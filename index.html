@@ -1,12 +1,22 @@
+
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="asdfo123">
+  <meta name="keywords" content="">
   
-  <title>Asdfo123 - Learning and Sharing</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Blogs of asdfo123">
+    <meta name="description" content="Blogs of asdfo123">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Asdfo123 - Learning and Sharing">
 <meta property="og:url" content="http://example.com/index.html">
@@ -14,530 +24,518 @@
 <meta property="og:description" content="Blogs of asdfo123">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="asdfo123">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Asdfo123 - Learning and Sharing" type="application/atom+xml">
+<meta name="twitter:card" content="summary_large_image">
   
   
-    <link rel="shortcut icon" href="/favicon.png">
   
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+  <title>Asdfo123 - Learning and Sharing</title>
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
   
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
   
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Asdfo123 - Learning and Sharing</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
-          <a class="main-nav-link" href="/">Home</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/%20%7C%7C%20fas%20fas%20fa-home">首页</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/categories/%20%7C%7C%20fas%20fa-folder-open">分类</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/archives/%20%7C%7C%20fas%20fa-archive">时间轴</a>
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
         
-          <a class="main-nav-link" href="/tags/%20%7C%7C%20fas%20fa-tags">标签</a>
         
-          <a class="main-nav-link" href="/link/%20%7C%7C%20fas%20fa-link">友情链接</a>
-        
-          <a class="main-nav-link" href="/about/%20%7C%7C%20fas%20fa-heart">关于我</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-xCPC常用英文词汇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/14/xCPC%E5%B8%B8%E7%94%A8%E8%8B%B1%E6%96%87%E8%AF%8D%E6%B1%87/" class="article-date">
-  <time class="dt-published" datetime="2024-01-13T18:03:10.444Z" itemprop="datePublished">2024-01-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/14/xCPC%E5%B8%B8%E7%94%A8%E8%8B%B1%E6%96%87%E8%AF%8D%E6%B1%87/">xCPC常见英文词汇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="反馈信息"><a href="#反馈信息" class="headerlink" title="反馈信息"></a>反馈信息</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Accepted. ————通过！(AC)</span><br><span class="line">Wrong Answer.————答案错。(WA)</span><br><span class="line">RunTime Error.——程序运行出错，意外终止等。(RTE)</span><br><span class="line">Time Limit Exceeded. ——超时。程序没在规定时间内出答案。(TLE)</span><br><span class="line">Presentation Error. ——格式错。程序没按规定的格式输出答案。(PE)</span><br><span class="line">Memory Limit Exceeded. ——超内存。程序没在规定空间内出答案。(MLE)</span><br><span class="line">Compile Error. ——编译错。程序编译不过。(CE)</span><br></pre></td></tr></table></figure>
-
-<h1 id="A"><a href="#A" class="headerlink" title="A"></a>A</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">abbreviate    缩写  </span><br><span class="line">acyclic       非循环的、非周期的</span><br><span class="line">addition      附加</span><br><span class="line">adjacent      相邻的</span><br><span class="line">ambiguous     模糊的</span><br><span class="line">ancestor      祖先</span><br><span class="line">anticlockwise 逆时针</span><br><span class="line">arbitrary     任意的</span><br><span class="line">arc           弧</span><br><span class="line">array         数组</span><br><span class="line">assemble      组合</span><br><span class="line">assess        评估</span><br><span class="line">assume        假设，认为</span><br><span class="line">attributes    属性</span><br><span class="line">axis axes     轴</span><br></pre></td></tr></table></figure>
-
-<h1 id="B"><a href="#B" class="headerlink" title="B"></a>B</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">base          底边，幂的底数</span><br><span class="line">balanced	  平衡</span><br><span class="line">balloon       气球</span><br><span class="line">binary        二进制</span><br><span class="line">bonus         奖金</span><br><span class="line">boundary      界限</span><br><span class="line">briefly       简短的 </span><br></pre></td></tr></table></figure>
-
-<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">calculate     计算</span><br><span class="line">carpet        地毯</span><br><span class="line">categories    类别</span><br><span class="line">chaotic       混乱的</span><br><span class="line">chariot       战车</span><br><span class="line">checkmate     挫败</span><br><span class="line">circle        圆</span><br><span class="line">clique        最大团</span><br><span class="line">collinear     共线的</span><br><span class="line">columns       列</span><br><span class="line">comma         逗号</span><br><span class="line">composition   作品</span><br><span class="line">compile       汇编</span><br><span class="line">concentrate   浓度，集中 </span><br><span class="line">conditions    条件</span><br><span class="line">consecutive   连续的</span><br><span class="line">consistof     由....组成</span><br><span class="line">constrain     约束</span><br><span class="line">contain       包含</span><br><span class="line">converge      汇聚</span><br><span class="line">coordinates   坐标</span><br><span class="line">corrupt       腐烂，破坏</span><br><span class="line">courier       快递公司</span><br><span class="line">cubes         立方</span><br><span class="line">cubic         立方体的</span><br><span class="line">cylindrical   圆柱</span><br></pre></td></tr></table></figure>
-
-<h1 id="D"><a href="#D" class="headerlink" title="D"></a>D</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">decimal       十进制</span><br><span class="line">define		  定义</span><br><span class="line">deformed      变形的</span><br><span class="line">denote        一套</span><br><span class="line">denominator   分母</span><br><span class="line">depth         深度</span><br><span class="line">denote        象征</span><br><span class="line">descentdant   子孙</span><br><span class="line">destination   终点</span><br><span class="line">determine     确定</span><br><span class="line">diagonal      对角</span><br><span class="line">dial          钟面，拨打</span><br><span class="line">diameter      直径</span><br><span class="line">dictionaries  字典</span><br><span class="line">difference    差</span><br><span class="line">digit         位数  数字；手指；足趾</span><br><span class="line">dimension     纬度</span><br><span class="line">dimensional   尺寸</span><br><span class="line">discuss       讨论</span><br><span class="line">distinctvalues独一无二的值</span><br><span class="line">distributed   分布式的</span><br><span class="line">divisor       因子,分母</span><br><span class="line">draw          平局</span><br><span class="line">duplicated    复制</span><br></pre></td></tr></table></figure>
-
-<h1 id="E"><a href="#E" class="headerlink" title="E"></a>E</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">efficiently   高效地</span><br><span class="line">element       元素</span><br><span class="line">equation      方程式 等式</span><br><span class="line">equal         相等</span><br><span class="line">encrypt       加密</span><br><span class="line">endpoint      断点</span><br><span class="line">even          偶数</span><br><span class="line">expectation   期待</span><br><span class="line">exponent      幂</span><br></pre></td></tr></table></figure>
-
-<h1 id="F"><a href="#F" class="headerlink" title="F"></a>F</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">factorial     阶乘</span><br><span class="line">feature       特征</span><br><span class="line">followby      跟随，其后</span><br><span class="line">formally      正式的</span><br><span class="line">fraction      分数，小数</span><br><span class="line">front         队头</span><br></pre></td></tr></table></figure>
-
-<h1 id="G"><a href="#G" class="headerlink" title="G"></a>G</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">generate      产生</span><br><span class="line">grid          网格；格栅；方格；（地图上的）坐标方格</span><br><span class="line">grabh         图</span><br></pre></td></tr></table></figure>
-
-<h1 id="H"><a href="#H" class="headerlink" title="H"></a>H</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">horizon       地平线</span><br></pre></td></tr></table></figure>
-
-<h1 id="I"><a href="#I" class="headerlink" title="I"></a>I</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">identical     完全相同的</span><br><span class="line">incline       倾斜</span><br><span class="line">indegree      入度</span><br><span class="line">indent        缩进</span><br><span class="line">indices       下标</span><br><span class="line">inequality    不等式</span><br><span class="line">infinite      无限的</span><br><span class="line">integer       整数</span><br><span class="line">intersect     相交</span><br><span class="line">interval      间隔</span><br><span class="line">inverse       反向 </span><br><span class="line">involution    内卷</span><br><span class="line">irreducible   不可减少的</span><br></pre></td></tr></table></figure>
-
-<h1 id="J"><a href="#J" class="headerlink" title="J"></a>J</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">justified   合理的</span><br></pre></td></tr></table></figure>
-
-<h1 id="K"><a href="#K" class="headerlink" title="K"></a>K</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">knight    骑士(象棋）  </span><br></pre></td></tr></table></figure>
-
-<h1 id="L"><a href="#L" class="headerlink" title="L"></a>L</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">labelled     贴标签于</span><br><span class="line">letter       字母</span><br><span class="line">liquid       液体</span><br><span class="line">loop         环</span><br></pre></td></tr></table></figure>
-
-<h1 id="M"><a href="#M" class="headerlink" title="M"></a>M</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">matching     匹配</span><br><span class="line">matrices     矩阵</span><br><span class="line">meadow       草坪</span><br><span class="line">mean         平均值</span><br><span class="line">minimalvolume最小体积</span><br><span class="line">minor        较小的</span><br><span class="line">multiset     多重集合</span><br><span class="line">multiple     多种多样的</span><br></pre></td></tr></table></figure>
-
-<h1 id="N"><a href="#N" class="headerlink" title="N"></a>N</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">negative     负</span><br><span class="line">notice       注意</span><br><span class="line">notation     标记</span><br></pre></td></tr></table></figure>
-
-<h1 id="O"><a href="#O" class="headerlink" title="O"></a>O</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">obesity      肥胖</span><br><span class="line">odd          奇数</span><br><span class="line">optimal      最优的</span><br><span class="line">orbit        轨道 </span><br><span class="line">overall      总体的</span><br></pre></td></tr></table></figure>
-
-<h1 id="P"><a href="#P" class="headerlink" title="P"></a>P</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">palindromic  回文的</span><br><span class="line">parallel     平行的</span><br><span class="line">participant  参加者</span><br><span class="line">per          一、每一</span><br><span class="line">perspective  观点</span><br><span class="line">pile         一叠</span><br><span class="line">positive     正</span><br><span class="line">prefix       前缀</span><br><span class="line">prime        质数</span><br><span class="line">proceed      运行</span><br><span class="line">processed    处理，加工</span><br><span class="line">profile      轮廓</span><br><span class="line">proportional 成比例的</span><br><span class="line">Protrusions  凸起物</span><br><span class="line">Pyramid      金字塔，渐增</span><br></pre></td></tr></table></figure>
-
-<h1 id="Q"><a href="#Q" class="headerlink" title="Q"></a>Q</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">quadrant 象限</span><br><span class="line">Queen 皇后(国际象棋）</span><br><span class="line">quotient 商</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h1 id="R"><a href="#R" class="headerlink" title="R"></a>R</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ratio        比率</span><br><span class="line">recommend    推荐</span><br><span class="line">rectangular  矩形的；成直角的</span><br><span class="line">recursive    递归的</span><br><span class="line">relevant     紧密相连的</span><br><span class="line">revisions    修订</span><br><span class="line">rotate       旋转</span><br></pre></td></tr></table></figure>
-
-<h1 id="S"><a href="#S" class="headerlink" title="S"></a>S</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">scenario     方案</span><br><span class="line">secret       秘密</span><br><span class="line">self-loops   自环</span><br><span class="line">sequence     一连串，有关联的一组事物</span><br><span class="line">several      一些</span><br><span class="line">simulation   同时的</span><br><span class="line">specify      指定</span><br><span class="line">sphere       圆</span><br><span class="line">Split        拆分</span><br><span class="line">statistic    统计</span><br><span class="line">submit       提交</span><br></pre></td></tr></table></figure>
-
-<h1 id="T"><a href="#T" class="headerlink" title="T"></a>T</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">task          任务</span><br><span class="line">terminates    停止,结束</span><br><span class="line">times         乘</span><br><span class="line">total         总的</span><br><span class="line">tournament    竞赛</span><br><span class="line">triangle      三角形</span><br><span class="line">triangulation 三角剖分</span><br><span class="line">triple        三倍的</span><br><span class="line">tromino       三格骨牌</span><br><span class="line">troop         军队，组群</span><br><span class="line">two-dimensional 维数</span><br></pre></td></tr></table></figure>
-
-<h1 id="U"><a href="#U" class="headerlink" title="U"></a>U</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ultimate     基本的</span><br><span class="line">underflow    下溢</span><br><span class="line">undigraph(undirected graph) 无向图</span><br><span class="line">uppercase    大写字母的  </span><br></pre></td></tr></table></figure>
-
-<h1 id="V"><a href="#V" class="headerlink" title="V"></a>V</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">variable   变量</span><br><span class="line">vertex     顶点</span><br><span class="line">volume     容量</span><br><span class="line">vulnerable 容易受到攻击的</span><br></pre></td></tr></table></figure>
-
-<h1 id="W"><a href="#W" class="headerlink" title="W"></a>W</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weight                 权</span><br></pre></td></tr></table></figure>
-
-<h1 id="X"><a href="#X" class="headerlink" title="X"></a>X</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无</span><br></pre></td></tr></table></figure>
-
-<h1 id="Y"><a href="#Y" class="headerlink" title="Y"></a>Y</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无</span><br></pre></td></tr></table></figure>
-
-<h1 id="Z"><a href="#Z" class="headerlink" title="Z"></a>Z</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">无</span><br></pre></td></tr></table></figure>
-
-<h1 id="词组"><a href="#词组" class="headerlink" title="词组"></a>词组</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">add, subtract, multiply and divide        加减乘除</span><br><span class="line">adjacency list                            邻接表</span><br><span class="line">adjacency matrix                          邻接矩阵</span><br><span class="line">adjacent vertex                           相邻顶点</span><br><span class="line">ascending order                           升序</span><br><span class="line">alphabetical order                        字典序</span><br><span class="line">alternately rise and fall                 交替上升和下降</span><br><span class="line">arbitrary Precision Arithmetic            高精度计算</span><br><span class="line">arithmetic mean                           算数平均值</span><br><span class="line">arithmetic progression                    等差数列</span><br><span class="line">ascending lexicographical order           词典顺序升序排列</span><br><span class="line">ascending order                           升序</span><br><span class="line">aspect ratio                              固定长宽比</span><br><span class="line">average temperature                       顺时针</span><br><span class="line"></span><br><span class="line">blank line                                空行</span><br><span class="line"></span><br><span class="line">clockwise order                           顺时针方向顺序</span><br><span class="line">contest time again                        比赛又开始了</span><br><span class="line"></span><br><span class="line">decimal representation                    十进制表示</span><br><span class="line"></span><br><span class="line">Education is where it all begins          教育是在这一切开始</span><br><span class="line"></span><br><span class="line">for each case                             每种情况</span><br><span class="line"></span><br><span class="line">horizontal or vertical direction          水平和垂直方向</span><br><span class="line"></span><br><span class="line">in the range of                           在....范围内</span><br><span class="line">in the shape of a cross                   十字形</span><br><span class="line">it may not execute in the allottedtime    这可能不是在规定的时间段内执行</span><br><span class="line"></span><br><span class="line">lie on                                    取决于</span><br><span class="line"></span><br><span class="line">parity property                           奇偶性</span><br><span class="line">positive and negative integers            正整数和负整数</span><br><span class="line">process a sequence of n distinct integers 处理一串n 个截然不同的整数</span><br><span class="line">Problem Description                       问题描述</span><br><span class="line">production of number                      数的乘积</span><br><span class="line"></span><br><span class="line">rational number                           有理数</span><br><span class="line">rounded to 2 decimal places               精确到小数点后2位</span><br><span class="line">rows and columns                          行与列</span><br><span class="line"></span><br><span class="line">there are no special punctuation symbols or spacingrules 没有特殊标点符号或间距的规则</span><br><span class="line">two adjacent sequence elements            两个相邻的元素串</span><br><span class="line">two-dimensional array                     二维数组</span><br><span class="line"></span><br><span class="line">unique identifier                         唯一的标识符</span><br><span class="line"></span><br><span class="line">wooden planks                             木板</span><br><span class="line"></span><br><span class="line">unconnected graph                         非连通图</span><br><span class="line"></span><br><span class="line">variable-aggregate data type              可变聚合数据类型</span><br><span class="line">vertex Coloring                           点染色（Vertex Cover 点覆盖）</span><br><span class="line">voronoi Diagrams Voronoi                  图</span><br><span class="line"></span><br><span class="line">weakly connected graph                    弱连通图</span><br><span class="line">weighted average                          加权平均值</span><br><span class="line">weighted graph                            加权图</span><br><span class="line">wooden planks                             木板</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/14/xCPC%E5%B8%B8%E7%94%A8%E8%8B%B1%E6%96%87%E8%AF%8D%E6%B1%87/" data-id="clrcdwj3d000914up5ljvbwvh" data-title="xCPC常见英文词汇" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-代码模板" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/14/%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/" class="article-date">
-  <time class="dt-published" datetime="2024-01-13T18:03:06.979Z" itemprop="datePublished">2024-01-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/14/%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/">部分代码模板</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h1><h2 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">priority_queue&lt; pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt;q;</span><br><span class="line"><span class="type">int</span> dis[N],vis[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="type">int</span> S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	q.<span class="built_in">push</span>(<span class="built_in">make_pair</span>(<span class="number">0</span>,S));</span><br><span class="line">	<span class="built_in">memset</span>(dis,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> dis);</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span> vis);</span><br><span class="line">	<span class="keyword">while</span>(!q.<span class="built_in">empty</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x = q.top.<span class="built_in">second</span>();q.<span class="built_in">pop</span>();</span><br><span class="line">		<span class="keyword">if</span>(vis[x]) <span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = head[x];i;i = nxt[i])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> v = to[i],w = val[i];</span><br><span class="line">			<span class="keyword">if</span>(dis[v] &gt; dis[x] + w)</span><br><span class="line">				dis[v] = dis[x] + w,q.<span class="built_in">push</span>(<span class="built_in">make_pair</span>(-dis[v],v));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> dis[N],vis[N];</span><br><span class="line">queue&lt;<span class="type">int</span>&gt; Q;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">spfa</span><span class="params">(<span class="type">int</span> S)</span><span class="comment">//负环 bool spfa(int S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(dis,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> dis);</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span> vis);</span><br><span class="line">    <span class="comment">//memset(pass,0,sizeof(pass));</span></span><br><span class="line">	<span class="keyword">while</span>(!Q.<span class="built_in">empty</span>()) Q.<span class="built_in">pop</span>();</span><br><span class="line">	Q.<span class="built_in">push</span>(S),dis[S] = <span class="number">0</span>,vis[S] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(!Q.<span class="built_in">empty</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x =Q.<span class="built_in">top</span>();</span><br><span class="line">		Q.<span class="built_in">pop</span>();</span><br><span class="line">		vis[x] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = head[x];i;i = nxt[i])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> v = to[i],w = val[i];</span><br><span class="line">			<span class="keyword">if</span>(dis[v] &gt; dis[x] + w) </span><br><span class="line">			&#123;</span><br><span class="line">				dis[v] = dis[x] + w;</span><br><span class="line">                <span class="comment">/*pass[v]=pass[X]+1; </span></span><br><span class="line"><span class="comment">				if(pass[v]&gt;n) return true;*/</span></span><br><span class="line">				<span class="keyword">if</span>(!vis[v])</span><br><span class="line">					vis[v] = <span class="number">1</span>,Q.<span class="built_in">push</span>(v);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="LCA-倍增"><a href="#LCA-倍增" class="headerlink" title="LCA(倍增)"></a>LCA(倍增)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//lca 倍增 </span></span><br><span class="line"><span class="comment">//板子 洛谷p3379 </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 500100</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> head[N];</span><br><span class="line"><span class="type">int</span> cnt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">	<span class="type">int</span> nxt,to;</span><br><span class="line">&#125;e[N&lt;&lt;<span class="number">1</span>];<span class="comment">//双向边 </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].nxt=head[x];</span><br><span class="line">	e[cnt].to=y;</span><br><span class="line">	head[x]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> d[N];<span class="comment">//深度 </span></span><br><span class="line"><span class="type">int</span> fa[N][<span class="number">22</span>];<span class="comment">//fa[i][j]代表i的2^j祖先 </span></span><br><span class="line"><span class="type">int</span> lg[N];<span class="comment">//log_2(N)</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> now,<span class="type">int</span> fath)</span><span class="comment">//预处理，now当前点，fath为它的父节点 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	fa[now][<span class="number">0</span>]=fath;</span><br><span class="line">	d[now]=d[fath]+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=lg[d[now]];i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//递推式 </span></span><br><span class="line">		fa[now][i]=fa[fa[now][i<span class="number">-1</span>]][i<span class="number">-1</span>];<span class="comment">//意思是now的2^i祖先等于now的2^(i-1)祖先的2^(i-1)祖先</span></span><br><span class="line">		<span class="comment">//2^i = 2^(i-1) + 2^(i-1)</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=head[now];i;i=e[i].nxt)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(e[i].to!=fath) <span class="built_in">dfs</span>(e[i].to,now);<span class="comment">//遍历出边进行预处理 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">lca</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(d[x]&lt;d[y]) <span class="built_in">swap</span>(x,y);<span class="comment">//不妨设x的深度 &gt;= y的深度</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> k=lg[d[x]]<span class="number">-1</span>;k&gt;=<span class="number">0</span>;k--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(d[fa[x][k]]&gt;=d[y]) x=fa[x][k];<span class="comment">//这里就是不断向上倍增，让x到和y一样的深度</span></span><br><span class="line">		<span class="comment">//注意要从大到小枚举k，防止需要回溯一下的情况。	 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(x==y) <span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> k=lg[d[x]]<span class="number">-1</span>;k&gt;=<span class="number">0</span>;k--)<span class="comment">//不断向上跳 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(fa[x][k]!=fa[y][k])<span class="comment">//因为我们要跳到它们LCA的下面一层，所以它们肯定不相等，如果不相等就跳过去。</span></span><br><span class="line">		&#123;</span><br><span class="line">			x=fa[x][k];</span><br><span class="line">			y=fa[y][k];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fa[x][<span class="number">0</span>];<span class="comment">//返回父节点</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n,m,s;<span class="comment">//节点个数，询问次数，根节点编号 </span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d&quot;</span>,&amp;n,&amp;m,&amp;s);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n<span class="number">-1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x,y;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x,&amp;y);</span><br><span class="line">		<span class="built_in">add</span>(x,y);</span><br><span class="line">		<span class="built_in">add</span>(y,x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        lg[i] = lg[i<span class="number">-1</span>] + (<span class="number">1</span> &lt;&lt; lg[i<span class="number">-1</span>] == i);<span class="comment">//这个是我抄的，暂时不懂，但是可以手算log_2(n) </span></span><br><span class="line">	<span class="built_in">dfs</span>(s,<span class="number">0</span>); </span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> a,b;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;a,&amp;b);</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,<span class="built_in">lca</span>(a,b));</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/14/%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/" data-id="clrcdwj3b000514uphjlx1tno" data-title="部分代码模板" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-哈v算法竞赛指北" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/14/%E5%93%88v%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E6%8C%87%E5%8C%97/" class="article-date">
-  <time class="dt-published" datetime="2024-01-13T18:02:57.419Z" itemprop="datePublished">2024-01-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/14/%E5%93%88v%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E6%8C%87%E5%8C%97/">哈v算法竞赛相关指北</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><strong>Author: ASDFO</strong></p>
-<p>注意，相关赛事奖项<strong>理论上</strong>都可以作为创新创业分的认定依据，<strong>最终认定</strong>需要根据学生手册和教学秘书的最终决定。</p>
-<blockquote>
-<p>2023年开始，毕业所需创新创业分为4分。</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://tigerisland.blog.csdn.net/article/details/132791498?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-132791498-blog-123582935.235%5Ev40%5Epc_relevant_anti_vip&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~CTRLIST~Rate-1-132791498-blog-123582935.235%5Ev40%5Epc_relevant_anti_vip&utm_relevant_index=2">2023年，ICPC比赛、CCPC比赛、CCF-CSP考试、蓝桥杯比赛、天梯赛日程_蓝桥杯2023年比赛时间-CSDN博客</a> <strong>一些时间参考。</strong></p>
-<h2 id="个人赛"><a href="#个人赛" class="headerlink" title="个人赛"></a>个人赛</h2><h3 id="CSP认证"><a href="#CSP认证" class="headerlink" title="CSP认证"></a>CSP认证</h3><p><a target="_blank" rel="noopener" href="https://cspro.org/">CCF CSP认证 (cspro.org)</a></p>
-<p>CCF（中国计算机学会）组织的认证，每年4场，达到相应分数可以参与计院创新创业分认定。</p>
-<img src="file:///C:\Users\asdfo\Documents\Tencent Files\2538432825\nt_qq\nt_data\Pic\2024-01\Ori\f5b776f6745d9dbbe2160e7867c95ba5.jpeg" alt="img" style="zoom: 50%;" />
-
-<p>用处是一些保研夏令营可以折算机考成绩，拿到一个相对不错的机考分，还能免去上机考试。（eg.北航，人大，…）</p>
-<p>共5道题，大概是2道基础实现题，1道大模拟题，2道算法题，<strong>IOI赛制</strong>（无限次提交，有部分分，结果实时反馈）。</p>
-<p>满分500分，一般240分能进前10％，300分能进前2％。</p>
-<p>报名费团报优惠价50，一次成绩不满意可以刷分，搞点创新创业分挺香的。</p>
-<p>QQ群：1084373123</p>
-<h3 id="CCSP"><a href="#CCSP" class="headerlink" title="CCSP"></a>CCSP</h3><p><a target="_blank" rel="noopener" href="https://www.ccf.org.cn/ccsp/">CCSP - 中国计算机学会 (ccf.org.cn)</a></p>
-<p>CCF在CSP认证基础上组织的比赛，全称CCF 大学生计算机系统与程序设计竞赛，硬性条件是CSP200分以上。</p>
-<p>每年跟着CNCC中国计算机大会组织的比赛，时间大概是11月左右，优点是报名后附赠一个CNCC大会的入场卷（你要真报得2000多呢），可以去感受一下。</p>
-<p>按10％，20％，30％比例发金银铜奖。比赛共5道题，其中3道算法题，2道比较新颖的系统题，<strong>IOI赛制</strong>，比较考察综合能力。</p>
-<p>报名费500，线下比赛，今年的政策是报销报名费和差旅费，但是需要CSP认证达到一定成绩。</p>
-<h3 id="蓝桥杯"><a href="#蓝桥杯" class="headerlink" title="蓝桥杯"></a>蓝桥杯</h3><p><a target="_blank" rel="noopener" href="https://dasai.lanqiao.cn/">蓝桥杯大赛 — 全国大学生TMT行业赛事 (lanqiao.cn)</a></p>
-<p>应该算是参与规模最大的算法相关赛事了，但是因为收费不便宜常年被人吐槽圈钱。如果需要一些奖项的话这个也是一个不错的选择，作为榜单赛事还是有一定认可度的，国赛的C++ A组是其中最难的。</p>
-<p>分为省赛和国赛（好像还有个校内赛，但是体验性质为主），<strong>报名时间是每年的10月-12月</strong>，次年4月省赛，6月国赛。</p>
-<p>省赛按10％，20％，30％比例发奖，一等奖可以有进国赛资格。国赛保底国优，然后按照5％，15％，30％发一至三等奖。</p>
-<p>特点是有很多赛道，C++组卷不过可以去Python，Java组，还有电子赛、Web开发组这样的，但是没有体验过就不评论了。</p>
-<p>需要注意的是这个是<strong>OI赛制</strong>（有部分分，以最后一次提交为准，比赛过程中不知道得分），没有尝试过的同学建议提前利用下往年题库模拟，不要出现最后因为各种细节问题爆零的情况。一般是会有10道题，其中前4题是填空题，可以通过暴力或者手写计算算出结果，剩下的为编程题，需要根据题目数据范围选择相应算法解决。</p>
-<p>省赛报名费300，线上比赛。国赛报名费300，线下比赛。政策大概是省赛不报销（或者发放一点奖品），国赛根据奖项按一定比例报销。</p>
-<p>QQ群：554521887</p>
-<h3 id="百度之星"><a href="#百度之星" class="headerlink" title="百度之星"></a>百度之星</h3><p><a target="_blank" rel="noopener" href="https://star.baidu.com/#/">百度之星大赛 (baidu.com)</a></p>
-<p>今年新进入榜单的赛事，百度发起的，举办历史比较久，含金量还不错。</p>
-<p>分为初赛和决赛。初赛线上举行，今年共有3场，时间分布在<strong>8-9月</strong>，分省评奖，30％获奖率，按排名分配国赛名额。</p>
-<p>国赛当年年底在北京举行，60％获奖率（今年甚至发了个铁牌奖，这下获奖率100％了）。</p>
-<p>哈工大和百度有一个百度松果班，在初赛之前会举行一个内训赛。这个内训赛打得好也会获得一定直通国赛的名额。</p>
-<p>ICPC赛制个人赛，没有部分分，结果实时反馈，但是难度可控，省赛拿奖还是比较容易的。</p>
-<p>初赛80，内训赛不花钱，决赛80，价格是良心的。今年的政策是国赛会进行报销。</p>
-<p>QQ群：学校好像每年会建一个，但是基本上是个人报名。</p>
-<h3 id="校ACM新生赛"><a href="#校ACM新生赛" class="headerlink" title="校ACM新生赛"></a>校ACM新生赛</h3><p><strong>每年12月</strong>左右会举行面向全校新生的ACM新生赛，只有大一新生或大一下学C语言的大二学生有资格正式参赛，排名会作为了解实力、互相组队、选下学期的创新创业课的参考和依据。</p>
-<p>ICPC赛制、个人赛，按照有效参赛人数的10％，20％，30％（向上取整）发放金、银、铜奖。</p>
-<h2 id="团队赛"><a href="#团队赛" class="headerlink" title="团队赛"></a>团队赛</h2><h3 id="ICPC"><a href="#ICPC" class="headerlink" title="ICPC"></a>ICPC</h3><p><a target="_blank" rel="noopener" href="https://icpc.global/">The ICPC International Collegiate Programming Contest</a></p>
-<p><a target="_blank" rel="noopener" href="https://icpc.pku.edu.cn/">ICPC北京总部 (pku.edu.cn)</a></p>
-<p>这个就不详细介绍背景了，是保研赛事。</p>
-<p>分为省赛、区域赛、东亚洲区总决赛、World Final。</p>
-<p>省赛<strong>每年6月</strong>左右在山东省一所高校举办，我校大概会分得10个名额左右，按照ICPC规则举办和发奖。</p>
-<p>区域赛在<strong>每年10-12月</strong>举行，共6场，在全国各地承办高校举行。在区域赛前9月份会有2场网络预选赛，由学校排名（取每所高校排名最高的队伍）和一些其他因素分配各区域赛赛站名额。</p>
-<p>东亚洲区总决赛（EC Final）、World Final 由区域赛成绩分配名额。</p>
-<h3 id="CCPC"><a href="#CCPC" class="headerlink" title="CCPC"></a>CCPC</h3><p><a target="_blank" rel="noopener" href="https://ccpc.io/">中国大学生程序设计竞赛 (ccpc.io)</a></p>
-<p>中国大学生程序设计竞赛，跟ICPC在举办形式上没什么差别，区别是不在榜单上，且由于规模略小会比ICPC区域赛拿奖难度稍微高一些。</p>
-<p>分为省赛（山东省赛不在这个范畴下）、分站赛（包括女生专场、高职赛）和全国总决赛。</p>
-<p>每年8-9月会有一次网络预选赛，根据网络预选赛成绩和一些其他因素分配各赛站名额。四场分站赛在10-11月全国各承办学校举行，总决赛次年年中举行，按分站赛成绩晋级。</p>
-<h3 id="WHCPC（市赛）"><a href="#WHCPC（市赛）" class="headerlink" title="WHCPC（市赛）"></a>WHCPC（市赛）</h3><p><strong>每年4月</strong>左右会举行威海市程序设计竞赛，由威海市各个高校承办，ICPC赛制、三人组队，是一个很好的体验ACM现场氛围的渠道。</p>
-<p>按照ICPC规则发放金、银、铜奖</p>
-<p><strong>以上三项比赛</strong>的具体事宜会在群里（770270126）通知。</p>
-<h3 id="华为软件精英挑战赛"><a href="#华为软件精英挑战赛" class="headerlink" title="华为软件精英挑战赛"></a>华为软件精英挑战赛</h3><p><a target="_blank" rel="noopener" href="https://competition.huaweicloud.com/codecraft2023">2023华为软件精英挑战赛——普朗克计划 (huaweicloud.com)</a></p>
-<p>不是传统意义上算法竞赛，有点像工程竞赛，一般是求解一个优化问题。</p>
-<p>进区域赛30强了华为请你免费旅游很香。</p>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>####C4-AI、软创、服创、互联网+、挑战杯、物联网、三创赛、信息安全赛…</p>
-<p><strong>保研赛事</strong>。</p>
-<h4 id="CTF"><a href="#CTF" class="headerlink" title="CTF"></a>CTF</h4><p>咨询隔壁233（QQ：3256516522）</p>
-<h4 id="一些待挖掘的赛事"><a href="#一些待挖掘的赛事" class="headerlink" title="一些待挖掘的赛事"></a>一些待挖掘的赛事</h4><p>团体程序设计天梯赛（GPLT），CCF-CAT，RoboCom（CAIP编程设计赛道），HWS计划，Kaggle……</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/14/%E5%93%88v%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E6%8C%87%E5%8C%97/" data-id="clrcdwj3c000714up87viaxbt" data-title="哈v算法竞赛相关指北" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/01/14/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-01-13T17:36:24.273Z" itemprop="datePublished">2024-01-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/01/14/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/01/14/hello-world/" data-id="clrcdwj39000314upfue85qwf" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2023牛客寒假算法基础集训营2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2023/01/18/2023%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A52/" class="article-date">
-  <time class="dt-published" datetime="2023-01-18T13:19:28.000Z" itemprop="datePublished">2023-01-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2023/01/18/2023%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A52/">2023牛客寒假算法基础集训营2题解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/46810">2023牛客寒假算法基础集训营2</a><br>预期A题数：6-7<br>实际：5<br>第一场摆了，等找时间补一下，这一场没理由摆了，但是结果不大理想</p>
-<p>首先是被卡题，C题 kswl。。。赛时想到了差分，但是我还以为差分只能区间修改单点查询，后来才知道差分加两边不就是前缀和了吗 qwq，硬写了个线段树，调了老半天</p>
-<p>然后是H题，在纠结开H还是L，看H题似乎挺可做，思路已经完全想出来了，结果经典看错题，子序列子串傻傻分不清，也没看加粗的提醒，直接浪费1个小时，开摆</p>
-<p>写一下补题题解吧</p>
-<h2 id="J-Tokitsukaze-and-Sum-of-MxAb"><a href="#J-Tokitsukaze-and-Sum-of-MxAb" class="headerlink" title="J - Tokitsukaze and Sum of MxAb"></a>J - Tokitsukaze and Sum of MxAb</h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>Tokitsukaze 最近对最大值与绝对值有了兴趣。</p>
-<p> 她有一个长度为 $n$ 的序列 $a$。</p>
-<p> 定义</p>
-<p>$MxAb(i,j)&#x3D;max(|a_i-a_j|,|a_i+a_j|)$</p>
-<p> Tokitsukaze 想知道对于所有的 $i, j (1 \le i,j \le n)$，$MxAb(i,j)$的和为多少。</p>
-<p> 即求下列式子</p>
-<p>$\sum_{i&#x3D;1}^{n} \sum_{j&#x3D;1}^{n} MxAb(i,j)$</p>
-<h2 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a>输入描述:</h2><p>第一行包含一个整数 $T (1 \leq T \leq 10)$，表示 $T$ 组测试数据。</p>
-<p>对于每组测试数据：</p>
-<p>第一行包含一个整数 $n (1 \leq n \leq 10^5)$。</p>
-<p>第二行包含 $n$ 个整数  ($-10^5 \leq a_i \leq 10^5$)。</p>
-<h2 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a>输出描述:</h2><p>对于每组测试数据，输出一个整数表示答案。</p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> x = <span class="number">0</span>,f = <span class="number">1</span>;<span class="type">char</span> ch = <span class="built_in">getchar</span>();</span><br><span class="line">	<span class="keyword">while</span>(ch &lt; <span class="string">&#x27;0&#x27;</span>||ch &gt; <span class="string">&#x27;9&#x27;</span>)&#123;<span class="keyword">if</span>(ch == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>;ch = <span class="built_in">getchar</span>();&#125;</span><br><span class="line">	<span class="keyword">while</span>(ch &gt;= <span class="string">&#x27;0&#x27;</span>&amp;&amp;ch &lt;= <span class="string">&#x27;9&#x27;</span>)&#123;x = x * <span class="number">10</span> + ch - <span class="string">&#x27;0&#x27;</span>;ch = <span class="built_in">getchar</span>();&#125;</span><br><span class="line">	<span class="keyword">return</span> x*f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> cnt1,cnt2;</span><br><span class="line"><span class="type">int</span> a,b;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> T = <span class="built_in">read</span>();</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        cnt1 =  <span class="number">0</span>,cnt2 = <span class="number">0</span>;</span><br><span class="line">        a = <span class="number">0</span>,b = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> n = <span class="built_in">read</span>();</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> shu = <span class="built_in">read</span>();</span><br><span class="line">            <span class="keyword">if</span>(shu &lt; <span class="number">0</span>) a += shu,cnt1++;</span><br><span class="line">            <span class="keyword">else</span> b += shu,cnt2++;</span><br><span class="line">        &#125;</span><br><span class="line">        ans+=<span class="number">2</span>*(-a)*cnt1;</span><br><span class="line">        ans+=<span class="number">2</span>*b*cnt2;</span><br><span class="line">        ans+=<span class="number">2</span>*cnt2*(-a)+<span class="number">2</span>*cnt1*b;</span><br><span class="line">        cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>当时主要还是想着分成负数和负数间，正数和正数间，负数和正数间三种情况讨论了，实际上最后看题解，如果稍微推导一下会简单很多</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2023/01/18/2023%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A52/" data-id="clrcdwj36000114up9fbsghea" data-title="2023牛客寒假算法基础集训营2题解" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">一月 2023</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2024/01/14/xCPC%E5%B8%B8%E7%94%A8%E8%8B%B1%E6%96%87%E8%AF%8D%E6%B1%87/">xCPC常见英文词汇</a>
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
           </li>
+          
         
-          <li>
-            <a href="/2024/01/14/%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/">部分代码模板</a>
-          </li>
         
-          <li>
-            <a href="/2024/01/14/%E5%93%88v%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E6%8C%87%E5%8C%97/">哈v算法竞赛相关指北</a>
-          </li>
-        
-          <li>
-            <a href="/2024/01/14/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2023/01/18/2023%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A52/">2023牛客寒假算法基础集训营2题解</a>
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
     </div>
   </div>
+</nav>
 
   
-</aside>
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="An elegant Material-Design theme for Hexo"></span>
+          
+        </div>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
+
       
-      &copy; 2024 asdfo123<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
   </div>
-</footer>
+</div>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/%20%7C%7C%20fas%20fas%20fa-home" class="mobile-nav-link">首页</a>
-  
-    <a href="/categories/%20%7C%7C%20fas%20fa-folder-open" class="mobile-nav-link">分类</a>
-  
-    <a href="/archives/%20%7C%7C%20fas%20fa-archive" class="mobile-nav-link">时间轴</a>
-  
-    <a href="/tags/%20%7C%7C%20fas%20fa-tags" class="mobile-nav-link">标签</a>
-  
-    <a href="/link/%20%7C%7C%20fas%20fa-link" class="mobile-nav-link">友情链接</a>
-  
-    <a href="/about/%20%7C%7C%20fas%20fa-heart" class="mobile-nav-link">关于我</a>
-  
-</nav>
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/01/14/test1/" target="_self">
+          test1
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/14/test1/" target="_self">
+        <div>
+          
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-14 02:17" pubdate>
+              2024-01-14
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/01/14/xCPC%E5%B8%B8%E7%94%A8%E8%8B%B1%E6%96%87%E8%AF%8D%E6%B1%87/" target="_self">
+          xCPC常见英文词汇
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/14/xCPC%E5%B8%B8%E7%94%A8%E8%8B%B1%E6%96%87%E8%AF%8D%E6%B1%87/" target="_self">
+        <div>
+          反馈信息1234567Accepted. ————通过！(AC)Wrong Answer.————答案错。(WA)RunTime Error.——程序运行出错，意外终止等。(RTE)Time Limit Exceeded. ——超时。程序没在规定时间内出答案。(TLE)Presentation Error. ——格式错。程序没按规定的格式输出答案。(PE)Memory Limit Exceeded
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-14 02:03" pubdate>
+              2024-01-14
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/01/14/%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/" target="_self">
+          部分代码模板
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/14/%E4%BB%A3%E7%A0%81%E6%A8%A1%E6%9D%BF/" target="_self">
+        <div>
+          图论Dijkstra12345678910111213141516171819priority_queue&lt; pair&lt;int,int&gt; &gt;q;int dis[N],vis[N];void Dijkstra(int S)&#123;	q.push(make_pair(0,S));	memset(dis,0x3f,sizeof dis);	memset(vis,0,sizeo
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-14 02:03" pubdate>
+              2024-01-14
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/01/14/%E5%93%88v%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E6%8C%87%E5%8C%97/" target="_self">
+          哈v算法竞赛相关指北
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/14/%E5%93%88v%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E6%8C%87%E5%8C%97/" target="_self">
+        <div>
+          Author: ASDFO 注意，相关赛事奖项理论上都可以作为创新创业分的认定依据，最终认定需要根据学生手册和教学秘书的最终决定。  2023年开始，毕业所需创新创业分为4分。  2023年，ICPC比赛、CCPC比赛、CCF-CSP考试、蓝桥杯比赛、天梯赛日程_蓝桥杯2023年比赛时间-CSDN博客 一些时间参考。 个人赛CSP认证CCF CSP认证 (cspro.org) CCF（中国计算机学
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-14 02:02" pubdate>
+              2024-01-14
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/01/14/hello-world/" target="_self">
+          Hello World
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/01/14/hello-world/" target="_self">
+        <div>
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-14 01:36" pubdate>
+              2024-01-14
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/01/18/2023%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A52/" target="_self">
+          2023牛客寒假算法基础集训营2题解
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/01/18/2023%E7%89%9B%E5%AE%A2%E5%AF%92%E5%81%87%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E9%9B%86%E8%AE%AD%E8%90%A52/" target="_self">
+        <div>
+          2023牛客寒假算法基础集训营2预期A题数：6-7实际：5第一场摆了，等找时间补一下，这一场没理由摆了，但是结果不大理想 首先是被卡题，C题 kswl。。。赛时想到了差分，但是我还以为差分只能区间修改单点查询，后来才知道差分加两边不就是前缀和了吗 qwq，硬写了个线段树，调了老半天 然后是H题，在纠结开H还是L，看H题似乎挺可做，思路已经完全想出来了，结果经典看错题，子序列子串傻傻分不清，也没看加
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-01-18 21:19" pubdate>
+              2023-01-18
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     
 
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
 
 
 
   
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
 
-<script src="/js/script.js"></script>
+  <script  src="/js/local-search.js" ></script>
 
 
 
 
 
-  </div>
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 </body>
 </html>
