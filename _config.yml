@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Haochuan's Homepage"
-description              : "N/A"
+description              : "To be a maverick in the era"
 repository               : "PinkEx/pinkex.github.io"
 google_scholar_stats_use_cdn : true
 
@@ -22,7 +22,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 # Site Author
 author:
   name             : "Haochuan Wang"
-  avatar           : "images/CinnamonDog.jpg"
+  avatar           : "images/22.jpg"
   bio              : "CS undergraduate"
   location         : "Weihai, China"
   employer         :
