@@ -26,7 +26,7 @@ redirect_from:
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024 Main</div><img src='images/500x300.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024 Main</div><img src='images/unoarena.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [UNO Arena for Evaluating Sequential Decision-Making Capability of Large Language Models](https://arxiv.org/pdf/2406.16382)
@@ -36,7 +36,7 @@ Zhanyue Qin, **Haochuan Wang**, Deyuan Liu, Ziyang Song, Cunhang Fan, Zhao Lv, J
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Arxiv Preprint</div><img src='images/500x300.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Arxiv Preprint</div><img src='images/econarena.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Economics Arena for Large Language Models](https://arxiv.org/abs/2401.01735)
