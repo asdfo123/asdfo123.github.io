@@ -20,13 +20,25 @@ redirect_from:
 
 # 🔥 News
 - *Now*: I am looking for a PhD position in natural language processing (NLP) / computing social science (CSS).
+- *2024.10*: &nbsp;🎉🎉 Our paper "Economics Arena for Large Language Models" (co-first author) has been accepted by Neurips 2024 Workshop LanGame!
 - *2024.09*: &nbsp;🎉🎉 Our paper "UNO Arena for Evaluating Sequential Decision-Making Capability of Large Language Models" (second author) has been accepted by EMNLP 2024 Main Conference!
 - *2024.08*: I have completed my summer internship at [HKU NLP group](https://hkunlp.github.io/), supervised by [Prof. Lingpeng Kong](https://scholar.google.com/citations?user=f1hBi5wAAAAJ&hl=zh-CN).
 
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024 Main</div><img src='images/unoarena.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Arxiv Preprint</div><img src='images/tmgbench.png' alt="sym" width="50%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+[TMGBench: A Systematic Game Benchmark for Evaluating Strategic Reasoning Abilities of LLMs](https://arxiv.org/pdf/2410.10479)
+
+**Haochuan Wang**, Xiachong Feng, Lei Li, Zhanyue Qin, Dianbo Sui, Lingpeng Kong
+
+</div>
+</div>
+
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2024 Main Conference</div><img src='images/unoarena.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [UNO Arena for Evaluating Sequential Decision-Making Capability of Large Language Models](https://arxiv.org/pdf/2406.16382)
@@ -36,7 +48,7 @@ Zhanyue Qin, **Haochuan Wang**, Deyuan Liu, Ziyang Song, Cunhang Fan, Zhao Lv, J
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Arxiv Preprint</div><img src='images/econarena.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Neurips 2024 Workshop LanGame</div><img src='images/econarena.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 [Economics Arena for Large Language Models](https://arxiv.org/abs/2401.01735)
