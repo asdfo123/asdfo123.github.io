@@ -39,7 +39,7 @@ redirect_from:
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACMMM 2024 (CCF-A)</div><img src='images/paper_mm.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 [Can We Debiase Multimodal Large Language Models via Model Editing?](https://openreview.net/pdf?id=ybqqGTWuhj)<br>
-Zecheng Wang, Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, Dianbo Sui
+Zecheng Wang, **Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, Dianbo Sui
 </div>
 </div>
 
