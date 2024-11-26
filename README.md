@@ -1,5 +1,5 @@
 ## Deployment
 
 ```shell
-bundle exec jekyll liveserve
+bundle exec jekyll serve -l liveserve
 ```
