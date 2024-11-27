@@ -16,11 +16,18 @@ redirect_from:
 {% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
 
 <span class='anchor' id='about-me'></span>
-👋 Hi, everyone! I am currently a junior undergraduate at Harbin Institute of Technology, Weihai Campus, China. I have been under supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). I am interested in NLP and LLMs, with a particular interest in Model Editing and Model Debiasing.
+👋 Hi, everyone! I am a junior undergraduate student at Harbin Institute of Technology, China, currently working under the supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on model editing and debiasing techniques. 
+
+Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
+
 
 # 🔥 News
 
-- *2024.07*: &nbsp;🎉🎉 Our paper "Can We Debias Multimodal Large Language Models via Model Editing?" has been accepted by ACMMM 2024!
+- *2024.11*: &nbsp;🎉🎉 Our project "PCBGuard: An AI-Driven Innovative Industrial Quality Inspection Solution" was awarded the Second Prize in the **Challenge Cup**.
+
+- *2024.07*: &nbsp;🎉🎉 Our paper "Can We Debias Multimodal Large Language Models via Model Editing?" has been accepted by **ACMMM 2024**!
+
+- *2024.07*: Personal Website is now live!
 <!-- - *2024.06*: I have completed my summer internship at [HKU NLP group](https://hkunlp.github.io/), supervised by [Prof. Lingpeng Kong](https://scholar.google.com/citations?user=f1hBi5wAAAAJ&hl=zh-CN). -->
 
 
@@ -56,19 +63,19 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 <!-- </div> -->
 
 # 🎖 Honors and Awards
-- *2024.09* "Excellent Student Model" Honorary Title (Top 0.5%), Harbin Institute of Technology.
-- *2023.12* National Scholarship (Top 0.2% Nationwide), Ministry of Education of the People's Republic of China.
-- *2023.11* Taihu Future Science and Technology Scholarship (Top 1.6%), Harbin Institute of Technology, Weihai.
-- *2023.04* First Grade Scholarship, Harbin Institute of Technology, Weihai.
+- *2024.09*: **"Excellent Student Model"** Honorary Title (Top 0.5%), Harbin Institute of Technology.
+- *2023.12*: **National Scholarship** (Top 0.2% Nationwide), Ministry of Education of the People's Republic of China.
+- *2023.11*: Taihu Future Science and Technology Scholarship (Top 1.6%), Harbin Institute of Technology, Weihai.
+- *2023.04*: First Grade Scholarship, Harbin Institute of Technology, Weihai.
 
 # 🏆 Competitions
-- *2024.11* The 19th "Challenge Cup": 2024 'Open Call for Solutions' Special Program: Second Prize *(Team Leader)*
-- *2024.09* The 2024 Weihai Collegiate Programming Contest: Gold Medal🥇
+- *2024.11*: The 19th "Challenge Cup": 2024 'Open Call for Solutions' Special Program: Second Prize *(Team Leader)*
+- *2024.09*: The 2024 Weihai Collegiate Programming Contest: Gold Medal🥇
 
-- *2024.04* Huawei CodeCraft Contest 2024: Second Prize *(9th in the preliminary round)*
-- *2023.12* The 48th ACM-ICPC Asia Regional Contest, Hangzhou: Silver Medal🥈
-- *2023.11* The 48th ACM-ICPC Asia Regional Contest, Nanjing: Bronze Medal🥉
-- *2023.10* The 2023 CCF Collegiate Computer Systems & Programming Contest: Bronze Medal🥉
+- *2024.04*: Huawei CodeCraft Contest 2024: Second Prize *(9th in the preliminary round)*
+- *2023.12*: The 48th ACM-ICPC Asia Regional Contest, Hangzhou: **Silver Medal**🥈
+- *2023.11*: The 48th ACM-ICPC Asia Regional Contest, Nanjing: Bronze Medal🥉
+- *2023.10*: The 2023 CCF Collegiate Computer Systems & Programming Contest: Bronze Medal🥉
 
 # 📖 Educations
 - *2022.08 - 2026.06 (Expected)*, Harbin Institute of Technology, Weihai, China. B.Eng. in Software Engineering.
