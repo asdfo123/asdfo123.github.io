@@ -16,14 +16,16 @@ redirect_from:
 {% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
 
 <span class='anchor' id='about-me'></span>
-👋 Hi, everyone! I am a junior undergraduate student at Harbin Institute of Technology, China, currently working under the supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on model editing and debiasing techniques. 
+# 👋 About Me
+
+ Hi, everyone! I am a junior undergraduate student at Harbin Institute of Technology, China, currently working under the supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on model editing and debiasing techniques. 
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
 
 # 🔥 News
 
-- *2024.11*: &nbsp;🎉🎉 Our project "PCBGuard: An AI-Driven Innovative Industrial Quality Inspection Solution" was awarded the Second Prize in the **Challenge Cup**.
+- *2024.11*: &nbsp;🎉🎉 Our project "PCBGuard: An AI-Driven Innovative Industrial Quality Inspection Solution" was awarded the Second Prize in the **"Challenge Cup"**.
 
 - *2024.07*: &nbsp;🎉🎉 Our paper "Can We Debias Multimodal Large Language Models via Model Editing?" has been accepted by **ACMMM 2024**!
 
