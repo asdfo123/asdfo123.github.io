@@ -72,7 +72,7 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 
 # 🏆 Competitions
 - *2024.11*: The 19th "Challenge Cup": 2024 'Open Call for Solutions' Special Program: Second Prize *(Team Leader)*
-- *2024.09*: The 2024 Weihai Collegiate Programming Contest: Gold Medal🥇
+- *2024.09*: The 2024 Weihai Collegiate Programming Contest: **Gold Medal**🥇
 
 - *2024.04*: Huawei CodeCraft Contest 2024: Second Prize *(9th in the preliminary round)*
 - *2023.12*: The 48th ACM-ICPC Asia Regional Contest, Hangzhou: **Silver Medal**🥈
