@@ -47,7 +47,7 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACM MM 2024 (CCF-A)</div><img src='images/paper_mm.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
-[Can We Debias Multimodal Large Language Models via Model Editing?](https://openreview.net/pdf?id=ybqqGTWuhj)<br>
+[Can We Debias Multimodal Large Language Models via Model Editing?](https://dl.acm.org/doi/abs/10.1145/3664647.3681589)<br>
 Zecheng Wang, **Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, Dianbo Sui
 </div>
 </div>
