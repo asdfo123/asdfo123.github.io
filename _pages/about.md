@@ -24,6 +24,7 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 
 # 🔥 News
+- *2024.12*: &nbsp;🎉🎉 Our team has won a Bronze Medal in **ICPC EC-Final**. What a fantastic way to conclude my ICPC journey!
 
 - *2024.11*: &nbsp;🎉🎉 Our project "PCBGuard: An AI-Driven Innovative Industrial Quality Inspection Solution" was awarded the Second Prize in the **"Challenge Cup"**.
 
@@ -71,6 +72,7 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 - *2023.04*: First Grade Scholarship, Harbin Institute of Technology, Weihai.
 
 # 🏆 Competitions
+- *2024.12*: The 49th ACM-ICPC Asia East Continent **Final** Contest (**EC-Final**): **Bronze Medal** 🥉
 - *2024.11*: The 19th "Challenge Cup": 2024 'Open Call for Solutions' Special Program: Second Prize *(Team Leader)*
 - *2024.09*: The 2024 Weihai Collegiate Programming Contest: **Gold Medal**🥇
 
