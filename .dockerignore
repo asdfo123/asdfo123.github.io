@@ -1,0 +1,7 @@
+_site
+.sass-cache
+.jekyll-cache
+.bundle
+node_modules
+.DS_Store
+docker-compose.yml
