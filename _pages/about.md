@@ -86,5 +86,6 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 - *2019.09 - 2022.06*, Dalian No.24 High School, Dalian, China. High School Diploma.
 
 # 💻 Internships
-<!-- - *2024.07 - 2024.08*, [HKU NLP Group](https://hkunlp.github.io/), Hong Kong SAR, China. -->
-I'm currently seeking internship opportunities for Winter 2024 and Summer 2025.
+- *2025.01 - Present*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, Guangdong, China.
+
+I'm currently seeking internship opportunities for  Summer 2025.
