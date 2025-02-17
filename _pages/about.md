@@ -20,7 +20,7 @@ redirect_from:
 
  Hi, everyone! I am a junior undergraduate student at Harbin Institute of Technology, China, currently working under the supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). I'm also a RA at [HKUST(GZ)](https://hkust-gz.edu.cn). 
  
- My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE) and debiasing techniques. More recently, I have developed a growing interest in Efficient Machine Learning (Efficient ML) and GUI Agents.
+ My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge and Debiasing techniques. More recently, I have developed a growing interest in Efficient Machine Learning (Efficient ML) and GUI Agents.
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
@@ -41,11 +41,11 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 <!-- <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Arxiv Preprint</div><img src='images/tmgbench.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[TMGBench: A Systematic Game Benchmark for Evaluating Strategic Reasoning Abilities of LLMs](https://arxiv.org/pdf/2410.10479)
+[TMGBench: A Systematic Game Benchmark for Evaluating Strategic Reasoning Abilities of LLMs](https://arxiv.org/pdf/2410.10479) -->
 
-**Haochuan Wang**, Xiachong Feng, Lei Li, Zhanyue Qin, Dianbo Sui, Lingpeng Kong
 
-</div> -->
+
+<!-- </div> -->
 
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACM MM 2024 (CCF-A)</div><img src='images/paper_mm.jpg' alt="sym" width="100%"></div></div>
@@ -55,7 +55,19 @@ Zecheng Wang, **Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, D
 </div>
 </div>
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 (CCF-A) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
+<div class='paper-box-text' markdown="1">
+Papers about Script and Knowledge Editing <br>
+**Xinye Li** (First Author)
+</div>
+</div>
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 (CCF-A) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
+<div class='paper-box-text' markdown="1">
+Papers about Inductive and Deductive Reasoning<br>
+**Xinye Li** (Second Author)
+</div>
+</div>
 <!-- <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Neurips 2024 Workshop LanGame</div><img src='images/econarena.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
