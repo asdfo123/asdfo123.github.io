@@ -18,7 +18,9 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 # 👋 About Me
 
- Hi, everyone! I am a junior undergraduate student at Harbin Institute of Technology, China, currently working under the supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on model editing and debiasing techniques. 
+ Hi, everyone! I am a junior undergraduate student at Harbin Institute of Technology, China, currently working under the supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). I'm also a RA at [HKUST(GZ)](https://hkust-gz.edu.cn). 
+ 
+ My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE) and debiasing techniques. More recently, I have developed a growing interest in Efficient Machine Learning (Efficient ML) and GUI Agents.
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
@@ -86,6 +88,6 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 - *2019.09 - 2022.06*, Dalian No.24 High School, Dalian, China. High School Diploma.
 
 # 💻 Internships
-- *2025.01 - Present*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, Guangdong, China.
+- *2025.01 - Present*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.
 
 I'm currently seeking internship opportunities for  Summer 2025.
