@@ -24,6 +24,8 @@ redirect_from:
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
+<span style="color:red">I am actively seeking PhD opportunities for Fall 2026.</span>
+
 
 # 🔥 News
 - *2025.02*: 2 papers submitted to ACL 2025, good luck!
