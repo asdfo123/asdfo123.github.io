@@ -28,6 +28,8 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 
 # 🔥 News
+- *2025.04*: 1 paper submitted to ACL 2025 XLLM Workshop, good luck!
+
 - *2025.02*: 2 papers submitted to ACL 2025, good luck!
 
 - *2024.12*: &nbsp;🎉🎉 Our team has won a Bronze Medal in **ICPC EC-Final**. What a fantastic way to conclude my ICPC journey!
@@ -42,11 +44,13 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 # 📝 Publications 
 
-<!-- <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Arxiv Preprint</div><img src='images/tmgbench.png' alt="sym" width="50%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 XLLM Workshop<br>Under Review</div><img src='images/workshop.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[TMGBench: A Systematic Game Benchmark for Evaluating Strategic Reasoning Abilities of LLMs](https://arxiv.org/pdf/2410.10479) -->
-
+Team asdfo123 at XLLM@ACL2025–LLM-SR Shared Task: An Empirical Study of LLM for Structural Reasoning<br>
+**Xinye Li**, Mingqi Wan, Dianbo Sui
+</div>
+</div>
 
 
 <!-- </div> -->
@@ -101,6 +105,7 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 
 # 📖 Educations
 - *2022.08 - 2026.06 (Expected)*, Harbin Institute of Technology, Weihai, China. B.Eng. in Software Engineering.
+- *2025.04 - 2025.10 (Expected)*, Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China. Visiting Research Student.
 - *2019.09 - 2022.06*, Dalian No.24 High School, Dalian, China. High School Diploma.
 
 # 💻 Internships
