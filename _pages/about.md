@@ -28,6 +28,9 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 
 # 🔥 News
+- *2025.05*: &nbsp;🎉🎉 Our paper "ScEdit: Script-based Assessment of Knowledge Editing" has been accepted by **Findings of ACL 2025**! Proud to mark this as my first first-author paper! 🚀 
+- *2025.05*: &nbsp;🎉🎉 Our shared task paper "LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning" has been accepted by **ACL 2025 XLLM Workshop**.
+
 - *2025.04*: 1 paper submitted to ACL 2025 XLLM Workshop, good luck!
 
 - *2025.02*: 2 papers submitted to ACL 2025, good luck!
@@ -44,10 +47,19 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 XLLM Workshop<br>Under Review</div><img src='images/workshop.png' alt="sym" width="50%"></div></div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Findings of ACL 2025 (CCF-A)</div><img src='images/scedit.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+ScEdit: Script-based Assessment of Knowledge Editing. <br>
+**Xinye Li**, Zunwen Zheng, Qian Zhang, Dekai Zhuang, Jiabao Kang, Liyan Xu, Qingbin Liu, Xi Chen, Zhiying Tu, Dianhui Chu, Dianbo Sui.
+
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 XLLM Workshop</div><img src='images/workshop.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-Team asdfo123 at XLLM@ACL2025–LLM-SR Shared Task: An Empirical Study of LLM for Structural Reasoning<br>
+LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning<br>
 **Xinye Li**, Mingqi Wan, Dianbo Sui
 </div>
 </div>
@@ -61,16 +73,10 @@ Team asdfo123 at XLLM@ACL2025–LLM-SR Shared Task: An Empirical Study of LLM fo
 [Can We Debias Multimodal Large Language Models via Model Editing?](https://dl.acm.org/doi/abs/10.1145/3664647.3681589)<br>
 Zecheng Wang, **Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, Dianbo Sui
 </div>
+
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 (CCF-A) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
-<div class='paper-box-text' markdown="1">
-Papers about Script and Knowledge Editing <br>
-**Xinye Li** (First Author)
-</div>
-</div>
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 (CCF-A) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2025 (CCF-B) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 Papers about Inductive and Deductive Reasoning<br>
 **Xinye Li** (Second Author)
