@@ -58,8 +58,7 @@ ScEdit: Script-based Assessment of Knowledge Editing. <br>
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 XLLM Workshop</div><img src='images/workshop.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
-
-LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning<br>
+[LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning](https://arxiv.org/abs/2505.12328)<br>
 **Xinye Li**, Mingqi Wan, Dianbo Sui
 </div>
 </div>
