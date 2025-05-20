@@ -28,12 +28,12 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 
 # 🔥 News
+- *2025.05*: 2 papers submitted to EMNLP 2025, good luck!
+
 - *2025.05*: &nbsp;🎉🎉 Our paper "ScEdit: Script-based Assessment of Knowledge Editing" has been accepted by **Findings of ACL 2025**! Proud to mark this as my first first-author paper! 🚀 
 - *2025.05*: &nbsp;🎉🎉 Our shared task paper "LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning" has been accepted by **ACL 2025 XLLM Workshop**.
 
-- *2025.04*: 1 paper submitted to ACL 2025 XLLM Workshop, good luck!
 
-- *2025.02*: 2 papers submitted to ACL 2025, good luck!
 
 - *2024.12*: &nbsp;🎉🎉 Our team has won a Bronze Medal in **ICPC EC-Final**. What a fantastic way to conclude my ICPC journey!
 
