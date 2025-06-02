@@ -48,18 +48,22 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 # 📝 Publications 
 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Findings of ACL 2025 (CCF-A)</div><img src='images/scedit.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-ScEdit: Script-based Assessment of Knowledge Editing. <br>
-**Xinye Li**, Zunwen Zheng, Qian Zhang, Dekai Zhuang, Jiabao Kang, Liyan Xu, Qingbin Liu, Xi Chen, Zhiying Tu, Dianhui Chu, Dianbo Sui.
-
-</div>
+<div class='paper-box'>
+  <div class='paper-box-image'>
+    <div>
+      <div class="badge">Findings of ACL 2025 (CCF-A)</div>
+      <img src='images/scedit.png' alt="sym" width="100%"></div>
+    </div>
+  <div class='paper-box-text' markdown="1">
+  [ScEdit: Script-based Assessment of Knowledge Editing.](https://arxiv.org/abs/2505.23291) <br>
+  **Xinye Li**, Zunwen Zheng, Qian Zhang, Dekai Zhuang, Jiabao Kang, Liyan Xu, Qingbin Liu, Xi Chen, Zhiying Tu, Dianhui Chu, Dianbo Sui.
+  </div>
 </div>
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 XLLM Workshop</div><img src='images/workshop.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 [LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning](https://arxiv.org/abs/2505.12328)<br>
-**Xinye Li**, Mingqi Wan, Dianbo Sui
+**Xinye Li\***, Mingqi Wan\*, Dianbo Sui
 </div>
 </div>
 
@@ -81,15 +85,22 @@ Papers about Inductive and Deductive Reasoning<br>
 **Xinye Li** (Second Author)
 </div>
 </div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2025 (CCF-B) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
+<div class='paper-box-text' markdown="1">
+Papers about editing Video-LLMs<br>
+**Xinye Li** 
+</div>
+</div>
 <!-- <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Neurips 2024 Workshop LanGame</div><img src='images/econarena.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[Economics Arena for Large Language Models](https://arxiv.org/abs/2401.01735)
+<!-- [Economics Arena for Large Language Models](https://arxiv.org/abs/2401.01735)
 
 Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Shang, Siting Lu
 
 *Equally contributed.
-</div> -->
+</div> --> 
 <!-- </div> -->
 
 # 🎖 Honors and Awards
@@ -116,4 +127,3 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 # 💻 Internships
 - *2025.01 - Present*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.
 
-I'm currently seeking internship opportunities for  Summer 2025.
