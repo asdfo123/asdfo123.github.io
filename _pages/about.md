@@ -55,14 +55,14 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
       <img src='images/scedit.png' alt="sym" width="100%"></div>
     </div>
   <div class='paper-box-text' markdown="1">
-  [ScEdit: Script-based Assessment of Knowledge Editing.](https://arxiv.org/abs/2505.23291) <br>
+  [ScEdit: Script-based Assessment of Knowledge Editing.](https://aclanthology.org/2025.findings-acl.104/) <br>
   **Xinye Li**, Zunwen Zheng, Qian Zhang, Dekai Zhuang, Jiabao Kang, Liyan Xu, Qingbin Liu, Xi Chen, Zhiying Tu, Dianhui Chu, Dianbo Sui.
   </div>
 </div>
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 XLLM Workshop</div><img src='images/workshop.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
-[LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning](https://arxiv.org/abs/2505.12328)<br>
+[LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning](https://aclanthology.org/2025.xllm-1.30/)<br>
 **Xinye Li\***, Mingqi Wan\*, Dianbo Sui
 </div>
 </div>
@@ -82,7 +82,7 @@ Zecheng Wang, **Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, D
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2025 (CCF-B) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 Papers about Inductive and Deductive Reasoning<br>
-**Xinye Li** (Second Author)
+**Xinye Li** 
 </div>
 </div>
 
