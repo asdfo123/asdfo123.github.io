@@ -28,11 +28,11 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 
 # 🔥 News
-- *2025.05*: 2 papers submitted to EMNLP 2025, good luck!
+- *2025.08*: &nbsp;🎉🎉 Our paper "Exploring Deductive and Inductive Reasoning Capabilities of Large Language Models in Procedural Planning" has been accepted by **Findings of EMNLP 2025**! 🚀 
 
 - *2025.05*: &nbsp;🎉🎉 Our paper "ScEdit: Script-based Assessment of Knowledge Editing" has been accepted by **Findings of ACL 2025**! Proud to mark this as my first first-author paper! 🚀 
-- *2025.05*: &nbsp;🎉🎉 Our shared task paper "LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning" has been accepted by **ACL 2025 XLLM Workshop**.
 
+- *2025.05*: &nbsp;🎉🎉 Our shared task paper "LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning" has been accepted by **ACL 2025 XLLM Workshop**.
 
 
 - *2024.12*: &nbsp;🎉🎉 Our team has won a Bronze Medal in **ICPC EC-Final**. What a fantastic way to conclude my ICPC journey!
@@ -69,7 +69,12 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 
 <!-- </div> -->
-
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Findings of EMNLP 2025 (CCF-B)</div><img src='images/paper_exploring.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+[Exploring Deductive and Inductive Reasoning Capabilities of Large Language Models in Procedural Planning](https://openreview.net/forum?id=BOKTyL6Uy9)<br>
+Jiabao Kang, **Xinye Li**, Liyan Xu, Qingbin Liu, Xi Chen, Zhiying Tu, Dianhui Chu, Dianbo Sui
+</div>
+</div>
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACM MM 2024 (CCF-A)</div><img src='images/paper_mm.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
@@ -79,14 +84,9 @@ Zecheng Wang, **Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, D
 
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2025 (CCF-B) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
-<div class='paper-box-text' markdown="1">
-Papers about Inductive and Deductive Reasoning<br>
-**Xinye Li** 
-</div>
-</div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">EMNLP 2025 (CCF-B) <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge"> ICLR <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 Papers about editing Video-LLMs<br>
 **Xinye Li** 
