@@ -60,13 +60,6 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
   </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 XLLM Workshop</div><img src='images/workshop.png' alt="sym" width="50%"></div></div>
-<div class='paper-box-text' markdown="1">
-[LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning](https://aclanthology.org/2025.xllm-1.30/)<br>
-**Xinye Li\***, Mingqi Wan\*, Dianbo Sui
-</div>
-</div>
-
 
 <!-- </div> -->
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Findings of EMNLP 2025 (CCF-B)</div><img src='images/paper_exploring.png' alt="sym" width="100%"></div></div>
@@ -84,9 +77,14 @@ Zecheng Wang, **Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, D
 
 </div>
 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2025 XLLM Workshop</div><img src='images/workshop.png' alt="sym" width="50%"></div></div>
+<div class='paper-box-text' markdown="1">
+[LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning](https://aclanthology.org/2025.xllm-1.30/)<br>
+**Xinye Li\***, Mingqi Wan\*, Dianbo Sui
+</div>
+</div>
 
-
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge"> ICLR <br>Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge"> Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 Papers about editing Video-LLMs<br>
 **Xinye Li** 
