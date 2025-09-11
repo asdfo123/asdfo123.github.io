@@ -20,7 +20,7 @@ redirect_from:
 
  Hi, everyone! I am a junior undergraduate student at Harbin Institute of Technology, China, currently working under the supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). I'm also a RA at [HKUST(GZ)](https://hkust-gz.edu.cn). 
  
- My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning and Debiasing techniques. More recently, I have developed a interest in (GUI) Agents.
+ My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning and Debiasing techniques. More recently, I have developed a interest in (GUI) Agents and Interpretality.
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
