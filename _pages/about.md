@@ -24,7 +24,7 @@ redirect_from:
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
-<span style="color:red">I am actively seeking PhD opportunities for Fall 2026.</span>
+<!-- <span style="color:red">I am actively seeking PhD opportunities for Fall 2026.</span> -->
 
 
 # 🔥 News
@@ -84,12 +84,12 @@ Zecheng Wang, **Xinye Li**, Zhanyue Qin, Chunshan Li, Zhiying Tu, Dianhui Chu, D
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge"> Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
+<!-- <div class='paper-box'><div class='paper-box-image'><div><div class="badge"> Under Review</div><img src='images/500x300.png' alt="sym" width="50%"></div></div>
 <div class='paper-box-text' markdown="1">
 Papers about editing Video-LLMs<br>
 **Xinye Li** 
 </div>
-</div>
+</div> -->
 <!-- <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Neurips 2024 Workshop LanGame</div><img src='images/econarena.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
@@ -123,5 +123,15 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 - *2019.09 - 2022.06*, Dalian No.24 High School, Dalian, China. High School Diploma.
 
 # 💻 Internships
-- *2025.01 - Present*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.
+- *2025.07 - Present*, [HKU CDS Summer Intenship Programme](https://cds.hku.hk/rintern/), Hong Kong SAR, China.
+- *2025.02 - Present*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.
+
+
+# ✈️Misc
+
+- [Several Useful Information about Summer Intern & Phd Application (Mainly focused on HK)](https://tidal-lyric-8aa.notion.site/Summer-Research-Program-HK-Phd-Early-Admission-Program-2025-119352074e7f8013aa38e2cca4126ec8)
+
+- If you'd like to collaborate or want advice on applying to CS Phd/Mphil program, feel free to [email](mailto:leeasdfo123@gmail.com) me directly.
+
+<br><br>
 
