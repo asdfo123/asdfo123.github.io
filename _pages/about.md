@@ -18,7 +18,7 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 # 👋 About Me
 
- Hi, everyone! I am a senior undergraduate student at [Harbin Institute of Technology](https://hit.edu.cn), China, currently working under the supervision of [Prof. Dianbo Sui](https://homepage.hit.edu.cn/suidianbo?lang=en). I am also a RA and visiting research student at [HKUST(GZ)](https://hkust-gz.edu.cn).
+ Hi, everyone! I am a senior undergraduate student at [Harbin Institute of Technology](https://www.hit.edu.cn), China, currently working under the supervision of [Prof. Dianbo Sui](https://homepage.hit.edu.cn/suidianbo?lang=en). I am also a RA and visiting research student at [HKUST(GZ)](https://hkust-gz.edu.cn).
  
  My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning and Efficient ML. More recently, I have developed a interest in (GUI) Agents and Interpretality.
 
