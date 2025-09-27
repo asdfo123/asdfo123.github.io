@@ -18,13 +18,13 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 # 👋 About Me
 
- Hi, everyone! I am a junior undergraduate student at Harbin Institute of Technology, China, currently working under the supervision of [Prof. Dianbo Sui](https://scholar.google.com/citations?user=yi639zEAAAAJ&hl=en). I'm also a RA at [HKUST(GZ)](https://hkust-gz.edu.cn). 
+ Hi, everyone! I am a senior undergraduate student at [Harbin Institute of Technology](https://hit.edu.cn), China, currently working under the supervision of [Prof. Dianbo Sui](https://homepage.hit.edu.cn/suidianbo?lang=en). I am also a RA and visiting research student at [HKUST(GZ)](https://hkust-gz.edu.cn).
  
- My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning and Debiasing techniques. More recently, I have developed a interest in (GUI) Agents and Interpretality.
+ My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning and Efficient ML. More recently, I have developed a interest in (GUI) Agents and Interpretality.
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
-<!-- <span style="color:red">I am actively seeking PhD opportunities for Fall 2026.</span> -->
+<span style="color:red">I am actively seeking Research Intern opportunities.</span>
 
 
 # 🔥 News
@@ -55,7 +55,7 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
       <img src='images/scedit.png' alt="sym" width="100%"></div>
     </div>
   <div class='paper-box-text' markdown="1">
-  [ScEdit: Script-based Assessment of Knowledge Editing.](https://aclanthology.org/2025.findings-acl.104/) <br>
+  [ScEdit: Script-based Assessment of Knowledge Editing](https://aclanthology.org/2025.findings-acl.104/) <br>
   **Xinye Li**, Zunwen Zheng, Qian Zhang, Dekai Zhuang, Jiabao Kang, Liyan Xu, Qingbin Liu, Xi Chen, Zhiying Tu, Dianhui Chu, Dianbo Sui.
   </div>
 </div>
@@ -102,7 +102,7 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 <!-- </div> -->
 
 # 🎖 Honors and Awards
-- *2024.09*: **"Excellent Student Model"** Honorary Title (Top 0.5%), Harbin Institute of Technology.
+- *2024.12*: **"Excellent Student Model"** Honorary Title (Top 0.5%), Harbin Institute of Technology.
 - *2023.12*: **National Scholarship** (Top 0.2% Nationwide), Ministry of Education of the People's Republic of China.
 - *2023.11*: Taihu Future Science and Technology Scholarship (Top 1.6%), Harbin Institute of Technology, Weihai.
 - *2023.04*: First Grade Scholarship, Harbin Institute of Technology, Weihai.
@@ -119,19 +119,27 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 
 # 📖 Educations
 - *2022.08 - 2026.06 (Expected)*, Harbin Institute of Technology, Weihai, China. B.Eng. in Software Engineering.
-- *2025.04 - 2025.10 (Expected)*, Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China. Visiting Research Student.
+- *2025.04 - 2025.10*, Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China. Visiting Research Student.
 - *2019.09 - 2022.06*, Dalian No.24 High School, Dalian, China. High School Diploma.
 
 # 💻 Internships
-- *2025.07 - Present*, [HKU CDS Summer Intenship Programme](https://cds.hku.hk/rintern/), Hong Kong SAR, China.
-- *2025.02 - Present*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.
+- *2025.07 - 2025.08*, [HKU CDS Summer Intenship Programme](https://cds.hku.hk/rintern/), Hong Kong SAR, China.
+- *2025.02 - 2025.10*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.
 
 
-# ✈️Misc
+# 😊 Services
+- ACM (Competitive Programming) Club Leader @ HITWH.
+- Reviewer: I'm not professional enough at this stage.
 
-- [Several Useful Information about Summer Intern & Phd Application (Mainly focused on HK)](https://tidal-lyric-8aa.notion.site/Summer-Research-Program-HK-Phd-Early-Admission-Program-2025-119352074e7f8013aa38e2cca4126ec8)
+# ✈️ Misc
+
+- [Several Useful Information about Summer Intern & Phd Application (Mainly focused on HK)](https://tidal-lyric-8aa.notion.site/Summer-Research-Program-HK-Phd-Early-Admission-Program-2025-119352074e7f8013aa38e2cca4126ec8).
 
 - If you'd like to collaborate or want advice on applying to CS Phd/Mphil program, feel free to [email](mailto:leeasdfo123@gmail.com) me directly.
+
+- I run a RedNote account, [XIEEE](https://www.xiaohongshu.com/user/profile/5f8695d300000000010021e1), where I share graduate school application tips and research experiences.
+
+- I've been learning Cantonese on Duolingo for 200+ days, but I'm still "識聽唔識講" (may understand but struggle to speak).
 
 <br><br>
 
