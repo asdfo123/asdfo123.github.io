@@ -28,20 +28,22 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 
 # 🔥 News
+- *2025.10*: &nbsp;🏆🏆 I am honored to be awarded the **National Scholarship 2024-2025** (Top 0.4% Nationwide)! 
+
 - *2025.08*: &nbsp;🎉🎉 Our paper "Exploring Deductive and Inductive Reasoning Capabilities of Large Language Models in Procedural Planning" has been accepted by **Findings of EMNLP 2025**! 🚀 
 
-- *2025.05*: &nbsp;🎉🎉 Our paper "ScEdit: Script-based Assessment of Knowledge Editing" has been accepted by **Findings of ACL 2025**! Proud to mark this as my first first-author paper! 🚀 
+- *2025.05*: &nbsp;🎉🎉 Our paper "ScEdit: Script-based Assessment of Knowledge Editing" has been accepted by **Findings of ACL 2025**! Proud to mark this as my first first-author paper! 🚀✨
 
-- *2025.05*: &nbsp;🎉🎉 Our shared task paper "LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning" has been accepted by **ACL 2025 XLLM Workshop**.
+- *2025.05*: &nbsp;🎉🎉 Our shared task paper "LLMSR@XLLM25: An Empirical Study of LLM for Structural Reasoning" has been accepted by **ACL 2025 XLLM Workshop**. 🎯
 
 
-- *2024.12*: &nbsp;🎉🎉 Our team has won a Bronze Medal in **ICPC EC-Final**. What a fantastic way to conclude my ICPC journey!
+- *2024.12*: &nbsp;🏅🏅 Our team has won a **Bronze Medal** in **ICPC EC-Final**. What a fantastic way to conclude my ICPC journey! 🥉
 
-- *2024.11*: &nbsp;🎉🎉 Our project "PCBGuard: An AI-Driven Innovative Industrial Quality Inspection Solution" was awarded the Second Prize in the **"Challenge Cup"**.
+- *2024.11*: &nbsp;🏅🏅 Our project "PCBGuard: An AI-Driven Innovative Industrial Quality Inspection Solution" was awarded the **Second Prize** in the **"Challenge Cup"**. 🎯
 
-- *2024.07*: &nbsp;🎉🎉 Our paper "Can We Debias Multimodal Large Language Models via Model Editing?" has been accepted by **ACMMM 2024**!
+- *2024.07*: &nbsp;🎉🎉 Our paper "Can We Debias Multimodal Large Language Models via Model Editing?" has been accepted by **ACMMM 2024**! 🚀
 
-- *2024.07*: Personal Website is now live!
+- *2024.07*: Personal Website is now live! 🤗
 <!-- - *2024.06*: I have completed my summer internship at [HKU NLP group](https://hkunlp.github.io/), supervised by [Prof. Lingpeng Kong](https://scholar.google.com/citations?user=f1hBi5wAAAAJ&hl=zh-CN). -->
 
 
