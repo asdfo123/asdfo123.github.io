@@ -102,6 +102,7 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 <!-- </div> -->
 
 # 🎖 Honors and Awards
+- *2025.12*: **National Scholarship** (Top 0.4% Nationwide), Ministry of Education of the People's Republic of China.
 - *2024.12*: **"Excellent Student Model"** Honorary Title (Top 0.5%), Harbin Institute of Technology.
 - *2023.12*: **National Scholarship** (Top 0.2% Nationwide), Ministry of Education of the People's Republic of China.
 - *2023.11*: Taihu Future Science and Technology Scholarship (Top 1.6%), Harbin Institute of Technology, Weihai.
