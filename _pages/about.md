@@ -18,9 +18,9 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 # 👋 About Me
 
- Hi, everyone! I am a senior undergraduate student at [Harbin Institute of Technology](https://www.hit.edu.cn), Weihai, China, currently working under the supervision of [Prof. Dianbo Sui](https://homepage.hit.edu.cn/suidianbo?lang=en). I am also a RA and visiting research student at [HKUST(GZ)](https://hkust-gz.edu.cn).
+ Hi, everyone! I am an incoming PhD student at [The Chinese University of Hong Kong](https://www.cuhk.edu.hk). I am currently a senior undergraduate student at [Harbin Institute of Technology](https://www.hit.edu.cn), Weihai, China, working under the supervision of [Prof. Dianbo Sui](https://homepage.hit.edu.cn/suidianbo?lang=en). Previously, I was an RA & visiting research student at [HKUST(GZ)](https://hkust-gz.edu.cn) and an RA at [HKU CDS](https://cds.hku.hk).
  
- My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning and Efficient ML. More recently, I have developed a interest in (GUI) Agents and Interpretality.
+ My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning, and Efficient ML. More recently, I have developed an interest in Agents and Interpretability.
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
