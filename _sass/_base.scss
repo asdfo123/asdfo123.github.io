@@ -334,3 +334,243 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a,
   max-width: 100% !important;
   max-height: 100% !important;
 }
+
+/* ==========================================================================
+   Dark Mode Styles
+   ========================================================================== */
+
+/* CSS Variables for theming */
+:root {
+  --bg-color: #fff;
+  --text-color: #494e52;
+  --text-muted: #6c757d;
+  --link-color: #224b8d;
+  --link-hover: #0d2f5e;
+  --border-color: #e9ecef;
+  --code-bg: #f8f9fa;
+  --card-bg: #fff;
+  --masthead-bg: #fff;
+  --badge-bg: #224b8d;
+}
+
+html[data-theme="dark"] {
+  --bg-color: #1a1a2e;
+  --text-color: #e4e4e7;
+  --text-muted: #a1a1aa;
+  --link-color: #8ab4f8;
+  --link-hover: #aecbfa;
+  --border-color: #3f3f46;
+  --code-bg: #27272a;
+  --card-bg: #16213e;
+  --masthead-bg: #0f0f1a;
+  --badge-bg: #3b82f6;
+}
+
+/* Apply dark mode styles */
+html[data-theme="dark"] body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+html[data-theme="dark"] a {
+  color: var(--link-color);
+}
+
+html[data-theme="dark"] a:hover {
+  color: var(--link-hover);
+}
+
+html[data-theme="dark"] .masthead {
+  background-color: var(--masthead-bg);
+  border-bottom-color: var(--border-color);
+}
+
+html[data-theme="dark"] .greedy-nav a {
+  color: var(--text-color);
+}
+
+html[data-theme="dark"] .sidebar,
+html[data-theme="dark"] .profile_box {
+  background-color: var(--bg-color);
+}
+
+html[data-theme="dark"] .author__name,
+html[data-theme="dark"] .author__bio {
+  color: var(--text-color);
+}
+
+html[data-theme="dark"] .page__content {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+html[data-theme="dark"] h1, 
+html[data-theme="dark"] h2, 
+html[data-theme="dark"] h3, 
+html[data-theme="dark"] h4, 
+html[data-theme="dark"] h5, 
+html[data-theme="dark"] h6 {
+  color: var(--text-color);
+}
+
+html[data-theme="dark"] hr {
+  border-top-color: var(--border-color);
+}
+
+html[data-theme="dark"] code,
+html[data-theme="dark"] pre {
+  background-color: var(--code-bg);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .paper-box {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+html[data-theme="dark"] .badge {
+  background-color: var(--badge-bg);
+}
+
+html[data-theme="dark"] blockquote {
+  color: var(--text-muted);
+  border-left-color: var(--link-color);
+}
+
+html[data-theme="dark"] figcaption {
+  color: var(--text-muted);
+}
+
+html[data-theme="dark"] .author__urls-wrapper a,
+html[data-theme="dark"] .author__urls li {
+  color: var(--text-color);
+}
+
+html[data-theme="dark"] .author__urls li i {
+  color: var(--text-muted);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 1.2em;
+  color: var(--text-color);
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Desktop: positioned next to visible-links */
+  &.theme-toggle-desktop {
+    position: absolute !important;
+    display: none !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    height: 100% !important;
+    padding: 0.5rem 0.5rem;
+    color: $masthead-link-color !important;
+    background: none !important;
+    border: none !important;
+    z-index: 10;
+    transition: right 0.3s ease;
+    
+    &:hover {
+      color: $masthead-link-color-hover !important;
+      background-color: transparent !important;
+    }
+    
+    html[data-theme="dark"] & {
+      color: var(--text-color, #e4e4e7) !important;
+      
+      &:hover {
+        color: var(--link-color, #8ab4f8) !important;
+      }
+    }
+    
+    /* Show on desktop, hide on mobile */
+    @media (min-width: 768px) {
+      display: flex !important;
+      /* Default position when hamburger is hidden */
+      right: 0.5rem !important;
+    }
+  }
+  
+  /* When hamburger menu is visible, adjust position */
+  .greedy-nav > button:first-of-type:not(.hidden) ~ .theme-toggle-desktop {
+    @media (min-width: 768px) {
+      right: 50px !important;
+    }
+  }
+  
+  /* Mobile: absolute positioned button */
+  &.theme-toggle-mobile {
+    position: absolute;
+    right: 50px; /* Position to the left of the hamburger menu button */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+    height: 100%;
+    color: $masthead-link-color !important;
+    background: none;
+    border: none;
+    
+    &:hover {
+      color: $masthead-link-color-hover !important;
+    }
+    
+    html[data-theme="dark"] & {
+      color: var(--text-color, #e4e4e7) !important;
+      
+      &:hover {
+        color: var(--link-color, #8ab4f8) !important;
+      }
+    }
+    
+    /* Show on mobile, hide on desktop */
+    display: flex;
+    @include breakpoint($medium) {
+      display: none;
+    }
+  }
+}
+
+/* Theme toggle as menu item - styles moved to _navigation.scss for better specificity */
+
+.theme-toggle:hover {
+  background-color: rgba(128, 128, 128, 0.2) !important;
+  transform: rotate(15deg);
+  
+  /* Don't rotate desktop button */
+  &.theme-toggle-desktop {
+    transform: none;
+  }
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.theme-toggle .icon-moon {
+  fill: none;
+}
+
+/* Hide icons based on theme - show sun in light mode, moon in dark mode */
+html:not([data-theme="dark"]) .theme-toggle .icon-moon {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .icon-sun {
+  display: none;
+}

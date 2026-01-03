@@ -177,6 +177,11 @@
   min-width: 250px;
   background: $background-color;
 
+  /* Dark mode styles */
+  html[data-theme="dark"] & {
+    background: var(--masthead-bg, #0f0f1a);
+  }
+
   a {
     display: block;
     margin: 0 1rem;
@@ -187,9 +192,19 @@
     &:hover {
       color: $masthead-link-color-hover;
     }
+
+    /* Dark mode link styles */
+    html[data-theme="dark"] & {
+      color: var(--text-color, #e4e4e7);
+      
+      &:hover {
+        color: var(--link-color, #8ab4f8);
+      }
+    }
   }
 
-  button {
+  /* Hamburger menu button only - exclude theme toggle buttons */
+  > button:first-of-type {
     position: absolute;
     height: 100%;
     right: 0;
@@ -199,6 +214,11 @@
     background-color: $primary-color;
     color: #fff;
     cursor: pointer;
+
+    /* Dark mode button styles */
+    html[data-theme="dark"] & {
+      background-color: var(--primary-color, #3b82f6);
+    }
   }
 
   .visible-links {
@@ -221,6 +241,7 @@
           margin-right: 0;
         }
       }
+      
     }
 
     a {
@@ -259,6 +280,13 @@
     border-radius: $border-radius;
     background: #fff;
     box-shadow: 0 0 10px rgba(#000, 0.25);
+
+    /* Dark mode hidden links styles */
+    html[data-theme="dark"] & {
+      background: var(--card-bg, #16213e);
+      border-color: var(--border-color, #3f3f46);
+      box-shadow: 0 0 10px rgba(#000, 0.5);
+    }
 
     a {
       margin: 0;

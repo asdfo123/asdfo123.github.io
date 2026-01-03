@@ -6,8 +6,24 @@
 <meta name="msapplication-TileColor" content="#000000">
 <meta name="msapplication-TileImage" content="images/mstile-144x144.png?v=M44lzPylqQ">
 <meta name="msapplication-config" content="images/browserconfig.xml?v=M44lzPylqQ">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#ffffff" id="theme-color-meta">
 <link rel="stylesheet" href="assets/css/academicons.css"/>
+
+<!-- Font Awesome 6 (for updated brand icons like X/Twitter) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkfQ9YQ+8c+YQHsG2h6xkqVqKxEsGZC5GsvmY0Z5Pq1I1l4rG4rY6Y5uQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Theme initialization (runs before page renders to prevent flash) -->
+<script>
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('theme-color-meta').setAttribute('content', '#1a1a2e');
+    }
+  })();
+</script>
 
 <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
 <script type="text/x-mathjax-config">
@@ -19,5 +35,86 @@
   });
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- Theme toggle functionality -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    const themeColorMeta = document.getElementById('theme-color-meta');
+    
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+      if (!localStorage.getItem('theme')) {
+        // Only auto-switch if user hasn't manually set a preference
+        if (e.matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          themeColorMeta.setAttribute('content', '#1a1a2e');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          themeColorMeta.setAttribute('content', '#ffffff');
+        }
+      }
+    });
+    
+    // Toggle button click handler (handle both desktop and mobile buttons)
+    const toggleButtons = document.querySelectorAll('#theme-toggle, #theme-toggle-mobile');
+    
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeColorMeta.setAttribute('content', '#ffffff');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeColorMeta.setAttribute('content', '#1a1a2e');
+      }
+    }
+    
+    toggleButtons.forEach(function(btn) {
+      if (btn) {
+        btn.addEventListener('click', toggleTheme);
+      }
+    });
+    
+    // Adjust theme toggle button position based on hamburger menu visibility
+    function adjustThemeTogglePosition() {
+      const hamburgerBtn = document.querySelector('#site-nav > button:first-of-type');
+      const themeToggleDesktop = document.getElementById('theme-toggle');
+      
+      if (hamburgerBtn && themeToggleDesktop && window.innerWidth >= 768) {
+        // Small delay to ensure greedy-nav has updated
+        setTimeout(function() {
+          if (hamburgerBtn.classList.contains('hidden')) {
+            // Hamburger is hidden, position toggle at the right edge
+            themeToggleDesktop.style.right = '0.5rem';
+          } else {
+            // Hamburger is visible, position toggle to its left
+            themeToggleDesktop.style.right = '50px';
+          }
+        }, 10);
+      }
+    }
+    
+    // Run on load
+    setTimeout(adjustThemeTogglePosition, 100);
+    
+    // Run on resize (greedy-nav updates on resize)
+    window.addEventListener('resize', function() {
+      setTimeout(adjustThemeTogglePosition, 50);
+    });
+    
+    // Observe hamburger button for class changes (when greedy-nav updates)
+    const hamburgerBtn = document.querySelector('#site-nav > button:first-of-type');
+    if (hamburgerBtn) {
+      const observer = new MutationObserver(function() {
+        setTimeout(adjustThemeTogglePosition, 10);
+      });
+      observer.observe(hamburgerBtn, { attributes: true, attributeFilter: ['class'] });
+    }
+  });
+</script>
 
 <!-- end custom head snippets -->

@@ -16,7 +16,7 @@ redirect_from:
 {% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
 
 <span class='anchor' id='about-me'></span>
-# 👋 About Me
+# 👋 About Me <img src="images/decorates/maple.png" style="height:30px; vertical-align:bottom;">
 
  Hi, everyone! I am an incoming PhD student at [The Chinese University of Hong Kong](https://www.cuhk.edu.hk). I am currently a senior undergraduate student at [Harbin Institute of Technology](https://www.hit.edu.cn), Weihai, China, working under the supervision of [Prof. Dianbo Sui](https://homepage.hit.edu.cn/suidianbo?lang=en). Previously, I was an RA & visiting research student at [HKUST(GZ)](https://hkust-gz.edu.cn) and an RA at [HKU CDS](https://cds.hku.hk).
  
@@ -28,6 +28,8 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 
 
 # 🔥 News
+- *2025.10*: &nbsp; I am honored to be awarded the **National Scholarship**!
+
 - *2025.10*: &nbsp;🏆🏆 I am honored to be awarded the **National Scholarship 2024-2025** (Top 0.4% Nationwide)! 
 
 - *2025.08*: &nbsp;🎉🎉 Our paper "Exploring Deductive and Inductive Reasoning Capabilities of Large Language Models in Procedural Planning" has been accepted by **Findings of EMNLP 2025**! 🚀 
