@@ -18,17 +18,18 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 # 👋 About Me <img src="images/decorates/maple.png" style="height:30px; vertical-align:bottom;">
 
- Hi, everyone! I am an incoming PhD student at [The Chinese University of Hong Kong](https://www.cuhk.edu.hk). I am currently a senior undergraduate student at [Harbin Institute of Technology](https://www.hit.edu.cn), Weihai, China, working under the supervision of [Prof. Dianbo Sui](https://homepage.hit.edu.cn/suidianbo?lang=en). Previously, I was an RA & visiting research student at [HKUST(GZ)](https://hkust-gz.edu.cn) and an RA at [HKU CDS](https://cds.hku.hk).
+Hi! I am an incoming PhD student at [The Chinese University of Hong Kong](https://www.cuhk.edu.hk). I am currently a senior undergraduate at [Harbin Institute of Technology](https://www.hit.edu.cn), Weihai, where I work under the supervision of [Prof. Dianbo Sui](https://homepage.hit.edu.cn/suidianbo?lang=en). Previously, I was a research assistant and visiting research student at [HKUST(GZ)](https://hkust-gz.edu.cn), and a research assistant at [HKU CDS](https://cds.hku.hk).
  
- My research interests lie in Natural Language Processing (NLP) and Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning, and Efficient ML. More recently, I have developed an interest in Agents and Interpretability.
+My research interests lie in Large Language Models (LLMs), with a particular focus on Model Editing (Knowledge Editing, KE), Knowledge, Reasoning, and Efficient ML. More recently, I have become interested in Diffusion models and Video Generation.
 
 Previously, I was a competitive programming (CP) contestant and a leader of the ACM club, working under the guidance of [Prof. Kaikun Dong](https://homepage.hit.edu.cn/dongkaikun?lang=en).
 
 <span style="color:red">I am actively seeking Research Intern opportunities.</span>
 
 
+<span class='anchor' id='news'></span>
 # 🔥 News
-- *2025.10*: &nbsp; I am honored to be awarded the **National Scholarship**!
+- *2025.12*: &nbsp;🏆🏆 I am excited to share that I have been awarded the **Zeshi Virtue and Talent Scholarship**, one of the prestigious scholarships at Harbin Institute of Technology, Weihai!
 
 - *2025.10*: &nbsp;🏆🏆 I am honored to be awarded the **National Scholarship 2024-2025** (Top 0.4% Nationwide)! 
 
@@ -49,6 +50,7 @@ Previously, I was a competitive programming (CP) contestant and a leader of the 
 <!-- - *2024.06*: I have completed my summer internship at [HKU NLP group](https://hkunlp.github.io/), supervised by [Prof. Lingpeng Kong](https://scholar.google.com/citations?user=f1hBi5wAAAAJ&hl=zh-CN). -->
 
 
+<span class='anchor' id='publications'></span>
 # 📝 Publications 
 
 
@@ -105,7 +107,9 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 </div> --> 
 <!-- </div> -->
 
+<span class='anchor' id='honors-awards'></span>
 # 🎖 Honors and Awards
+- *2025.12*: **Zeshi Virtue and Talent Scholarship** (10 in HITWH), Harbin Institute of Technology, Weihai.
 - *2025.12*: **National Scholarship** (Top 0.4% Nationwide), Ministry of Education of the People's Republic of China.
 - *2024.12*: **"Excellent Student Model"** Honorary Title (Top 0.5%), Harbin Institute of Technology.
 - *2023.12*: **National Scholarship** (Top 0.2% Nationwide), Ministry of Education of the People's Republic of China.
@@ -122,29 +126,31 @@ Shangmin Guo\*, Haoran Bu\*, **Haochuan Wang\***, Yi Ren, Dianbo Sui, Yuming Sha
 - *2023.11*: The 48th ACM-ICPC Asia Regional Contest, Nanjing: Bronze Medal🥉
 - *2023.10*: The 2023 CCF Collegiate Computer Systems & Programming Contest: Bronze Medal🥉
 
-# 📖 Educations
+<span class='anchor' id='education'></span>
+# 📖 Education
 - *2022.08 - 2026.06 (Expected)*, Harbin Institute of Technology, Weihai, China. B.Eng. in Software Engineering.
 - *2025.04 - 2025.10*, Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China. Visiting Research Student.
 - *2019.09 - 2022.06*, Dalian No.24 High School, Dalian, China. High School Diploma.
 
+<span class='anchor' id='internships'></span>
 # 💻 Internships
-- *2025.07 - 2025.08*, [HKU CDS Summer Intenship Programme](https://cds.hku.hk/rintern/), Hong Kong SAR, China.
+- *2026.01 - Now*, [Tencent PCG](https://www.tencent.com/en-us/), Shenzhen, China.
+- *2025.07 - 2025.08*, [HKU CDS Summer Internship Programme](https://cds.hku.hk/rintern/), Hong Kong SAR, China.
 - *2025.02 - 2025.10*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.
 
 
 # 😊 Services
 - ACM (Competitive Programming) Club Leader @ HITWH.
-- Reviewer: I'm not professional enough at this stage.
+- Reviewer: Open to reviewing opportunities in LLM-related workshops and venues.
 
 # ✈️ Misc
 
-- [Several Useful Information about Summer Intern & Phd Application (Mainly focused on HK)](https://tidal-lyric-8aa.notion.site/Summer-Research-Program-HK-Phd-Early-Admission-Program-2025-119352074e7f8013aa38e2cca4126ec8).
+- [Several Useful Information about Summer Intern & PhD Application (Mainly focused on HK)](https://tidal-lyric-8aa.notion.site/Summer-Research-Program-HK-Phd-Early-Admission-Program-2025-119352074e7f8013aa38e2cca4126ec8).
 
-- If you'd like to collaborate or want advice on applying to CS Phd/Mphil program, feel free to [email](mailto:leeasdfo123@gmail.com) me directly.
+- If you'd like to collaborate or want advice on applying to CS PhD/MPhil programs, feel free to [email](mailto:leeasdfo123@gmail.com) me directly.
 
 - I run a RedNote account, [XIEEE](https://www.xiaohongshu.com/user/profile/5f8695d300000000010021e1), where I share graduate school application tips and research experiences.
 
 - I've been learning Cantonese on Duolingo for 200+ days, but I'm still "識聽唔識講" (may understand but struggle to speak).
 
 <br><br>
-

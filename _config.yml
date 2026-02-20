@@ -9,6 +9,7 @@
 title                    : "Xinye's Homepage"
 description              : "Passion is the fuel in the fire of action"
 repository               : "asdfo123/asdfo123.github.io"
+url                      : "https://asdfo123.github.io"
 google_scholar_stats_use_cdn : true
 
 # google analytics
@@ -23,7 +24,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 author:
   name             : "Xinye Li"
   avatar           : "images/avatar.JPG"
-  bio              : "Incoming Phd Student @ CUHK, Senior UG @ HIT"
+  bio              : "Incoming PhD Student @ CUHK, Senior UG @ HIT"
   location         : "Weihai, China"
   employer         : 
   pubmed           : 

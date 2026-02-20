@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="assets/css/academicons.css"/>
 
 <!-- Font Awesome 6 (for updated brand icons like X/Twitter) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkfQ9YQ+8c+YQHsG2h6xkqVqKxEsGZC5GsvmY0Z5Pq1I1l4rG4rY6Y5uQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- Theme initialization (runs before page renders to prevent flash) -->
 <script>
@@ -79,7 +79,7 @@
       }
     });
     
-    // Adjust theme toggle button position based on hamburger menu visibility
+    // Adjust desktop theme toggle position based on hamburger button width
     function adjustThemeTogglePosition() {
       const hamburgerBtn = document.querySelector('#site-nav > button:first-of-type');
       const themeToggleDesktop = document.getElementById('theme-toggle');
@@ -89,10 +89,12 @@
         setTimeout(function() {
           if (hamburgerBtn.classList.contains('hidden')) {
             // Hamburger is hidden, position toggle at the right edge
-            themeToggleDesktop.style.right = '0.5rem';
+            themeToggleDesktop.style.setProperty('right', '0.5rem', 'important');
           } else {
-            // Hamburger is visible, position toggle to its left
-            themeToggleDesktop.style.right = '50px';
+            // Hamburger is visible: place toggle to its left with a small gap
+            const gap = 8;
+            const right = hamburgerBtn.offsetWidth + gap;
+            themeToggleDesktop.style.setProperty('right', right + 'px', 'important');
           }
         }, 10);
       }
@@ -106,13 +108,20 @@
       setTimeout(adjustThemeTogglePosition, 50);
     });
     
-    // Observe hamburger button for class changes (when greedy-nav updates)
+    // Observe hamburger button changes (when greedy-nav updates)
     const hamburgerBtn = document.querySelector('#site-nav > button:first-of-type');
     if (hamburgerBtn) {
       const observer = new MutationObserver(function() {
         setTimeout(adjustThemeTogglePosition, 10);
       });
-      observer.observe(hamburgerBtn, { attributes: true, attributeFilter: ['class'] });
+      observer.observe(hamburgerBtn, { attributes: true, attributeFilter: ['class', 'count', 'style'] });
+
+      if (window.ResizeObserver) {
+        const resizeObserver = new ResizeObserver(function() {
+          setTimeout(adjustThemeTogglePosition, 10);
+        });
+        resizeObserver.observe(hamburgerBtn);
+      }
     }
   });
 </script>
