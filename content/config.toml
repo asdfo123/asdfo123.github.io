@@ -1,0 +1,42 @@
+[site]
+title = "Xinye Li (李信烨)"
+brand = "Xinye Li"
+description = "Incoming PhD Student @ CUHK, Senior UG @ HIT"
+favicon = "/favicon.png"
+last_updated = "March 22, 2026"
+
+[author]
+name = "Xinye Li"
+title = "Incoming PhD Student"
+institution = "The Chinese University of Hong Kong"
+avatar = "/avatar.JPG"
+
+[social]
+email = "leeasdfo123@gmail.com"
+google_scholar = "https://scholar.google.com/citations?hl=en&user=1uSeBd8AAAAJ"
+orcid = "https://orcid.org/0009-0005-1929-2407"
+github = "https://github.com/asdfo123"
+linkedin = "https://www.linkedin.com/in/xinye-li-5503a3283"
+xiaohongshu = "https://www.xiaohongshu.com/user/profile/5f8695d300000000010021e1"
+
+[features]
+enable_likes = true
+enable_one_page_mode = false
+
+[[navigation]]
+title = "About"
+type = "page"
+target = "about"
+href = "/"
+
+[[navigation]]
+title = "Publications"
+type = "page"
+target = "publications"
+href = "/publications"
+
+[[navigation]]
+title = "CV"
+type = "page"
+target = "cv"
+href = "/cv"

@@ -1,0 +1,33 @@
+type = "card"
+title = "Awards"
+description = "Honors and awards I have received."
+
+[[items]]
+date = "2025.12"
+awards = ["Zeshi Virtue and Talent Scholarship"]
+suffix = "(10 in HITWH), Harbin Institute of Technology, Weihai"
+
+[[items]]
+date = "2025.12"
+awards = ["National Scholarship"]
+suffix = "(Top 0.4% Nationwide), Ministry of Education of China"
+
+[[items]]
+date = "2024.12"
+awards = ["\"Excellent Student Model\" Honorary Title"]
+suffix = "(Top 0.5%), Harbin Institute of Technology"
+
+[[items]]
+date = "2023.12"
+awards = ["National Scholarship"]
+suffix = "(Top 0.2% Nationwide), Ministry of Education of China"
+
+[[items]]
+date = "2023.11"
+awards = ["Taihu Future Science and Technology Scholarship"]
+suffix = "(Top 1.6%), Harbin Institute of Technology, Weihai"
+
+[[items]]
+date = "2023.04"
+awards = ["First Grade Scholarship"]
+suffix = "Harbin Institute of Technology, Weihai"

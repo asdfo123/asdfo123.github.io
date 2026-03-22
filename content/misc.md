@@ -1,0 +1,4 @@
+- [Several Useful Information about Summer Intern & PhD Application (Mainly focused on HK)](https://tidal-lyric-8aa.notion.site/Summer-Research-Program-HK-Phd-Early-Admission-Program-2025-119352074e7f8013aa38e2cca4126ec8).
+- If you'd like to collaborate or want advice on applying to CS PhD/MPhil programs, feel free to [email me](mailto:leeasdfo123@gmail.com) directly.
+- I run a RedNote account, [XIEEE](https://www.xiaohongshu.com/user/profile/5f8695d300000000010021e1), where I share graduate school application tips and research experiences.
+- I've been learning Cantonese on Duolingo for 200+ days, but I'm still "識聽唔識講" (may understand but struggle to speak).

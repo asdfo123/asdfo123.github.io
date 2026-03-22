@@ -1,0 +1,4 @@
+- *2026.08 - 2030.07 (Expected)*, The Chinese University of Hong Kong. Incoming PhD Student.
+- *2022.08 - 2026.06 (Expected)*, Harbin Institute of Technology, Weihai, China. B.Eng. in Software Engineering.
+- *2025.04 - 2025.10*, Hong Kong University of Science and Technology (Guangzhou), Guangzhou, China. Visiting Research Student.
+- *2019.09 - 2022.06*, Dalian No.24 High School, Dalian, China. High School Diploma.

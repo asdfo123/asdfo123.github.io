@@ -1,0 +1,5 @@
+type = "text"
+title = "CV"
+description = "My academic curriculum vitae."
+source = "cv.md"
+pdf = "https://cdn.jsdelivr.net/gh/asdfo123/asdfo123@main/CV_Xinye_Li.pdf"

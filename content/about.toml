@@ -1,0 +1,63 @@
+type = "about"
+title = "About"
+
+[profile]
+research_interests = [
+  "Large Language Models (Model Editing, Knowledge, Reasoning)",
+  "Efficient Machine Learning",
+  "Diffusion Models & Video Generation",
+]
+
+[[sections]]
+id = "about"
+type = "markdown"
+source = "bio.md"
+title = "About"
+
+[[sections]]
+id = "featured_publications"
+type = "publications"
+title = "Selected Publications"
+filter = "selected"
+
+[[sections]]
+id = "news"
+type = "list"
+title = "News"
+source = "news.toml"
+
+[[sections]]
+id = "awards"
+type = "awards"
+title = "Honors and Awards"
+source = "awards.toml"
+
+[[sections]]
+id = "competitions"
+type = "competitions"
+title = "Competitions"
+source = "competitions.toml"
+
+[[sections]]
+id = "education"
+type = "markdown"
+source = "education.md"
+title = "Education"
+
+[[sections]]
+id = "internships"
+type = "markdown"
+source = "internships.md"
+title = "Internships"
+
+[[sections]]
+id = "services"
+type = "markdown"
+source = "services.md"
+title = "Services"
+
+[[sections]]
+id = "misc"
+type = "markdown"
+source = "misc.md"
+title = "Misc"
