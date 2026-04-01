@@ -36,7 +36,14 @@ target = "publications"
 href = "/publications"
 
 [[navigation]]
+title = "Blog"
+type = "page"
+target = "blog"
+href = "/blog"
+
+[[navigation]]
 title = "CV"
 type = "page"
 target = "cv"
 href = "/cv"
+

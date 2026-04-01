@@ -41,6 +41,23 @@ export default function About({ content, title = 'About' }: AboutProps) {
                         ),
                         strong: ({ children }) => <strong className="font-semibold text-primary">{children}</strong>,
                         em: ({ children }) => <em className="italic text-neutral-600 dark:text-neutral-500">{children}</em>,
+                        img: ({ src, alt }) => {
+                            const [displayAlt, width] = (alt || '').split('|');
+                            return (
+                                <span className="block my-6">
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
+                                        src={src}
+                                        alt={displayAlt}
+                                        style={width ? { width } : undefined}
+                                        className="rounded-xl max-w-full mx-auto shadow-sm"
+                                    />
+                                    {displayAlt && (
+                                        <span className="block text-center text-sm text-neutral-500 mt-2">{displayAlt}</span>
+                                    )}
+                                </span>
+                            );
+                        },
                     }}
                 >
                     {content}

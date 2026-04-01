@@ -1,5 +1,5 @@
 export interface BasePageConfig {
-  type: 'about' | 'publication' | 'card' | 'text';
+  type: 'about' | 'publication' | 'card' | 'text' | 'blog';
   title: string;
   description?: string;
 }
@@ -28,4 +28,19 @@ export interface CardItem {
 export interface CardPageConfig extends BasePageConfig {
   type: 'card';
   items: CardItem[];
+}
+
+export interface BlogPageConfig extends BasePageConfig {
+  type: 'blog';
+}
+
+export interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  tags: string[];
+  summary: string;
+  content: string;
+  contentType: 'markdown' | 'notion';
+  notionUrl?: string;
 }

@@ -1,15 +1,17 @@
 import { notFound } from 'next/navigation';
-import { getPageConfig, getMarkdownContent, getBibtexContent } from '@/lib/content';
+import { getPageConfig, getMarkdownContent, getBibtexContent, getBlogPosts } from '@/lib/content';
 import { getConfig } from '@/lib/config';
 import { parseBibTeX } from '@/lib/bibtexParser';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
+import BlogListPage from '@/components/pages/BlogListPage';
 import {
     BasePageConfig,
     PublicationPageConfig,
     TextPageConfig,
-    CardPageConfig
+    CardPageConfig,
+    BlogPageConfig
 } from '@/types/page';
 
 import { Metadata } from 'next';
@@ -56,6 +58,9 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug: 
             {pageConfig.type === 'card' && (
                 <CardPage config={pageConfig as CardPageConfig} />
             )}
+            {pageConfig.type === 'blog' && (
+                <BlogListPageWrapper config={pageConfig as BlogPageConfig} />
+            )}
         </div>
     );
 }
@@ -70,3 +75,9 @@ function TextPageWrapper({ config }: { config: TextPageConfig }) {
     const content = getMarkdownContent(config.source);
     return <TextPage config={config} content={content} />;
 }
+
+function BlogListPageWrapper({ config }: { config: BlogPageConfig }) {
+    const posts = getBlogPosts();
+    return <BlogListPage config={config} posts={posts} />;
+}
+
