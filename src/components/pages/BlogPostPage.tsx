@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { BlogPost } from '@/types/page';
 
 interface BlogPostPageProps {
@@ -72,6 +73,7 @@ export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageP
             ) : (
                 <article className="text-neutral-700 dark:text-neutral-600 leading-relaxed">
                     <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
                         components={{
                             h1: ({ children }) => <h1 className="text-3xl font-serif font-bold text-primary mt-8 mb-4">{children}</h1>,
                             h2: ({ children }) => <h2 className="text-2xl font-serif font-bold text-primary mt-8 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-2">{children}</h2>,
@@ -127,6 +129,33 @@ export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageP
                                     </span>
                                 );
                             },
+                            table: ({ children }) => (
+                                <div className="overflow-x-auto my-8">
+                                    <table className="w-full border-collapse text-left text-sm">
+                                        {children}
+                                    </table>
+                                </div>
+                            ),
+                            thead: ({ children }) => (
+                                <thead className="bg-neutral-50 dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
+                                    {children}
+                                </thead>
+                            ),
+                            th: ({ children }) => (
+                                <th className="px-4 py-3 font-semibold text-primary/80 border border-neutral-200 dark:border-neutral-800">
+                                    {children}
+                                </th>
+                            ),
+                            td: ({ children }) => (
+                                <td className="px-4 py-3 border border-neutral-200 dark:border-neutral-800">
+                                    {children}
+                                </td>
+                            ),
+                            tr: ({ children }) => (
+                                <tr className="even:bg-neutral-50/30 dark:even:bg-neutral-900/10 transition-colors">
+                                    {children}
+                                </tr>
+                            ),
                         }}
                     >
                         {post.content}
