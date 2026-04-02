@@ -7,7 +7,7 @@ import SelectedPublications from '@/components/home/SelectedPublications';
 import News, { NewsItem } from '@/components/home/News';
 import Awards, { AwardItem } from '@/components/home/Awards';
 import Competitions, { CompetitionItem } from '@/components/home/Competitions';
-import ClustrMapsGlobe from '@/components/home/ClustrMapsGlobe';
+import { GlobeSidebar, GlobeBottom } from '@/components/home/GlobeWrapper';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
@@ -159,9 +159,7 @@ export default function Home() {
             features={config.features}
             researchInterests={researchInterests}
           />
-          <div className="show-landscape mt-6">
-            <ClustrMapsGlobe />
-          </div>
+          <GlobeSidebar />
         </div>
 
         {/* Right Column - Content */}
@@ -240,9 +238,7 @@ export default function Home() {
       </div>
 
       {/* Globe at bottom in portrait orientation */}
-      <div className="show-portrait mt-8">
-        <ClustrMapsGlobe />
-      </div>
+      <GlobeBottom />
     </div>
   );
 }
