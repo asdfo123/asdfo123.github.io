@@ -1,3 +1,4 @@
 - *2026.01 - Now*, [Tencent PCG](https://www.tencent.com/en-us/), Shenzhen, China.
+- *2026.08 - 2026.02*, [Grace Investment Machine](https://graceim.ai/), Remote.
 - *2025.07 - 2025.08*, [HKU CDS Summer Internship Programme](https://cds.hku.hk/rintern/), Hong Kong SAR, China.
 - *2025.02 - 2025.10*, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.

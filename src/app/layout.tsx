@@ -97,6 +97,11 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Busuanzi page view counter - async to avoid blocking */}
+        <script
+          async
+          src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+        />
       </head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider>

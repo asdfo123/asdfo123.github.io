@@ -151,7 +151,7 @@ export default function Home() {
       {/* Main Content Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
-        {/* Left Column - Profile + Globe (desktop) */}
+        {/* Left Column - Profile + Globe (landscape) */}
         <div className="lg:col-span-1">
           <Profile
             author={config.author}
@@ -159,7 +159,7 @@ export default function Home() {
             features={config.features}
             researchInterests={researchInterests}
           />
-          <div className="hidden lg:block mt-6">
+          <div className="show-landscape mt-6">
             <ClustrMapsGlobe />
           </div>
         </div>
@@ -239,8 +239,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Globe at bottom on mobile */}
-      <div className="lg:hidden mt-8">
+      {/* Globe at bottom in portrait orientation */}
+      <div className="show-portrait mt-8">
         <ClustrMapsGlobe />
       </div>
     </div>

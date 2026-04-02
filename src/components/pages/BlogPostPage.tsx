@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -13,6 +14,15 @@ interface BlogPostPageProps {
 }
 
 export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageProps) {
+    // Trigger busuanzi refresh on SPA navigation (Next.js doesn't reload the page)
+    useEffect(() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const bsz = (window as any).busuanzi;
+        if (bsz && typeof bsz.fetch === 'function') {
+            bsz.fetch();
+        }
+    }, [post.slug]);
+
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -36,8 +46,18 @@ export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageP
                 <h1 className="text-3xl sm:text-4xl font-serif font-bold text-primary leading-tight">
                     {post.title}
                 </h1>
-                <div className="flex items-center gap-3 mt-3 text-sm text-neutral-500 dark:text-neutral-600">
+                <div className="flex items-center flex-wrap gap-3 mt-3 text-sm text-neutral-500 dark:text-neutral-600">
                     <time className="tabular-nums">{formatDate(post.date)}</time>
+                    {/* Busuanzi page view counter */}
+                    <span className="flex items-center gap-1">
+                        <span className="text-neutral-300 dark:text-neutral-700">·</span>
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        <span id="busuanzi_value_page_pv" className="tabular-nums">–</span>
+                        <span>views</span>
+                    </span>
                     {post.tags.length > 0 && (
                         <>
                             <span className="text-neutral-300 dark:text-neutral-700">·</span>
