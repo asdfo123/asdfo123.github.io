@@ -3,7 +3,7 @@ title = "About"
 
 [profile]
 research_interests = [
-  "Large Language Models (Model Editing, Knowledge, Reasoning)",
+  "Large Language Models (Model Editing, Knowledge, Agent)",
   "Efficient Machine Learning",
   "Diffusion Models & Video Generation",
 ]

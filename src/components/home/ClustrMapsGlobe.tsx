@@ -8,46 +8,18 @@ export default function ClustrMapsGlobe() {
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
-        if (container.childElementCount > 0) return;
+        // Already injected
+        if (container.querySelector('canvas, iframe')) return;
 
-        // Override document.write temporarily to capture globe.js output
-        const originalWrite = document.write.bind(document);
-        let captured = '';
-        document.write = (content: string) => {
-            captured += content;
-        };
-
+        // ClustrMaps globe.js locates itself by finding the script tag with
+        // id="clstr_globe" and injects the canvas immediately after it.
+        // So we must place the script INSIDE our container, not in <head>.
         const script = document.createElement('script');
+        script.id = 'clstr_globe';
         script.type = 'text/javascript';
         script.src = 'https://clustrmaps.com/globe.js?d=avG-4JvN5vL6vm1wDplFnk2UidHH4qQKDGhumzuvOeQ';
 
-        script.onload = () => {
-            document.write = originalWrite;
-            if (captured && container) {
-                container.innerHTML = captured;
-                // Execute any scripts in the captured content
-                const scripts = container.querySelectorAll('script');
-                scripts.forEach((s) => {
-                    const newScript = document.createElement('script');
-                    if (s.src) {
-                        newScript.src = s.src;
-                    } else {
-                        newScript.textContent = s.textContent;
-                    }
-                    s.replaceWith(newScript);
-                });
-            }
-        };
-
-        script.onerror = () => {
-            document.write = originalWrite;
-        };
-
-        document.head.appendChild(script);
-
-        return () => {
-            document.write = originalWrite;
-        };
+        container.appendChild(script);
     }, []);
 
     return (
