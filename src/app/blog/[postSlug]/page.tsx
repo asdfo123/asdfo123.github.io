@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getBlogPost, getBlogPosts } from '@/lib/content';
+import { getBlogPostWithTranslation, getBlogPosts } from '@/lib/content';
 import BlogPostPage from '@/components/pages/BlogPostPage';
 import { Metadata } from 'next';
 
@@ -12,23 +12,24 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ postSlug: string }> }): Promise<Metadata> {
     const { postSlug } = await params;
-    const post = getBlogPost(postSlug);
+    const data = getBlogPostWithTranslation(postSlug);
 
-    if (!post) {
+    if (!data) {
         return {};
     }
 
+    const primary = data.en ?? data.zh;
     return {
-        title: post.title,
-        description: post.summary,
+        title: primary.title,
+        description: primary.summary,
     };
 }
 
 export default async function BlogPostRoute({ params }: { params: Promise<{ postSlug: string }> }) {
     const { postSlug } = await params;
-    const post = getBlogPost(postSlug);
+    const data = getBlogPostWithTranslation(postSlug);
 
-    if (!post) {
+    if (!data) {
         notFound();
     }
 
@@ -44,7 +45,12 @@ export default async function BlogPostRoute({ params }: { params: Promise<{ post
 
     return (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <BlogPostPage post={post} prevPost={prevPost} nextPost={nextPost} />
+            <BlogPostPage
+                post={data.zh}
+                enPost={data.en}
+                prevPost={prevPost}
+                nextPost={nextPost}
+            />
         </div>
     );
 }

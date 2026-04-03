@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
@@ -9,11 +9,16 @@ import { BlogPost } from '@/types/page';
 
 interface BlogPostPageProps {
     post: BlogPost;
+    enPost?: BlogPost | null;
     prevPost?: { slug: string; title: string } | null;
     nextPost?: { slug: string; title: string } | null;
 }
 
-export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageProps) {
+export default function BlogPostPage({ post, enPost, prevPost, nextPost }: BlogPostPageProps) {
+    const hasEnglish = !!enPost;
+    const [lang, setLang] = useState<'zh' | 'en'>('en');
+    const activePost = lang === 'en' && hasEnglish ? enPost! : post;
+
     // Trigger busuanzi refresh on SPA navigation (Next.js doesn't reload the page)
     useEffect(() => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,24 +35,50 @@ export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageP
             transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-3xl mx-auto"
         >
-            {/* Back link */}
-            <Link
-                href="/blog/"
-                className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-accent transition-colors duration-200 mb-6 group"
-            >
-                <svg className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-                Back to Blog
-            </Link>
+            {/* Back link + Language Toggle */}
+            <div className="flex items-center justify-between mb-6">
+                <Link
+                    href="/blog/"
+                    className="inline-flex items-center gap-1.5 text-sm text-neutral-500 hover:text-accent transition-colors duration-200 group"
+                >
+                    <svg className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Back to Blog
+                </Link>
+
+                {/* Language Toggle */}
+                <div className="flex items-center gap-1 bg-neutral-100 dark:bg-neutral-800 rounded-full p-0.5">
+                    <button
+                        onClick={() => setLang('zh')}
+                        className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
+                            lang === 'zh'
+                                ? 'bg-white dark:bg-neutral-700 text-primary shadow-sm'
+                                : 'text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
+                        }`}
+                    >
+                        中文
+                    </button>
+                    <button
+                        onClick={() => setLang('en')}
+                        className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
+                            lang === 'en'
+                                ? 'bg-white dark:bg-neutral-700 text-primary shadow-sm'
+                                : 'text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
+                        }`}
+                    >
+                        EN
+                    </button>
+                </div>
+            </div>
 
             {/* Post header */}
             <header className="mb-8">
                 <h1 className="text-3xl sm:text-4xl font-serif font-bold text-primary leading-tight">
-                    {post.title}
+                    {activePost.title}
                 </h1>
                 <div className="flex items-center flex-wrap gap-3 mt-3 text-sm text-neutral-500 dark:text-neutral-600">
-                    <time className="tabular-nums">{formatDate(post.date)}</time>
+                    <time className="tabular-nums">{formatDate(activePost.date)}</time>
                     {/* Busuanzi page view counter */}
                     <span className="flex items-center gap-1">
                         <span className="text-neutral-300 dark:text-neutral-700">·</span>
@@ -58,11 +89,11 @@ export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageP
                         <span id="busuanzi_value_page_pv" className="tabular-nums">–</span>
                         <span>views</span>
                     </span>
-                    {post.tags.length > 0 && (
+                    {activePost.tags.length > 0 && (
                         <>
                             <span className="text-neutral-300 dark:text-neutral-700">·</span>
                             <div className="flex flex-wrap gap-1.5">
-                                {post.tags.map(tag => (
+                                {activePost.tags.map(tag => (
                                     <span
                                         key={tag}
                                         className="px-2 py-0.5 rounded-full bg-accent/10 text-accent text-xs font-medium"
@@ -79,14 +110,21 @@ export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageP
             {/* Divider */}
             <hr className="border-neutral-200 dark:border-neutral-800 mb-8" />
 
+            {/* Translation not available notice */}
+            {lang === 'en' && !hasEnglish && (
+                <div className="mb-8 px-4 py-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 text-sm text-amber-700 dark:text-amber-400">
+                    🌐 English translation is not available for this post yet. Showing the original Chinese version.
+                </div>
+            )}
+
             {/* Content */}
-            {post.contentType === 'notion' && post.notionUrl ? (
+            {activePost.contentType === 'notion' && activePost.notionUrl ? (
                 <div className="rounded-xl border border-neutral-200 dark:border-neutral-700/60 overflow-hidden">
                     <iframe
-                        src={post.notionUrl}
+                        src={activePost.notionUrl}
                         className="w-full border-0"
                         style={{ height: 'calc(100vh - 12rem)', minHeight: '60vh' }}
-                        title={post.title}
+                        title={activePost.title}
                         allowFullScreen
                     />
                 </div>
@@ -178,7 +216,7 @@ export default function BlogPostPage({ post, prevPost, nextPost }: BlogPostPageP
                             ),
                         }}
                     >
-                        {post.content}
+                        {activePost.content}
                     </ReactMarkdown>
                 </article>
             )}

@@ -43,4 +43,11 @@ export interface BlogPost {
   content: string;
   contentType: 'markdown' | 'notion';
   notionUrl?: string;
+  lang: 'zh' | 'en';
+  hasTranslation?: boolean;
+}
+
+export interface BlogPostWithTranslation {
+  zh: BlogPost;
+  en: BlogPost | null;
 }

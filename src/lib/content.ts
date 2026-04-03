@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { parse } from 'smol-toml';
 import matter from 'gray-matter';
-import { BlogPost } from '@/types/page';
+import { BlogPost, BlogPostWithTranslation } from '@/types/page';
 
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 const BLOG_DIR = path.join(CONTENT_DIR, 'blog');
@@ -42,29 +42,42 @@ export function getPageConfig<T>(pageName: string): T | null {
   return getTomlContent<T>(`${pageName}.toml`);
 }
 
+function parseBlogFile(filePath: string, slug: string, lang: 'zh' | 'en'): BlogPost {
+  const fileContent = fs.readFileSync(filePath, 'utf-8');
+  const { data, content } = matter(fileContent);
+  return {
+    slug,
+    title: data.title || slug,
+    date: data.date || '',
+    tags: data.tags || [],
+    summary: data.summary || '',
+    content,
+    contentType: data.type === 'notion' ? 'notion' : 'markdown',
+    notionUrl: data.notion_url || undefined,
+    lang,
+    hasTranslation: false,
+  };
+}
+
 export function getBlogPosts(): BlogPost[] {
   try {
     if (!fs.existsSync(BLOG_DIR)) {
       return [];
     }
-    const files = fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.md'));
+    // Only get primary (Chinese) files — exclude .en.md
+    const files = fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.md') && !f.endsWith('.en.md'));
     const posts: BlogPost[] = files.map(filename => {
       const filePath = path.join(BLOG_DIR, filename);
-      const fileContent = fs.readFileSync(filePath, 'utf-8');
-      const { data, content } = matter(fileContent);
       const slug = filename.replace(/\.md$/, '');
-      return {
-        slug,
-        title: data.title || slug,
-        date: data.date || '',
-        tags: data.tags || [],
-        summary: data.summary || '',
-        content,
-        contentType: data.type === 'notion' ? 'notion' : 'markdown',
-        notionUrl: data.notion_url || undefined,
-      };
+      const enPath = path.join(BLOG_DIR, `${slug}.en.md`);
+      const hasEn = fs.existsSync(enPath);
+      // Prefer English version for listing; fall back to Chinese
+      const post = hasEn
+        ? parseBlogFile(enPath, slug, 'en')
+        : parseBlogFile(filePath, slug, 'zh');
+      post.hasTranslation = hasEn;
+      return post;
     });
-    // Sort by date descending
     posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     return posts;
   } catch (error) {
@@ -79,18 +92,33 @@ export function getBlogPost(slug: string): BlogPost | null {
     if (!fs.existsSync(filePath)) {
       return null;
     }
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const { data, content } = matter(fileContent);
-    return {
-      slug,
-      title: data.title || slug,
-      date: data.date || '',
-      tags: data.tags || [],
-      summary: data.summary || '',
-      content,
-      contentType: data.type === 'notion' ? 'notion' : 'markdown',
-      notionUrl: data.notion_url || undefined,
-    };
+    const enPath = path.join(BLOG_DIR, `${slug}.en.md`);
+    const post = parseBlogFile(filePath, slug, 'zh');
+    post.hasTranslation = fs.existsSync(enPath);
+    return post;
+  } catch (error) {
+    console.error(`Error loading blog post ${slug}:`, error);
+    return null;
+  }
+}
+
+export function getBlogPostWithTranslation(slug: string): BlogPostWithTranslation | null {
+  try {
+    const zhPath = path.join(BLOG_DIR, `${slug}.md`);
+    if (!fs.existsSync(zhPath)) {
+      return null;
+    }
+    const zhPost = parseBlogFile(zhPath, slug, 'zh');
+
+    const enPath = path.join(BLOG_DIR, `${slug}.en.md`);
+    let enPost: BlogPost | null = null;
+    if (fs.existsSync(enPath)) {
+      enPost = parseBlogFile(enPath, slug, 'en');
+    }
+
+    zhPost.hasTranslation = enPost !== null;
+
+    return { zh: zhPost, en: enPost };
   } catch (error) {
     console.error(`Error loading blog post ${slug}:`, error);
     return null;
