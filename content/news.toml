@@ -1,4 +1,12 @@
 [[news]]
+date = "2026.04"
+content = "🎉 Two papers (Vid-LLMs Editing & Financial alpha mining Framework) have been accepted by **Main Conference of 🇺🇸 ACL 2026**!"
+
+[[news]]
+date = "2026.03"
+content = "🎉 I got the Phd offer from 🇭🇰 **The Chinese University of Hong Kong (CUHK)**!"
+
+[[news]]
 date = "2025.12"
 content = "🏆 Awarded the **Zeshi Virtue and Talent Scholarship**, one of the prestigious scholarships at Harbin Institute of Technology, Weihai!"
 
@@ -8,11 +16,11 @@ content = "🏆 Honored to be awarded the **National Scholarship 2024-2025** (To
 
 [[news]]
 date = "2025.08"
-content = "🎉 Our paper on deductive and inductive reasoning has been accepted by **Findings of EMNLP 2025**!"
+content = "🎉 Our paper on deductive and inductive reasoning has been accepted by **Findings of 🇨🇳 EMNLP 2025**!"
 
 [[news]]
 date = "2025.05"
-content = "🎉 Our paper [ScEdit](https://aclanthology.org/2025.findings-acl.104/) has been accepted by **Findings of ACL 2025**! My first first-author paper!"
+content = "🎉 Our paper [ScEdit](https://aclanthology.org/2025.findings-acl.104/) has been accepted by **Findings of 🇦🇹 ACL 2025**! My first first-author paper!"
 
 [[news]]
 date = "2025.05"
@@ -28,4 +36,4 @@ content = "🏅 Our project was awarded **Second Prize** in the **\"Challenge Cu
 
 [[news]]
 date = "2024.07"
-content = "🎉 Our paper on debiasing MLLMs via model editing has been accepted by **ACM MM 2024**!"
+content = "🎉 Our paper on debiasing MLLMs via model editing has been accepted by ** 🇦🇺 ACM MM 2024**!"
