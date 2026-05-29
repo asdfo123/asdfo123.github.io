@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForgeWM: A Reproducible Training Recipe for Action-Controllable World Models</title>
+    <link rel="icon" href="/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #ffffff;
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --code-bg: #f3f4f6;
+            --section-bg: #f9fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            background: var(--bg);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 24px;
+        }
+
+        .authors {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .authors a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .authors a:hover {
+            text-decoration: underline;
+        }
+
+        .badges {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .badges a {
+            display: inline-block;
+            transition: transform 0.15s;
+        }
+
+        .badges a:hover {
+            transform: translateY(-2px);
+        }
+
+        .links {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.15s;
+        }
+
+        .links a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+        }
+
+        .links a svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Sections */
+        section {
+            padding: 40px 0;
+        }
+
+        section h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 24px 0 12px;
+        }
+
+        p {
+            margin-bottom: 14px;
+        }
+
+        /* Abstract */
+        .abstract {
+            background: var(--section-bg);
+            border-left: 4px solid var(--primary);
+            padding: 20px 24px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 20px;
+        }
+
+        /* Teaser */
+        .teaser {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .teaser img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .teaser .caption {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .comparison-table th {
+            background: var(--section-bg);
+            font-weight: 600;
+        }
+
+        .comparison-table tr:hover td {
+            background: #f0f7ff;
+        }
+
+        /* Video grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .video-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .video-card .label {
+            padding: 8px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--section-bg);
+            text-align: center;
+        }
+
+        .video-card img {
+            width: 100%;
+            display: block;
+        }
+
+        .video-row {
+            margin-bottom: 24px;
+        }
+
+        .video-row h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        /* Pipeline */
+        .pipeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .pipeline-stage {
+            text-align: center;
+            padding: 16px 12px;
+            background: var(--section-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .pipeline-stage::after {
+            content: '\2192';
+            position: absolute;
+            right: -14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .pipeline-stage:last-child::after {
+            display: none;
+        }
+
+        .pipeline-stage .stage-num {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pipeline-stage .stage-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 4px 0;
+        }
+
+        .pipeline-stage .stage-detail {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Architecture */
+        .arch-diagram {
+            text-align: center;
+            margin: 24px 0;
+            padding: 20px;
+            background: var(--section-bg);
+            border-radius: 8px;
+        }
+
+        .arch-diagram img {
+            max-width: 100%;
+        }
+
+        /* Code block */
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            overflow-x: auto;
+            margin: 16px 0;
+            line-height: 1.6;
+        }
+
+        .code-block .comment {
+            color: #94a3b8;
+        }
+
+        /* Key features list */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .feature-item h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .feature-item p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Observations */
+        .observations {
+            margin: 20px 0;
+        }
+
+        .observations li {
+            margin-bottom: 10px;
+            padding-left: 8px;
+        }
+
+        .observations li strong {
+            color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* BibTeX */
+        .bibtex {
+            background: var(--code-bg);
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .bibtex .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: white;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bibtex .copy-btn:hover {
+            background: var(--section-bg);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .pipeline {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .pipeline-stage::after {
+                display: none;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero -->
+    <header class="hero">
+        <h1>ForgeWM</h1>
+        <p class="subtitle">
+            A Reproducible Training Recipe for Action-Controllable World Models
+        </p>
+        <p class="authors">
+            <a href="https://asdfo123.github.io">Xinye Li</a>
+        </p>
+
+        <div class="badges">
+            <a href="https://github.com/asdfo123/ForgeWM"><img src="https://img.shields.io/github/stars/asdfo123/ForgeWM?style=social" alt="GitHub Stars"></a>
+            <img src="https://img.shields.io/badge/license-Apache%202.0-blue" alt="License">
+            <img src="https://img.shields.io/badge/GPUs-8%C3%97H20-orange" alt="GPUs">
+        </div>
+
+        <div class="links">
+            <a href="https://github.com/asdfo123/ForgeWM">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                Code
+            </a>
+            <a href="https://huggingface.co/asdfo123/ForgeWM">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-2-9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-5 3c0 1.657 1.343 3 3 3s3-1.343 3-3H9z"/></svg>
+                Models
+            </a>
+            <a href="https://huggingface.co/datasets/asdfo123/ForgeWM-data">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+                Data
+            </a>
+            <a href="#">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                Paper (coming soon)
+            </a>
+        </div>
+    </header>
+
+    <!-- Abstract -->
+    <section>
+        <h2>Abstract</h2>
+        <div class="abstract">
+            <p>
+                We present <strong>ForgeWM</strong>, the first fully open and reproducible training recipe for building real-time, action-controllable world models from the Matrix-Game 2 lineage. ForgeWM integrates MG2's game-native I2V backbone, GameFactory's open Minecraft gameplay data, and the Causal Forcing distillation paradigm into a 4-stage progressive pipeline trainable on 8 GPUs. Our final model achieves comparable generation quality to MG2's proprietary distilled checkpoint at 4-step inference, while fixing key failure modes (underwater drift artifacts) and providing complete training code, data, and checkpoints for the community.
+            </p>
+        </div>
+    </section>
+
+    <!-- Teaser -->
+    <section>
+        <div class="teaser">
+            <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/banner.png" alt="ForgeWM Banner">
+            <p class="caption">ForgeWM generates interactive Minecraft video conditioned on keyboard and mouse inputs, running at real-time speed with 4-step inference.</p>
+        </div>
+    </section>
+
+    <!-- Key Contributions -->
+    <section>
+        <h2>Key Contributions</h2>
+        <div class="features">
+            <div class="feature-item">
+                <h4>Fully Reproducible</h4>
+                <p>Complete training code, pre-encoded data (89 GB LMDB), and checkpoints (Stage 0 + Stage 3) are publicly available.</p>
+            </div>
+            <div class="feature-item">
+                <h4>4-Stage Distillation</h4>
+                <p>Bidirectional SFT &rarr; Teacher-Forcing AR &rarr; Consistency Distillation &rarr; DMD, building on Causal Forcing.</p>
+            </div>
+            <div class="feature-item">
+                <h4>Game-Native Control</h4>
+                <p>Discrete keyboard (WASD) + continuous mouse input, injected via cross-attention and channel concatenation.</p>
+            </div>
+            <div class="feature-item">
+                <h4>Open Data</h4>
+                <p>Trained entirely on GameFactory's GF-Minecraft (~70h gameplay), with scripts to reproduce data preparation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Pipeline -->
+    <section>
+        <h2>Training Pipeline</h2>
+        <p>ForgeWM uses a 4-stage progressive distillation strategy. Each stage builds on the previous checkpoint, gradually transforming a bidirectional diffusion model into a real-time causal generator.</p>
+
+        <div class="pipeline">
+            <div class="pipeline-stage">
+                <div class="stage-num">Stage 0</div>
+                <div class="stage-name">Bid. SFT</div>
+                <div class="stage-detail">4000 steps<br>Domain adaptation</div>
+            </div>
+            <div class="pipeline-stage">
+                <div class="stage-num">Stage 1</div>
+                <div class="stage-name">TF Causal AR</div>
+                <div class="stage-detail">10000 steps<br>Teacher Forcing</div>
+            </div>
+            <div class="pipeline-stage">
+                <div class="stage-num">Stage 2</div>
+                <div class="stage-name">Consistency</div>
+                <div class="stage-detail">6000 steps<br>Distillation</div>
+            </div>
+            <div class="pipeline-stage">
+                <div class="stage-num">Stage 3</div>
+                <div class="stage-name">DMD</div>
+                <div class="stage-detail">2000 steps<br>4-step real-time</div>
+            </div>
+        </div>
+
+        <div class="code-block">
+<span class="comment"># Full pipeline on 8 GPUs</span>
+torchrun --nproc_per_node=8 train.py --config_path configs/stage0_bid_sft.yaml
+torchrun --nproc_per_node=8 train.py --config_path configs/stage1_teacher_forcing.yaml
+torchrun --nproc_per_node=8 train.py --config_path configs/stage2_consistency_distillation.yaml
+torchrun --nproc_per_node=8 train.py --config_path configs/stage3_dmd.yaml
+        </div>
+    </section>
+
+    <!-- Architecture -->
+    <section>
+        <h2>Architecture</h2>
+        <h3>I2V Conditioning (First-Frame Fidelity)</h3>
+        <p>ForgeWM uses a three-pathway image conditioning mechanism inherited from Matrix-Game 2:</p>
+        <ol style="margin-left: 20px; margin-bottom: 16px;">
+            <li style="margin-bottom: 8px;"><strong>Channel-concat:</strong> The first frame is VAE-encoded and concatenated channel-wise with the noise input (4-ch mask | 16-ch img_latent = 20 channels). A binary mask marks frame 0 as "real" and subsequent frames as "to generate".</li>
+            <li style="margin-bottom: 8px;"><strong>CLIP visual context:</strong> The first frame is encoded through a CLIP vision encoder into a 257-token sequence, injected via cross-attention at every transformer block for high-level semantic guidance.</li>
+            <li style="margin-bottom: 8px;"><strong>Causal history:</strong> Previously generated clean frames are cached in the KV store during autoregressive rollout.</li>
+        </ol>
+
+        <h3>Action Injection</h3>
+        <ul style="margin-left: 20px; margin-bottom: 16px;">
+            <li style="margin-bottom: 8px;"><strong>Keyboard (discrete):</strong> Cross-attention injection &mdash; keyboard actions are embedded and attend to latent frame tokens at each transformer block.</li>
+            <li style="margin-bottom: 8px;"><strong>Mouse (continuous):</strong> Sliding-window grouping (VAE temporal compression = 4) followed by channel concatenation with latent features.</li>
+        </ul>
+
+        <h3>Temporal Architecture</h3>
+        <ul style="margin-left: 20px;">
+            <li style="margin-bottom: 8px;"><strong>Block-wise causal attention:</strong> Frames grouped into chunks of 3; within-chunk bidirectional, cross-chunk strictly causal.</li>
+            <li style="margin-bottom: 8px;"><strong>Sliding window</strong> (size=6): Each chunk attends only to the 6 most recent frames, enabling unbounded-length generation without memory growth.</li>
+        </ul>
+    </section>
+
+    <!-- Results -->
+    <section>
+        <h2>Results</h2>
+        <p>We compare ForgeWM (4-step DMD, Causal Forcing) against Matrix-Game 2 (Self-Forcing distilled checkpoint). Same reference frame, same action, both at 352&times;640 resolution.</p>
+
+        <div class="video-row">
+            <h4>Forest &mdash; Turn Right</h4>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="label">Matrix-Game 2</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/mg2_forest_turn_right.gif" alt="MG2 Forest">
+                </div>
+                <div class="video-card">
+                    <div class="label">ForgeWM (Ours)</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/forge_forest_turn_right.gif" alt="ForgeWM Forest">
+                </div>
+            </div>
+        </div>
+
+        <div class="video-row">
+            <h4>Plains &mdash; Forward</h4>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="label">Matrix-Game 2</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/mg2_plains_forward.gif" alt="MG2 Plains">
+                </div>
+                <div class="video-card">
+                    <div class="label">ForgeWM (Ours)</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/forge_plains_forward.gif" alt="ForgeWM Plains">
+                </div>
+            </div>
+        </div>
+
+        <div class="video-row">
+            <h4>Cave &mdash; Forward</h4>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="label">Matrix-Game 2</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/mg2_cave_forward.gif" alt="MG2 Cave">
+                </div>
+                <div class="video-card">
+                    <div class="label">ForgeWM (Ours)</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/forge_cave_forward.gif" alt="ForgeWM Cave">
+                </div>
+            </div>
+        </div>
+
+        <div class="video-row">
+            <h4>Desert &mdash; Back</h4>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="label">Matrix-Game 2</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/mg2_desert_back.gif" alt="MG2 Desert">
+                </div>
+                <div class="video-card">
+                    <div class="label">ForgeWM (Ours)</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/forge_desert_back.gif" alt="ForgeWM Desert">
+                </div>
+            </div>
+        </div>
+
+        <div class="video-row">
+            <h4>Rainy Sunset &mdash; Random Actions</h4>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="label">Matrix-Game 2</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/mg2_night_random.gif" alt="MG2 Night">
+                </div>
+                <div class="video-card">
+                    <div class="label">ForgeWM (Ours)</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/forge_night_random.gif" alt="ForgeWM Night">
+                </div>
+            </div>
+        </div>
+
+        <div class="video-row">
+            <h4>Rainy Night &mdash; Forward</h4>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="label">Matrix-Game 2</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/mg2_sunset_forward.gif" alt="MG2 Sunset">
+                </div>
+                <div class="video-card">
+                    <div class="label">ForgeWM (Ours)</div>
+                    <img src="https://raw.githubusercontent.com/asdfo123/ForgeWM/main/assets/results/forge_sunset_forward.gif" alt="ForgeWM Sunset">
+                </div>
+            </div>
+        </div>
+
+        <h3>Observations</h3>
+        <ul class="observations">
+            <li><strong>Overall quality:</strong> ForgeWM largely reproduces MG2's generation quality. Temporal smoothness is slightly better; fine-grained texture detail is slightly weaker (smaller training data: ~70h vs MG2's proprietary dataset).</li>
+            <li><strong>"Underwater" artifact fixed:</strong> MG2 tends to drift into underwater/ocean textures when encountering rain, blue sky, or dark scenes &mdash; likely from over-representation of ocean footage in its proprietary data. ForgeWM does not exhibit this failure mode.</li>
+            <li><strong>Action controllability:</strong> Both models respond correctly to keyboard/mouse inputs. Causal Forcing distillation preserves action fidelity through all 4 stages.</li>
+            <li><strong>HUD stability:</strong> MG2's HUD elements gradually shrink over a rollout (possible resolution mismatch). ForgeWM does not show this artifact.</li>
+        </ul>
+    </section>
+
+    <!-- Comparison -->
+    <section>
+        <h2>Comparison with Related Work</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Base Model</th>
+                    <th>Control</th>
+                    <th>Paradigm</th>
+                    <th>I2V</th>
+                    <th>Data Open</th>
+                    <th>Train Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ForgeWM</strong></td>
+                    <td>Wan2.1-1.3B</td>
+                    <td>KB + Mouse</td>
+                    <td>Causal Forcing</td>
+                    <td style="color:green">&#10003;</td>
+                    <td style="color:green">&#10003;</td>
+                    <td style="color:green">&#10003;</td>
+                </tr>
+                <tr>
+                    <td>Matrix-Game 2</td>
+                    <td>Wan2.1-1.3B</td>
+                    <td>KB + Mouse</td>
+                    <td>Self Forcing</td>
+                    <td style="color:green">&#10003;</td>
+                    <td style="color:red">&#10007;</td>
+                    <td style="color:red">&#10007;</td>
+                </tr>
+                <tr>
+                    <td>minWM</td>
+                    <td>HY1.5 / Wan2.1</td>
+                    <td>Camera pose</td>
+                    <td>Causal Forcing</td>
+                    <td>HY only</td>
+                    <td style="color:green">&#10003;</td>
+                    <td style="color:green">&#10003;</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- BibTeX -->
+    <section>
+        <h2>Citation</h2>
+        <div class="bibtex">
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('bibtex-text').innerText)">Copy</button>
+<pre id="bibtex-text">@misc{forgewm2026,
+  title={ForgeWM: A Reproducible Training Recipe for Action-Controllable World Models},
+  author={Xinye Li},
+  year={2026},
+  url={https://github.com/asdfo123/ForgeWM}
+}</pre>
+        </div>
+    </section>
+
+    <!-- Acknowledgements -->
+    <section>
+        <h2>Acknowledgements</h2>
+        <p>ForgeWM integrates work from multiple research groups:</p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li><a href="https://github.com/SkyworkAI/Matrix-Game" style="color: var(--primary)">Matrix-Game 2</a> &mdash; Base model architecture and weights</li>
+            <li><a href="https://github.com/KlingAIResearch/GameFactory" style="color: var(--primary)">GameFactory</a> &mdash; GF-Minecraft training data</li>
+            <li><a href="https://github.com/thu-ml/Causal-Forcing" style="color: var(--primary)">Causal Forcing</a> &mdash; Distillation paradigm</li>
+            <li><a href="https://github.com/shengshu-ai/minWM" style="color: var(--primary)">minWM</a> &mdash; Open-source reference for Causal Forcing on video</li>
+            <li><a href="https://github.com/tianweiy/CausVid" style="color: var(--primary)">CausVid</a>, <a href="https://github.com/guandeh17/Self-Forcing" style="color: var(--primary)">Self-Forcing</a>, <a href="https://github.com/Wan-Video/Wan2.1" style="color: var(--primary)">Wan 2.1</a></li>
+        </ul>
+    </section>
+</div>
+
+<footer>
+    <div class="container">
+        <p>ForgeWM &copy; 2026 &middot; Released under Apache License 2.0</p>
+        <p style="margin-top: 8px;">Contact: <a href="mailto:leeasdfo123@gmail.com" style="color: var(--primary)">leeasdfo123@gmail.com</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
