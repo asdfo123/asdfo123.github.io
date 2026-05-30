@@ -39,6 +39,12 @@ title = "Competitions"
 source = "competitions.toml"
 
 [[sections]]
+id = "projects"
+type = "projects"
+title = "Open-Source Projects"
+source = "projects.toml"
+
+[[sections]]
 id = "education"
 type = "markdown"
 source = "education.md"

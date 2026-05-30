@@ -1,0 +1,22 @@
+[[items]]
+name = "ForgeWM"
+date = "2026"
+description = "A reproducible training recipe for action-controllable world models. An integration project connecting Matrix-Game 2's game-native I2V backbone, GameFactory's open Minecraft data, and the Causal Forcing distillation paradigm into the first fully open, end-to-end pipeline for the MG2 lineage — trainable on 8 GPUs."
+image = "/ForgeWM/banner.png"
+tags = ["World Model", "Video Generation", "Causal Forcing", "Minecraft", "Diffusion"]
+
+[[items.links]]
+label = "Project Page"
+url = "/ForgeWM/"
+
+[[items.links]]
+label = "Code"
+url = "https://github.com/asdfo123/ForgeWM"
+
+[[items.links]]
+label = "Models"
+url = "https://huggingface.co/asdfo123/ForgeWM"
+
+[[items.links]]
+label = "Data"
+url = "https://huggingface.co/datasets/asdfo123/ForgeWM-data"

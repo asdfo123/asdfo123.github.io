@@ -7,6 +7,7 @@ import SelectedPublications from '@/components/home/SelectedPublications';
 import News, { NewsItem } from '@/components/home/News';
 import Awards, { AwardItem } from '@/components/home/Awards';
 import Competitions, { CompetitionItem } from '@/components/home/Competitions';
+import Projects, { ProjectItem } from '@/components/home/Projects';
 import ClustrMapsGlobe from '@/components/home/ClustrMapsGlobe';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
@@ -18,7 +19,7 @@ import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig }
 // Define types for section config
 interface SectionConfig {
   id: string;
-  type: 'markdown' | 'publications' | 'list' | 'awards' | 'competitions';
+  type: 'markdown' | 'publications' | 'list' | 'awards' | 'competitions' | 'projects';
   title?: string;
   source?: string;
   filter?: string;
@@ -28,6 +29,7 @@ interface SectionConfig {
   items?: NewsItem[];
   awards?: AwardItem[];
   competitions?: CompetitionItem[];
+  projects?: ProjectItem[];
 }
 
 type PageData =
@@ -83,6 +85,13 @@ export default function Home() {
           return {
             ...section,
             competitions: competitionsData?.items || []
+          };
+        }
+        case 'projects': {
+          const projectsData = section.source ? getTomlContent<{ items: ProjectItem[] }>(section.source) : null;
+          return {
+            ...section,
+            projects: projectsData?.items || []
           };
         }
         default:
@@ -204,6 +213,14 @@ export default function Home() {
                       <Competitions
                         key={section.id}
                         items={section.competitions || []}
+                        title={section.title}
+                      />
+                    );
+                  case 'projects':
+                    return (
+                      <Projects
+                        key={section.id}
+                        items={section.projects || []}
                         title={section.title}
                       />
                     );
