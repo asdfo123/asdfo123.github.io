@@ -15,6 +15,12 @@ source = "bio.md"
 title = "About"
 
 [[sections]]
+id = "projects"
+type = "projects"
+title = "Open-Source Projects"
+source = "projects.toml"
+
+[[sections]]
 id = "featured_publications"
 type = "publications"
 title = "Selected Publications"
@@ -37,12 +43,6 @@ id = "competitions"
 type = "competitions"
 title = "Competitions"
 source = "competitions.toml"
-
-[[sections]]
-id = "projects"
-type = "projects"
-title = "Open-Source Projects"
-source = "projects.toml"
 
 [[sections]]
 id = "education"
