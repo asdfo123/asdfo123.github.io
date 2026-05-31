@@ -1,2 +1,2 @@
 - ACM (Competitive Programming) Club Leader @ HITWH.
-- Reviewer: Open to reviewing opportunities in LLM-related workshops and venues.
+- Reviewer: Open to reviewing opportunities in AI-related workshops and venues.

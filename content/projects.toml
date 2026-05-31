@@ -1,8 +1,10 @@
 [[items]]
 name = "ForgeWM"
 date = "2026"
+highlight = "First open-source pipeline to train real-time, keyboard & mouse controllable world models."
 description = "A reproducible training recipe for action-controllable world models. An integration project connecting Matrix-Game 2's game-native I2V backbone, GameFactory's open Minecraft data, and the Causal Forcing distillation paradigm into the first fully open, end-to-end pipeline for the MG2 lineage — trainable on 8 GPUs."
 image = "/ForgeWM/banner.png"
+github = "asdfo123/ForgeWM"
 tags = ["World Model", "Video Generation", "Causal Forcing", "Minecraft", "Diffusion"]
 
 [[items.links]]

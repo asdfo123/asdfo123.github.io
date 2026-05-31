@@ -3,6 +3,11 @@ title = "Awards"
 description = "Honors and awards I have received."
 
 [[items]]
+date = "2026.05"
+awards = ["CUHK Vice-Chancellor's Ph.D. Scholarship"]
+suffix = "The Chinese University of Hong Kong"
+
+[[items]]
 date = "2025.12"
 awards = ["Zeshi Virtue and Talent Scholarship"]
 suffix = "(10 in HITWH), Harbin Institute of Technology, Weihai"
