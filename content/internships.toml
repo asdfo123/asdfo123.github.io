@@ -1,0 +1,31 @@
+[[items]]
+period = "2026.01 – Present"
+role = "Research Intern"
+company = "Tencent PCG"
+location = "Shenzhen, China"
+logo = "/logos/tencent.png"
+url = "https://www.tencent.com/en-us/"
+
+[[items]]
+period = "2025.08 – 2026.02"
+role = "Quantitative Researcher Intern (ML & AI)"
+company = "Grace Investment Machine"
+location = "Remote"
+logo = "/logos/gim.png"
+url = "https://graceim.ai/"
+
+[[items]]
+period = "2025.07 – 2025.08"
+role = "Student Research Assistant"
+company = "HKU CDS Summer Internship Programme"
+location = "Hong Kong SAR, China"
+logo = "/logos/hkucds.png"
+url = "https://cds.hku.hk/rintern/"
+
+[[items]]
+period = "2025.02 – 2025.10"
+role = "Research Assistant"
+company = "HKUST(GZ) HPML Laboratory"
+location = "Guangzhou, China"
+logo = "/logos/hkustgz.png"
+url = "https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/"

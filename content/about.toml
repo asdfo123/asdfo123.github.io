@@ -52,8 +52,8 @@ title = "Education"
 
 [[sections]]
 id = "internships"
-type = "markdown"
-source = "internships.md"
+type = "internships"
+source = "internships.toml"
 title = "Internships"
 
 [[sections]]

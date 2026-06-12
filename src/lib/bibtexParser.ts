@@ -84,6 +84,8 @@ export function parseBibTeX(bibtexContent: string): Publication[] {
       doi: tags.doi,
       url: tags.url,
       code: tags.code,
+      data: tags.data,
+      media: tags.media,
       abstract: cleanBibTeXString(tags.abstract),
       description: cleanBibTeXString(tags.description || tags.note),
       selected,

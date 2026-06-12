@@ -22,3 +22,7 @@ url = "https://huggingface.co/asdfo123/ForgeWM"
 [[items.links]]
 label = "Data"
 url = "https://huggingface.co/datasets/asdfo123/ForgeWM-data"
+
+[[items.links]]
+label = "Blog: My Notes on World Models"
+url = "/blog/world-model/"

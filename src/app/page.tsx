@@ -8,6 +8,7 @@ import News, { NewsItem } from '@/components/home/News';
 import Awards, { AwardItem } from '@/components/home/Awards';
 import Competitions, { CompetitionItem } from '@/components/home/Competitions';
 import Projects, { ProjectItem } from '@/components/home/Projects';
+import Internships, { InternshipItem } from '@/components/home/Internships';
 import ClustrMapsGlobe from '@/components/home/ClustrMapsGlobe';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
@@ -19,7 +20,7 @@ import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig }
 // Define types for section config
 interface SectionConfig {
   id: string;
-  type: 'markdown' | 'publications' | 'list' | 'awards' | 'competitions' | 'projects';
+  type: 'markdown' | 'publications' | 'list' | 'awards' | 'competitions' | 'projects' | 'internships';
   title?: string;
   source?: string;
   filter?: string;
@@ -30,6 +31,7 @@ interface SectionConfig {
   awards?: AwardItem[];
   competitions?: CompetitionItem[];
   projects?: ProjectItem[];
+  internships?: InternshipItem[];
 }
 
 type PageData =
@@ -92,6 +94,13 @@ export default function Home() {
           return {
             ...section,
             projects: projectsData?.items || []
+          };
+        }
+        case 'internships': {
+          const internshipsData = section.source ? getTomlContent<{ items: InternshipItem[] }>(section.source) : null;
+          return {
+            ...section,
+            internships: internshipsData?.items || []
           };
         }
         default:
@@ -221,6 +230,14 @@ export default function Home() {
                       <Projects
                         key={section.id}
                         items={section.projects || []}
+                        title={section.title}
+                      />
+                    );
+                  case 'internships':
+                    return (
+                      <Internships
+                        key={section.id}
+                        items={section.internships || []}
                         title={section.title}
                       />
                     );

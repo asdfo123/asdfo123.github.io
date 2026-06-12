@@ -125,6 +125,15 @@ function LinkIcon({ label }: { label: string }) {
     const cls = "w-4 h-4 flex-shrink-0";
     const lower = label.toLowerCase();
 
+    // Blog/Notes — must check before "model" since label may contain both
+    if (lower.includes('blog') || lower.startsWith('note')) {
+        return (
+            <svg className={cls} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+        );
+    }
+
     if (lower.includes('code') || lower.includes('github')) {
         return (
             <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
@@ -133,10 +142,11 @@ function LinkIcon({ label }: { label: string }) {
         );
     }
 
+    // Models / HuggingFace — cube/package icon
     if (lower.includes('model') || lower.includes('huggingface')) {
         return (
-            <svg className={cls} viewBox="0 0 24 24" fill="currentColor">
-                <path d="M10.5 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm3 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM7.5 8.25a.75.75 0 01.75.75v6a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm9 0a.75.75 0 01.75.75v6a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zM6 17.25a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm4.5 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm4.5 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm3 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
+            <svg className={cls} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
             </svg>
         );
     }
