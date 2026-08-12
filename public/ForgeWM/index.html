@@ -3,261 +3,1024 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ForgeWM: A Reproducible Training Recipe for Action-Controllable World Models</title>
-<link rel="icon" href="/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>ForgeWM — Few-Step Action-Conditioned Video World Models</title>
+<meta name="description" content="ForgeWM turns a bidirectional action-conditioned video generator into 1-, 2- and 4-step real-time causal world models, playable with keyboard, mouse and gamepad.">
+<meta property="og:title" content="ForgeWM: Progressive Causal Training for Few-Step Action-Conditioned Video World Models">
+<meta property="og:description" content="Real-time playable world models — 72 FPS at one denoising step, with keyboard, mouse and gamepad control.">
+<meta property="og:image" content="https://asdfo123.github.io/ForgeWM/assets/hero_rollouts.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ForgeWM: Progressive Causal Training for Few-Step Action-Conditioned Video World Models">
+<meta name="twitter:description" content="Real-time playable world models — 72 FPS at one denoising step, with keyboard, mouse and gamepad control.">
+<meta name="twitter:image" content="https://asdfo123.github.io/ForgeWM/assets/hero_rollouts.jpg">
+<meta property="og:url" content="https://asdfo123.github.io/ForgeWM/">
+<meta property="og:site_name" content="ForgeWM">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="canonical" href="https://asdfo123.github.io/ForgeWM/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#3b82f6;--primary-dark:#2563eb;--accent:#f59e0b;--bg:#fafbfc;--text:#1a1a2e;--text-s:#64748b;--border:#e2e8f0;--card:#ffffff;--code-bg:#1e293b;--section-alt:#f1f5f9}
+:root{
+  --primary:#3b82f6; --primary-dark:#2563eb; --primary-soft:#eff6ff;
+  --accent:#f59e0b; --accent-soft:#fffbeb;
+  --bg:#fafbfc; --text:#1a1a2e; --text-s:#64748b; --text-t:#94a3b8;
+  --border:#e2e8f0; --card:#ffffff; --code-bg:#1e293b; --section-alt:#f1f5f9;
+  --ink:#0f172a;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.06);
+  --shadow:0 2px 8px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);
+  --shadow-lg:0 14px 38px rgba(15,23,42,.12),0 3px 10px rgba(15,23,42,.05);
+  --radius:14px;
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.7;background:var(--bg)}
-.container{max-width:1100px;margin:0 auto;padding:0 24px}
-.hero{text-align:center;padding:80px 0 50px;background:linear-gradient(180deg,#f8faff 0%,var(--bg) 100%)}
-.hero h1{font-size:3.2rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;background:linear-gradient(135deg,var(--text),var(--primary));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero .tagline{font-size:1.15rem;color:var(--text-s);max-width:700px;margin:0 auto 24px;font-weight:400}
-.authors{font-size:0.95rem;color:var(--text-s);margin-bottom:20px}
-.badges{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
-.badges img{height:22px}
-.links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
-.links a{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border:1px solid var(--border);border-radius:10px;color:var(--text);text-decoration:none;font-size:0.9rem;font-weight:500;transition:all 0.2s;background:white;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
-.links a:hover{border-color:var(--primary);color:var(--primary);box-shadow:0 4px 12px rgba(59,130,246,0.12);transform:translateY(-1px)}
-.links a svg{width:18px;height:18px}
-section{padding:50px 0}
-section h2{font-size:1.8rem;font-weight:700;margin-bottom:12px;letter-spacing:-0.02em}
-section h3{font-size:1.15rem;font-weight:600;margin:24px 0 12px;color:var(--text)}
-.section-subtitle{color:var(--text-s);margin-bottom:30px;font-size:1rem}
-.abstract{background:white;border:1px solid var(--border);border-left:4px solid var(--primary);padding:24px 28px;border-radius:0 12px 12px 0;margin:20px 0;box-shadow:0 2px 8px rgba(0,0,0,0.03)}
-.banner-img{width:100%;max-width:900px;margin:30px auto;display:block;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.1)}
-.caption{font-size:0.85rem;color:var(--text-s);text-align:center;margin-top:12px;font-style:italic}
-.features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:24px 0}
-.feature-item{padding:20px;background:white;border:1px solid var(--border);border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.03);transition:box-shadow 0.2s}
-.feature-item:hover{box-shadow:0 4px 16px rgba(0,0,0,0.08)}
-.feature-item h4{font-size:0.95rem;font-weight:600;margin-bottom:6px;color:var(--primary-dark)}
-.feature-item p{font-size:0.87rem;color:var(--text-s);margin:0}
-.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}
-.pipeline-stage{text-align:center;padding:20px 12px;background:white;border-radius:12px;border:1px solid var(--border);position:relative;box-shadow:0 2px 8px rgba(0,0,0,0.03)}
-.pipeline-stage::after{content:'\2192';position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:1.3rem;color:var(--text-s)}
-.pipeline-stage:last-child::after{display:none}
-.stage-num{font-size:0.72rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:0.08em}
-.stage-name{font-size:0.9rem;font-weight:600;margin:6px 0 4px}
-.stage-detail{font-size:0.75rem;color:var(--text-s)}
-.code-block{background:var(--code-bg);color:#e2e8f0;padding:18px 22px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;overflow-x:auto;margin:20px 0;line-height:1.7}
-.code-block pre{margin:0;font-family:inherit;font-size:inherit;line-height:inherit;white-space:pre-wrap}
-.code-block .comment{color:#94a3b8}
-.video-section{background:var(--section-alt);padding:50px 0;margin:0 -24px;padding-left:24px;padding-right:24px}
-.video-row{margin-bottom:32px}
-.video-row h4{font-size:1rem;font-weight:500;margin-bottom:12px;color:var(--text-s);text-align:center}
-.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.video-card{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:white;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:box-shadow 0.2s}
-.video-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1)}
-.video-card .label{padding:10px 14px;font-size:0.82rem;font-weight:600;background:linear-gradient(90deg,#f8fafc,#f1f5f9);text-align:center;border-bottom:1px solid var(--border)}
-.video-card .label.ours{background:linear-gradient(90deg,#eff6ff,#dbeafe);color:var(--primary-dark)}
-.video-card img{width:100%;display:block}
-.comparison-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:0.88rem;background:white;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
-.comparison-table th,.comparison-table td{padding:12px 16px;border:1px solid var(--border);text-align:center}
-.comparison-table th{background:var(--section-alt);font-weight:600;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.03em}
-.comparison-table tr:hover td{background:#f8faff}
-.observations{margin:24px 0;padding:0}
-.observations li{margin-bottom:12px;padding-left:8px;font-size:0.92rem}
-.observations li strong{color:var(--primary-dark)}
-.bibtex{background:var(--section-alt);padding:18px 22px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;overflow-x:auto;position:relative;border:1px solid var(--border)}
-.bibtex .copy-btn{position:absolute;top:10px;right:10px;padding:5px 12px;font-size:0.75rem;border:1px solid var(--border);border-radius:6px;background:white;cursor:pointer;font-family:'Inter',sans-serif;transition:all 0.15s}
-.bibtex .copy-btn:hover{background:var(--primary);color:white;border-color:var(--primary)}
-footer{text-align:center;padding:40px 0;border-top:1px solid var(--border);margin-top:40px}
-footer p{font-size:0.85rem;color:var(--text-s)}
-footer a{color:var(--primary);text-decoration:none}
-.topnav{position:fixed;top:0;left:0;width:100%;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);z-index:1000}
-.topnav .nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
-.topnav .nav-logo{font-weight:800;font-size:1.1rem;color:var(--text);text-decoration:none;letter-spacing:-0.02em}
-.topnav .nav-links{display:flex;gap:22px}
-.topnav .nav-links a{color:var(--text-s);text-decoration:none;font-size:0.85rem;font-weight:500;transition:color 0.15s}
-.topnav .nav-links a:hover{color:var(--primary)}
-body{padding-top:56px}
-html{scroll-behavior:smooth;scroll-padding-top:70px}
-@media(max-width:768px){.hero h1{font-size:2rem}.hero{padding:50px 0 40px}.pipeline{grid-template-columns:1fr 1fr}.pipeline-stage::after{display:none}.features,.video-grid{grid-template-columns:1fr}.topnav .nav-links{display:none}section{padding:36px 0}section h2{font-size:1.5rem}.code-block{font-size:0.72rem;padding:14px 16px}.comparison-table{font-size:0.78rem}.comparison-table th,.comparison-table td{padding:8px 6px}.video-section [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}
-@media(max-width:480px){.links a{padding:8px 14px;font-size:0.82rem}.tagline{font-size:1rem}}
+html{scroll-behavior:smooth;scroll-padding-top:74px;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg); color:var(--text);
+  line-height:1.7; font-size:16.5px; padding-top:56px;
+  -webkit-font-smoothing:antialiased;
+}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+.container.wide{max-width:1340px}
+.narrow{max-width:840px;margin:0 auto}
+a{color:var(--primary-dark);text-decoration:none}
+a:hover{text-decoration:underline}
+code,kbd{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.86em}
+:not(pre)>code{background:#eef2f7;color:#334155;padding:.14em .42em;border-radius:5px;border:1px solid #e2e8f0}
+
+/* ── nav ─────────────────────────────────────────────── */
+.topnav{
+  position:fixed;top:0;left:0;right:0;height:56px;z-index:100;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid var(--border);
+}
+.topnav .inner{max-width:1340px;margin:0 auto;padding:0 24px;height:100%;
+  display:flex;align-items:center;gap:6px}
+.topnav .brand{font-weight:800;letter-spacing:-.02em;font-size:1.06rem;margin-right:auto;color:var(--ink)}
+.topnav .brand:hover{text-decoration:none}
+.topnav .brand em{font-style:normal;color:var(--primary)}
+.topnav a.nl{
+  color:var(--text-s);font-size:.875rem;font-weight:500;padding:6px 12px;border-radius:8px;
+  white-space:nowrap;transition:background .15s,color .15s
+}
+.topnav a.nl:hover{background:var(--primary-soft);color:var(--primary-dark);text-decoration:none}
+.topnav a.gh{background:var(--ink);color:#fff}
+.topnav a.gh:hover{background:#1e293b;color:#fff}
+
+/* ── hero ────────────────────────────────────────────── */
+.hero{
+  padding:54px 0 40px;text-align:center;
+  background:
+    radial-gradient(920px 350px at 50% -90px,rgba(59,130,246,.11),transparent 70%),
+    radial-gradient(620px 260px at 88% 8%,rgba(245,158,11,.09),transparent 70%),
+    linear-gradient(180deg,#fff 0%,var(--bg) 100%);
+  border-bottom:1px solid var(--border);
+}
+/* The wordmark is a transparent PNG dropped straight onto the light hero
+   gradient; a whisper of shadow stops the dark anvil from looking pasted on. */
+.logo{
+  display:block;width:min(410px,76vw);height:auto;margin:0 auto 24px;
+  filter:drop-shadow(0 3px 11px rgba(15,23,42,.11))
+}
+h1.title{
+  font-size:2.2rem;font-weight:800;letter-spacing:-.03em;line-height:1.22;
+  max-width:900px;margin:0 auto 16px;color:var(--ink)
+}
+h1.title .kw{background:linear-gradient(180deg,transparent 62%,rgba(245,158,11,.34) 62%);padding:0 2px}
+.tagline{font-size:1.08rem;color:var(--text-s);max-width:680px;margin:0 auto}
+.authors{font-size:1rem;color:var(--text);margin:22px auto 6px;font-weight:500;
+  max-width:900px;line-height:1.85}
+.authors sup,.affil sup{font-size:.66em;font-weight:700;color:var(--primary-dark);
+  line-height:0;vertical-align:super}
+.affil{font-size:.88rem;color:var(--text-t);margin:0 auto 5px;max-width:820px}
+.affil sup{color:var(--text-s)}
+.fnote{font-size:.8rem;color:var(--text-t);margin:0 auto 24px}
+.fnote a{color:var(--text-s)}
+.links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 21px;border-radius:99px;font-size:.925rem;font-weight:600;
+  background:var(--ink);color:#fff;border:1px solid var(--ink);
+  transition:transform .14s,box-shadow .14s,background .14s
+}
+.btn:hover{text-decoration:none;color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-lg)}
+.btn.alt{background:#fff;color:var(--ink);border-color:var(--border)}
+.btn.alt:hover{color:var(--ink);border-color:var(--primary);background:var(--primary-soft)}
+.btn.dim{background:#f1f5f9;color:var(--text-t);border-color:var(--border);cursor:default;box-shadow:none}
+.btn.dim:hover{transform:none;box-shadow:none;color:var(--text-t)}
+
+/* ── hero stat strip ─────────────────────────────────── */
+.strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:34px auto 0;max-width:760px;
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden
+}
+.strip div{padding:16px 10px;border-left:1px solid var(--border)}
+.strip div:first-child{border-left:none}
+.strip b{display:block;font-size:1.42rem;font-weight:800;letter-spacing:-.03em;color:var(--ink);line-height:1.2}
+.strip span{display:block;font-size:.76rem;color:var(--text-t);font-weight:600;
+  letter-spacing:.045em;text-transform:uppercase;margin-top:4px}
+.strip b em{font-style:normal;font-size:.62em;font-weight:700;color:var(--text-s)}
+
+/* ── sections ────────────────────────────────────────── */
+section{padding:64px 0;border-bottom:1px solid var(--border)}
+section.alt{background:var(--section-alt)}
+.eyebrow{
+  font-size:.74rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--primary);margin-bottom:9px
+}
+h2{font-size:1.78rem;font-weight:780;letter-spacing:-.028em;color:var(--ink);margin-bottom:10px}
+h3{font-size:1.08rem;font-weight:700;color:var(--ink);margin:34px 0 10px;letter-spacing:-.01em}
+.lede{color:var(--text-s);font-size:1.04rem;margin-bottom:8px;max-width:760px}
+p{margin-bottom:14px}
+p:last-child{margin-bottom:0}
+.small{font-size:.9rem;color:var(--text-s)}
+.center{text-align:center}
+.center .lede{margin-left:auto;margin-right:auto}
+
+/* ── figures ─────────────────────────────────────────── */
+figure{margin:30px 0}
+figure img{
+  width:100%;display:block;border-radius:12px;
+  border:1px solid var(--border);background:#fff;box-shadow:var(--shadow)
+}
+figure img.plain{border:none;box-shadow:none;background:transparent}
+figcaption{font-size:.88rem;color:var(--text-s);margin-top:12px;line-height:1.65;max-width:900px}
+.center figcaption{margin-left:auto;margin-right:auto}
+
+/* ── stage chips ─────────────────────────────────────── */
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0 4px}
+.stg{
+  background:#fff;border:1px solid var(--border);border-radius:12px;padding:15px 16px;
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden
+}
+.stg:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--primary)}
+.stg:nth-child(4):before{background:var(--accent)}
+.stg .no{font-family:'JetBrains Mono',monospace;font-size:.72rem;font-weight:500;color:var(--text-t)}
+.stg h4{font-size:.95rem;font-weight:700;color:var(--ink);margin:2px 0 4px;letter-spacing:-.01em}
+.stg p{font-size:.86rem;color:var(--text-s);margin:0;line-height:1.6}
+
+/* ── video gallery ───────────────────────────────────── */
+.vgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:26px}
+/* Single-panel clips used to go four across, to land at about the on-screen size
+   of one panel of a side-by-side comparison. They are two across now: each clip
+   carries a burned-in control track under the frame, and at a quarter of the
+   container its stick dials and button labels were too small to read. */
+.vcard{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:15px;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s
+}
+.vcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.vcard .vt{font-size:.94rem;font-weight:680;margin-bottom:11px;color:var(--ink)}
+.vcard .vt span{font-weight:400;color:var(--text-t);font-size:.86em}
+.vpair{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.vpair figure{margin:0}
+.vpair img{width:100%;border-radius:9px;border:1px solid var(--border);display:block}
+.vlab{font-size:.73rem;text-align:center;margin-top:6px;color:var(--text-t);font-weight:600;
+  letter-spacing:.035em;text-transform:uppercase}
+.vlab.ours{color:var(--primary-dark)}
+
+/* ── composite videos ────────────────────────────────── */
+/* Each comparison is ONE file with the panels stacked side by side, so the
+   panels can never drift out of sync. Labels are overlaid here in CSS. */
+.vid{
+  width:100%;display:block;border-radius:10px;border:1px solid var(--border);
+  background:#0b1220;box-shadow:var(--shadow-sm)
+}
+.plab{display:grid;margin-top:7px}
+.plab.n2{grid-template-columns:repeat(2,1fr)}
+.plab.n3{grid-template-columns:repeat(3,1fr)}
+.plab b{
+  font-size:.73rem;text-align:center;font-weight:700;color:var(--text-t);
+  letter-spacing:.04em;text-transform:uppercase
+}
+.plab b.ours{color:var(--primary-dark)}
+.plab b.mut{color:#cbd5e1}
+.vsolo{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:13px;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s}
+.vsolo:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.vsolo .vt{font-size:.9rem;font-weight:680;color:var(--ink);margin-bottom:9px}
+.vsolo .vt span{font-weight:400;color:var(--text-t);font-size:.86em}
+.vhint{font-size:.82rem;color:var(--text-t);margin-top:14px;font-style:italic}
+
+
+/* ── in-place video controls ─────────────────────────── */
+/* Clips autoplay muted once they scroll in, but a reader has to be able to stop
+   one and step through it. A native controls bar parks across the bottom of the
+   frame -- exactly where the control-trace HUD is -- so the toggle is a corner
+   chip and the scrubber sits below the frame instead. */
+.vwrap{position:relative}
+.vbtn{
+  position:absolute;top:10px;right:10px;width:34px;height:34px;padding:0;
+  display:grid;place-items:center;border-radius:50%;cursor:pointer;
+  background:rgba(11,18,32,.58);border:1px solid rgba(255,255,255,.32);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:.92;
+  transition:opacity .15s,background .15s,transform .15s
+}
+.vbtn:hover{opacity:1;background:rgba(11,18,32,.86);transform:scale(1.07)}
+.vbtn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.vbtn i{                                   /* play triangle -- clip is paused */
+  display:block;width:0;height:0;border-style:solid;margin-left:2px;
+  border-width:6px 0 6px 10px;border-color:transparent transparent transparent #fff
+}
+.vbtn.on i{                                /* two bars -- clip is playing */
+  width:11px;height:12px;border:none;margin-left:0;
+  background:linear-gradient(90deg,#fff 0 4px,transparent 4px 7px,#fff 7px 11px)
+}
+.vseek{margin-top:7px;height:5px;border-radius:99px;background:#e2e8f0;
+  cursor:pointer;overflow:hidden}
+.vseek:hover{background:#cbd5e1}
+.vfill{display:block;height:100%;width:0;background:var(--primary);border-radius:99px}
+
+/* ── tables ──────────────────────────────────────────── */
+.tablewrap{overflow-x:auto;margin:26px 0 0;border:1px solid var(--border);
+  border-radius:12px;background:#fff;box-shadow:var(--shadow-sm)}
+table{width:100%;border-collapse:collapse;font-size:.905rem}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+thead th{background:#f8fafc;font-weight:680;font-size:.82rem;color:var(--text-s);
+  letter-spacing:.025em;position:sticky;top:0}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.ours{background:var(--primary-soft)}
+tr.ours td{color:var(--ink)}
+td.eff{color:var(--text-s)}
+.tnote{font-size:.83rem;color:var(--text-t);margin-top:12px;line-height:1.65;max-width:960px}
+
+/* ── misc blocks ─────────────────────────────────────── */
+.grid{display:grid;gap:18px}
+.grid.g2{grid-template-columns:repeat(2,1fr)}
+.callout{
+  background:var(--accent-soft);border:1px solid #fde68a;border-left:3px solid var(--accent);
+  border-radius:10px;padding:15px 19px;margin:22px 0;font-size:.92rem
+}
+.callout b{color:#92400e}
+.note{
+  background:#fff;border:1px solid var(--border);border-left:3px solid var(--text-t);
+  border-radius:10px;padding:15px 19px;margin:22px 0;font-size:.9rem;color:var(--text-s)
+}
+pre{
+  background:var(--code-bg);color:#e2e8f0;padding:18px 20px;border-radius:12px;
+  overflow-x:auto;font-family:'JetBrains Mono',monospace;font-size:.83rem;
+  line-height:1.72;margin:18px 0 0;border:1px solid #334155
+}
+pre .c{color:#64748b}
+pre .f{color:#fcd34d}
+.copywrap{position:relative}
+.copybtn{
+  position:absolute;top:12px;right:12px;background:#334155;color:#cbd5e1;border:none;
+  padding:5px 11px;border-radius:7px;font-size:.74rem;font-family:'Inter',sans-serif;
+  font-weight:600;cursor:pointer;transition:background .15s
+}
+.copybtn:hover{background:#475569;color:#fff}
+/* pre-wrap, not the default: .bibtex is a div, so without it every newline in
+   the entry collapses to a space and the whole thing renders as one paragraph.
+   It also fixes the Copy button, which reads innerText -- i.e. the *rendered*
+   line breaks, so a collapsed block was being copied as a single line too.
+   pre-wrap rather than pre so the long author line still wraps on a phone
+   instead of forcing a horizontal scroll. */
+.bibtex{background:var(--code-bg);color:#e2e8f0;padding:18px 20px;border-radius:12px;
+  font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.7;
+  white-space:pre-wrap;overflow-wrap:break-word;overflow-x:auto}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:.92rem;margin:14px 0}
+.kv dt{color:var(--text-t);font-weight:500}
+.kv dd{margin:0}
+footer{padding:36px 0;text-align:center;color:var(--text-t);font-size:.87rem}
+
+@media (max-width:1000px){
+  .stages{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:820px){
+  body{font-size:16px}
+  .topnav a.nl:not(.gh){display:none}
+  h1.title{font-size:1.62rem}
+  h2{font-size:1.42rem}
+  .strip{grid-template-columns:repeat(2,1fr)}
+  .strip div:nth-child(3){border-left:none}
+  .strip div:nth-child(n+3){border-top:1px solid var(--border)}
+  .vgrid,.grid.g2{grid-template-columns:1fr}
+  .stages{grid-template-columns:1fr}
+  section{padding:46px 0}
+}
+@media (max-width:480px){
+  .container{padding:0 16px}
+  .btn{padding:9px 16px;font-size:.87rem}
+}
 </style>
 </head>
 <body>
 
-<nav class="topnav"><div class="nav-inner">
-<a href="#top" class="nav-logo">ForgeWM</a>
-<div class="nav-links">
-<a href="#contributions">Contributions</a>
-<a href="#pipeline">Pipeline</a>
-<a href="#architecture">Architecture</a>
-<a href="#results">Results</a>
-<a href="#comparison">Comparison</a>
-<a href="https://github.com/asdfo123/ForgeWM" target="_blank">GitHub</a>
-</div>
-</div></nav>
+<nav class="topnav">
+  <div class="inner">
+    <a href="#top" class="brand">Forge<em>WM</em></a>
+    <a href="#method"   class="nl">Method</a>
+    <a href="#gallery"  class="nl">vs MG2</a>
+    <a href="#steps"    class="nl">Few-step</a>
+    <a href="#control"  class="nl">Control</a>
+    <a href="#replay"   class="nl">Replay</a>
+    <a href="#metrics"  class="nl">Metrics</a>
+    <a href="#crossfps" class="nl">CrossFPS</a>
+    <a href="https://github.com/asdfo123/ForgeWM" class="nl gh" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</nav>
 
-<header class="hero" id="top">
-<div class="container">
-<img src="banner.png" alt="ForgeWM" style="max-width:700px;width:100%;margin:0 auto 20px;display:block">
-<p class="tagline">A Reproducible Training Recipe for Action-Controllable World Models</p>
-<p class="authors">ForgeWM Team</p>
-<div class="badges">
-<img src="https://img.shields.io/badge/license-Apache%202.0-blue" alt="License">
-<img src="https://img.shields.io/badge/python-3.10+-green" alt="Python">
-<img src="https://img.shields.io/badge/GPUs-8%C3%97H20-orange" alt="GPUs">
-</div>
-<div class="links">
-<a href="https://github.com/asdfo123/ForgeWM"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>Code</a>
-<a href="https://huggingface.co/asdfo123/ForgeWM"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-2-9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm4 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-5 3c0 1.657 1.343 3 3 3s3-1.343 3-3H9z"/></svg>Models</a>
-<a href="https://huggingface.co/datasets/asdfo123/ForgeWM-data"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>Data</a>
-<a href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>Paper (coming soon)</a>
-</div>
-</div>
-</header>
+<!-- ══ HERO ══════════════════════════════════════════════════════ -->
+<div class="hero" id="top">
+  <div class="container">
+    <img class="logo" src="assets/forgewm_logo.png" width="880" height="279"
+         alt="ForgeWM">
+    <h1 class="title">ForgeWM: Progressive Causal Training for <span class="kw">Few-Step</span> Action-Conditioned Video World Models</h1>
+    <p class="tagline">
+      A playable world model you drive with keyboard, mouse or a gamepad — at
+      <b>one denoising step</b>, in real time.
+    </p>
+    <p class="authors">
+      Xinye Li<sup>1,2,*</sup>, Lingshuai Lin<sup>3,4,*</sup>, Lei Wang<sup>2</sup>,
+      Liuzhou Zhang<sup>5</sup>, Jialin Cui<sup>3,4</sup>, Qingshan Li<sup>4</sup>,
+      Guanchu Wang<sup>4</sup>, Qingbin Liu<sup>2</sup>, Xi Chen<sup>2</sup>,
+      Jiang Bian<sup>2</sup>, Wai Lam<sup>1,†</sup>
+    </p>
+    <p class="affil">
+      <sup>1</sup>CUHK &nbsp; <sup>2</sup>Tencent PCG &nbsp; <sup>3</sup>Fudan University
+      &nbsp; <sup>4</sup>Shanghai AI Laboratory &nbsp; <sup>5</sup>HKUST
+    </p>
+    <p class="fnote">
+      * Equal contribution &nbsp;·&nbsp; † Corresponding author &nbsp;·&nbsp;
+      <a href="mailto:xyli@se.cuhk.edu.hk">xyli@se.cuhk.edu.hk</a>
+    </p>
 
-<div class="container">
-<p class="caption" style="margin-top:0;margin-bottom:30px">Train a real-time, playable Minecraft world model on 8 GPUs &mdash; keyboard &amp; mouse control, fully open and reproducible.</p>
+    <div class="links">
+      <a class="btn dim" title="A preprint link will appear here">📄 Paper <span style="opacity:.7">(soon)</span></a>
+      <a class="btn" href="https://github.com/asdfo123/ForgeWM" target="_blank" rel="noopener">⌨️ Code</a>
+      <a class="btn alt" href="https://huggingface.co/ForgeWM/ForgeWM" target="_blank" rel="noopener">🤗 Models</a>
+      <a class="btn alt" href="https://huggingface.co/datasets/ForgeWM/ForgeWM-data" target="_blank" rel="noopener">🤗 Data</a>
+    </div>
 
+    <div class="strip">
+      <div><b>72<em> FPS</em></b><span>1-step, 352×640</span></div>
+      <div><b>168<em> ms</em></b><span>per chunk</span></div>
+      <div><b>1 / 2 / 4</b><span>step students</span></div>
+      <div><b>8<em> GPUs</em></b><span>full recipe</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HEADER FIGURE (teaser from the tech report) ═══════════════ -->
+<section style="padding:34px 0 46px">
+  <div class="container">
+    <figure style="margin:0">
+      <img src="assets/hero_rollouts.jpg" alt="ForgeWM rollouts in Minecraft and an FPS domain">
+      <figcaption>
+        Minecraft (top) driven by keyboard&nbsp;+&nbsp;mouse, a gamepad FPS domain (bottom).
+        Both checkpoints come out of the <i>same</i> framework — only the action interface
+        and the data change. Overlays show the control trace fed to the model.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══ METHOD ════════════════════════════════════════════════════ -->
+<section id="method" class="alt">
+  <div class="container center">
+    <div class="eyebrow">Method</div>
+    <h2>One base generator, four coordinated stages</h2>
+    <p class="lede">
+      A bidirectional action-conditioned generator becomes a family of causal students that
+      run at a fixed, tiny denoising budget — while keyboard, mouse and stick motion stay
+      frame-aligned to every compressed latent chunk.
+    </p>
+
+    <figure>
+      <img src="assets/overview.png" alt="ForgeWM framework overview" class="plain">
+    </figure>
+
+    <div class="stages" style="text-align:left">
+      <div class="stg">
+        <div class="no">Stage 0</div>
+        <h4>Domain adaptation</h4>
+        <p>Bidirectional fine-tuning on the target game. Frozen afterwards and reused as the
+        teacher in Stage 3.</p>
+      </div>
+      <div class="stg">
+        <div class="no">Stage 1</div>
+        <h4>Causal AR</h4>
+        <p>Teacher-forced block-wise causal attention turns the generator autoregressive
+        without losing control fidelity.</p>
+      </div>
+      <div class="stg">
+        <div class="no">Stage 2</div>
+        <h4>Consistency distillation</h4>
+        <p>Causal consistency distillation compresses the sampling trajectory and unlocks
+        few-step generation.</p>
+      </div>
+      <div class="stg">
+        <div class="no">Stage 3</div>
+        <h4>On-policy matching</h4>
+        <p>The student rolls out <i>itself</i> and is supervised at the distribution level by
+        the frozen Stage-0 teacher.</p>
+      </div>
+    </div>
+    <p class="tnote" style="margin:16px auto 0">
+      Stage 0 and Stage 1 are siblings from the same base generator; Stage 3 consumes Stage 2
+      as its student and Stage 0 as its teacher. Every stage ships as a runnable config —
+      full hyperparameters are in the
+      <a href="https://github.com/asdfo123/ForgeWM" target="_blank" rel="noopener">repository</a>
+      and the paper.
+    </p>
+  </div>
+</section>
+
+<!-- ══ FEW-STEP ══════════════════════════════════════════════════ -->
+<!-- ══ GALLERY ═══════════════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="container wide center">
+    <div class="eyebrow">Head to head</div>
+    <h2>ForgeWM vs Matrix-Game 2</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto">
+      Same reference frame, same action sequence, same seed, four denoising steps on both
+      sides. Left: Matrix-Game 2&rsquo;s own distilled model. Right: ForgeWM-4.
+    </p>
+
+    <div class="vgrid" style="text-align:left">
+      <div class="vcard">
+        <div class="vt">Underwater cave <span>· forward</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Underwater cave · forward rollout" data-src="videos/lead_cave_forward.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Underwater cave · forward"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n2"><b>Matrix-Game 2</b><b class="ours">ForgeWM-4</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">River <span>· turn right</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="River · turn right rollout" data-src="videos/lead_river_turn_right.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause River · turn right"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n2"><b>Matrix-Game 2</b><b class="ours">ForgeWM-4</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Rainy sunset <span>· forward</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Rainy sunset · forward rollout" data-src="videos/lead_sunset_forward.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Rainy sunset · forward"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n2"><b>Matrix-Game 2</b><b class="ours">ForgeWM-4</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Desert <span>· hold back</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Desert · hold back rollout" data-src="videos/lead_desert_back.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Desert · hold back"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n2"><b>Matrix-Game 2</b><b class="ours">ForgeWM-4</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Forest <span>· turn right</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Forest · turn right rollout" data-src="videos/lead_forest_turn_right.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Forest · turn right"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n2"><b>Matrix-Game 2</b><b class="ours">ForgeWM-4</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Rainy night <span>· look up</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Rainy night · look up rollout" data-src="videos/lead_night_look_up.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Rainy night · look up"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n2"><b>Matrix-Game 2</b><b class="ours">ForgeWM-4</b></div>
+      </div>
+    </div>
+    <p class="vhint">Every clip on this page is a complete, unedited rollout — 81 frames, no frame selection, no post-processing.
+      The dark strip under each rollout is its control track: the keys held, the camera dial, and the whole action
+      trajectory with a playhead at the current frame — the exact input stream the model was conditioned on.</p>
+
+    <div class="callout" style="text-align:left;max-width:900px;margin:26px auto 0">
+      <b>Watch the horizon.</b> Given a cave, a river or a rainy scene, Matrix-Game 2 tends to
+      drift into open water &mdash; the geometry dissolves into an ocean texture and stays there.
+      ForgeWM holds the scene it was given. Both sides run four denoising steps, so this is not
+      a compute difference.
+    </div>
+  </div>
+</section>
+
+<section id="steps" class="alt">
+  <div class="container wide center">
+    <div class="eyebrow">Few-step students</div>
+    <h2>One step, two steps, four steps</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto">
+      The same scene at three denoising budgets — identical initial frame, identical action,
+      identical seed. Fewer steps means a different sampling trajectory, so the rollouts are
+      not meant to match frame for frame. What matters is that they are all
+      <b>equally plausible worlds</b>: the one-step student holds its own against the four-step
+      one while running <b>2.2× faster</b>.
+    </p>
+
+    <div class="vgrid" style="text-align:left">
+      <div class="vcard">
+        <div class="vt">Plains <span>· hold forward</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Plains · hold forward rollout" data-src="videos/steps_plains_day_03_forward.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Plains · hold forward"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b class="ours">ForgeWM-1</b><b>ForgeWM-2</b><b>ForgeWM-4</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Rainy sunset <span>· hold turn-right</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Rainy sunset · hold turn-right rollout" data-src="videos/steps_sunset_02_turn_right.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Rainy sunset · hold turn-right"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b class="ours">ForgeWM-1</b><b>ForgeWM-2</b><b>ForgeWM-4</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Desert <span>· hold back</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Desert · hold back rollout" data-src="videos/steps_desert_day_03_back.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Desert · hold back"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b class="ours">ForgeWM-1</b><b>ForgeWM-2</b><b>ForgeWM-4</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Forest <span>· hold turn-right</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Forest · hold turn-right rollout" data-src="videos/steps_forest_day_00_turn_right.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Forest · hold turn-right"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b class="ours">ForgeWM-1</b><b>ForgeWM-2</b><b>ForgeWM-4</b></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ ACTION CONTROL ════════════════════════════════════════════ -->
+<section id="control">
+  <div class="container wide center">
+    <div class="eyebrow">Action control</div>
+    <h2>The same frame, opposite commands</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto">
+      Three rollouts from one initial frame, differing only in the action held for the whole
+      sequence. Nothing else changes — not the checkpoint, not the seed. The camera goes
+      where it is told.
+    </p>
+
+    <div class="vgrid" style="text-align:left">
+      <div class="vcard">
+        <div class="vt">Desert <span>· yaw</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Desert · yaw rollout" data-src="videos/yaw_desert_day_03.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Desert · yaw"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b>&larr; turn left</b><b class="mut">no action</b><b>turn right &rarr;</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Plains <span>· yaw</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Plains · yaw rollout" data-src="videos/yaw_plains_day_03.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Plains · yaw"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b>&larr; turn left</b><b class="mut">no action</b><b>turn right &rarr;</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">River <span>· yaw</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="River · yaw rollout" data-src="videos/yaw_water_river_03.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause River · yaw"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b>&larr; turn left</b><b class="mut">no action</b><b>turn right &rarr;</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Rainy sunset <span>· yaw</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Rainy sunset · yaw rollout" data-src="videos/yaw_sunset_02.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Rainy sunset · yaw"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b>&larr; turn left</b><b class="mut">no action</b><b>turn right &rarr;</b></div>
+      </div>
+    </div>
+
+    <div class="note" style="text-align:left;max-width:900px;margin:26px auto 0">
+      Holding one command for an entire rollout is deliberately harsh: the camera keeps turning
+      long after a player would have stopped, and the world still has to stay coherent. Every
+      panel here comes from the ForgeWM-4 checkpoint at seed 0.
+    </div>
+  </div>
+</section>
+
+<!-- ══ REPLAY ════════════════════════════════════════════════════ -->
+<section id="replay" class="alt">
+  <div class="container wide center">
+    <div class="eyebrow">Replay-time refinement</div>
+    <h2>Play at one step, polish afterwards</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto">
+      Extra denoising helps — but rerunning the model from noise gives you a
+      <i>different</i> rollout, not a better version of the one you just played. So we spend
+      the extra budget on the saved draft instead: the deployed one-step student re-noises
+      and refines its own chunks, in order, under the recorded actions.
+    </p>
+
+    <div class="vgrid" style="text-align:left">
+      <div class="vcard">
+        <div class="vt">Tall grass by the water <span>· the clearest case</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Tall grass by the water · the clearest case rollout" data-src="videos/replay_1.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Tall grass by the water · the clearest case"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b>(A) 1-step draft</b><b class="ours">(B) refined replay</b><b>(C) direct 4-step</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Shoreline <span>· (A) and (B) share a trajectory</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Shoreline · (A) and (B) share a trajectory rollout" data-src="videos/replay_2.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Shoreline · (A) and (B) share a trajectory"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b>(A) 1-step draft</b><b class="ours">(B) refined replay</b><b>(C) direct 4-step</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Riverbank <span>· same story on a third scene</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Riverbank · same story on a third scene rollout" data-src="videos/replay_0.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Riverbank · same story on a third scene"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b>(A) 1-step draft</b><b class="ours">(B) refined replay</b><b>(C) direct 4-step</b></div>
+      </div>
+      <div class="vcard">
+        <div class="vt">Sandbank <span>· tree in the foreground</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Sandbank · tree in the foreground rollout" data-src="videos/replay_5.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Sandbank · tree in the foreground"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+        <div class="plab n3"><b>(A) 1-step draft</b><b class="ours">(B) refined replay</b><b>(C) direct 4-step</b></div>
+      </div>
+    </div>
+
+    <p class="vhint" style="text-align:left;max-width:900px;margin:14px auto 0">
+      <b>(A)</b> and <b>(B)</b> are frame-aligned by construction — <b>(B)</b> starts from
+      <b>(A)</b>'s saved latents. <b>(C)</b> restarts from noise, so it drifts to a different
+      realization. That divergence <i>is</i> the argument.
+    </p>
+
+    <div class="grid g2" style="text-align:left;max-width:900px;margin:26px auto 0">
+      <div class="callout" style="margin:0">
+        <b>Four-step quality from a one-step draft.</b> 0.6155 LPIPS, versus 0.6168 for direct
+        four-step generation — while staying <b>3.1× closer</b> to the draft that was actually
+        played.
+      </div>
+      <div class="note" style="margin:0">
+        No extra weights and no online cost: the refiner <i>is</i> the deployed student, and
+        the pass runs after interaction ends. Swapping in the four-step student instead gives
+        essentially the same trade-off.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ METRICS ═══════════════════════════════════════════════════ -->
+<section id="metrics">
+  <div class="container">
+    <div class="eyebrow">Metrics</div>
+    <h2>Scores</h2>
+    <p class="lede">
+      1,000 paired Minecraft trajectories for reference-aligned metrics; 462 constant-action
+      videos for no-reference metrics. All systems share the same initial frames and controls.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th class="n">IQ ↑</th>
+            <th class="n">LPIPS ↓</th>
+            <th class="n">AQ ↑</th>
+            <th class="n">Subj. Cons. ↑</th>
+            <th class="n">Flow Prof. ↑</th>
+            <th class="n">KCtrl ↑</th>
+            <th class="n">Mouse Acc. ↑</th>
+            <th class="n">Latency ↓</th>
+            <th class="n">FPS ↑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Matrix-Game 2</td>
+            <td class="n">0.6282</td><td class="n">0.6443</td><td class="n">0.4583</td>
+            <td class="n">0.7349</td><td class="n">0.9343</td><td class="n">0.9156</td>
+            <td class="n">0.7061</td>
+            <td class="n eff">370.9 ms</td><td class="n eff">32.35</td>
+          </tr>
+          <tr>
+            <td>HY-WorldPlay</td>
+            <td class="n">0.6133</td><td class="n">0.6172</td><td class="n">0.4855</td>
+            <td class="n"><b>0.9466</b></td><td class="n">0.8288</td><td class="n">0.9286</td>
+            <td class="n">0.5818</td>
+            <td class="n eff">2164.3 ms</td><td class="n eff">7.54</td>
+          </tr>
+          <tr class="ours">
+            <td><b>ForgeWM-1</b></td>
+            <td class="n">0.6776</td><td class="n">0.6529</td><td class="n">0.4807</td>
+            <td class="n">0.8279</td><td class="n">0.9403</td><td class="n">0.9545</td>
+            <td class="n">0.7848</td>
+            <td class="n eff">168.2 ms</td><td class="n eff">72.10</td>
+          </tr>
+          <tr class="ours">
+            <td><b>ForgeWM-2</b></td>
+            <td class="n"><b>0.6865</b></td><td class="n">0.6171</td><td class="n">0.4814</td>
+            <td class="n">0.8349</td><td class="n"><b>0.9429</b></td><td class="n"><b>0.9740</b></td>
+            <td class="n"><b>0.8268</b></td>
+            <td class="n eff">239.7 ms</td><td class="n eff">50.31</td>
+          </tr>
+          <tr class="ours">
+            <td><b>ForgeWM-4</b></td>
+            <td class="n">0.6788</td><td class="n"><b>0.6168</b></td><td class="n"><b>0.4860</b></td>
+            <td class="n">0.7613</td><td class="n">0.9420</td><td class="n"><b>0.9740</b></td>
+            <td class="n">0.8102</td>
+            <td class="n eff">369.6 ms</td><td class="n eff">32.47</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">
+      Best per column in <b>bold</b>. ForgeWM leads six of the seven quality and control
+      metrics; HY-WorldPlay's Subject Consistency advantage comes with the weakest
+      motion-profile agreement and mouse accuracy in the table. Efficiency columns are
+      reported for context and are not bolded — they are measured on a single H20 at 352×640
+      and exclude loading, VAE decoding and file writing. KCtrl is a camera-trajectory sign
+      test on opposite-action pairs.
+    </p>
+
+    <div class="grid g2" style="margin-top:34px;align-items:center">
+      <div>
+        <h3 style="margin-top:0">Replay refinement</h3>
+        <div class="tablewrap" style="margin-top:14px">
+          <table>
+            <thead><tr><th>Method</th><th class="n">LPIPS ↓</th><th class="n">D<sub>draft</sub> ↓</th></tr></thead>
+            <tbody>
+              <tr><td>One-step draft</td><td class="n">0.6532</td><td class="n">—</td></tr>
+              <tr class="ours"><td><b>Replay refinement</b></td><td class="n"><b>0.6155</b></td><td class="n"><b>0.1970</b></td></tr>
+              <tr><td>Direct four-step</td><td class="n">0.6168</td><td class="n">0.6187</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tnote">
+          LPIPS against the paired reference; D<sub>draft</sub> against the saved draft.
+          Refinement matches from-noise four-step quality while staying far closer to the
+          rollout that was played.
+        </p>
+      </div>
+      <div>
+        <h3 style="margin-top:0">Blind user study</h3>
+        <figure style="margin:14px 0 0">
+          <img src="assets/user_study.png" alt="Blind three-way user preferences" class="plain">
+        </figure>
+        <p class="tnote">
+          41 participants, 615 selections, 205 judgments per criterion, three-way blind
+          comparison with hidden identities and randomized order. ForgeWM-4 takes
+          <b>68.8%</b> of visual-quality preferences, <b>57.6%</b> on action accuracy and
+          <b>55.6%</b> on spatiotemporal consistency — <b>60.7%</b> pooled.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CROSSFPS ══════════════════════════════════════════════════ -->
+<section id="crossfps" class="alt">
+  <div class="container wide center">
+    <div class="eyebrow">CrossFPS</div>
+    <h2>The same recipe, a different game family</h2>
+    <p class="lede" style="margin-left:auto;margin-right:auto">
+      Swap the action interface from mouse-and-keys to dual analog sticks and gamepad
+      buttons, swap the data, and run the same four stages. No architectural change — and a
+      separate checkpoint lineage, not a multi-domain model.
+    </p>
+
+    <div class="vgrid" style="text-align:left;margin-top:28px">
+      <div class="vsolo">
+        <div class="vt">Call of Duty <span>· scoped</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Call of Duty · scoped rollout" data-src="videos/crossfps_cod.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Call of Duty · scoped"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+      </div>
+      <div class="vsolo">
+        <div class="vt">Science-fiction interiors</div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Science-fiction interiors rollout" data-src="videos/crossfps_scifi.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Science-fiction interiors"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+      </div>
+      <div class="vsolo">
+        <div class="vt">Halo <span>· indoor to outdoor</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Halo · indoor to outdoor rollout" data-src="videos/crossfps_halo.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Halo · indoor to outdoor"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+      </div>
+      <div class="vsolo">
+        <div class="vt">Call of Duty <span>· vehicles</span></div>
+        <div class="vwrap">
+          <video class="vid" aria-label="Call of Duty · vehicles rollout" data-src="videos/crossfps_cod2.mp4" autoplay loop muted playsinline preload="none"></video>
+          <button class="vbtn" type="button" aria-pressed="false" aria-label="Play or pause Call of Duty · vehicles"><i></i></button>
+          <div class="vseek" title="Scrub this clip"><i class="vfill"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note" style="text-align:left;max-width:900px;margin:26px auto 0">
+      Across seven games the macro-average paired LPIPS is <b>0.656</b> and generated motion
+      runs <b>1.45×</b> the reference magnitude. Every rollout above follows an action trace
+      recorded from real play, not a synthetic one. Checkpoint and inference are released;
+      the gameplay corpus is not ours to redistribute.
+    </div>
+  </div>
+</section>
+
+<!-- ══ GET IT ════════════════════════════════════════════════════ -->
 <section>
-<h2>Abstract</h2>
-<div class="abstract">
-<p>We present <strong>ForgeWM</strong>, an integration project that provides the first fully open and reproducible training recipe for the <strong>Matrix-Game 2 (MG2) lineage</strong>. We do not introduce new methods, models, or data &mdash; instead, we connect MG2's game-native I2V backbone, GameFactory's open Minecraft gameplay data, and the Causal Forcing distillation paradigm into an end-to-end 4-stage pipeline that is trainable on 8 GPUs. MG2 open-sourced its weights but not its training data or training code, leaving the community unable to reproduce the MG2 recipe; ForgeWM fills this gap. Our final model achieves comparable generation quality to MG2's distilled checkpoint at 4-step inference, while fixing key failure modes (underwater drift artifacts) and releasing complete training code, data, and checkpoints.</p>
-</div>
+  <div class="container narrow center">
+    <div class="eyebrow">Get it</div>
+    <h2>Two commands to a rollout</h2>
+    <p class="lede">
+      Checkpoints for all four Minecraft stages and the pre-encoded training data —
+      40,000 GF-Minecraft clips at 640×352 — are on HuggingFace; the four-stage recipe
+      and the few-step students ship as runnable configs. CrossFPS ships as inference.
+    </p>
+    <div class="copywrap" style="text-align:left">
+<pre><span class="c"># base model + ForgeWM checkpoints</span>
+bash scripts/download_models.sh
+huggingface-cli download ForgeWM/ForgeWM --local-dir ./ckpts
+
+<span class="c"># drive it (stage3_new is the ForgeWM-4 student)</span>
+python inference.py --config_path configs/<span class="f">stage3_dmd.yaml</span> \
+    --checkpoint_path ckpts/stage3_new/model.pt \
+    --image_path demo_images/forest.png --action_type forward</pre>
+      <button class="copybtn" onclick="cp(this)">Copy</button>
+    </div>
+    <div class="links" style="margin-top:26px">
+      <a class="btn" href="https://github.com/asdfo123/ForgeWM" target="_blank" rel="noopener">⌨️ Code</a>
+      <a class="btn alt" href="https://huggingface.co/ForgeWM/ForgeWM" target="_blank" rel="noopener">🤗 Models</a>
+      <a class="btn alt" href="https://huggingface.co/datasets/ForgeWM/ForgeWM-data" target="_blank" rel="noopener">🤗 Data</a>
+    </div>
+  </div>
 </section>
 
-<section id="contributions">
-<h2>Key Contributions</h2>
-<div class="features">
-<div class="feature-item"><h4>Fully Reproducible</h4><p>Complete training code, pre-encoded data (89 GB LMDB), and checkpoints for all 4 stages (Stage 0 / 1 / 2 / 3) publicly available on HuggingFace.</p></div>
-<div class="feature-item"><h4>4-Stage Distillation</h4><p>Bidirectional SFT &rarr; Teacher-Forcing AR &rarr; Consistency Distillation &rarr; DMD, building on Causal Forcing paradigm.</p></div>
-<div class="feature-item"><h4>Game-Native Control</h4><p>Discrete keyboard (WASD) via cross-attention + continuous mouse via channel concatenation &mdash; MG2's hybrid action module.</p></div>
-<div class="feature-item"><h4>Open Data Pipeline</h4><p>Trained entirely on GameFactory's GF-Minecraft (~70h gameplay) with balanced action distribution. No proprietary data needed.</p></div>
-</div>
+<!-- ══ CITATION ══════════════════════════════════════════════════ -->
+<section class="alt">
+  <div class="container narrow">
+    <div class="eyebrow">Citation</div>
+    <h2>Cite &amp; credit</h2>
+    <div class="copywrap" style="margin-top:22px">
+      <div class="bibtex" id="bib">@misc{li2026forgewm,
+  title  = {ForgeWM: Progressive Causal Training for Few-Step
+            Action-Conditioned Video World Models},
+  author = {Xinye Li and Lingshuai Lin and Lei Wang and Liuzhou Zhang and
+            Jialin Cui and Qingshan Li and Guanchu Wang and Qingbin Liu and
+            Xi Chen and Jiang Bian and Wai Lam},
+  year   = {2026},
+  url    = {https://github.com/asdfo123/ForgeWM}
+}</div>
+      <button class="copybtn" onclick="cpbib(this)">Copy</button>
+    </div>
+
+    <h3>Built on</h3>
+    <dl class="kv">
+      <dt>Base model</dt><dd><a href="https://github.com/SkyworkAI/Matrix-Game" target="_blank" rel="noopener">Matrix-Game 2</a></dd>
+      <dt>Training data</dt><dd><a href="https://github.com/KlingAIResearch/GameFactory" target="_blank" rel="noopener">GameFactory</a></dd>
+      <dt>Distillation</dt><dd><a href="https://github.com/thu-ml/Causal-Forcing" target="_blank" rel="noopener">Causal Forcing</a></dd>
+    </dl>
+    <p class="small">
+      We also thank the authors of
+      <a href="https://github.com/guandeh17/Self-Forcing" target="_blank" rel="noopener">Self-Forcing</a>,
+      <a href="https://github.com/tianweiy/CausVid" target="_blank" rel="noopener">CausVid</a>,
+      <a href="https://github.com/Wan-Video/Wan2.1" target="_blank" rel="noopener">Wan 2.1</a>,
+      <a href="https://github.com/shengshu-ai/minWM" target="_blank" rel="noopener">minWM</a>,
+      <a href="https://github.com/Tencent-Hunyuan/Hunyuan-GameCraft-1.0" target="_blank" rel="noopener">GameCraft</a> and
+      <a href="https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5" target="_blank" rel="noopener">HunyuanVideo</a>.
+    </p>
+
+    <h3>Contact</h3>
+    <dl class="kv">
+      <dt>Email</dt><dd><a href="mailto:leeasdfo123@gmail.com">leeasdfo123@gmail.com</a></dd>
+      <dt>Code</dt><dd><a href="https://github.com/asdfo123/ForgeWM" target="_blank" rel="noopener">github.com/asdfo123/ForgeWM</a></dd>
+      <dt>WeChat</dt><dd><a href="wechat.JPG" target="_blank" rel="noopener">discussion group QR</a></dd>
+    </dl>
+  </div>
 </section>
 
-<section id="pipeline">
-<h2>Training Pipeline</h2>
-<p class="section-subtitle">4-stage progressive distillation: from bidirectional diffusion to real-time causal generator.</p>
-<div class="pipeline">
-<div class="pipeline-stage"><div class="stage-num">Stage 0</div><div class="stage-name">Bid. SFT</div><div class="stage-detail">4000 steps<br>Domain adaptation</div></div>
-<div class="pipeline-stage"><div class="stage-num">Stage 1</div><div class="stage-name">TF Causal AR</div><div class="stage-detail">10000 steps<br>Teacher Forcing</div></div>
-<div class="pipeline-stage"><div class="stage-num">Stage 2</div><div class="stage-name">Causal CD</div><div class="stage-detail">6000 steps<br>Consistency Distill.</div></div>
-<div class="pipeline-stage"><div class="stage-num">Stage 3</div><div class="stage-name">DMD</div><div class="stage-detail">2000 steps<br>4-step real-time</div></div>
-</div>
-<div class="code-block"><pre><span class="comment"># Full pipeline on 8 GPUs (~22K steps total)</span>
-torchrun --nproc_per_node=8 train.py --config configs/stage0_bid_sft.yaml
-torchrun --nproc_per_node=8 train.py --config configs/stage1_teacher_forcing.yaml
-torchrun --nproc_per_node=8 train.py --config configs/stage2_consistency_distillation.yaml
-torchrun --nproc_per_node=8 train.py --config configs/stage3_dmd.yaml</pre>
-</div>
-</section>
+<footer>
+  <div class="container">
+    ForgeWM · Apache License 2.0 · code and checkpoints on
+    <a href="https://github.com/asdfo123/ForgeWM" target="_blank" rel="noopener">GitHub</a>
+    and <a href="https://huggingface.co/ForgeWM/ForgeWM" target="_blank" rel="noopener">HuggingFace</a>
+  </div>
+</footer>
 
-<section id="architecture">
-<h2>Architecture</h2>
-<figure style="text-align:center;margin:8px 0 28px">
-  <img src="assets/architecture.png" alt="ForgeWM / Matrix-Game 2 architecture" style="max-width:100%;border-radius:8px;border:1px solid var(--border)">
-  <figcaption style="font-size:0.85rem;color:var(--text-secondary);margin-top:10px;font-style:italic">
-    Architecture diagram &mdash; <strong>same backbone as <a href="https://github.com/SkyworkAI/Matrix-Game" style="color:var(--primary)">Matrix-Game 2</a></strong>: WanX with the text branch removed and a hybrid action module (keyboard cross-attention + mouse channel concat) added. ForgeWM reuses this architecture and contributes the open training recipe / data / weights. <em>Figure adapted from the Matrix-Game 2 paper.</em>
-  </figcaption>
-</figure>
-<h3>I2V Conditioning (First-Frame Fidelity)</h3>
-<p>ForgeWM uses Matrix-Game 2's three-pathway image conditioning:</p>
-<ol style="margin:12px 0 16px 20px;font-size:0.92rem">
-<li style="margin-bottom:8px"><strong>Channel-concat:</strong> First frame VAE-encoded + concatenated with noise (4-ch mask | 16-ch latent = 20 channels).</li>
-<li style="margin-bottom:8px"><strong>CLIP visual context:</strong> 257-token CLIP sequence injected via cross-attention at every transformer block.</li>
-<li style="margin-bottom:8px"><strong>Causal history:</strong> Previously generated clean frames cached in KV store during autoregressive rollout.</li>
-</ol>
-<h3>Action Injection (Hybrid Design)</h3>
-<ul style="margin:12px 0 16px 20px;font-size:0.92rem">
-<li style="margin-bottom:8px"><strong>Keyboard (discrete):</strong> Cross-attention &mdash; actions embedded and attend to latent tokens at each block.</li>
-<li style="margin-bottom:8px"><strong>Mouse (continuous):</strong> Sliding-window grouping (VAE temporal compression=4) + channel concatenation.</li>
-</ul>
-<h3>Temporal: Block-wise Causal Attention</h3>
-<ul style="margin:12px 0 0 20px;font-size:0.92rem">
-<li style="margin-bottom:8px">Frames grouped into chunks of 3: within-chunk bidirectional, cross-chunk strictly causal.</li>
-<li style="margin-bottom:8px">Sliding window (size=6): each chunk attends only to 6 most recent frames &rarr; unbounded generation without memory growth.</li>
-</ul>
-</section>
-</div>
+<script>
+function flash(btn){var t=btn.textContent;btn.textContent='Copied';setTimeout(function(){btn.textContent=t;},1400);}
+function cp(btn){
+  var pre=btn.parentElement.querySelector('pre');
+  if(!pre)return;
+  navigator.clipboard.writeText(pre.innerText).then(function(){flash(btn);});
+}
+function cpbib(btn){
+  navigator.clipboard.writeText(document.getElementById('bib').innerText).then(function(){flash(btn);});
+}
 
-<div class="video-section" id="results">
-<div class="container">
-<h2 style="font-size:1.8rem;font-weight:700;margin-bottom:8px">Results</h2>
-<p class="section-subtitle">ForgeWM (4-step DMD, Causal Forcing) vs Matrix-Game 2 (Self-Forcing distilled). Same reference frame, same action, 352&times;640.</p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0">
+/* Lazy video + in-place controls. Nothing is fetched until a clip is near the
+   viewport, and clips pause once they leave it (keeps ~16 MB of rollouts off the
+   initial load). Every clip carries its own toggle and scrubber; a pause the
+   reader asked for is remembered, so scrolling away and back does not restart
+   it. Markup order is one .vbtn/.vseek/.vfill per clip, so they pair by index. */
+(function(){
+  var vids  = [].slice.call(document.querySelectorAll('video[data-src]'));
+  if(!vids.length) return;
+  var btns  = [].slice.call(document.querySelectorAll('.vbtn'));
+  var seeks = [].slice.call(document.querySelectorAll('.vseek'));
+  var fills = [].slice.call(document.querySelectorAll('.vfill'));
 
-<div class="video-card"><div class="label">Forest &mdash; Turn Right</div><div style="display:grid;grid-template-columns:1fr 1fr"><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--text-s)">MG2</div><img src="results/mg2_forest_turn_right.gif" alt="MG2" style="width:100%;display:block"></div><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--primary-dark);font-weight:600">ForgeWM</div><img src="results/forge_forest_turn_right.gif" alt="ForgeWM" style="width:100%;display:block"></div></div></div>
+  /* prefers-reduced-motion: CSS cannot stop an autoplaying video, so drop the
+     attribute and let the reader start each clip from its own button. Loading
+     stays lazy either way. */
+  var calm = window.matchMedia &&
+             window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(calm) vids.forEach(function(v){
+    v.removeAttribute('autoplay'); v.autoplay = false;
+  });
 
-<div class="video-card"><div class="label">Plains &mdash; Forward</div><div style="display:grid;grid-template-columns:1fr 1fr"><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--text-s)">MG2</div><img src="results/mg2_plains_forward.gif" alt="MG2" style="width:100%;display:block"></div><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--primary-dark);font-weight:600">ForgeWM</div><img src="results/forge_plains_forward.gif" alt="ForgeWM" style="width:100%;display:block"></div></div></div>
+  function load(v){
+    if(v.dataset.loaded) return;
+    v.dataset.loaded = '1';
+    v.src = v.dataset.src;
+  }
+  function play(v){
+    load(v);
+    var p = v.play(); if(p && p.catch) p.catch(function(){});
+  }
+  function start(v){                 // clip scrolled into view
+    load(v);
+    if(calm || v.dataset.held) return;
+    play(v);
+  }
 
-<div class="video-card"><div class="label">Cave &mdash; Forward</div><div style="display:grid;grid-template-columns:1fr 1fr"><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--text-s)">MG2</div><img src="results/mg2_cave_forward.gif" alt="MG2" style="width:100%;display:block"></div><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--primary-dark);font-weight:600">ForgeWM</div><img src="results/forge_cave_forward.gif" alt="ForgeWM" style="width:100%;display:block"></div></div></div>
+  vids.forEach(function(v, i){
+    var btn = btns[i], seek = seeks[i], fill = fills[i];
+    if(btn) btn.addEventListener('click', function(e){
+      e.preventDefault();
+      if(v.paused){ delete v.dataset.held; play(v); }
+      else { v.dataset.held = '1'; v.pause(); }
+    });
+    function icon(on){
+      if(!btn) return;
+      btn.classList[on ? 'add' : 'remove']('on');
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+    v.addEventListener('play',  function(){ icon(true);  });
+    v.addEventListener('pause', function(){ icon(false); });
+    if(fill) v.addEventListener('timeupdate', function(){
+      if(v.duration) fill.style.width = (v.currentTime / v.duration * 100) + '%';
+    });
+    if(seek) seek.addEventListener('click', function(e){
+      var r = seek.getBoundingClientRect && seek.getBoundingClientRect();
+      if(!r || !r.width || !v.duration) return;
+      var at = (e.clientX - r.left) / r.width;
+      v.currentTime = Math.max(0, Math.min(1, at)) * v.duration;
+    });
+  });
 
-<div class="video-card"><div class="label">Desert &mdash; Back</div><div style="display:grid;grid-template-columns:1fr 1fr"><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--text-s)">MG2</div><img src="results/mg2_desert_back.gif" alt="MG2" style="width:100%;display:block"></div><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--primary-dark);font-weight:600">ForgeWM</div><img src="results/forge_desert_back.gif" alt="ForgeWM" style="width:100%;display:block"></div></div></div>
+  if(!('IntersectionObserver' in window)){ vids.forEach(start); return; }
 
-<div class="video-card"><div class="label">Rainy Sunset &mdash; Random</div><div style="display:grid;grid-template-columns:1fr 1fr"><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--text-s)">MG2</div><img src="results/mg2_night_random.gif" alt="MG2" style="width:100%;display:block"></div><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--primary-dark);font-weight:600">ForgeWM</div><img src="results/forge_night_random.gif" alt="ForgeWM" style="width:100%;display:block"></div></div></div>
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting) start(e.target);
+      else if(e.target.dataset.loaded && !e.target.paused) e.target.pause();
+    });
+  }, {rootMargin: '250px 0px', threshold: 0.01});
 
-<div class="video-card"><div class="label">Rainy Night &mdash; Forward</div><div style="display:grid;grid-template-columns:1fr 1fr"><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--text-s)">MG2</div><img src="results/mg2_sunset_forward.gif" alt="MG2" style="width:100%;display:block"></div><div><div style="text-align:center;font-size:0.72rem;padding:4px;color:var(--primary-dark);font-weight:600">ForgeWM</div><img src="results/forge_sunset_forward.gif" alt="ForgeWM" style="width:100%;display:block"></div></div></div>
+  vids.forEach(function(v){ io.observe(v); });
+})();
 
-</div>
-
-<h3>Observations</h3>
-<ul class="observations">
-<li><strong>Overall quality:</strong> ForgeWM largely reproduces MG2's generation quality. Temporal smoothness is slightly better; texture detail slightly weaker (smaller data: ~70h vs MG2 proprietary).</li>
-<li><strong>"Underwater" artifact fixed:</strong> MG2 drifts into ocean textures on rain/dark scenes (over-represented in proprietary data). ForgeWM does not exhibit this.</li>
-<li><strong>Action controllability:</strong> Both models respond correctly to keyboard/mouse. Causal Forcing preserves action fidelity through all 4 stages.</li>
-<li><strong>HUD stability:</strong> MG2's HUD gradually shrinks over rollout (resolution mismatch). ForgeWM does not show this artifact.</li>
-</ul>
-</div>
-</div>
-
-<div class="container">
-<section id="comparison">
-<h2>Comparison</h2>
-<table class="comparison-table">
-<thead><tr><th>Project</th><th>Base Model</th><th>Control</th><th>Paradigm</th><th>I2V</th><th>Data Open</th><th>Train Code</th></tr></thead>
-<tbody>
-<tr><td style="text-align:left"><strong>ForgeWM</strong></td><td>Wan2.1-1.3B</td><td>KB + Mouse</td><td>Causal Forcing</td><td style="color:#16a34a">&#10003;</td><td style="color:#16a34a">&#10003;</td><td style="color:#16a34a">&#10003;</td></tr>
-<tr><td style="text-align:left">Matrix-Game 2</td><td>Wan2.1-1.3B</td><td>KB + Mouse</td><td>Self Forcing</td><td style="color:#16a34a">&#10003;</td><td style="color:#dc2626">&#10007;</td><td style="color:#dc2626">&#10007;</td></tr>
-<tr><td style="text-align:left">minWM</td><td>HY1.5 / Wan2.1</td><td>Camera pose</td><td>Causal Forcing</td><td>HY only</td><td style="color:#16a34a">&#10003;</td><td style="color:#16a34a">&#10003;</td></tr>
-</tbody>
-</table>
-</section>
-
-<section>
-<h2>Citation</h2>
-<div class="bibtex">
-<button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('bib').innerText).then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)})">Copy</button>
-<pre id="bib">@misc{forgewm2026,
-  title={ForgeWM: A Reproducible Training Recipe for Action-Controllable World Models},
-  author={ForgeWM Team},
-  year={2026},
-  url={https://github.com/asdfo123/ForgeWM}
-}</pre>
-</div>
-</section>
-
-<section>
-<h2>Acknowledgements</h2>
-<p style="font-size:0.92rem">ForgeWM integrates work from multiple research groups:</p>
-<ul style="margin:12px 0 0 20px;font-size:0.92rem">
-<li style="margin-bottom:8px"><a href="https://github.com/SkyworkAI/Matrix-Game" style="color:var(--primary)">Matrix-Game 2</a> &mdash; Base model architecture and weights</li>
-<li style="margin-bottom:8px"><a href="https://github.com/KlingAIResearch/GameFactory" style="color:var(--primary)">GameFactory</a> &mdash; GF-Minecraft training data</li>
-<li style="margin-bottom:8px"><a href="https://github.com/thu-ml/Causal-Forcing" style="color:var(--primary)">Causal Forcing</a> &mdash; Distillation paradigm</li>
-</ul>
-<p style="font-size:0.92rem;margin-top:12px">We also thank the authors of:</p>
-<ul style="margin:8px 0 0 20px;font-size:0.92rem">
-<li style="margin-bottom:6px"><a href="https://github.com/shengshu-ai/minWM" style="color:var(--primary)">minWM</a></li>
-<li style="margin-bottom:6px"><a href="https://github.com/guandeh17/Self-Forcing" style="color:var(--primary)">Self-Forcing</a></li>
-<li style="margin-bottom:6px"><a href="https://github.com/tianweiy/CausVid" style="color:var(--primary)">CausVid</a></li>
-<li style="margin-bottom:6px"><a href="https://github.com/Wan-Video/Wan2.1" style="color:var(--primary)">Wan 2.1</a></li>
-<li style="margin-bottom:6px"><a href="https://github.com/Tencent-Hunyuan/Hunyuan-GameCraft-1.0" style="color:var(--primary)">GameCraft</a></li>
-<li style="margin-bottom:6px"><a href="https://github.com/Tencent-Hunyuan/HunyuanVideo-1.5" style="color:var(--primary)">HunyuanVideo</a></li>
-</ul>
-</section>
-
-<section>
-<h2>Contact</h2>
-<p style="font-size:0.92rem"><a href="https://asdfo123.github.io" style="color:var(--primary);font-weight:500">Xinye Li</a> &mdash; <a href="mailto:leeasdfo123@gmail.com" style="color:var(--primary)">leeasdfo123@gmail.com</a></p>
-<p style="font-size:0.92rem;margin-top:12px">WeChat Group:</p>
-<img src="wechat.JPG" alt="WeChat Group" style="width:200px;border-radius:8px;margin-top:8px;border:1px solid var(--border)">
-</section>
-</div>
-
-<footer><div class="container"><p>ForgeWM &copy; 2026 &middot; Released under Apache License 2.0</p><p style="margin-top:8px">Contact: <a href="mailto:leeasdfo123@gmail.com">leeasdfo123@gmail.com</a></p></div></footer>
+</script>
 </body>
 </html>
