@@ -851,8 +851,7 @@ footer{padding:36px 0;text-align:center;color:var(--text-t);font-size:.87rem}
     <div class="note" style="text-align:left;max-width:900px;margin:26px auto 0">
       Across seven games the macro-average paired LPIPS is <b>0.656</b> and generated motion
       runs <b>1.45×</b> the reference magnitude. Every rollout above follows an action trace
-      recorded from real play, not a synthetic one. Checkpoint and inference are released;
-      the gameplay corpus is not ours to redistribute.
+      recorded from real play, not a synthetic one. The checkpoint and inference code are released.
     </div>
   </div>
 </section>
@@ -865,7 +864,7 @@ footer{padding:36px 0;text-align:center;color:var(--text-t);font-size:.87rem}
     <p class="lede">
       Checkpoints for all four Minecraft stages, the two few-step students, and the
       CrossFPS inference model — plus the pre-encoded training data, 40,000 GF-Minecraft
-      clips at 640×352 — are on HuggingFace.
+      clips at 352×640 — are on HuggingFace.
     </p>
     <div class="copywrap" style="text-align:left">
 <pre><span class="c"># base model + ForgeWM checkpoints</span>
@@ -922,7 +921,7 @@ python inference.py --config_path configs/<span class="f">stage3_dmd.yaml</span>
 
     <h3>Contact</h3>
     <dl class="kv">
-      <dt>Email</dt><dd><a href="mailto:leeasdfo123@gmail.com">leeasdfo123@gmail.com</a></dd>
+      <dt>Email</dt><dd><a href="mailto:xyli@se.cuhk.edu.hk">xyli@se.cuhk.edu.hk</a></dd>
       <dt>Code</dt><dd><a href="https://github.com/asdfo123/ForgeWM" target="_blank" rel="noopener">github.com/asdfo123/ForgeWM</a></dd>
       <dt>WeChat</dt><dd><a href="wechat.JPG" target="_blank" rel="noopener">discussion group QR</a></dd>
     </dl>
