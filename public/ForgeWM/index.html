@@ -863,18 +863,18 @@ footer{padding:36px 0;text-align:center;color:var(--text-t);font-size:.87rem}
     <div class="eyebrow">Get it</div>
     <h2>Two commands to a rollout</h2>
     <p class="lede">
-      Checkpoints for all four Minecraft stages and the pre-encoded training data —
-      40,000 GF-Minecraft clips at 640×352 — are on HuggingFace; the four-stage recipe
-      and the few-step students ship as runnable configs. CrossFPS ships as inference.
+      Checkpoints for all four Minecraft stages, the two few-step students, and the
+      CrossFPS inference model — plus the pre-encoded training data, 40,000 GF-Minecraft
+      clips at 640×352 — are on HuggingFace.
     </p>
     <div class="copywrap" style="text-align:left">
 <pre><span class="c"># base model + ForgeWM checkpoints</span>
 bash scripts/download_models.sh
 huggingface-cli download ForgeWM/ForgeWM --local-dir ./ckpts
 
-<span class="c"># drive it (stage3_new is the ForgeWM-4 student)</span>
+<span class="c"># drive it (stage3 is the ForgeWM-4 student)</span>
 python inference.py --config_path configs/<span class="f">stage3_dmd.yaml</span> \
-    --checkpoint_path ckpts/stage3_new/model.pt \
+    --checkpoint_path ckpts/stage3/model.pt \
     --image_path demo_images/forest.png --action_type forward</pre>
       <button class="copybtn" onclick="cp(this)">Copy</button>
     </div>
@@ -907,7 +907,7 @@ python inference.py --config_path configs/<span class="f">stage3_dmd.yaml</span>
     <h3>Built on</h3>
     <dl class="kv">
       <dt>Base model</dt><dd><a href="https://github.com/SkyworkAI/Matrix-Game" target="_blank" rel="noopener">Matrix-Game 2</a></dd>
-      <dt>Training data</dt><dd><a href="https://github.com/KlingAIResearch/GameFactory" target="_blank" rel="noopener">GameFactory</a></dd>
+      <dt>Training data</dt><dd><a href="https://github.com/KlingAIResearch/GameFactory" target="_blank" rel="noopener">GameFactory</a> (Minecraft) · <a href="https://z2tong.github.io/SCOPE" target="_blank" rel="noopener">SCOPE</a> (CrossFPS)</dd>
       <dt>Distillation</dt><dd><a href="https://github.com/thu-ml/Causal-Forcing" target="_blank" rel="noopener">Causal Forcing</a></dd>
     </dl>
     <p class="small">
