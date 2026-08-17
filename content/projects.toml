@@ -12,6 +12,10 @@ label = "Project Page"
 url = "/ForgeWM/"
 
 [[items.links]]
+label = "Paper"
+url = "https://arxiv.org/abs/2608.14022"
+
+[[items.links]]
 label = "Code"
 url = "https://github.com/asdfo123/ForgeWM"
 

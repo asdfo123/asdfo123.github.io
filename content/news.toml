@@ -1,4 +1,9 @@
 [[news]]
+date = "2026.08"
+content = "📄 The [ForgeWM](https://arxiv.org/abs/2608.14022) paper is now on arXiv! Progressive causal training for few-step action-conditioned video world models."
+
+
+[[news]]
 date = "2026.05"
 content = "🌍 [ForgeWM](https://github.com/asdfo123/forgewm) has been released! The **First** open-source pipeline to train real-time, keyboard & mouse controllable world models."
 

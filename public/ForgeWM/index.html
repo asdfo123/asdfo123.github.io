@@ -349,7 +349,7 @@ footer{padding:36px 0;text-align:center;color:var(--text-t);font-size:.87rem}
     </p>
 
     <div class="links">
-      <a class="btn dim" title="A preprint link will appear here">📄 Paper <span style="opacity:.7">(soon)</span></a>
+      <a class="btn" href="https://arxiv.org/abs/2608.14022" target="_blank" rel="noopener">📄 Paper</a>
       <a class="btn" href="https://github.com/asdfo123/ForgeWM" target="_blank" rel="noopener">⌨️ Code</a>
       <a class="btn alt" href="https://huggingface.co/ForgeWM/ForgeWM" target="_blank" rel="noopener">🤗 Models</a>
       <a class="btn alt" href="https://huggingface.co/datasets/ForgeWM/ForgeWM-data" target="_blank" rel="noopener">🤗 Data</a>
@@ -892,16 +892,22 @@ python inference.py --config_path configs/<span class="f">stage3_dmd.yaml</span>
     <h2>Cite &amp; credit</h2>
     <div class="copywrap" style="margin-top:22px">
       <div class="bibtex" id="bib">@misc{li2026forgewm,
-  title  = {ForgeWM: Progressive Causal Training for Few-Step
-            Action-Conditioned Video World Models},
-  author = {Xinye Li and Lingshuai Lin and Lei Wang and Liuzhou Zhang and
-            Jialin Cui and Qingshan Li and Guanchu Wang and Qingbin Liu and
-            Xi Chen and Jiang Bian and Wai Lam},
-  year   = {2026},
-  url    = {https://github.com/asdfo123/ForgeWM}
+  title         = {ForgeWM: Progressive Causal Training for Few-Step
+                   Action-Conditioned Video World Models},
+  author        = {Xinye Li and Lingshuai Lin and Lei Wang and Liuzhou Zhang and
+                   Jialin Cui and Qingshan Li and Guanchu Wang and Qingbin Liu and
+                   Xi Chen and Jiang Bian and Wai Lam},
+  year          = {2026},
+  eprint        = {2608.14022},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2608.14022}
 }</div>
       <button class="copybtn" onclick="cpbib(this)">Copy</button>
     </div>
+    <p class="small" style="margin-top:14px">
+      Preprint on <a href="https://arxiv.org/abs/2608.14022" target="_blank" rel="noopener">arXiv:2608.14022</a> (cs.CV).
+    </p>
 
     <h3>Built on</h3>
     <dl class="kv">
