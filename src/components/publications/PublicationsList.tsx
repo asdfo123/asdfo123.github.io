@@ -243,6 +243,9 @@ export default function PublicationsList({ config, publications, embedded = fals
                                                 <span className={`${author.isHighlighted ? 'font-semibold text-accent' : ''} ${author.isCoAuthor ? `underline underline-offset-4 ${author.isHighlighted ? 'decoration-accent' : 'decoration-neutral-400'}` : ''}`}>
                                                     {author.name}
                                                 </span>
+                                                {author.isCoAuthor && (
+                                                    <sup className={`ml-0 ${author.isHighlighted ? 'text-accent' : 'text-neutral-600 dark:text-neutral-400'}`}>*</sup>
+                                                )}
                                                 {author.isCorresponding && (
                                                     <sup className={`ml-0 ${author.isHighlighted ? 'text-accent' : 'text-neutral-600 dark:text-neutral-400'}`}>†</sup>
                                                 )}
@@ -251,7 +254,9 @@ export default function PublicationsList({ config, publications, embedded = fals
                                         ))}
                                     </p>
                                     <p className="text-sm font-medium text-neutral-800 dark:text-neutral-600 mb-3">
-                                        {pub.journal || pub.conference}, {pub.year}
+                                        {pub.journal || pub.conference
+                                            ? <>{pub.journal || pub.conference}, {pub.year}</>
+                                            : pub.year}
                                     </p>
 
                                     {pub.description && (

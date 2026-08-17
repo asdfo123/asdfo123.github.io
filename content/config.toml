@@ -1,13 +1,13 @@
 [site]
 title = "Xinye Li (李昕烨)"
 brand = "Xinye Li"
-description = "Incoming PhD Student @ CUHK, Senior UG @ HIT"
+description = "PhD Student @ CUHK"
 favicon = "/favicon.png"
 last_updated = "April 3, 2026"
 
 [author]
 name = "Xinye Li"
-title = "Incoming PhD Student"
+title = "PhD Student"
 institution = "The Chinese University of Hong Kong"
 avatar = "/avatar.JPG"
 
