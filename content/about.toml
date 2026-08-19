@@ -5,7 +5,7 @@ title = "About"
 research_interests = [
   "Large Language Models (Model Editing, Knowledge, Agent)",
   "Efficient Machine Learning",
-  "Diffusion Models & Video Generation",
+  "Diffusion Models, Video Generation & World Models",
 ]
 
 [[sections]]

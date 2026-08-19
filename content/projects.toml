@@ -21,11 +21,11 @@ url = "https://github.com/asdfo123/ForgeWM"
 
 [[items.links]]
 label = "Models"
-url = "https://huggingface.co/asdfo123/ForgeWM"
+url = "https://huggingface.co/ForgeWM/ForgeWM"
 
 [[items.links]]
 label = "Data"
-url = "https://huggingface.co/datasets/asdfo123/ForgeWM-data"
+url = "https://huggingface.co/datasets/ForgeWM/ForgeWM-data"
 
 [[items.links]]
 label = "Blog: My Notes on World Models"
