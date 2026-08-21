@@ -1,5 +1,13 @@
 [[items]]
-period = "2026.01 – Present"
+period = "2026.08 – Present"
+role = "Project-Up Research Intern (青云计划)"
+company = "Tencent Games · LightSpeed Studios"
+location = "Shenzhen, China"
+logo = "/logos/lightspeed.png"
+url = "https://www.tencent.com/en-us/"
+
+[[items]]
+period = "2026.01 – 2026.08"
 role = "Research Intern"
 company = "Tencent PCG"
 location = "Shenzhen, China"
@@ -8,7 +16,7 @@ url = "https://www.tencent.com/en-us/"
 
 [[items]]
 period = "2025.08 – 2026.02"
-role = "Quantitative Researcher Intern (ML & AI)"
+role = "Quantitative Research Intern (ML & AI)"
 company = "Grace Investment Machine"
 location = "Remote"
 logo = "/logos/gim.png"

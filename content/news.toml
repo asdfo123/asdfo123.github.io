@@ -1,5 +1,9 @@
 [[news]]
 date = "2026.08"
+content = "🚀 Selected for Tencent's Project-Up Program (青云计划) as a Research Intern at LightSpeed Studios!"
+
+[[news]]
+date = "2026.08"
 content = "📄 The [ForgeWM](https://arxiv.org/abs/2608.14022) paper is now on arXiv! Progressive causal training for few-step action-conditioned video world models."
 
 

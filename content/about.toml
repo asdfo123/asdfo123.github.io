@@ -3,9 +3,9 @@ title = "About"
 
 [profile]
 research_interests = [
-  "Large Language Models (Model Editing, Knowledge, Agent)",
-  "Efficient Machine Learning",
-  "Diffusion Models, Video Generation & World Models",
+  "World Models & Video Generation (Action-Controllable Generation)",
+  "Generative Models & Efficient Machine Learning",
+  "Large Language Models (Agents, Model / Knowledge Editing, Interpretability)",
 ]
 
 [[sections]]
