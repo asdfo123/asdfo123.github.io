@@ -17,15 +17,80 @@ interface BlogPostPageProps {
 export default function BlogPostPage({ post, enPost, prevPost, nextPost }: BlogPostPageProps) {
     const hasEnglish = !!enPost;
     const [lang, setLang] = useState<'zh' | 'en'>('en');
+    const [pageViews, setPageViews] = useState<number | null>(null);
     const activePost = lang === 'en' && hasEnglish ? enPost! : post;
 
-    // Trigger busuanzi refresh on SPA navigation (Next.js doesn't reload the page)
+    // Fetch and increment real page views (Busuanzi JSONP + Abacus fallback for SPA/local)
     useEffect(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const bsz = (window as any).busuanzi;
-        if (bsz && typeof bsz.fetch === 'function') {
-            bsz.fetch();
+        let resolved = false;
+        const callbackName = 'BusuanziCallback_' + Math.floor(1099511627776 * Math.random());
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.defer = true;
+        script.referrerPolicy = 'no-referrer-when-downgrade';
+
+        const cleanup = () => {
+            try {
+                delete (window as unknown as Record<string, unknown>)[callbackName];
+                if (script.parentNode) script.parentNode.removeChild(script);
+            } catch {
+                // ignore
+            }
+        };
+
+        const fallbackToAbacus = () => {
+            if (resolved) return;
+            fetch(`https://abacus.jasoncameron.dev/hit/asdfo123.github.io/blog-${post.slug}`)
+                .then(res => (res.ok ? res.json() : null))
+                .then(data => {
+                    if (!resolved && data && typeof data.value === 'number') {
+                        resolved = true;
+                        setPageViews(data.value);
+                    }
+                })
+                .catch(() => {});
+        };
+
+        const isLocalhost =
+            typeof window !== 'undefined' &&
+            (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+
+        if (isLocalhost) {
+            // Busuanzi uses HTTP Referer which groups all localhost sites together; use Abacus on localhost
+            fallbackToAbacus();
+            return;
         }
+
+        const timer = setTimeout(fallbackToAbacus, 3500);
+
+        (window as unknown as Record<string, unknown>)[callbackName] = (data: {
+            page_pv?: number;
+            site_pv?: number;
+            site_uv?: number;
+        }) => {
+            clearTimeout(timer);
+            if (data && typeof data.page_pv === 'number') {
+                resolved = true;
+                setPageViews(data.page_pv);
+            } else {
+                fallbackToAbacus();
+            }
+            cleanup();
+        };
+
+        script.onerror = () => {
+            clearTimeout(timer);
+            cleanup();
+            fallbackToAbacus();
+        };
+
+        script.src = `https://busuanzi.ibruce.info/busuanzi?jsonpCallback=${callbackName}`;
+        document.head.appendChild(script);
+
+        return () => {
+            clearTimeout(timer);
+            cleanup();
+        };
     }, [post.slug]);
 
     return (
@@ -86,7 +151,9 @@ export default function BlogPostPage({ post, enPost, prevPost, nextPost }: BlogP
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
-                        <span id="busuanzi_value_page_pv" className="tabular-nums">–</span>
+                        <span id="busuanzi_value_page_pv" className="tabular-nums">
+                            {pageViews !== null ? pageViews.toLocaleString() : '–'}
+                        </span>
                         <span>views</span>
                     </span>
                     {activePost.tags.length > 0 && (
@@ -129,7 +196,7 @@ export default function BlogPostPage({ post, enPost, prevPost, nextPost }: BlogP
                     />
                 </div>
             ) : (
-                <article className="text-neutral-700 dark:text-neutral-600 leading-relaxed">
+                <article className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         components={{
@@ -149,12 +216,12 @@ export default function BlogPostPage({ post, enPost, prevPost, nextPost }: BlogP
                                 />
                             ),
                             blockquote: ({ children }) => (
-                                <blockquote className="border-l-4 border-accent/50 pl-4 italic my-4 text-neutral-600 dark:text-neutral-500">
+                                <blockquote className="border-l-4 border-accent/50 pl-4 italic my-4 text-neutral-600 dark:text-neutral-400">
                                     {children}
                                 </blockquote>
                             ),
                             strong: ({ children }) => <strong className="font-semibold text-primary">{children}</strong>,
-                            em: ({ children }) => <em className="italic text-neutral-600 dark:text-neutral-500">{children}</em>,
+                            em: ({ children }) => <em className="italic text-neutral-600 dark:text-neutral-400">{children}</em>,
                             code: ({ children, className }) => {
                                 const isInline = !className;
                                 return isInline ? (

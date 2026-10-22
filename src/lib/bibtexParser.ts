@@ -61,6 +61,7 @@ export function parseBibTeX(bibtexContent: string): Publication[] {
 
     // Parse preview field (remove braces if present)
     const preview = tags.preview?.replace(/[{}]/g, '');
+    const video = tags.video?.replace(/[{}]/g, '');
 
     // Create publication object
     const publication: Publication = {
@@ -83,17 +84,32 @@ export function parseBibTeX(bibtexContent: string): Publication[] {
       pages: tags.pages,
       doi: tags.doi,
       url: tags.url,
+      website: tags.website,
       code: tags.code,
+      models: tags.models,
       data: tags.data,
       media: tags.media,
       abstract: cleanBibTeXString(tags.abstract),
       description: cleanBibTeXString(tags.description || tags.note),
       selected,
       preview,
+      video,
       venue: cleanBibTeXString(tags.venue),
 
       // Store original BibTeX (excluding custom fields)
-      bibtex: reconstructBibTeX(entry, ['selected', 'preview', 'description', 'keywords', 'code', 'month', 'venue']),
+      bibtex: reconstructBibTeX(entry, [
+        'selected',
+        'preview',
+        'video',
+        'description',
+        'keywords',
+        'code',
+        'data',
+        'media',
+        'website',
+        'models',
+        'venue',
+      ]),
     };
 
     // Clean up undefined fields
@@ -105,33 +121,35 @@ export function parseBibTeX(bibtexContent: string): Publication[] {
 
     return publication;
   }).sort((a: Publication, b: Publication) => {
-    // Prioritize papers where the site owner is the first author.
-    const aIsFirstAuthor = isOwnerFirstAuthor(a, authorName);
-    const bIsFirstAuthor = isOwnerFirstAuthor(b, authorName);
-    if (aIsFirstAuthor !== bIsFirstAuthor) {
-      return bIsFirstAuthor ? 1 : -1;
-    }
-
-    // Sort by year (descending), then by month if available
+    // Sort by year (descending), then by month (descending)
     if (b.year !== a.year) return b.year - a.year;
 
-    // For month comparison, treat missing months as January (1) to ensure they appear last within the year
-    const monthA = typeof a.month === 'string' ?
-      (monthMapping[a.month.toLowerCase()] || parseInt(a.month) || 1) :
-      (a.month || 1);
-    const monthB = typeof b.month === 'string' ?
-      (monthMapping[b.month.toLowerCase()] || parseInt(b.month) || 1) :
-      (b.month || 1);
+    const monthA = typeof a.month === 'string'
+      ? (monthMapping[a.month.toLowerCase()] || parseInt(a.month) || 1)
+      : (a.month || 1);
+    const monthB = typeof b.month === 'string'
+      ? (monthMapping[b.month.toLowerCase()] || parseInt(b.month) || 1)
+      : (b.month || 1);
 
-    // Sort by month descending (December to January)
-    return monthB - monthA;
+    if (monthB !== monthA) return monthB - monthA;
+
+    // Tie-breaker: prioritize papers where the site owner is first or co-first author
+    const aIsLead = isOwnerLeadAuthor(a, authorName);
+    const bIsLead = isOwnerLeadAuthor(b, authorName);
+    if (aIsLead !== bIsLead) {
+      return bIsLead ? 1 : -1;
+    }
+
+    return 0;
   });
 }
 
-function isOwnerFirstAuthor(publication: Publication, ownerName: string): boolean {
+function isOwnerLeadAuthor(publication: Publication, ownerName: string): boolean {
   const firstAuthor = publication.authors[0]?.name;
-  if (!firstAuthor || !ownerName) return false;
-  return isSamePerson(firstAuthor, ownerName);
+  if (firstAuthor && ownerName && isSamePerson(firstAuthor, ownerName)) {
+    return true;
+  }
+  return publication.authors.some(a => a.isHighlighted && a.isCoAuthor);
 }
 
 function isSamePerson(nameA: string, nameB: string): boolean {
@@ -197,18 +215,12 @@ function parseAuthors(authorsStr: string, highlightName?: string): Array<{ name:
       // Check if this is the site owner (to highlight)
       let isHighlighted = false;
       if (highlightName) {
-        const lowerName = name.toLowerCase();
-        const lowerHighlight = highlightName.toLowerCase();
-        isHighlighted = lowerName.includes(lowerHighlight);
-
-        // Also check for reversed order (Last First) if not found
-        if (!isHighlighted && lowerHighlight.includes(' ')) {
-          const parts = lowerHighlight.split(' ');
-          // Handle simple First Last case
-          if (parts.length === 2) {
-            const reversed = `${parts[1]} ${parts[0]}`;
-            isHighlighted = lowerName.includes(reversed);
-          }
+        const cleanCandidate = cleanBibTeXString(name);
+        isHighlighted = isSamePerson(cleanCandidate, highlightName);
+        if (!isHighlighted) {
+          const lowerName = cleanCandidate.toLowerCase();
+          const lowerHighlight = highlightName.toLowerCase();
+          isHighlighted = lowerName.includes(lowerHighlight);
         }
       }
 
@@ -261,6 +273,15 @@ function cleanBibTeXString(str?: string): string {
 function detectResearchArea(title: string, keywords: string[]): ResearchArea {
   const text = (title + ' ' + keywords.join(' ')).toLowerCase();
 
+  if (text.includes('world model') || text.includes('world models')) {
+    return 'world-models';
+  }
+  if (text.includes('video')) {
+    return 'video-generation';
+  }
+  if (text.includes('llm') || text.includes('language model') || text.includes('editing') || text.includes('reasoning')) {
+    return 'llm';
+  }
   if (text.includes('healthcare') || text.includes('medical') || text.includes('health')) {
     return 'ai-healthcare';
   }

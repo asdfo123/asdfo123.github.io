@@ -1,3 +1,5 @@
+import { Publication } from './publication';
+
 export interface BasePageConfig {
   type: 'about' | 'publication' | 'card' | 'text' | 'blog';
   title: string;
@@ -33,6 +35,45 @@ export interface CardPageConfig extends BasePageConfig {
 export interface BlogPageConfig extends BasePageConfig {
   type: 'blog';
 }
+
+export interface SectionConfig {
+  id: string;
+  type: 'markdown' | 'publications' | 'list' | 'awards' | 'competitions' | 'projects' | 'internships' | 'cards';
+  title?: string;
+  source?: string;
+  filter?: string;
+  limit?: number;
+  content?: string;
+  publications?: Publication[];
+  items?: Array<{ date: string; content: string; icon?: string }>;
+  awards?: Array<{ date: string; awards: string[]; suffix?: string }>;
+  competitions?: Array<{ date: string; name: string; url?: string; prize: string; role: string }>;
+  projects?: Array<{
+    name: string;
+    description: string;
+    highlight?: string;
+    github?: string;
+    date?: string;
+    image?: string;
+    video?: string;
+    tags?: string[];
+    links?: Array<{ label: string; url: string }>;
+  }>;
+  internships?: Array<{
+    period: string;
+    role: string;
+    company: string;
+    location: string;
+    logo?: string;
+    url?: string;
+  }>;
+}
+
+export type PageData =
+  | { type: 'about'; id: string; sections: SectionConfig[] }
+  | { type: 'publication'; id: string; config: PublicationPageConfig; publications: Publication[] }
+  | { type: 'text'; id: string; config: TextPageConfig; content: string }
+  | { type: 'card'; id: string; config: CardPageConfig };
 
 export interface BlogPost {
   slug: string;

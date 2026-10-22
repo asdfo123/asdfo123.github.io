@@ -9,36 +9,21 @@ import Awards, { AwardItem } from '@/components/home/Awards';
 import Competitions, { CompetitionItem } from '@/components/home/Competitions';
 import Projects, { ProjectItem } from '@/components/home/Projects';
 import Internships, { InternshipItem } from '@/components/home/Internships';
+import QuickJumpNav from '@/components/home/QuickJumpNav';
 import ClustrMapsGlobe from '@/components/home/ClustrMapsGlobe';
+import { PageBlueprintDecor } from '@/components/ui/WorldModelArt';
 import PublicationsList from '@/components/publications/PublicationsList';
 import TextPage from '@/components/pages/TextPage';
 import CardPage from '@/components/pages/CardPage';
 
-import { Publication } from '@/types/publication';
-import { BasePageConfig, PublicationPageConfig, TextPageConfig, CardPageConfig } from '@/types/page';
-
-// Define types for section config
-interface SectionConfig {
-  id: string;
-  type: 'markdown' | 'publications' | 'list' | 'awards' | 'competitions' | 'projects' | 'internships';
-  title?: string;
-  source?: string;
-  filter?: string;
-  limit?: number;
-  content?: string;
-  publications?: Publication[];
-  items?: NewsItem[];
-  awards?: AwardItem[];
-  competitions?: CompetitionItem[];
-  projects?: ProjectItem[];
-  internships?: InternshipItem[];
-}
-
-type PageData =
-  | { type: 'about', id: string, sections: SectionConfig[] }
-  | { type: 'publication', id: string, config: PublicationPageConfig, publications: Publication[] }
-  | { type: 'text', id: string, config: TextPageConfig, content: string }
-  | { type: 'card', id: string, config: CardPageConfig };
+import {
+  BasePageConfig,
+  PublicationPageConfig,
+  TextPageConfig,
+  CardPageConfig,
+  SectionConfig,
+  PageData,
+} from '@/types/page';
 
 export default function Home() {
   const config = getConfig();
@@ -49,7 +34,7 @@ export default function Home() {
   const researchInterests = (aboutConfig as { profile?: { research_interests?: string[] } })?.profile?.research_interests;
 
   // Helper function to process sections (for about page)
-  const processSections = (sections: SectionConfig[]) => {
+  const processSections = (sections: SectionConfig[]): SectionConfig[] => {
     return sections.map((section: SectionConfig) => {
       switch (section.type) {
         case 'markdown':
@@ -164,13 +149,28 @@ export default function Home() {
     }
   }
 
+  // Extract section quick links from the primary about page
+  const aboutPage = pagesToShow.find((p): p is Extract<PageData, { type: 'about' }> => p.type === 'about');
+  const quickLinks = (aboutPage?.sections || []).map(sec => ({
+    id: `section-${sec.id}`,
+    label:
+      sec.id === 'featured_publications'
+        ? 'Publications'
+        : sec.id === 'projects'
+        ? 'Projects'
+        : sec.id === 'awards'
+        ? 'Awards'
+        : sec.title || sec.id,
+  }));
+
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-background min-h-screen">
+    <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 min-h-screen">
+      <PageBlueprintDecor />
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
 
         {/* Left Column - Profile */}
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-4">
           <Profile
             author={config.author}
             social={config.social}
@@ -180,66 +180,78 @@ export default function Home() {
         </div>
 
         {/* Right Column - Content */}
-        <div className="lg:col-span-2 space-y-8">
+        <div className="lg:col-span-8 space-y-8 sm:space-y-10 min-w-0">
+          {/* Quick Section Jump Bar (Horizontal Scrollable on Mobile + Scroll Spy) */}
+          <QuickJumpNav links={quickLinks} />
+
           {pagesToShow.map((page) => (
-            <section key={page.id} id={page.id} className="scroll-mt-24 space-y-8">
+            <div key={page.id} id={page.id} className="scroll-mt-24 space-y-8 sm:space-y-10">
               {page.type === 'about' && page.sections.map((section: SectionConfig) => {
+                const sectionAnchorId = `section-${section.id}`;
                 switch (section.type) {
                   case 'markdown':
                     return (
-                      <About
-                        key={section.id}
-                        content={section.content || ''}
-                        title={section.title}
-                      />
+                      <div key={section.id} id={sectionAnchorId} className="scroll-mt-32">
+                        <About
+                          content={section.content || ''}
+                          title={section.title}
+                          sectionId={section.id}
+                        />
+                      </div>
                     );
                   case 'publications':
                     return (
-                      <SelectedPublications
-                        key={section.id}
-                        publications={section.publications || []}
-                        title={section.title}
-                      />
+                      <div key={section.id} id={sectionAnchorId} className="scroll-mt-32">
+                        <SelectedPublications
+                          publications={section.publications || []}
+                          title={section.title}
+                        />
+                      </div>
                     );
                   case 'list':
                     return (
-                      <News
-                        key={section.id}
-                        items={section.items || []}
-                        title={section.title}
-                      />
+                      <div key={section.id} id={sectionAnchorId} className="scroll-mt-32">
+                        <News
+                          items={section.items || []}
+                          title={section.title}
+                        />
+                      </div>
                     );
                   case 'awards':
                     return (
-                      <Awards
-                        key={section.id}
-                        items={section.awards || []}
-                        title={section.title}
-                      />
+                      <div key={section.id} id={sectionAnchorId} className="scroll-mt-32">
+                        <Awards
+                          items={section.awards || []}
+                          title={section.title}
+                        />
+                      </div>
                     );
                   case 'competitions':
                     return (
-                      <Competitions
-                        key={section.id}
-                        items={section.competitions || []}
-                        title={section.title}
-                      />
+                      <div key={section.id} id={sectionAnchorId} className="scroll-mt-32">
+                        <Competitions
+                          items={section.competitions || []}
+                          title={section.title}
+                        />
+                      </div>
                     );
                   case 'projects':
                     return (
-                      <Projects
-                        key={section.id}
-                        items={section.projects || []}
-                        title={section.title}
-                      />
+                      <div key={section.id} id={sectionAnchorId} className="scroll-mt-32">
+                        <Projects
+                          items={section.projects || []}
+                          title={section.title}
+                        />
+                      </div>
                     );
                   case 'internships':
                     return (
-                      <Internships
-                        key={section.id}
-                        items={section.internships || []}
-                        title={section.title}
-                      />
+                      <div key={section.id} id={sectionAnchorId} className="scroll-mt-32">
+                        <Internships
+                          items={section.internships || []}
+                          title={section.title}
+                        />
+                      </div>
                     );
                   default:
                     return null;
@@ -265,16 +277,15 @@ export default function Home() {
                   embedded={true}
                 />
               )}
-            </section>
+            </div>
           ))}
         </div>
       </div>
 
       {/* Globe at bottom */}
-      <div className="mt-8">
+      <div className="mt-12 pt-6 border-t border-neutral-200/60 dark:border-neutral-800/80">
         <ClustrMapsGlobe />
       </div>
     </div>
   );
 }
-

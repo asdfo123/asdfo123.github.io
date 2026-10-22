@@ -1,4 +1,8 @@
 [[news]]
+date = "2026.09"
+content = "📄 Our benchmark paper [OPIS](https://arxiv.org/abs/2609.35052) for evaluating multi-object memory in video world models is now on arXiv! ([Code](https://github.com/SSStarain/OPIS) & [Dataset](https://huggingface.co/datasets/Kirito-Lab/OPIS-dataset))"
+
+[[news]]
 date = "2026.08"
 content = "🚀 Selected for Tencent's Project-Up Program (青云计划) as a Research Intern at LightSpeed Studios!"
 

@@ -23,33 +23,25 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
+      const isScrolled = window.scrollY > 12;
       setScrolled(isScrolled);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
     if (enableOnePageMode) {
-      // Set initial hash on client-side to avoid hydration mismatch
       setActiveHash(window.location.hash);
       const handleHashChange = () => setActiveHash(window.location.hash);
       window.addEventListener('hashchange', handleHashChange);
 
-      // Scroll Spy Logic
       const observerCallback = (entries: IntersectionObserverEntry[]) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Update active hash based on intersecting section
             const id = entry.target.id;
-            // Only update if we are not currently scrolling to a target (optional refinement, 
-            // but for now simple intersection is enough, we might want to debounce or check intersection ratio)
-            // We use history.replaceState to update URL without jumping or window.location.hash which might jump
-            // But for the nav highlighting, we just need to update local state if we want it to be responsive
-            // However, the requirement says "nav bar did not change". 
-            // Let's update the activeHash state.
             setActiveHash(id === 'about' ? '' : `#${id}`);
           }
         });
@@ -57,13 +49,12 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
 
       const observerOptions = {
         root: null,
-        rootMargin: '-20% 0px -60% 0px', // Adjust these margins to trigger when section is roughly in view
+        rootMargin: '-20% 0px -60% 0px',
         threshold: 0
       };
 
       const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-      // Observe all sections
       items.forEach(item => {
         if (item.type === 'page') {
           const element = document.getElementById(item.target);
@@ -85,34 +76,34 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
           <motion.div
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className={cn(
               'transition-all duration-300 ease-out',
-              scrolled
-                ? 'bg-background/80 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg'
-                : 'bg-transparent'
+              scrolled || open
+                ? 'bg-background/85 backdrop-blur-xl border-b border-neutral-200/70 dark:border-neutral-800/80 shadow-xs'
+                : 'bg-background/60 backdrop-blur-sm border-b border-transparent'
             )}
           >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between items-center h-16 lg:h-20">
                 {/* Logo/Name */}
                 <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   className="flex-shrink-0"
                 >
                   <Link
                     href="/"
-                    className="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200"
+                    className="text-xl lg:text-2xl font-serif font-bold text-primary hover:text-accent transition-colors duration-200 tracking-tight"
                   >
                     {siteTitle}
                   </Link>
                 </motion.div>
 
                 {/* Desktop Navigation */}
-                <div className="hidden lg:block">
-                  <div className="ml-10 flex items-center space-x-8">
-                    <div className="flex items-baseline space-x-8">
+                <div className="hidden md:block">
+                  <div className="ml-6 lg:ml-10 flex items-center space-x-4 lg:space-x-6">
+                    <div className="flex items-center space-x-1.5 lg:space-x-2">
                       {items.map((item) => {
                         const isActive = enableOnePageMode
                           ? activeHash === `#${item.target}` || (!activeHash && item.target === 'about')
@@ -131,17 +122,17 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                             prefetch={true}
                             onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
                             className={cn(
-                              'relative px-3 py-2 text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm',
+                              'relative px-3.5 py-2 text-sm font-medium transition-all duration-200 rounded-xl hover:text-primary',
                               isActive
-                                ? 'text-primary'
-                                : 'text-neutral-600 hover:text-primary'
+                                ? 'text-accent font-semibold'
+                                : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100/70 dark:hover:bg-neutral-800/70'
                             )}
                           >
                             <span className="relative z-10">{item.title}</span>
                             {isActive && (
                               <motion.div
                                 layoutId="activeTab"
-                                className="absolute inset-0 bg-accent/10 rounded-lg"
+                                className="absolute inset-0 bg-accent/12 dark:bg-accent/15 rounded-xl border border-accent/25"
                                 initial={false}
                                 transition={{
                                   type: 'spring',
@@ -154,17 +145,18 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                         );
                       })}
                     </div>
+                    <div className="h-5 w-px bg-neutral-200 dark:bg-neutral-800" />
                     <ThemeToggle />
                   </div>
                 </div>
 
                 {/* Mobile menu button and theme toggle */}
-                <div className="lg:hidden flex items-center space-x-2">
+                <div className="md:hidden flex items-center space-x-2">
                   <ThemeToggle />
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-neutral-600 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
+                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-xl text-neutral-600 dark:text-neutral-300 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
                     <motion.div
-                      animate={{ rotate: open ? 180 : 0 }}
+                      animate={{ rotate: open ? 90 : 0 }}
                       transition={{ duration: 0.2 }}
                     >
                       {open ? (
@@ -187,10 +179,10 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/50 shadow-lg"
+                  transition={{ duration: 0.25 }}
+                  className="md:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/70 dark:border-neutral-800 shadow-lg overflow-hidden"
                 >
-                  <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                  <div className="px-4 pt-2 pb-4 space-y-1.5">
                     {items.map((item, index) => {
                       const isActive = enableOnePageMode
                         ? (item.href === '/' ? pathname === '/' && !activeHash : activeHash === `#${item.target}`)
@@ -205,9 +197,9 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                       return (
                         <motion.div
                           key={item.title}
-                          initial={{ opacity: 0, x: -20 }}
+                          initial={{ opacity: 0, x: -12 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
+                          transition={{ delay: index * 0.05 }}
                         >
                           <Disclosure.Button
                             as={Link}
@@ -215,10 +207,10 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                             prefetch={true}
                             onClick={() => enableOnePageMode && setActiveHash(item.href === '/' ? '' : `#${item.target}`)}
                             className={cn(
-                              'block px-3 py-2 rounded-md text-base font-medium transition-all duration-200',
+                              'block px-4 py-2.5 rounded-xl text-base font-medium transition-all duration-200',
                               isActive
-                                ? 'text-primary bg-accent/10 border-l-4 border-accent'
-                                : 'text-neutral-600 hover:text-primary hover:bg-neutral-50'
+                                ? 'text-accent bg-accent/10 font-semibold border-l-4 border-accent'
+                                : 'text-neutral-600 dark:text-neutral-300 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/70'
                             )}
                           >
                             {item.title}

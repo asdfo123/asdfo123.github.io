@@ -1,4 +1,4 @@
 type = "publication"
 title = "Publications"
-description = "A collection of my research work in NLP, LLMs, and related areas."
+description = "A collection of my research works in World Models, Video Generation, Generative Models, and Large Language Models."
 source = "publications.bib"

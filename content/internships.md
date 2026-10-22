@@ -1,4 +1,5 @@
-- *2026.01 – Present*, Research Intern, [Tencent PCG](https://www.tencent.com/en-us/), Shenzhen, China.
+- *2026.08 – Present*, Project-Up Research Intern (青云计划), [Tencent Games · LightSpeed Studios](https://www.lightspeed-studios.com/) (supervised by [Dr. Shengju Qian](https://scholar.google.com/citations?user=QNnWmasAAAAJ&hl=en)), Shenzhen, China.
+- *2026.01 – 2026.08*, Research Intern, [Tencent PCG](https://www.tencent.com/en-us/), Shenzhen, China.
 - *2025.08 – 2026.02*, Quantitative Researcher Intern (ML & AI), [Grace Investment Machine](https://graceim.ai/), Remote.
 - *2025.07 – 2025.08*, Student Research Assistant, [HKU CDS Summer Internship Programme](https://cds.hku.hk/rintern/), Hong Kong SAR, China.
 - *2025.02 – 2025.10*, Research Assistant, [HKUST(GZ) High-Performance Machine Learning (HPML) Laboratory](https://dsa.hkust-gz.edu.cn/research/labs-institutes/high-performance-machine-learning-laboratory/), Guangzhou, China.

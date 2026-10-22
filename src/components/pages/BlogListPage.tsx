@@ -30,7 +30,7 @@ export default function BlogListPage({ config, posts }: BlogListPageProps) {
             <div className="mb-8">
                 <h1 className="text-4xl font-serif font-bold text-primary">{config.title}</h1>
                 {config.description && (
-                    <p className="text-lg text-neutral-600 dark:text-neutral-500 mt-2">
+                    <p className="text-lg text-neutral-600 dark:text-neutral-400 mt-2">
                         {config.description}
                     </p>
                 )}
@@ -85,12 +85,12 @@ export default function BlogListPage({ config, posts }: BlogListPageProps) {
                                 <h2 className="text-lg font-semibold text-primary group-hover:text-accent transition-colors duration-200 leading-snug">
                                     {post.title}
                                 </h2>
-                                <time className="text-sm text-neutral-500 dark:text-neutral-600 shrink-0 tabular-nums">
+                                <time className="text-sm text-neutral-500 dark:text-neutral-400 shrink-0 tabular-nums">
                                     {formatDate(post.date)}
                                 </time>
                             </div>
                             {post.summary && (
-                                <p className="text-sm text-neutral-600 dark:text-neutral-500 mt-1 line-clamp-2 leading-relaxed">
+                                <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-1 line-clamp-2 leading-relaxed">
                                     {post.summary}
                                 </p>
                             )}

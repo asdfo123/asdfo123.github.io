@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { parse } from 'smol-toml';
+import { SectionConfig } from '@/types/page';
 
 export interface SiteConfig {
   site: {
@@ -39,22 +40,24 @@ export interface SiteConfig {
     target: string;
     href: string;
   }>;
-  sections: Array<{
-    id: string;
-    type: 'markdown' | 'publications' | 'list' | 'cards';
-    source?: string;
-    title?: string;
-    filter?: string;
-    limit?: number;
-  }>;
+  sections?: SectionConfig[];
 }
 
 const CONFIG_PATH = path.join(process.cwd(), 'content', 'config.toml');
 
+let cachedConfig: SiteConfig | null = null;
+let cachedConfigMtimeMs = 0;
+
 export function getConfig(): SiteConfig {
   try {
+    const stat = fs.statSync(CONFIG_PATH);
+    if (cachedConfig && stat.mtimeMs === cachedConfigMtimeMs) {
+      return cachedConfig;
+    }
     const fileContent = fs.readFileSync(CONFIG_PATH, 'utf-8');
     const config = parse(fileContent) as unknown as SiteConfig;
+    cachedConfig = config;
+    cachedConfigMtimeMs = stat.mtimeMs;
     return config;
   } catch (error) {
     console.error('Error loading config:', error);

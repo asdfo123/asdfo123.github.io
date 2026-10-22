@@ -13,7 +13,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
             <div className={embedded ? "mb-4" : "mb-8"}>
                 <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
                 {config.description && (
-                    <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-500 max-w-2xl`}>
+                    <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-400 max-w-2xl`}>
                         {config.description}
                     </p>
                 )}
@@ -31,7 +31,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                         <div className="flex justify-between items-start mb-2">
                             <h3 className={`${embedded ? "text-lg" : "text-xl"} font-semibold text-primary`}>{item.title}</h3>
                             {item.date && (
-                                <span className="text-sm text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                                <span className="text-sm text-neutral-500 dark:text-neutral-400 font-medium bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
                                     {item.date}
                                 </span>
                             )}
@@ -40,7 +40,7 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
                             <p className={`${embedded ? "text-sm" : "text-base"} text-accent font-medium mb-3`}>{item.subtitle}</p>
                         )}
                         {item.content && (
-                            <p className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-500 leading-relaxed`}>
+                            <p className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-300 leading-relaxed`}>
                                 {item.content}
                             </p>
                         )}

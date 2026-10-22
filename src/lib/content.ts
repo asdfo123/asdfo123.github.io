@@ -7,10 +7,24 @@ import { BlogPost, BlogPostWithTranslation } from '@/types/page';
 const CONTENT_DIR = path.join(process.cwd(), 'content');
 const BLOG_DIR = path.join(CONTENT_DIR, 'blog');
 
+const textFileCache = new Map<string, { mtimeMs: number; content: string }>();
+const tomlFileCache = new Map<string, { mtimeMs: number; data: unknown }>();
+
+function readCachedTextFile(filePath: string): string {
+  const stat = fs.statSync(filePath);
+  const cached = textFileCache.get(filePath);
+  if (cached && cached.mtimeMs === stat.mtimeMs) {
+    return cached.content;
+  }
+  const content = fs.readFileSync(filePath, 'utf-8');
+  textFileCache.set(filePath, { mtimeMs: stat.mtimeMs, content });
+  return content;
+}
+
 export function getMarkdownContent(filename: string): string {
   try {
     const filePath = path.join(CONTENT_DIR, filename);
-    return fs.readFileSync(filePath, 'utf-8');
+    return readCachedTextFile(filePath);
   } catch (error) {
     console.error(`Error loading markdown file ${filename}:`, error);
     return '';
@@ -20,7 +34,7 @@ export function getMarkdownContent(filename: string): string {
 export function getBibtexContent(filename: string): string {
   try {
     const filePath = path.join(CONTENT_DIR, filename);
-    return fs.readFileSync(filePath, 'utf-8');
+    return readCachedTextFile(filePath);
   } catch (error) {
     console.error(`Error loading bibtex file ${filename}:`, error);
     return '';
@@ -30,8 +44,15 @@ export function getBibtexContent(filename: string): string {
 export function getTomlContent<T>(filename: string): T | null {
   try {
     const filePath = path.join(CONTENT_DIR, filename);
+    const stat = fs.statSync(filePath);
+    const cached = tomlFileCache.get(filePath);
+    if (cached && cached.mtimeMs === stat.mtimeMs) {
+      return cached.data as T;
+    }
     const fileContent = fs.readFileSync(filePath, 'utf-8');
-    return parse(fileContent) as unknown as T;
+    const parsed = parse(fileContent);
+    tomlFileCache.set(filePath, { mtimeMs: stat.mtimeMs, data: parsed });
+    return parsed as unknown as T;
   } catch (error) {
     console.error(`Error loading TOML file ${filename}:`, error);
     return null;

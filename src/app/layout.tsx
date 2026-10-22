@@ -102,6 +102,36 @@ export default function RootLayout({
           async
           src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
         />
+        {/* Structured Data (JSON-LD) for Google Scholar & Search SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: config.author.name,
+              alternateName: '李昕烨',
+              jobTitle: config.author.title,
+              affiliation: {
+                '@type': 'CollegeOrUniversity',
+                name: config.author.institution,
+                url: 'https://www.cuhk.edu.hk',
+              },
+              alumniOf: {
+                '@type': 'CollegeOrUniversity',
+                name: 'Harbin Institute of Technology, Weihai',
+              },
+              url: 'https://asdfo123.github.io',
+              image: `https://asdfo123.github.io${config.author.avatar}`,
+              sameAs: [
+                config.social.google_scholar,
+                config.social.github,
+                config.social.orcid,
+                config.social.linkedin,
+              ].filter(Boolean),
+            }),
+          }}
+        />
       </head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider>

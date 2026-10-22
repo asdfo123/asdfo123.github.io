@@ -26,7 +26,9 @@ export interface Publication {
   arxivId?: string;
   pmid?: string;
   url?: string;
+  website?: string;
   code?: string;
+  models?: string;
   data?: string;
   media?: string;
   pdfUrl?: string;
@@ -44,6 +46,7 @@ export interface Publication {
   featured?: boolean;
   selected?: boolean;
   preview?: string;
+  video?: string;
   summary?: string;
   researchArea: ResearchArea;
   description?: string;
@@ -69,6 +72,9 @@ export type PublicationStatus =
   | 'draft';
 
 export type ResearchArea =
+  | 'world-models'
+  | 'video-generation'
+  | 'llm'
   | 'ai-healthcare'
   | 'signal-processing'
   | 'reliability-engineering'

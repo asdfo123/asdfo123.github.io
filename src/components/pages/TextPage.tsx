@@ -36,11 +36,11 @@ export default function TextPage({ config, content, embedded = false }: TextPage
                 )}
             </div>
             {config.description && (
-                <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-500 mb-8 max-w-2xl`}>
+                <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl`}>
                     {config.description}
                 </p>
             )}
-            <div className="text-neutral-700 dark:text-neutral-600 leading-relaxed">
+            <div className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
@@ -60,12 +60,12 @@ export default function TextPage({ config, content, embedded = false }: TextPage
                             />
                         ),
                         blockquote: ({ children }) => (
-                            <blockquote className="border-l-4 border-accent/50 pl-4 italic my-4 text-neutral-600 dark:text-neutral-500">
+                            <blockquote className="border-l-4 border-accent/50 pl-4 italic my-4 text-neutral-600 dark:text-neutral-400">
                                 {children}
                             </blockquote>
                         ),
                         strong: ({ children }) => <strong className="font-semibold text-primary">{children}</strong>,
-                        em: ({ children }) => <em className="italic text-neutral-600 dark:text-neutral-500">{children}</em>,
+                        em: ({ children }) => <em className="italic text-neutral-600 dark:text-neutral-400">{children}</em>,
                         img: ({ src, alt }) => {
                             const [displayAlt, width] = (alt || '').split('|');
                             return (
@@ -117,7 +117,30 @@ export default function TextPage({ config, content, embedded = false }: TextPage
             </div>
             {config.pdf && (
                 <div className="mt-8">
-                    <h2 className="text-2xl font-serif font-bold text-primary mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-2">PDF Preview</h2>
+                    <div className="flex flex-wrap items-center justify-between gap-2 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-2">
+                        <h2 className="text-2xl font-serif font-bold text-primary">PDF Preview</h2>
+                        <a
+                            href={config.pdf}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-accent hover:underline"
+                        >
+                            <span>Open in Full Screen ↗</span>
+                        </a>
+                    </div>
+                    <div className="sm:hidden mb-4 p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/60 flex items-center justify-between gap-3">
+                        <p className="text-xs text-neutral-700 dark:text-neutral-300 leading-snug">
+                            For the best reading experience on mobile devices, open the PDF directly:
+                        </p>
+                        <a
+                            href={config.pdf}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="shrink-0 px-3 py-1.5 rounded-xl bg-accent text-white text-xs font-semibold shadow-2xs"
+                        >
+                            Open PDF ↗
+                        </a>
+                    </div>
                     <div className="rounded-xl border border-neutral-200 dark:border-neutral-700/60 overflow-hidden shadow-sm">
                         <object
                             data={`${config.pdf}#view=FitH`}
