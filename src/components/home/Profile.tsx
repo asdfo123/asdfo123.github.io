@@ -11,8 +11,7 @@ import {
     MapPinIcon,
     CheckIcon,
     ClipboardDocumentIcon,
-    SparklesIcon,
-    DocumentTextIcon,
+    ArrowUpRightIcon,
 } from '@heroicons/react/24/outline';
 import {
     MapPinIcon as MapPinSolidIcon,
@@ -85,7 +84,6 @@ export default function Profile({ author, social, features, researchInterests }:
             setHasLiked(true);
         }
 
-        // Fetch real global like count from Abacus counter API
         const controller = new AbortController();
         fetch(`${LIKES_API_BASE}/get/${LIKES_NAMESPACE}/${LIKES_KEY}`, {
             signal: controller.signal,
@@ -96,9 +94,7 @@ export default function Profile({ author, social, features, researchInterests }:
                     setLikeCount(data.value);
                 }
             })
-            .catch(() => {
-                // Ignore network errors gracefully
-            });
+            .catch(() => {});
 
         return () => controller.abort();
     }, [features.enable_likes]);
@@ -112,7 +108,6 @@ export default function Profile({ author, social, features, researchInterests }:
             setShowThanks(true);
             setTimeout(() => setShowThanks(false), 2000);
 
-            // Only increment cloud counter once per browser to avoid spam inflation
             const alreadyCounted = localStorage.getItem('xinye-website-user-like-counted');
             if (alreadyCounted !== 'true') {
                 setLikeCount(prev => (prev !== null ? prev + 1 : 1));
@@ -187,20 +182,25 @@ export default function Profile({ author, social, features, researchInterests }:
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="lg:sticky lg:top-24"
         >
-            <div className="editorial-card rounded-3xl overflow-hidden">
-                {/* Procedural SVG/HTML 3D World-Model & Camera Frustum Illustration */}
+            {/* Architectural Monograph Frame */}
+            <div className="relative editorial-card overflow-hidden">
+                {/* Corner Registration Marks (+) */}
+                <span aria-hidden="true" className="pointer-events-none absolute top-1 left-1.5 z-20 font-mono text-[10px] text-white/35 leading-none">+</span>
+                <span aria-hidden="true" className="pointer-events-none absolute bottom-1 right-1.5 z-20 font-mono text-[10px] text-neutral-400/50 leading-none">+</span>
+
+                {/* Real-time 60fps HTML5 Canvas 3D Latent Point-Cloud Scene */}
                 <ProfileWorldScene />
 
-                <div className="px-5 pb-5 sm:px-6 sm:pb-6">
-                    {/* Responsive Profile Identity: Side-by-side on mobile/tablet (<lg), Centered vertical on desktop (lg+) */}
-                    <div className="flex flex-row lg:flex-col items-start lg:items-center gap-3.5 sm:gap-4 lg:gap-0 mb-4 lg:mb-5">
-                        {/* Profile Image - only the image overlaps the banner */}
-                        <div className="relative z-10 -mt-8 sm:-mt-10 lg:-mt-16 w-24 h-24 sm:w-28 sm:h-28 lg:w-40 lg:h-40 rounded-2xl overflow-hidden shadow-lg ring-4 ring-white dark:ring-neutral-900 flex-shrink-0 group bg-neutral-100">
+                <div className="p-5 sm:p-6">
+                    {/* Responsive Identity Block */}
+                    <div className="flex flex-row lg:flex-col items-start lg:items-start gap-4 lg:gap-0 mb-5">
+                        {/* Portrait with crisp museum matte frame */}
+                        <div className="relative z-10 -mt-10 sm:-mt-12 lg:-mt-14 w-24 h-24 sm:w-28 sm:h-28 lg:w-36 lg:h-36 overflow-hidden bg-neutral-100 ring-4 ring-[var(--background)] shadow-md flex-shrink-0 group">
                             <Image
                                 src={author.avatar}
                                 alt={author.name}
@@ -211,30 +211,25 @@ export default function Profile({ author, social, features, researchInterests }:
                             />
                         </div>
 
-                        {/* Name, Chinese Name, and Affiliation - stays cleanly in the card body */}
-                        <div className="flex-1 min-w-0 lg:text-center pt-2.5 sm:pt-3 lg:pt-0 lg:mt-3.5">
-                            <div className="flex flex-wrap items-baseline lg:justify-center gap-x-2 gap-y-0.5 mb-1.5">
-                                <h1 className="text-2xl sm:text-3xl font-serif font-bold text-primary tracking-tight leading-tight">
+                        {/* Name & Affiliation */}
+                        <div className="flex-1 min-w-0 pt-1 sm:pt-1.5 lg:pt-0 lg:mt-4">
+                            <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-0.5 mb-1">
+                                <h1 className="text-3xl sm:text-4xl font-serif font-semibold text-primary tracking-tight leading-none">
                                     {author.name}
                                 </h1>
-                                <span className="text-sm sm:text-base font-serif text-neutral-400 dark:text-neutral-500 font-normal">
+                                <span className="text-sm font-serif text-neutral-500 dark:text-neutral-400 tracking-widest">
                                     李昕烨
                                 </span>
                             </div>
 
-                            <div className="flex flex-wrap items-center lg:justify-center gap-1.5">
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-accent/12 text-accent text-xs font-semibold tracking-wide shrink-0">
-                                    {author.title}
-                                </span>
-                                <span className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 font-medium leading-snug">
-                                    {author.institution}
-                                </span>
-                            </div>
+                            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent font-medium mt-1.5">
+                                {author.title} · {author.institution}
+                            </p>
                         </div>
                     </div>
 
-                    {/* Social / Contact Links Bar */}
-                    <div className="flex flex-wrap lg:justify-center gap-2 mb-4">
+                    {/* Monochrome Contact Icon Strip */}
+                    <div className="flex flex-wrap gap-1.5 pb-5 swiss-rule-b">
                         {socialLinks.map((link) => {
                             const IconComponent = link.icon;
                             if (link.isLocation) {
@@ -243,18 +238,18 @@ export default function Profile({ author, social, features, researchInterests }:
                                     <button
                                         key={link.name}
                                         onClick={() => setActivePanel(isSelected ? null : 'address')}
-                                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-200 border cursor-pointer ${
+                                        className={`w-9 h-9 flex items-center justify-center transition-all duration-150 border cursor-pointer ${
                                             isSelected
-                                                ? 'bg-accent text-white border-accent shadow-xs'
-                                                : 'bg-neutral-100/80 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-300 border-neutral-200/70 dark:border-neutral-700/60 hover:border-accent/50 hover:text-accent'
+                                                ? 'bg-primary text-background border-primary'
+                                                : 'border-[var(--hairline)] text-neutral-600 dark:text-neutral-300 hover:bg-primary hover:text-background hover:border-primary'
                                         }`}
                                         aria-label={link.name}
                                         title={link.name}
                                     >
                                         {isSelected ? (
-                                            <MapPinSolidIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                                            <MapPinSolidIcon className="h-4 w-4" />
                                         ) : (
-                                            <MapPinIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                                            <MapPinIcon className="h-4 w-4" />
                                         )}
                                     </button>
                                 );
@@ -265,18 +260,18 @@ export default function Profile({ author, social, features, researchInterests }:
                                     <button
                                         key={link.name}
                                         onClick={() => setActivePanel(isSelected ? null : 'email')}
-                                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-all duration-200 border cursor-pointer ${
+                                        className={`w-9 h-9 flex items-center justify-center transition-all duration-150 border cursor-pointer ${
                                             isSelected
-                                                ? 'bg-accent text-white border-accent shadow-xs'
-                                                : 'bg-neutral-100/80 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-300 border-neutral-200/70 dark:border-neutral-700/60 hover:border-accent/50 hover:text-accent'
+                                                ? 'bg-primary text-background border-primary'
+                                                : 'border-[var(--hairline)] text-neutral-600 dark:text-neutral-300 hover:bg-primary hover:text-background hover:border-primary'
                                         }`}
                                         aria-label={link.name}
                                         title={link.name}
                                     >
                                         {isSelected ? (
-                                            <EnvelopeSolidIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                                            <EnvelopeSolidIcon className="h-4 w-4" />
                                         ) : (
-                                            <EnvelopeIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                                            <EnvelopeIcon className="h-4 w-4" />
                                         )}
                                     </button>
                                 );
@@ -287,7 +282,7 @@ export default function Profile({ author, social, features, researchInterests }:
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center bg-neutral-100/80 dark:bg-neutral-800/80 text-neutral-600 dark:text-neutral-300 border border-neutral-200/70 dark:border-neutral-700/60 hover:border-accent/50 hover:text-accent hover:-translate-y-0.5 transition-all duration-200"
+                                    className="w-9 h-9 flex items-center justify-center border border-[var(--hairline)] text-neutral-600 dark:text-neutral-300 hover:bg-primary hover:text-background hover:border-primary transition-all duration-150"
                                     aria-label={link.name}
                                     title={link.name}
                                 >
@@ -296,17 +291,17 @@ export default function Profile({ author, social, features, researchInterests }:
                                         <img
                                             src={link.customIcon}
                                             alt={link.name}
-                                            className="h-4 w-4 sm:h-5 sm:w-5 rounded-xs object-cover"
+                                            className="h-4 w-4 rounded-xs object-cover grayscale contrast-125 hover:grayscale-0 transition-all"
                                         />
                                     ) : (
-                                        <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" />
+                                        <IconComponent className="h-4 w-4" />
                                     )}
                                 </a>
                             );
                         })}
                     </div>
 
-                    {/* Expandable Contact Info Drawer */}
+                    {/* Expandable Contact Drawer */}
                     <AnimatePresence mode="wait">
                         {activePanel === 'email' && social.email && (
                             <motion.div
@@ -314,28 +309,28 @@ export default function Profile({ author, social, features, researchInterests }:
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="overflow-hidden mb-4"
+                                className="overflow-hidden"
                             >
-                                <div className="p-3.5 rounded-2xl bg-neutral-50 dark:bg-neutral-800/90 border border-neutral-200 dark:border-neutral-700 text-center">
-                                    <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 mb-1">
-                                        Email Address
+                                <div className="py-4 swiss-rule-b">
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400 mb-1">
+                                        Direct Correspondence
                                     </p>
-                                    <p className="text-xs sm:text-sm font-mono text-primary break-all mb-2.5">
+                                    <p className="text-xs font-mono text-primary break-all mb-3">
                                         {social.email}
                                     </p>
-                                    <div className="flex flex-wrap items-center justify-center gap-2">
+                                    <div className="flex flex-wrap items-center gap-1.5">
                                         <button
                                             onClick={handleCopyEmail}
-                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-600 hover:border-accent hover:text-accent transition-colors cursor-pointer"
+                                            className="cma-pill"
                                         >
                                             {copiedEmail ? (
                                                 <>
-                                                    <CheckIcon className="h-3.5 w-3.5 text-green-500" />
-                                                    <span>Copied!</span>
+                                                    <CheckIcon className="h-3 w-3 text-emerald-500" />
+                                                    <span>Copied</span>
                                                 </>
                                             ) : (
                                                 <>
-                                                    <ClipboardDocumentIcon className="h-3.5 w-3.5" />
+                                                    <ClipboardDocumentIcon className="h-3 w-3" />
                                                     <span>Copy</span>
                                                 </>
                                             )}
@@ -346,17 +341,16 @@ export default function Profile({ author, social, features, researchInterests }:
                                                 e.stopPropagation();
                                                 window.location.href = `mailto:${social.email}`;
                                             }}
-                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-accent text-white hover:bg-accent-dark transition-colors cursor-pointer"
+                                            className="cma-pill cma-pill-active"
                                         >
-                                            <EnvelopeIcon className="h-3.5 w-3.5" />
+                                            <EnvelopeIcon className="h-3 w-3" />
                                             <span>Mail App</span>
                                         </a>
                                         <a
                                             href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(social.email)}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-600 hover:border-accent hover:text-accent transition-colors"
-                                            title="Compose in Gmail"
+                                            className="cma-pill"
                                         >
                                             <span>Gmail ↗</span>
                                         </a>
@@ -371,14 +365,14 @@ export default function Profile({ author, social, features, researchInterests }:
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="overflow-hidden mb-4"
+                                className="overflow-hidden"
                             >
-                                <div className="p-3.5 rounded-2xl bg-neutral-50 dark:bg-neutral-800/90 border border-neutral-200 dark:border-neutral-700 text-center">
-                                    <p className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 mb-1">
+                                <div className="py-4 swiss-rule-b">
+                                    <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400 mb-1">
                                         Location
                                     </p>
                                     {social.location_details?.map((line, i) => (
-                                        <p key={i} className="text-xs sm:text-sm text-primary break-words">
+                                        <p key={i} className="text-xs text-primary break-words">
                                             {line}
                                         </p>
                                     ))}
@@ -387,10 +381,9 @@ export default function Profile({ author, social, features, researchInterests }:
                                             href={social.location_url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-accent text-white hover:bg-accent-dark transition-colors"
+                                            className="mt-2 cma-pill"
                                         >
-                                            <MapPinIcon className="h-3.5 w-3.5" />
-                                            <span>Google Maps</span>
+                                            <span>Maps ↗</span>
                                         </a>
                                     )}
                                 </div>
@@ -398,74 +391,74 @@ export default function Profile({ author, social, features, researchInterests }:
                         )}
                     </AnimatePresence>
 
-                    {/* Research Interests */}
+                    {/* Indexed Research Focus List (De-boxed Swiss Hairlines) */}
                     {researchInterests && researchInterests.length > 0 && (
-                        <div className="pt-3.5 border-t border-neutral-200/70 dark:border-neutral-800">
-                            <div className="flex items-center gap-1.5 mb-2.5">
-                                <SparklesIcon className="w-3.5 h-3.5 text-accent flex-shrink-0" />
-                                <h3 className="text-[11px] font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                        <div className="py-4 swiss-rule-b">
+                            <div className="flex items-center justify-between mb-2.5">
+                                <h3 className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400 font-semibold">
                                     Research Focus
                                 </h3>
+                                <span className="font-mono text-[10px] text-neutral-400">01—0{researchInterests.length}</span>
                             </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-2">
+                            <div className="divide-y divide-[var(--hairline)]">
                                 {researchInterests.map((interest, index) => (
                                     <div
                                         key={index}
-                                        className="relative overflow-hidden text-xs text-neutral-700 dark:text-neutral-200 bg-neutral-50/90 dark:bg-neutral-800/60 border border-neutral-200/70 dark:border-neutral-700/50 rounded-xl pl-3.5 pr-3 py-2 leading-snug font-medium hover:border-accent/40 transition-colors"
+                                        className="py-2 first:pt-0.5 last:pb-0.5 flex items-baseline gap-2.5 text-xs text-neutral-700 dark:text-neutral-200 leading-snug"
                                     >
-                                        <span className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent to-amber-500/40" />
-                                        {interest}
+                                        <span className="font-mono text-[10px] text-accent shrink-0">
+                                            0{index + 1}
+                                        </span>
+                                        <span className="font-medium">{interest}</span>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     )}
 
-                    {/* Bottom Action Row: CV Link + Like Button with Real Counter */}
-                    <div className="mt-4 pt-3.5 border-t border-neutral-200/70 dark:border-neutral-800 flex items-center justify-between gap-2">
+                    {/* Bottom Action Row: Curriculum Vitae + Appreciation Counter */}
+                    <div className="pt-4 flex items-center justify-between gap-2">
                         <Link
                             href="/cv"
-                            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-accent dark:hover:bg-accent dark:hover:text-white transition-colors shadow-2xs"
+                            className="flex-1 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 font-mono text-[11px] uppercase tracking-wider font-medium bg-primary text-background hover:bg-accent hover:text-white transition-colors"
                         >
-                            <DocumentTextIcon className="w-4 h-4" />
                             <span>Curriculum Vitae</span>
+                            <ArrowUpRightIcon className="w-3.5 h-3.5" />
                         </Link>
 
                         {features.enable_likes && (
                             <div className="relative">
                                 <motion.button
                                     onClick={handleLike}
-                                    whileHover={{ scale: 1.04 }}
                                     whileTap={{ scale: 0.96 }}
-                                    className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-semibold text-xs transition-all duration-200 border cursor-pointer ${
+                                    className={`inline-flex items-center gap-1.5 px-3.5 py-2 font-mono text-[11px] uppercase tracking-wider font-medium transition-all duration-150 border cursor-pointer ${
                                         hasLiked
-                                            ? 'bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border-red-200 dark:border-red-800/60'
-                                            : 'bg-neutral-50 dark:bg-neutral-800/80 text-neutral-700 dark:text-neutral-300 border-neutral-200/70 dark:border-neutral-700 hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-600 dark:hover:text-red-400 hover:border-red-200'
+                                            ? 'border-primary bg-primary/8 text-primary'
+                                            : 'border-[var(--hairline)] text-neutral-600 dark:text-neutral-300 hover:border-primary hover:text-primary'
                                     }`}
                                 >
                                     {hasLiked ? (
-                                        <HeartSolidIcon className="h-4 w-4 text-red-500" />
+                                        <HeartSolidIcon className="h-3.5 w-3.5 text-accent" />
                                     ) : (
-                                        <HeartIcon className="h-4 w-4" />
+                                        <HeartIcon className="h-3.5 w-3.5" />
                                     )}
                                     <span>{hasLiked ? 'Liked' : 'Like'}</span>
                                     {likeCount !== null && (
-                                        <span className="ml-0.5 px-1.5 py-0.2 rounded-full text-[11px] tabular-nums bg-black/5 dark:bg-white/10">
-                                            {likeCount}
+                                        <span className="tabular-nums text-accent font-semibold">
+                                            [{likeCount}]
                                         </span>
                                     )}
                                 </motion.button>
 
-                                {/* Thanks bubble */}
                                 <AnimatePresence>
                                     {showThanks && (
                                         <motion.div
-                                            initial={{ opacity: 0, y: 10, scale: 0.85 }}
-                                            animate={{ opacity: 1, y: -8, scale: 1 }}
-                                            exit={{ opacity: 0, y: -16, scale: 0.85 }}
-                                            className="absolute top-0 right-0 transform -translate-y-full bg-accent text-white px-3 py-1.5 rounded-lg text-xs font-medium shadow-lg whitespace-nowrap z-20"
+                                            initial={{ opacity: 0, y: 8 }}
+                                            animate={{ opacity: 1, y: -8 }}
+                                            exit={{ opacity: 0, y: -14 }}
+                                            className="absolute top-0 right-0 transform -translate-y-full bg-primary text-background px-2.5 py-1 font-mono text-[10px] tracking-wider uppercase whitespace-nowrap z-20"
                                         >
-                                            Thanks for visiting!
+                                            Appreciated
                                         </motion.div>
                                     )}
                                 </AnimatePresence>

@@ -48,12 +48,12 @@ export default function RootLayout({
         <link
           rel="preload"
           as="style"
-          href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+          href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap"
         />
         <link
           rel="stylesheet"
           id="gfonts-css"
-          href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+          href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap"
           media="print"
           suppressHydrationWarning
         />
@@ -74,7 +74,7 @@ export default function RootLayout({
           {/* Fallback for no-JS environments */}
           <link
             rel="stylesheet"
-            href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap"
+            href="https://google-fonts.jialeliu.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap"
           />
         </noscript>
         <script
@@ -140,7 +140,7 @@ export default function RootLayout({
             siteTitle={config.site.brand || config.site.title}
             enableOnePageMode={config.features.enable_one_page_mode}
           />
-          <main className="min-h-screen pt-16 lg:pt-20">
+          <main className="min-h-screen pt-14 lg:pt-16">
             {children}
           </main>
           <Footer lastUpdated={config.site.last_updated} />

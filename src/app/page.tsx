@@ -180,12 +180,12 @@ export default function Home() {
         </div>
 
         {/* Right Column - Content */}
-        <div className="lg:col-span-8 space-y-8 sm:space-y-10 min-w-0">
+        <div className="lg:col-span-8 space-y-10 sm:space-y-12 min-w-0">
           {/* Quick Section Jump Bar (Horizontal Scrollable on Mobile + Scroll Spy) */}
           <QuickJumpNav links={quickLinks} />
 
           {pagesToShow.map((page) => (
-            <div key={page.id} id={page.id} className="scroll-mt-24 space-y-8 sm:space-y-10">
+            <div key={page.id} id={page.id} className="scroll-mt-24 space-y-10 sm:space-y-14">
               {page.type === 'about' && page.sections.map((section: SectionConfig) => {
                 const sectionAnchorId = `section-${section.id}`;
                 switch (section.type) {
@@ -283,7 +283,7 @@ export default function Home() {
       </div>
 
       {/* Globe at bottom */}
-      <div className="mt-12 pt-6 border-t border-neutral-200/60 dark:border-neutral-800/80">
+      <div className="mt-14 pt-8 swiss-rule-t">
         <ClustrMapsGlobe />
       </div>
     </div>

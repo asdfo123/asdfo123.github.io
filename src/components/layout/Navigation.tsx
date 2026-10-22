@@ -23,8 +23,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 12;
-      setScrolled(isScrolled);
+      setScrolled(window.scrollY > 12);
     };
 
     handleScroll();
@@ -47,13 +46,11 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
         });
       };
 
-      const observerOptions = {
+      const observer = new IntersectionObserver(observerCallback, {
         root: null,
         rootMargin: '-20% 0px -60% 0px',
-        threshold: 0
-      };
-
-      const observer = new IntersectionObserver(observerCallback, observerOptions);
+        threshold: 0,
+      });
 
       items.forEach(item => {
         if (item.type === 'page') {
@@ -74,37 +71,36 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
       {({ open }) => (
         <>
           <motion.div
-            initial={{ y: -100 }}
+            initial={{ y: -80 }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.45 }}
             className={cn(
-              'transition-all duration-300 ease-out',
+              'transition-all duration-300 ease-out swiss-rule-b',
               scrolled || open
-                ? 'bg-background/85 backdrop-blur-xl border-b border-neutral-200/70 dark:border-neutral-800/80 shadow-xs'
-                : 'bg-background/60 backdrop-blur-sm border-b border-transparent'
+                ? 'bg-background/90 backdrop-blur-xl'
+                : 'bg-background/75 backdrop-blur-md'
             )}
           >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex justify-between items-center h-16 lg:h-20">
-                {/* Logo/Name */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex-shrink-0"
-                >
+              <div className="flex justify-between items-center h-14 lg:h-16">
+                {/* Brand Monogram / Name */}
+                <div className="flex items-baseline gap-3">
                   <Link
                     href="/"
-                    className="text-xl lg:text-2xl font-serif font-bold text-primary hover:text-accent transition-colors duration-200 tracking-tight"
+                    className="text-xl lg:text-2xl font-serif font-semibold text-primary hover:text-accent transition-colors duration-200 tracking-tight"
                   >
                     {siteTitle}
                   </Link>
-                </motion.div>
+                  <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
+                    PORTFOLIO & ARCHIVE
+                  </span>
+                </div>
 
                 {/* Desktop Navigation */}
                 <div className="hidden md:block">
-                  <div className="ml-6 lg:ml-10 flex items-center space-x-4 lg:space-x-6">
-                    <div className="flex items-center space-x-1.5 lg:space-x-2">
-                      {items.map((item) => {
+                  <div className="ml-6 lg:ml-10 flex items-center space-x-6">
+                    <div className="flex items-center space-x-1 lg:space-x-2">
+                      {items.map((item, idx) => {
                         const isActive = enableOnePageMode
                           ? activeHash === `#${item.target}` || (!activeHash && item.target === 'about')
                           : (item.href === '/'
@@ -122,22 +118,23 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                             prefetch={true}
                             onClick={() => enableOnePageMode && setActiveHash(`#${item.target}`)}
                             className={cn(
-                              'relative px-3.5 py-2 text-sm font-medium transition-all duration-200 rounded-xl hover:text-primary',
+                              'relative px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-all duration-200',
                               isActive
-                                ? 'text-accent font-semibold'
-                                : 'text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100/70 dark:hover:bg-neutral-800/70'
+                                ? 'text-primary font-semibold'
+                                : 'text-neutral-500 hover:text-primary'
                             )}
                           >
-                            <span className="relative z-10">{item.title}</span>
+                            <span className="text-[10px] text-accent mr-1">0{idx + 1}.</span>
+                            <span>{item.title}</span>
                             {isActive && (
                               <motion.div
                                 layoutId="activeTab"
-                                className="absolute inset-0 bg-accent/12 dark:bg-accent/15 rounded-xl border border-accent/25"
+                                className="absolute left-3 right-3 bottom-0 h-[1.5px] bg-primary"
                                 initial={false}
                                 transition={{
                                   type: 'spring',
                                   stiffness: 500,
-                                  damping: 30
+                                  damping: 35,
                                 }}
                               />
                             )}
@@ -145,7 +142,7 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                         );
                       })}
                     </div>
-                    <div className="h-5 w-px bg-neutral-200 dark:bg-neutral-800" />
+                    <div className="h-4 w-px bg-[var(--hairline)]" />
                     <ThemeToggle />
                   </div>
                 </div>
@@ -153,18 +150,13 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                 {/* Mobile menu button and theme toggle */}
                 <div className="md:hidden flex items-center space-x-2">
                   <ThemeToggle />
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-xl text-neutral-600 dark:text-neutral-300 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent transition-colors duration-200">
+                  <Disclosure.Button className="inline-flex items-center justify-center p-2 text-neutral-600 dark:text-neutral-300 hover:text-primary focus:outline-none transition-colors duration-200">
                     <span className="sr-only">Open main menu</span>
-                    <motion.div
-                      animate={{ rotate: open ? 90 : 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                      ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                      )}
-                    </motion.div>
+                    {open ? (
+                      <XMarkIcon className="block h-5 w-5" aria-hidden="true" />
+                    ) : (
+                      <Bars3Icon className="block h-5 w-5" aria-hidden="true" />
+                    )}
                   </Disclosure.Button>
                 </div>
               </div>
@@ -180,9 +172,9 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                   animate={{ opacity: 1, height: 'auto' }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.25 }}
-                  className="md:hidden bg-background/95 backdrop-blur-xl border-b border-neutral-200/70 dark:border-neutral-800 shadow-lg overflow-hidden"
+                  className="md:hidden bg-background/95 backdrop-blur-xl swiss-rule-b overflow-hidden"
                 >
-                  <div className="px-4 pt-2 pb-4 space-y-1.5">
+                  <div className="px-4 py-3 divide-y divide-[var(--hairline)]">
                     {items.map((item, index) => {
                       const isActive = enableOnePageMode
                         ? (item.href === '/' ? pathname === '/' && !activeHash : activeHash === `#${item.target}`)
@@ -195,27 +187,22 @@ export default function Navigation({ items, siteTitle, enableOnePageMode }: Navi
                         : item.href;
 
                       return (
-                        <motion.div
+                        <Disclosure.Button
                           key={item.title}
-                          initial={{ opacity: 0, x: -12 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.05 }}
+                          as={Link}
+                          href={href}
+                          prefetch={true}
+                          onClick={() => enableOnePageMode && setActiveHash(item.href === '/' ? '' : `#${item.target}`)}
+                          className={cn(
+                            'flex items-baseline gap-3 py-3 font-mono text-xs uppercase tracking-widest transition-all duration-150',
+                            isActive
+                              ? 'text-primary font-semibold'
+                              : 'text-neutral-500 hover:text-primary'
+                          )}
                         >
-                          <Disclosure.Button
-                            as={Link}
-                            href={href}
-                            prefetch={true}
-                            onClick={() => enableOnePageMode && setActiveHash(item.href === '/' ? '' : `#${item.target}`)}
-                            className={cn(
-                              'block px-4 py-2.5 rounded-xl text-base font-medium transition-all duration-200',
-                              isActive
-                                ? 'text-accent bg-accent/10 font-semibold border-l-4 border-accent'
-                                : 'text-neutral-600 dark:text-neutral-300 hover:text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800/70'
-                            )}
-                          >
-                            {item.title}
-                          </Disclosure.Button>
-                        </motion.div>
+                          <span className="text-[10px] text-accent">0{index + 1}</span>
+                          <span>{item.title}</span>
+                        </Disclosure.Button>
                       );
                     })}
                   </div>

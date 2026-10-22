@@ -15,76 +15,69 @@ interface CompetitionsProps {
     title?: string;
 }
 
-function getPrizeBadgeStyle(prize: string): { cls: string; icon: string } {
-    const lower = prize.toLowerCase();
-    if (lower.includes('gold') || lower.includes('first')) {
-        return {
-            cls: 'bg-amber-50 dark:bg-amber-950/50 text-amber-700 dark:text-amber-300 border-amber-200/80 dark:border-amber-800/60',
-            icon: '🥇',
-        };
-    }
-    if (lower.includes('silver') || lower.includes('second')) {
-        return {
-            cls: 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700',
-            icon: '🥈',
-        };
-    }
-    return {
-        cls: 'bg-orange-50/80 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border-orange-200/70 dark:border-orange-800/50',
-        icon: '🥉',
-    };
-}
-
 export default function Competitions({ items, title = 'Competitions' }: CompetitionsProps) {
     return (
         <motion.section
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.32 }}
+            transition={{ duration: 0.45, delay: 0.28 }}
         >
-            <div className="flex items-center gap-2.5 mb-4">
-                <span className="w-1 h-6 rounded-full bg-gradient-to-b from-accent to-amber-500/50 inline-block" />
-                <h2 className="text-2xl font-serif font-bold text-primary tracking-tight">{title}</h2>
+            {/* Curatorial Section Header */}
+            <div className="flex items-baseline justify-between pb-3 mb-2 swiss-rule-b">
+                <div className="flex items-baseline gap-3">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent font-semibold">
+                        06 // COMPETITIVE PROGRAMMING
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-primary tracking-tight">
+                        {title}
+                    </h2>
+                </div>
+                <span aria-hidden="true" className="font-mono text-xs text-neutral-400">+</span>
             </div>
 
-            <div className="editorial-card rounded-2xl divide-y divide-neutral-200/60 dark:divide-neutral-800/80 overflow-hidden">
+            <div className="divide-y divide-[var(--hairline)] swiss-rule-b">
                 {items.map((item, index) => {
-                    const badge = getPrizeBadgeStyle(item.prize);
+                    const isFirstTier =
+                        item.prize.toLowerCase().includes('gold') || item.prize.toLowerCase().includes('first');
                     return (
                         <div
                             key={index}
-                            className="p-3.5 sm:px-5 sm:py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-neutral-50/70 dark:hover:bg-neutral-800/40 transition-colors"
+                            className="py-3.5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-4"
                         >
-                            <div className="min-w-0 flex-1">
-                                <div className="flex items-center gap-2 flex-wrap">
+                            <div className="flex items-baseline gap-3 min-w-0">
+                                <span className="font-mono text-xs text-neutral-400 w-16 shrink-0 tabular-nums">
+                                    {item.date}
+                                </span>
+                                <div className="min-w-0">
                                     {item.url ? (
                                         <a
                                             href={item.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="text-sm font-semibold text-primary dark:text-white hover:text-accent transition-colors"
+                                            className="text-sm sm:text-[15px] font-medium text-primary hover:text-accent transition-colors"
                                         >
                                             {item.name}
                                         </a>
                                     ) : (
-                                        <span className="text-sm font-semibold text-primary dark:text-white">
+                                        <span className="text-sm sm:text-[15px] font-medium text-primary">
                                             {item.name}
                                         </span>
                                     )}
+                                    <span className="text-xs text-neutral-400 ml-2 font-mono">
+                                        ({item.role})
+                                    </span>
                                 </div>
-                                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
-                                    {item.role} · <span className="font-mono">{item.date}</span>
-                                </p>
                             </div>
 
-                            <div className="flex items-center gap-2 shrink-0">
-                                <span
-                                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold border ${badge.cls}`}
-                                >
-                                    <span>{badge.icon}</span>
-                                    <span>{item.prize}</span>
-                                </span>
-                            </div>
+                            <span
+                                className={`pl-19 sm:pl-0 font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 border shrink-0 w-fit ${
+                                    isFirstTier
+                                        ? 'bg-primary text-background border-primary font-semibold'
+                                        : 'border-[var(--hairline)] text-neutral-600 dark:text-neutral-300'
+                                }`}
+                            >
+                                {item.prize}
+                            </span>
                         </div>
                     );
                 })}

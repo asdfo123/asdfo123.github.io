@@ -16,7 +16,6 @@ interface NewsProps {
     initialCount?: number;
 }
 
-// Parse inline Markdown links [text](url) and bold **text**
 function parseMarkdownInline(text: string): React.ReactNode[] {
     const regex = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
     const parts: React.ReactNode[] = [];
@@ -28,22 +27,20 @@ function parseMarkdownInline(text: string): React.ReactNode[] {
             parts.push(text.slice(lastIndex, match.index));
         }
         if (match[1] !== undefined) {
-            // Link: [text](url)
             parts.push(
                 <a
                     key={match.index}
                     href={match[2]}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-accent font-medium underline decoration-accent/40 underline-offset-3 hover:decoration-accent transition-colors"
+                    className="text-primary font-medium underline decoration-accent/60 underline-offset-4 hover:text-accent transition-colors"
                 >
                     {match[1]}
                 </a>
             );
         } else if (match[3] !== undefined) {
-            // Bold: **text**
             parts.push(
-                <strong key={match.index} className="font-semibold text-primary dark:text-white">
+                <strong key={match.index} className="font-semibold text-primary">
                     {match[3]}
                 </strong>
             );
@@ -65,76 +62,69 @@ export default function News({ items, title = 'News', initialCount = 7 }: NewsPr
 
     return (
         <motion.section
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
+            transition={{ duration: 0.45, delay: 0.2 }}
         >
-            <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2.5">
-                    <span className="w-1 h-6 rounded-full bg-gradient-to-b from-accent to-amber-500/50 inline-block" />
-                    <h2 className="text-2xl font-serif font-bold text-primary tracking-tight">{title}</h2>
+            {/* Curatorial Section Header */}
+            <div className="flex items-baseline justify-between pb-3 mb-2 swiss-rule-b">
+                <div className="flex items-baseline gap-3">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent font-semibold">
+                        04 // CHRONICLE
+                    </span>
+                    <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-primary tracking-tight">
+                        {title}
+                    </h2>
                 </div>
                 {hasMore && (
                     <button
                         onClick={() => setExpanded(!expanded)}
-                        className="inline-flex items-center gap-1 text-xs sm:text-sm font-medium text-accent hover:text-accent-dark px-2.5 py-1 rounded-lg hover:bg-accent/10 transition-colors cursor-pointer"
+                        className="font-mono text-[11px] uppercase tracking-wider text-primary hover:text-accent inline-flex items-center gap-1 transition-colors cursor-pointer"
                     >
-                        <span>{expanded ? 'Show Less' : `Show All (${items.length})`}</span>
-                        {expanded ? <ChevronUpIcon className="w-3.5 h-3.5" /> : <ChevronDownIcon className="w-3.5 h-3.5" />}
+                        <span>{expanded ? 'Collapse' : `All (${items.length})`}</span>
+                        {expanded ? <ChevronUpIcon className="w-3 h-3" /> : <ChevronDownIcon className="w-3 h-3" />}
                     </button>
                 )}
             </div>
 
-            <div className="editorial-card rounded-2xl p-4 sm:p-6">
-                <div className="relative border-l-2 border-neutral-200 dark:border-neutral-800 ml-2 sm:ml-3 space-y-4">
-                    <AnimatePresence initial={false}>
-                        {visibleItems.map((item, index) => (
-                            <motion.div
-                                key={`${item.date}-${index}`}
-                                initial={{ opacity: 0, y: 8 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -8 }}
-                                transition={{ duration: 0.2 }}
-                                className="relative pl-4 sm:pl-5 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3"
-                            >
-                                {/* Timeline dot */}
-                                <span
-                                    className={`absolute -left-[5px] top-1.5 sm:top-2 w-2 h-2 rounded-full ring-4 ring-white dark:ring-neutral-900 ${
-                                        index < 3 ? 'bg-accent' : 'bg-neutral-300 dark:bg-neutral-600'
-                                    }`}
-                                />
-                                <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-mono font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 w-fit shrink-0 tabular-nums">
-                                    {item.date}
-                                </span>
-                                <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
-                                    {item.icon && <span className="mr-1">{item.icon}</span>}
-                                    {parseMarkdownInline(item.content)}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </div>
-
-                {hasMore && (
-                    <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex justify-center">
-                        <button
-                            onClick={() => setExpanded(!expanded)}
-                            className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 dark:text-neutral-400 hover:text-accent dark:hover:text-accent transition-colors py-1 px-3 rounded-full bg-neutral-50 dark:bg-neutral-800/60 cursor-pointer"
+            {/* Architectural Ledger Rows */}
+            <div className="divide-y divide-[var(--hairline)] swiss-rule-b">
+                <AnimatePresence initial={false}>
+                    {visibleItems.map((item, index) => (
+                        <motion.div
+                            key={`${item.date}-${index}`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.18 }}
+                            className="py-3 flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6"
                         >
-                            <span>
-                                {expanded
-                                    ? 'Collapse earlier news'
-                                    : `Show ${items.length - initialCount} more news items`}
+                            <span className="font-mono text-xs text-accent w-20 shrink-0 tabular-nums font-medium">
+                                {item.date}
                             </span>
-                            {expanded ? (
-                                <ChevronUpIcon className="w-3.5 h-3.5" />
-                            ) : (
-                                <ChevronDownIcon className="w-3.5 h-3.5" />
-                            )}
-                        </button>
-                    </div>
-                )}
+                            <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed flex-1">
+                                {item.icon && <span className="mr-1">{item.icon}</span>}
+                                {parseMarkdownInline(item.content)}
+                            </p>
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
             </div>
+
+            {hasMore && (
+                <div className="mt-3 flex justify-start">
+                    <button
+                        onClick={() => setExpanded(!expanded)}
+                        className="cma-pill"
+                    >
+                        <span>
+                            {expanded
+                                ? 'Collapse Archive'
+                                : `+ ${items.length - initialCount} Earlier Entries`}
+                        </span>
+                    </button>
+                </div>
+            )}
         </motion.section>
     );
 }

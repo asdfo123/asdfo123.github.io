@@ -43,7 +43,6 @@ export default function QuickJumpNav({ links }: QuickJumpNavProps) {
         return () => observer.disconnect();
     }, [links]);
 
-    // Keep active pill visible in horizontal scroll bar on mobile
     useEffect(() => {
         if (!activeId || !containerRef.current) return;
         const activeBtn = containerRef.current.querySelector(`[data-jump-id="${activeId}"]`) as HTMLElement | null;
@@ -60,10 +59,13 @@ export default function QuickJumpNav({ links }: QuickJumpNavProps) {
     return (
         <nav
             aria-label="Section quick navigation"
-            className="sticky top-16 lg:top-20 z-30 -mx-4 px-4 sm:mx-0 sm:px-0 py-1.5 bg-background/85 backdrop-blur-xl border-b border-neutral-200/70 dark:border-neutral-800/80 sm:border sm:rounded-2xl sm:p-1.5 sm:bg-white/80 sm:dark:bg-neutral-900/80 shadow-xs"
+            className="sticky top-14 lg:top-16 z-30 -mx-4 px-4 sm:mx-0 sm:px-0 py-2 bg-background/90 backdrop-blur-xl swiss-rule-t swiss-rule-b"
         >
-            <div ref={containerRef} className="flex items-center gap-1 overflow-x-auto no-scrollbar">
-                {links.map((link) => {
+            <div ref={containerRef} className="flex items-center gap-4 overflow-x-auto no-scrollbar">
+                <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400 shrink-0">
+                    INDEX //
+                </span>
+                {links.map((link, idx) => {
                     const isActive = activeId === link.id;
                     return (
                         <a
@@ -71,20 +73,21 @@ export default function QuickJumpNav({ links }: QuickJumpNavProps) {
                             href={`#${link.id}`}
                             data-jump-id={link.id}
                             onClick={() => setActiveId(link.id)}
-                            className={`relative px-3 py-1.5 rounded-xl text-xs font-medium transition-colors shrink-0 ${
+                            className={`relative py-1 font-mono text-[11px] uppercase tracking-wider transition-colors shrink-0 ${
                                 isActive
-                                    ? 'text-accent font-semibold'
-                                    : 'text-neutral-600 dark:text-neutral-300 hover:text-primary dark:hover:text-white'
+                                    ? 'text-primary font-semibold'
+                                    : 'text-neutral-500 hover:text-primary'
                             }`}
                         >
+                            <span className="text-[9px] text-accent mr-1">{String(idx + 1).padStart(2, '0')}</span>
+                            <span>{link.label}</span>
                             {isActive && (
                                 <motion.span
-                                    layoutId="quickJumpActivePill"
-                                    className="absolute inset-0 rounded-xl bg-accent/12 dark:bg-accent/18 border border-accent/25"
-                                    transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                                    layoutId="quickJumpActiveLine"
+                                    className="absolute left-0 right-0 -bottom-2 h-[2px] bg-primary"
+                                    transition={{ type: 'spring', stiffness: 450, damping: 34 }}
                                 />
                             )}
-                            <span className="relative z-10">{link.label}</span>
                         </a>
                     );
                 })}
