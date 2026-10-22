@@ -103,12 +103,12 @@ export default function SelectedPublications({ publications, title = 'Selected P
                                         [W.{String(index + 1).padStart(2, '0')}]
                                     </span>
                                     {pub.venue && (
-                                        <span className="px-2 py-0.5 bg-primary text-background font-semibold">
+                                        <span className="inline-flex items-center justify-center px-2 py-1 leading-none bg-primary text-background font-semibold">
                                             {pub.venue}
                                         </span>
                                     )}
                                     {roleBadge && (
-                                        <span className="px-2 py-0.5 border border-accent/50 text-accent font-medium">
+                                        <span className="inline-flex items-center justify-center px-2 py-1 leading-none border border-accent/50 text-accent font-medium">
                                             {roleBadge}
                                         </span>
                                     )}

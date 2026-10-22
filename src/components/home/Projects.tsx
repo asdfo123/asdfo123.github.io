@@ -117,7 +117,7 @@ function ProjectCard({ item, index }: { item: ProjectItem; index: number }) {
                         {item.tags.map((tag, tagIndex) => (
                             <span
                                 key={tagIndex}
-                                className="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 border border-[var(--hairline)] text-neutral-500 dark:text-neutral-400"
+                                className="inline-flex items-center justify-center font-mono text-[10px] leading-none uppercase tracking-wider px-2.5 py-1 border border-[var(--hairline)] text-neutral-500 dark:text-neutral-400"
                             >
                                 {tag}
                             </span>

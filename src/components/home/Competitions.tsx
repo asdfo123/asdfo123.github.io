@@ -42,7 +42,7 @@ export default function Competitions({ items, title = 'Competitions' }: Competit
                     return (
                         <div
                             key={index}
-                            className="py-3.5 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-4"
+                            className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-4"
                         >
                             <div className="flex items-baseline gap-3 min-w-0">
                                 <span className="font-mono text-xs text-neutral-400 w-16 shrink-0 tabular-nums">
@@ -70,7 +70,7 @@ export default function Competitions({ items, title = 'Competitions' }: Competit
                             </div>
 
                             <span
-                                className={`pl-19 sm:pl-0 font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 border shrink-0 w-fit ${
+                                className={`ml-19 sm:ml-0 inline-flex items-center justify-center text-center font-mono text-[10px] leading-none uppercase tracking-wider px-2.5 py-1.5 border shrink-0 w-fit ${
                                     isFirstTier
                                         ? 'bg-primary text-background border-primary font-semibold'
                                         : 'border-[var(--hairline)] text-neutral-600 dark:text-neutral-300'
