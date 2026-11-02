@@ -8,6 +8,7 @@ import { getConfig } from "@/lib/config";
 export async function generateMetadata(): Promise<Metadata> {
   const config = getConfig();
   return {
+    metadataBase: new URL("https://asdfo123.github.io"),
     title: {
       default: config.site.title,
       template: `%s | ${config.site.title}`
@@ -26,6 +27,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title: config.site.title,
       description: config.site.description,
       siteName: `${config.author.name}'s Academic Website`,
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: `${config.author.name} — Portfolio & Archive` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: config.site.title,
+      description: config.site.description,
+      images: ["/og-image.png"],
     },
   };
 }

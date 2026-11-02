@@ -31,6 +31,14 @@ export function getMarkdownContent(filename: string): string {
   }
 }
 
+// Returns the Chinese companion of a markdown file (e.g. bio.md -> bio.zh.md), or undefined if absent.
+export function getChineseMarkdownContent(filename: string): string | undefined {
+  const zhFilename = filename.replace(/\.md$/, '.zh.md');
+  const filePath = path.join(CONTENT_DIR, zhFilename);
+  if (zhFilename === filename || !fs.existsSync(filePath)) return undefined;
+  return readCachedTextFile(filePath);
+}
+
 export function getBibtexContent(filename: string): string {
   try {
     const filePath = path.join(CONTENT_DIR, filename);
@@ -77,6 +85,7 @@ function parseBlogFile(filePath: string, slug: string, lang: 'zh' | 'en'): BlogP
     notionUrl: data.notion_url || undefined,
     lang,
     hasTranslation: false,
+    draft: data.draft === true,
   };
 }
 
@@ -87,18 +96,22 @@ export function getBlogPosts(): BlogPost[] {
     }
     // Only get primary (Chinese) files — exclude .en.md
     const files = fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.md') && !f.endsWith('.en.md'));
-    const posts: BlogPost[] = files.map(filename => {
-      const filePath = path.join(BLOG_DIR, filename);
-      const slug = filename.replace(/\.md$/, '');
-      const enPath = path.join(BLOG_DIR, `${slug}.en.md`);
-      const hasEn = fs.existsSync(enPath);
-      // Prefer English version for listing; fall back to Chinese
-      const post = hasEn
-        ? parseBlogFile(enPath, slug, 'en')
-        : parseBlogFile(filePath, slug, 'zh');
-      post.hasTranslation = hasEn;
-      return post;
-    });
+    const posts: BlogPost[] = files
+      .map(filename => {
+        const filePath = path.join(BLOG_DIR, filename);
+        const slug = filename.replace(/\.md$/, '');
+        const enPath = path.join(BLOG_DIR, `${slug}.en.md`);
+        const hasEn = fs.existsSync(enPath);
+        // Prefer English version for listing; fall back to Chinese
+        const post = hasEn
+          ? parseBlogFile(enPath, slug, 'en')
+          : parseBlogFile(filePath, slug, 'zh');
+        post.hasTranslation = hasEn;
+        // The primary (Chinese) file decides whether a post is a draft
+        post.draft = parseBlogFile(filePath, slug, 'zh').draft;
+        return post;
+      })
+      .filter(post => !post.draft);
     posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     return posts;
   } catch (error) {

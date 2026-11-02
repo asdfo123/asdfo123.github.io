@@ -4,6 +4,7 @@ date: "2026-04-01"
 tags: ["随笔"]
 summary: "欢迎来到我的博客！这是第一篇测试文章，用来展示博客功能。"
 type: "markdown"
+draft: true
 ---
 
 ## 欢迎！

@@ -1,65 +1,63 @@
 [[news]]
 date = "2026.09"
-content = "📄 Our benchmark paper [OPIS](https://arxiv.org/abs/2609.35052) for evaluating multi-object memory in video world models is now on arXiv! ([Code](https://github.com/SSStarain/OPIS) & [Dataset](https://huggingface.co/datasets/Kirito-Lab/OPIS-dataset))"
+content = "Our benchmark paper [OPIS](https://arxiv.org/abs/2609.35052) for evaluating multi-object memory in video world models is now on arXiv! ([Code](https://github.com/SSStarain/OPIS) & [Dataset](https://huggingface.co/datasets/Kirito-Lab/OPIS-dataset))"
 
 [[news]]
 date = "2026.08"
-content = "🚀 Selected for Tencent's Project-Up Program (青云计划) as a Research Intern at LightSpeed Studios!"
+content = "Selected for Tencent's Project-Up Program (青云计划) as a Research Intern at LightSpeed Studios!"
 
 [[news]]
 date = "2026.08"
-content = "📄 The [ForgeWM](https://arxiv.org/abs/2608.14022) paper is now on arXiv! Progressive causal training for few-step action-conditioned video world models."
-
-
-[[news]]
-date = "2026.05"
-content = "🌍 [ForgeWM](https://github.com/asdfo123/ForgeWM) has been released! The **First** open-source pipeline to train real-time, keyboard & mouse controllable world models."
-
+content = "The [ForgeWM](https://arxiv.org/abs/2608.14022) paper is now on arXiv! Progressive causal training for few-step action-conditioned video world models."
 
 [[news]]
 date = "2026.05"
-content = "🏆 Awarded the ** 🎓 CUHK Vice-Chancellor's Ph.D. Scholarship**!"
+content = "[ForgeWM](https://github.com/asdfo123/ForgeWM) has been released! The **first** open-source pipeline to train real-time, keyboard & mouse controllable world models."
+
+[[news]]
+date = "2026.05"
+content = "Awarded the **CUHK Vice-Chancellor's Ph.D. Scholarship**!"
 
 [[news]]
 date = "2026.04"
-content = "🎉 One Paper has been accepted by **🇺🇸 ACL 2026 KnowFM Workshop**!"
+content = "One paper has been accepted by the **ACL 2026 KnowFM Workshop**!"
 
 [[news]]
 date = "2026.04"
-content = "🎉 Two papers (Vid-LLMs Editing & [CogAlpha](https://arxiv.org/abs/2511.18850)) have been accepted by **Main Conference of 🇺🇸 ACL 2026**!"
+content = "Two papers (Vid-LLMs Editing & [CogAlpha](https://arxiv.org/abs/2511.18850)) have been accepted by the **Main Conference of ACL 2026**!"
 
 [[news]]
 date = "2026.03"
-content = "🎉 I got the Phd offer from 🇭🇰 **The Chinese University of Hong Kong (CUHK)**!"
+content = "Received a PhD offer from **The Chinese University of Hong Kong (CUHK)**!"
 
 [[news]]
 date = "2025.12"
-content = "🏆 Awarded the **Zeshi Virtue and Talent Scholarship**, one of the prestigious scholarships at Harbin Institute of Technology, Weihai!"
+content = "Awarded the **Zeshi Virtue and Talent Scholarship**, one of the most prestigious scholarships at Harbin Institute of Technology, Weihai!"
 
 [[news]]
 date = "2025.10"
-content = "🏆 Honored to be awarded the **National Scholarship 2024-2025** (Top 0.4% Nationwide)!"
+content = "Honored to be awarded the **National Scholarship 2024-2025** (Top 0.4% Nationwide)!"
 
 [[news]]
 date = "2025.08"
-content = "🎉 Our paper on deductive and inductive reasoning has been accepted by **Findings of 🇨🇳 EMNLP 2025**!"
+content = "Our paper on deductive and inductive reasoning has been accepted by **Findings of EMNLP 2025**!"
 
 [[news]]
 date = "2025.05"
-content = "🎉 Our paper [ScEdit](https://aclanthology.org/2025.findings-acl.104/) has been accepted by **Findings of 🇦🇹 ACL 2025**! My first first-author paper!"
+content = "Our paper [ScEdit](https://aclanthology.org/2025.findings-acl.104/) has been accepted by **Findings of ACL 2025**! My first first-author paper!"
 
 [[news]]
 date = "2025.05"
-content = "🎉 Shared task paper [LLMSR@XLLM25](https://aclanthology.org/2025.xllm-1.30/) accepted by **ACL 2025 XLLM Workshop**."
+content = "Shared task paper [LLMSR@XLLM25](https://aclanthology.org/2025.xllm-1.30/) accepted by the **ACL 2025 XLLM Workshop**."
 
 [[news]]
 date = "2024.12"
-content = "🥉 Our team won a **Bronze Medal** in **ICPC EC-Final**!"
+content = "Our team won a **Bronze Medal** at the **ICPC EC-Final**!"
 
 [[news]]
 date = "2024.11"
-content = "🏅 Our project was awarded **Second Prize** in the **\"Challenge Cup\"**."
+content = "Our project was awarded **Second Prize** in the **\"Challenge Cup\"**."
 
 [[news]]
 date = "2024.07"
-content = "🎉 Our paper on debiasing MLLMs via model editing has been accepted by ** 🇦🇺 ACM MM 2024**!"
+content = "Our paper on debiasing MLLMs via model editing has been accepted by **ACM MM 2024**!"

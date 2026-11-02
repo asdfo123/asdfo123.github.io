@@ -16,30 +16,35 @@ export default function TextPage({ config, content, embedded = false }: TextPage
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.45, delay: 0.1 }}
             className={embedded ? "" : "max-w-3xl mx-auto"}
         >
-            <div className="flex items-center justify-between mb-4">
-                <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary`}>{config.title}</h1>
-                {config.pdf && (
-                    <a
-                        href={config.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-lg text-sm font-medium hover:bg-accent/90 transition-colors duration-200 shadow-sm"
-                    >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        Download PDF
-                    </a>
+            <div className="pb-5 mb-8 swiss-rule-b">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent font-semibold">
+                    ARCHIVE // {config.title}
+                </span>
+                <div className="flex flex-wrap items-end justify-between gap-3 mt-2">
+                    <h1 className={`${embedded ? "text-2xl sm:text-3xl" : "text-3xl sm:text-5xl"} font-serif font-semibold text-primary tracking-tight`}>
+                        {config.title}
+                    </h1>
+                    {config.pdf && (
+                        <a
+                            href={config.pdf}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cma-pill cma-pill-active"
+                        >
+                            <span>Download PDF</span>
+                            <span aria-hidden="true">↓</span>
+                        </a>
+                    )}
+                </div>
+                {config.description && (
+                    <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 mt-2 max-w-2xl">
+                        {config.description}
+                    </p>
                 )}
             </div>
-            {config.description && (
-                <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-400 mb-8 max-w-2xl`}>
-                    {config.description}
-                </p>
-            )}
             <div className="text-neutral-700 dark:text-neutral-300 leading-relaxed">
                 <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
@@ -56,7 +61,7 @@ export default function TextPage({ config, content, embedded = false }: TextPage
                                 {...props}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-accent font-medium hover:underline transition-colors"
+                                className="text-primary font-medium underline decoration-accent/60 underline-offset-4 hover:text-accent transition-colors"
                             />
                         ),
                         blockquote: ({ children }) => (
@@ -117,31 +122,36 @@ export default function TextPage({ config, content, embedded = false }: TextPage
             </div>
             {config.pdf && (
                 <div className="mt-8">
-                    <div className="flex flex-wrap items-center justify-between gap-2 mb-4 border-b border-neutral-200 dark:border-neutral-800 pb-2">
-                        <h2 className="text-2xl font-serif font-bold text-primary">PDF Preview</h2>
+                    <div className="flex flex-wrap items-baseline justify-between gap-2 pb-3 mb-4 swiss-rule-b">
+                        <div className="flex items-baseline gap-3">
+                            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent font-semibold">
+                                FIG. 01
+                            </span>
+                            <h2 className="text-2xl font-serif font-semibold text-primary">PDF Preview</h2>
+                        </div>
                         <a
                             href={config.pdf}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-accent hover:underline"
+                            className="font-mono text-[11px] uppercase tracking-wider text-primary hover:text-accent transition-colors"
                         >
-                            <span>Open in Full Screen ↗</span>
+                            Full Screen ↗
                         </a>
                     </div>
-                    <div className="sm:hidden mb-4 p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200/80 dark:border-amber-800/60 flex items-center justify-between gap-3">
-                        <p className="text-xs text-neutral-700 dark:text-neutral-300 leading-snug">
-                            For the best reading experience on mobile devices, open the PDF directly:
+                    <div className="sm:hidden mb-4 pl-4 border-l-2 border-accent flex items-center justify-between gap-3">
+                        <p className="text-xs text-neutral-600 dark:text-neutral-300 leading-snug">
+                            On mobile, the PDF reads best when opened directly.
                         </p>
                         <a
                             href={config.pdf}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="shrink-0 px-3 py-1.5 rounded-xl bg-accent text-white text-xs font-semibold shadow-2xs"
+                            className="cma-pill cma-pill-active shrink-0"
                         >
                             Open PDF ↗
                         </a>
                     </div>
-                    <div className="rounded-xl border border-neutral-200 dark:border-neutral-700/60 overflow-hidden shadow-sm">
+                    <div className="border border-[var(--hairline)] bg-white p-1 overflow-hidden">
                         <object
                             data={`${config.pdf}#view=FitH`}
                             type="application/pdf"

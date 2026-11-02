@@ -1,5 +1,5 @@
 import { getConfig } from '@/lib/config';
-import { getMarkdownContent, getBibtexContent, getTomlContent, getPageConfig } from '@/lib/content';
+import { getMarkdownContent, getChineseMarkdownContent, getBibtexContent, getTomlContent, getPageConfig } from '@/lib/content';
 import { parseBibTeX } from '@/lib/bibtexParser';
 import Profile from '@/components/home/Profile';
 import About from '@/components/home/About';
@@ -40,7 +40,8 @@ export default function Home() {
         case 'markdown':
           return {
             ...section,
-            content: section.source ? getMarkdownContent(section.source) : ''
+            content: section.source ? getMarkdownContent(section.source) : '',
+            contentZh: section.source ? getChineseMarkdownContent(section.source) : undefined,
           };
         case 'publications': {
           const bibtex = getBibtexContent('publications.bib');
@@ -194,6 +195,7 @@ export default function Home() {
                       <div key={section.id} id={sectionAnchorId} className="scroll-mt-32">
                         <About
                           content={section.content || ''}
+                          contentZh={section.contentZh}
                           title={section.title}
                           sectionId={section.id}
                         />

@@ -27,9 +27,12 @@ export function ProfileWorldScene() {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        let animationFrameId: number;
+        let animationFrameId = 0;
+        let running = false;
+        let inView = true;
         let t = 0;
         let frameCounter = 0;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         const resize = () => {
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -38,10 +41,8 @@ export function ProfileWorldScene() {
             canvas.width = rect.width * dpr;
             canvas.height = rect.height * dpr;
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            if (!running) render();
         };
-
-        resize();
-        window.addEventListener('resize', resize);
 
         // 3D grid configuration
         const GRID_X = 11;
@@ -237,13 +238,39 @@ export function ProfileWorldScene() {
                 ctx.stroke();
             });
 
+            if (running) animationFrameId = requestAnimationFrame(render);
+        };
+
+        const start = () => {
+            if (running || reduceMotion || !inView || document.hidden) return;
+            running = true;
             animationFrameId = requestAnimationFrame(render);
         };
 
-        animationFrameId = requestAnimationFrame(render);
+        const stop = () => {
+            running = false;
+            cancelAnimationFrame(animationFrameId);
+        };
+
+        // Only animate while the canvas is on screen and the tab is visible
+        const observer = new IntersectionObserver(([entry]) => {
+            inView = entry.isIntersecting;
+            if (inView) start();
+            else stop();
+        });
+        observer.observe(canvas);
+
+        const handleVisibility = () => (document.hidden ? stop() : start());
+        document.addEventListener('visibilitychange', handleVisibility);
+
+        resize();
+        window.addEventListener('resize', resize);
+        start();
 
         return () => {
-            cancelAnimationFrame(animationFrameId);
+            stop();
+            observer.disconnect();
+            document.removeEventListener('visibilitychange', handleVisibility);
             window.removeEventListener('resize', resize);
         };
     }, []);

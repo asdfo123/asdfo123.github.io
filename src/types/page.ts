@@ -44,6 +44,7 @@ export interface SectionConfig {
   filter?: string;
   limit?: number;
   content?: string;
+  contentZh?: string;
   publications?: Publication[];
   items?: Array<{ date: string; content: string; icon?: string }>;
   awards?: Array<{ date: string; awards: string[]; suffix?: string }>;
@@ -86,6 +87,7 @@ export interface BlogPost {
   notionUrl?: string;
   lang: 'zh' | 'en';
   hasTranslation?: boolean;
+  draft?: boolean;
 }
 
 export interface BlogPostWithTranslation {

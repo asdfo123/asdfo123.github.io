@@ -1,13 +1,17 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { ResearchBlueprintStrip } from '@/components/ui/WorldModelArt';
 
+const BIO_LANG_STORAGE_KEY = 'xinye-website-bio-lang';
+
 interface AboutProps {
     content: string;
+    contentZh?: string;
     title?: string;
     sectionId?: string;
 }
@@ -99,10 +103,23 @@ function tryParseEducationTimeline(content: string): ParsedEducationItem[] | nul
     return parsed;
 }
 
-export default function About({ content, title = 'About', sectionId }: AboutProps) {
+export default function About({ content, contentZh, title = 'About', sectionId }: AboutProps) {
+    const [lang, setLang] = useState<'en' | 'zh'>('en');
     const educationItems = sectionId === 'education' ? tryParseEducationTimeline(content) : null;
     const isHeroBio = !sectionId || sectionId === 'about';
     const indexLabel = getSectionIndexLabel(sectionId);
+    const hasChinese = Boolean(contentZh);
+    const displayContent = lang === 'zh' && contentZh ? contentZh : content;
+
+    useEffect(() => {
+        if (!hasChinese) return;
+        if (localStorage.getItem(BIO_LANG_STORAGE_KEY) === 'zh') setLang('zh');
+    }, [hasChinese]);
+
+    const switchLang = (next: 'en' | 'zh') => {
+        setLang(next);
+        localStorage.setItem(BIO_LANG_STORAGE_KEY, next);
+    };
 
     return (
         <motion.section
@@ -120,7 +137,31 @@ export default function About({ content, title = 'About', sectionId }: AboutProp
                         {title}
                     </h2>
                 </div>
-                <span aria-hidden="true" className="font-mono text-xs text-neutral-400">+</span>
+                {hasChinese ? (
+                    <div
+                        role="group"
+                        aria-label="Biography language"
+                        className="inline-flex items-stretch border border-[var(--hairline)] font-mono text-[11px] leading-none"
+                    >
+                        {(['en', 'zh'] as const).map((code) => (
+                            <button
+                                key={code}
+                                type="button"
+                                onClick={() => switchLang(code)}
+                                aria-pressed={lang === code}
+                                className={`px-2.5 py-1.5 tracking-wider transition-colors cursor-pointer ${
+                                    lang === code
+                                        ? 'bg-primary text-background'
+                                        : 'text-neutral-500 hover:text-primary'
+                                }`}
+                            >
+                                {code === 'en' ? 'EN' : '中文'}
+                            </button>
+                        ))}
+                    </div>
+                ) : (
+                    <span aria-hidden="true" className="font-mono text-xs text-neutral-400">+</span>
+                )}
             </div>
 
             {educationItems ? (
@@ -176,7 +217,12 @@ export default function About({ content, title = 'About', sectionId }: AboutProp
                     ))}
                 </div>
             ) : (
-                <div className="text-sm sm:text-[15.5px] text-neutral-700 dark:text-neutral-300 leading-[1.75]">
+                <div
+                    lang={lang === 'zh' ? 'zh-CN' : 'en'}
+                    className={`text-sm sm:text-[15.5px] text-neutral-700 dark:text-neutral-300 ${
+                        lang === 'zh' ? 'leading-[1.9] tracking-[0.01em]' : 'leading-[1.75]'
+                    }`}
+                >
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         components={{
@@ -212,7 +258,7 @@ export default function About({ content, title = 'About', sectionId }: AboutProp
                             em: ({ children }) => <em className="italic font-serif text-base text-neutral-600 dark:text-neutral-300">{children}</em>,
                         }}
                     >
-                        {content}
+                        {displayContent}
                     </ReactMarkdown>
                     {isHeroBio && <ResearchBlueprintStrip />}
                 </div>
