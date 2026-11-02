@@ -30,8 +30,7 @@ export default function TextPage({ config, content, embedded = false }: TextPage
                     {config.pdf && (
                         <a
                             href={config.pdf}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            download
                             className="cma-pill cma-pill-active"
                         >
                             <span>Download PDF</span>

@@ -4,6 +4,9 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  # Daily rebuild so CV updates in asdfo123/asdfo123 reach the site
+  schedule:
+    - cron: "0 20 * * *"
 
 permissions:
   contents: read
@@ -32,6 +35,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      # Falls back to the committed copy if the fetch fails
+      - name: Fetch latest CV
+        run: |
+          curl -fsSL -o /tmp/cv.pdf https://raw.githubusercontent.com/asdfo123/asdfo123/main/CV_Xinye_Li.pdf \
+            && mv /tmp/cv.pdf public/CV_Xinye_Li.pdf \
+            || echo "CV fetch failed; using committed copy"
 
       - name: Build
         run: npm run build
