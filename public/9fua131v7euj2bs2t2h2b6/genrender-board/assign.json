@@ -1,6 +1,6 @@
 {
  "v": 1,
- "updated": "2026-11-03T13:47:41.344Z",
+ "updated": "2026-11-03T13:52:49.099Z",
  "by": "asdfo123",
  "state": {
   "pkgs": [
@@ -8,7 +8,7 @@
     "id": "p0_mw0odyob",
     "name": "主线与框架",
     "fit": "主线提出者 / 统稿；拍板 A、B",
-    "who": "Xinye Li",
+    "who": "Xinye Li、Liuzhou Zhang",
     "note": "",
     "ch": [
      "c1",
@@ -21,7 +21,7 @@
     "id": "p1_mw0odyob",
     "name": "为什么走向渲染器（正反两面）",
     "fit": "产业 + 世界模型视角；第 3 章与第 9 章互为正反",
-    "who": "",
+    "who": "Liuzhou Zhang",
     "note": "",
     "ch": [
      "c3",
@@ -44,7 +44,7 @@
     "id": "p3_mw0odyob",
     "name": "注入与理解",
     "fit": "偏模型结构，熟悉 MLLM + DiT",
-    "who": "",
+    "who": "Shipeng Luo",
     "note": "",
     "ch": [
      "c5"
@@ -64,13 +64,12 @@
    },
    {
     "id": "p5_mw0odyob",
-    "name": "流式与评测",
+    "name": "流式",
     "fit": "实时系统、基准评测",
-    "who": "",
+    "who": "Yijie Jin",
     "note": "",
     "ch": [
-     "c7",
-     "c8"
+     "c7"
     ],
     "shared": false
    },
@@ -90,9 +89,19 @@
     "id": "pmw0of8c6",
     "name": "画图",
     "fit": "",
-    "who": "",
-    "note": "各个领域交付初版AIGC图，要有详细Specification，然后画图同学细化",
+    "who": "Te Sun（一部分）",
+    "note": "各个领域交付初版AIGC图，要有详细Specification，然后画图同学细化；",
     "ch": []
+   },
+   {
+    "id": "pmw0qwa3r",
+    "name": "评测",
+    "fit": "",
+    "who": "Te Sun",
+    "note": "",
+    "ch": [
+     "c8"
+    ]
    }
   ],
   "pool": []
