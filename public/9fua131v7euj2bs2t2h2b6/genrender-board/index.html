@@ -163,7 +163,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
   <div class="meta">
     <span class="chip">更新 <b>2026-11-03</b></span>
     <span class="chip">方向 <b>以 v0.3 为准</b>，本页增补见 §09</span>
-    <span class="chip">目标 <b>TPAMI Survey</b> · 20 页双栏含参考文献</span>
+    <span class="chip">目标 <b>arXiv 长文</b> · 正文 40–50 页（不含参考文献）</span>
     <a class="chip" href="https://www.overleaf.com/project/6ae8963a94de1429cdeeeb39" target="_blank" rel="noopener noreferrer">Overleaf 项目 ↗</a>
     <button class="btn" id="themeBtn" onclick="toggleTheme()">切换深色</button>
   </div>
@@ -303,7 +303,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 
 <section id="s6">
   <div class="sh"><span class="num">06</span><h2>章节骨架与 Agent 进度</h2></div>
-  <p class="lede">Overleaf 已按下列 10 章重排，每章开头有"Agent progress"框（英文版）。这里逐章说明 Agent 做到哪、每个 TODO 是什么意思，方便认领的同学接手。进度为 Agent 的粗估，仅供参考。</p>
+  <p class="lede">Overleaf 已按下列 10 章重排，每章开头有"Agent progress"框（英文版）。这里逐章说明 Agent 做到哪、每个 TODO 是什么意思，方便认领的同学接手。页数是公开版（隐藏协作框）在现在模板下的实测和目标；进度为 Agent 的粗估，仅供参考。</p>
   <div class="chgrid" id="chgrid"></div>
 </section>
 
@@ -321,7 +321,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
   </div>
   <div class="sync" id="sync"></div>
   <div class="kan" id="kan"></div>
-  <p class="small" style="margin-top:10px">拖不动时（如手机上），用卡片右下角的"移到…"。页数按 TPAMI 20 页（含参考文献）倒推，正文约 14 页。附录 A 总表建议全员各自补自己负责论文的行。</p>
+  <p class="small" style="margin-top:10px">拖不动时（如手机上），用卡片右下角的"移到…"。篇幅：以 arXiv 为主，不按期刊限页；正文（不含参考文献和附录）至少 35 页，目标 40–50 页。按现在的 Overleaf 模板，正文约 30 页，各章目标合计约 47 页，新增篇幅主要给还没写的参考侧。附录 A 总表不限页数，建议全员各自补自己负责论文的行。</p>
 </section>
 
 <section id="s8">
@@ -344,7 +344,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
     <div class="add"><b>按因素评测有外部佐证</b><p>OmniVBench 按"保留、解耦、路由"逐因素评测参考，和条件决定矩阵同构；"相似度奖励照搬"在两条来路都成立（RefAlign 消融、结构侧边缘 F1 偏爱描边）。</p></div>
     <div class="add"><b>竞品表补三篇</b><p>Agentic Visual Generation（2609.06758）、Simulating the Visual World（2511.08585，作反方）、From Pixels to States（2607.14076）。2610.40191 §4.3 已全文读过，重叠集中在结构侧系统层面。</p></div>
     <div class="add"><b>建议加一个小实验</b><p>在同一底座上比较"去噪窗口"和"对齐 vs 输入 DINOv3"两组解法，给出两条来路第一次同协议比较。综述越来越多，有实验的分析性贡献更站得住。</p></div>
-    <div class="add"><b>引用与篇幅纪律</b><p>v0.3 中 23 篇新 arXiv 引用的标题和作者已核实入库；所有未核数字在 Overleaf 标 [to verify]；按 TPAMI 20 页给每章定了页数预算。</p></div>
+    <div class="add"><b>引用与篇幅纪律</b><p>v0.3 中 23 篇新 arXiv 引用的标题和作者已核实入库；所有未核数字在 Overleaf 标 [to verify]；按 arXiv 长文给每章定了目标页数（正文 40–50 页），并标出每章现在的实际页数。</p></div>
   </div>
 </section>
 
@@ -377,56 +377,56 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
     <li><b>产品与产业（来自 v0.3，待复核）：</b><a href="https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5">Seedance 2.5</a> · <a href="https://docs.byteplus.com/en/docs/modelark/seedance-2-0">Seedance 2.0</a> · <a href="https://kling.ai/quickstart/klingai-video-3-omni-model-user-guide">Kling 3.0 Omni</a> · <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/use-reference-images-to-guide-video-generation">Veo 3.1</a> · <a href="https://docs.platform.vidu.cn/331842775e0">Vidu</a> · <a href="https://nvidianews.nvidia.com/news/nvidia-dlss-5-delivers-ai-powered-breakthrough-in-visual-fidelity-for-games">DLSS 5</a></li>
   </ul>
 </section>
-<footer>GenRender Survey 协作框架 · 方向以 v0.3 为准 · 页面未在主页链接，设置了 noindex · 分工面板的修改只保存在当前浏览器</footer>
+<footer>GenRender Survey 协作框架 · 方向以 v0.3 为准 · 页面未在主页链接，设置了 noindex · 分工面板发布后所有人可见</footer>
 </main>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
 const CH = {
-  c1:{no:"1",t:"引言",en:"Introduction",pages:1.25,prog:35,state:"主张、汇合、谱系、区分已写；叙事与参考侧谱系待补",
+  c1:{no:"1",t:"引言",en:"Introduction",pages:3.5,now:2.5,prog:30,state:"主张、汇合、谱系、区分已写；叙事与参考侧谱系待补",
     done:["按 v0.3 重写主张段与工作论点（对条件留白处可创造，对条件决定处必须忠实）","\"两条来路，一个接口\"已写，并把汇合说法收窄、配上 22 个结构渲染器的通道统计","结构侧谱系：vid2vid（2018）→ Generative Rendering（按其摘要准确描述）→ 2026 渲染器，配演化图","与 6 篇已有综述的区分表；明确承认\"世界状态与渲染分离\"不是我们的贡献","贡献列表初稿（4 条）"],
     todo:[["§1.1 决策 A","主张措辞待拍板。推荐\"模型的智能从决定内容转向忠实执行条件\"；拍板后同步改主张段和摘要。"],["§1.2 两条来路叙事","按群里的\"路边 → 热门 → 工具\"主线，每条来路写一段，引用第 3 章领域证据，按时间正着写。"],["§1.3 参考侧谱系","主体定制（CustomCrafter、PersonalVideo、DreamVideo-2）→ 多概念（Movie Weaver）→ S2V 数据与基准（OpenS2V-Nexus、Phantom-Data）→ MLLM 引导（CINEMA、BindWeave、Kling-Omni）→ 商用角色生视频（Vidu，厂商自述待核）；并确定参考侧\"第一个工作\"。这些引用已核实入库。"],["§1.5 贡献表述","\"按去噪阶段错开条件\"可能有先例（SDEdit 式部分去噪、ControlNet guidance start/end），查新后再决定能不能写成发现。"]],
     hint:"适合主线提出者 / 统稿人，和第 2 章同一人最顺。"},
-  c2:{no:"2",t:"定义与框架",en:"Definition and Framework",pages:1.75,prog:60,state:"框架已起草；决策 B 与参考侧骨干待补",
+  c2:{no:"2",t:"定义与框架",en:"Definition and Framework",pages:5,now:3.0,prog:55,state:"框架已起草；决策 B 与参考侧骨干待补",
     done:["按因素的操作性定义（身份、外观、声音、布局几何、运动、相机、事件时序、风格光照）","条件决定矩阵：v3 六行 + G-buffer、语义图/框、骨架三行与例子系统","\"同一个问题\"一节与五组同类解法表（结构侧读过原文；R2V 侧数字标 [to verify]）","镜像发现写成 insight 框（标为假设，注明查新对象）","世界状态 vs 视觉记忆：三个架构证据","形式化推广到参考 + 结构 + 文本 + 记忆；三种保真；骨干与范围"],
     todo:[["§2.2 决策 B","模型边界规则待拍板。推荐：凡在视频生成器采样前、以显式可检查形式（文本、图、布局、轨迹、程序状态）确定某个内容因素的组件，都算外部；备选\"单独训练\"或\"可单独替换\"。"],["§2.7 参考侧骨干","总结哪些开源/闭源模型有多参考接口，参考怎么进模型（图像编码器、reference net、in-context token、MLLM 编码器）。"],["表：五组解法","R2V 侧数字（CustomCrafter 0.4/0.8、RefAlign 55.73→49.93、Phantom-Data、Movie Weaver 42.9→99.3 等）逐条对原文核对。"]],
     hint:"框架章节，决定全文口径；建议与第 1 章打包。"},
-  c3:{no:"3",t:"驱动领域",en:"Driving Domains",pages:1.75,prog:30,state:"世界模型与游戏已写；商业内容最弱",
+  c3:{no:"3",t:"驱动领域",en:"Driving Domains",pages:5,now:1.3,prog:20,state:"世界模型与游戏已写；商业内容最弱",
     done:["领域证据表，每格标核实状态","游戏与工业、世界模型两节按原文成稿（MG4 四个问题、Magpie、AlayaRenderer-Flash、AnyGameRenderer；PWM 8.00% → 94/98%、BoxWorld 97.3% vs ≤16.2%），并注明基准偏向外部状态"],
     todo:[["§3.1 商业内容（最弱一环）","两格空缺：参考生成之前角色一致性如何失败的系统证据；R2V 相对 T2V 的生产增益。采用信号要一手来源（财报、合作公告、平台数据）；可评估 World Narrative Model 作为早期\"外部决定、模型渲染\"例子；确认 \"videococo\" 是哪篇。"],["§3.2 数字人","基于 OmniHuman-1.5、Kling-Avatar、TalkingMachines 写一段，核对 0.58 → 0.37 等数字，并按第 2 章边界规则说明 MLLM 规划器算外部。"],["§3.5 具身仿真","基于 Kang et al.、Dream.exe、PhysGen、WonderPlay、RoboRender、Cosmos-Transfer2.5 写，核对 4.14 vs 1.39、80.2%、24/30 vs 1/30。"],["§3.6 跨领域归纳","可控性、状态可持久可验证、复用已有资产与引擎、成本；与第 9 章端到端立场对照。"]],
     hint:"需要懂短剧/商业内容/产品的同学；具身一节可交给做生成式仿真的同学。"},
-  c4:{no:"4",t:"渲染器接口",en:"Renderer Interfaces",pages:1.75,prog:50,state:"结构侧成稿；参考侧空缺",
+  c4:{no:"4",t:"渲染器接口",en:"Renderer Interfaces",pages:7,now:4.9,prog:45,state:"结构侧成稿；参考侧空缺",
     done:["结构侧全文（来自 v0.1）：内容/编码/来源三属性；七类结构接口，配原创合成示意图与\"决定矩阵\"图；侧信道；信息充分性与可构造性；泄漏-遵循两难与五类对策；接口泛化（typed vs untyped）","新增\"接口在扩张并部分合并\"：22 个结构渲染器通道统计","参考接口产品表（厂商自报，待核）"],
     todo:[["§4.1 参考接口（核心空缺）","按它固定的因素组织：身份图（单/多主体）、参考视频（动作/运镜/风格）、音频参考（音色/口型）；覆盖研究系统和 S2V 数据集/基准（引用已入库）。"],["§4.7 汇合统计","把通道统计扩展到参考侧与闭源产品，决定引言里\"汇合\"说多强；产品表按官方文档更新（可灵版本）。"]],
-    hint:"适合最熟 R2V 论文与产品接口的同学（已有 R2V 梳理报告的同学很合适）。结构侧偏长，可压缩。"},
-  c5:{no:"5",t:"从注入到理解",en:"From Injection to Understanding",pages:2.0,prog:50,state:"结构侧机制成稿；参考侧与\"理解\"待补",
+    hint:"适合最熟 R2V 论文与产品接口的同学（已有 R2V 梳理报告的同学很合适）。结构侧已基本成稿，新增的篇幅主要给参考侧。"},
+  c5:{no:"5",t:"从注入到理解",en:"From Injection to Understanding",pages:6.5,now:5.0,prog:45,state:"结构侧机制成稿；参考侧与\"理解\"待补",
     done:["结构侧四类注入位置（输入融合、并行分支、in-context 参考 token、交叉注意力）+ mask 绑定 + 按噪声阶段条件，配示意图","\"论文内部对比证据\"表：结论是没有一致排序、受骨干混杂","新增\"从注入到理解\"：CINEMA、BindWeave、Kling-Omni、OmniHuman-1.5 的描述已按摘要核对"],
     todo:[["§5.1 参考侧注入","R2V 常见三类：多编码器参考条件、参考解耦、MLLM 跨模态引导（RefAlign related work 的分法，需核对）；每类一段 + 代表系统。"],["§5.5 参考侧绑定","DreamVideo-2 框 mask 调制参考注意力、Movie Weaver 锚 token，与五组解法表对应。"],["§5.7 理解支配生成","补图像侧先例（多参考编辑/融合，需一手来源），正面回应\"智能外移还是回流\"（可直接用拍板 A 的建议说法）。"]],
-    hint:"适合偏模型结构、熟悉 MLLM + DiT 的同学。结构侧建议删约 1/3。"},
-  c6:{no:"6",t:"训练与数据",en:"Training and Data",pages:1.75,prog:55,state:"结构侧成稿；配对演进与 RL 待补",
+    hint:"适合偏模型结构、熟悉 MLLM + DiT 的同学。结构侧不用删，参考侧要和它并排补齐。"},
+  c6:{no:"6",t:"训练与数据",en:"Training and Data",pages:6,now:4.6,prog:50,state:"结构侧成稿；配对演进与 RL 待补",
     done:["结构侧全文：五类监督来源；对齐比规模重要；适配范围；双向 → 因果的四个要素；五类少步蒸馏与\"蒸馏侵蚀控制\"；训练流程图与架构训练表","\"同源配对 → 跨上下文配对\"开头段"],
     todo:[["§6.1 配对演进","补全\"同源 → 跨上下文 → 无需显式三元组\"，系统与数字对原文核对，对应五组解法表\"打破同源配对\"一行。"],["§6.6 后训练与 RL","两条来路的偏好优化 / RL：身份与参考保真奖励、结构遵循奖励、靠照搬刷奖励的风险；若结构侧基本只用蒸馏，要明说。"]],
     hint:"适合做后训练 / RL / 蒸馏的同学。"},
-  c7:{no:"7",t:"流式与交互",en:"Streaming and Interaction",pages:1.25,prog:70,state:"结构侧成稿",
+  c7:{no:"7",t:"流式与交互",en:"Streaming and Interaction",pages:4.5,now:3.6,prog:60,state:"结构侧成稿",
     done:["生成粒度、视觉记忆四种设计及\"记忆不能压过当前代理\"、流式编解码、延迟分解图、系统工程、条件切换；效率表（注明不可直接比较）"],
-    todo:[["§7.6 参考侧流式","实时音频驱动 / 对话式数字人（台词与声音由 LLM、TTS 流式给出）；身份参考如何缓存；对话场景下按键到画面的延迟意味着什么。"],["篇幅","整章压到 1.25 页。"]],
+    todo:[["§7.6 参考侧流式","实时音频驱动 / 对话式数字人（台词与声音由 LLM、TTS 流式给出）；身份参考如何缓存；对话场景下按键到画面的延迟意味着什么。"],["篇幅","不用压缩：现约 3.6 页，目标 4.5 页，增量主要给参考侧流式。"]],
     hint:"结构侧已基本写完，适合和第 8 章打包。"},
-  c8:{no:"8",t:"评测",en:"Evaluation",pages:1.25,prog:60,state:"结构侧协议成稿；参考侧一节已起草",
+  c8:{no:"8",t:"评测",en:"Evaluation",pages:4,now:2.6,prog:50,state:"结构侧协议成稿；参考侧一节已起草",
     done:["现有度量盘点与局限；八维评测协议（标注已有/改造/新提）；四个诊断实验（明确未做）","新增\"参考保真与相似度奖励照搬\"：RefAlign 消融（待核）、OmniVBench 按因素评测、结构侧边缘指标偏爱描边"],
     todo:[["§8.2 参考保真","盘点 S2V 与 omni-reference 基准；定义两条来路通用的泄漏指标（代理风格可检测性、参考姿态照搬）；评测表补参考侧行。"]],
     hint:"适合熟悉基准评测的同学。"},
-  c9:{no:"9",t:"另一条路",en:"The Other Path",pages:0.75,prog:20,state:"骨架",
+  c9:{no:"9",t:"另一条路",en:"The Other Path",pages:2.5,now:0.4,prog:10,state:"骨架",
     done:["通才立场（Veo 3 零样本推理论文、视觉世界模拟路线图）、按因素定义的分工光谱、渲染器路线代价三节骨架"],
     todo:[["§9.1 通才立场","补核实数字（分析的视频数量、最强端到端世界模型的实时分辨率/帧率、一致性保持时长），写入\"只有一种智能\"的观点。"],["§9.2 分工光谱图","按固定的因素摆放代表系统（复用条件矩阵与决定矩阵图）。"],["§9.3 何时端到端更好","无持久状态的开放内容、构造条件比生成更贵的任务等，并给证据。"]],
     hint:"适合做世界模型 / 生成式仿真、对\"智能内化\"有看法的同学；和第 10 章或第 3 章打包都顺。"},
-  c10:{no:"10",t:"开放问题",en:"Open Problems",pages:0.5,prog:35,state:"结构侧部分（v0.1）",
+  c10:{no:"10",t:"开放问题",en:"Open Problems",pages:2,now:1.3,prog:30,state:"结构侧部分（v0.1）",
     done:["v0.1 结构侧开放问题：通用接口、最小充分表示、条件仲裁、实体索引记忆、跨引擎泛化、闭环验证、算力预算、超越像素"],
     todo:[["补 v3 新问题","多参考冲突与路由、肖像授权与溯源、数据授权；建议每个分工包写一段自己领域的开放问题，由本章负责人汇总。"]],
     hint:"一人汇总，大家各写一段。"},
-  c11:{no:"·",t:"摘要与结论",en:"Abstract and Conclusion",pages:0.25,prog:30,state:"摘要已按 v0.3 起草；结论待重写",
+  c11:{no:"·",t:"摘要与结论",en:"Abstract and Conclusion",pages:1,now:0.7,prog:30,state:"摘要已按 v0.3 起草；结论待重写",
     done:["摘要按 v0.3 主张重写"],todo:[["结论","最后重写（现为 v0.1 结构侧结论），等前 10 章定稿。"]],hint:"统稿人负责。"},
-  cA:{no:"A",t:"附录 A 总表",en:"Master table",pages:0,prog:50,state:"结构侧 22 行已填；参考侧待补",
+  cA:{no:"A",t:"附录 A 总表",en:"Master table",pages:0,now:0,prog:50,state:"结构侧 22 行已填；参考侧待补",
     done:["列按 v0.3：外部决定什么、模型收到什么、状态由谁持有、注入方式、数据来源、是否实时；结构侧 22 行已填"],todo:[["参考侧行","参考侧 11 篇已列出待补；每人补自己负责论文的行。"]],hint:"全员共担，先填总表再写正文。"}
 };
 const ORDER=["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","cA"];
@@ -511,7 +511,7 @@ async function packState(base){
 async function issueURL(base){
   const data=await packState(base);
   const head="请直接点下方绿色的「Submit new issue」（或「Create」）提交，不用改任何内容。提交后通常十几秒生效，大家刷新分工面板就能看到。";
-  const sum=A.pkgs.map((p,i)=>"- "+(p.shared?"共担":"P"+(i+1))+" "+p.name+"："+(p.who||"待认领")).join("\n");
+  const sum=A.pkgs.map((p,i)=>"- "+lab(i)+" "+p.name+"："+(p.who||"待认领")).join("\n");
   const mk=b=>"https://github.com/"+GH.owner+"/"+GH.repo+"/issues/new?title="+encodeURIComponent("[board] 更新分工")+"&body="+encodeURIComponent(b);
   const full=mk(head+"\n\n"+sum+"\n\n（下面一行是分工数据，供自动程序读取）\nboard-data:"+data);
   return full.length<7500?full:mk(head+"\n\n（下面一行是分工数据，供自动程序读取）\nboard-data:"+data);
@@ -588,8 +588,11 @@ function applyPreset(n){if(!confirm("切换到 "+n+" 人建议方案？当前拖
 function clearAll(){if(!confirm("把所有章节放回\"待认领\"？"))return;A.pool=ORDER.slice();A.pkgs.forEach(p=>p.ch=[]);save();renderKan();}
 function addPkg(){A.pkgs.push({id:"p"+Date.now().toString(36),name:"新分工包",fit:"",who:"",note:"",ch:[]});save();renderKan();}
 function delPkg(i){const p=A.pkgs[i];A.pool.push(...p.ch);A.pkgs.splice(i,1);save();renderKan();}
-function relabel(){A.pkgs.forEach((p,i)=>document.querySelectorAll('.card select option[value="'+p.id+'"]').forEach(o=>o.textContent="P"+(i+1)+" "+p.name));}
+function relabel(){A.pkgs.forEach((p,i)=>document.querySelectorAll('.card select option[value="'+p.id+'"]').forEach(o=>o.textContent=lab(i)+" "+p.name));}
 function pagesOf(list){return list.reduce((s,c)=>s+(CH[c]?.pages||0),0);}
+function lab(i){if(A.pkgs[i].shared)return "共担";let n=0;for(let j=0;j<=i;j++)if(!A.pkgs[j].shared)n++;return "P"+n;}
+function nowOf(list){return list.reduce((s,c)=>s+(CH[c]?.now||0),0);}
+function num(x){return (Math.round(x*10)/10).toString();}
 function moveCard(cid,target){
   A.pool=A.pool.filter(x=>x!==cid);A.pkgs.forEach(p=>p.ch=p.ch.filter(x=>x!==cid));
   if(target==="pool")A.pool.push(cid);else{const p=A.pkgs.find(p=>p.id===target);if(p)p.ch.push(cid);}
@@ -597,13 +600,13 @@ function moveCard(cid,target){
   save();renderKan();
 }
 function cardHTML(cid){
-  const c=CH[cid];const opts=[["pool","待认领"]].concat(A.pkgs.map((p,i)=>[p.id,"P"+(i+1)+" "+p.name]));
-  return '<div class="card" draggable="true" data-id="'+cid+'"><div class="r1"><div class="b'+(/^\d+$/.test(c.no)?'':' x')+'">'+esc(c.no)+'</div><div style="flex:1"><div class="nm">'+esc(c.t)+'</div><div class="mt"><span>'+(c.pages?c.pages+" 页":"附录")+' · Agent '+c.prog+'%</span><a href="#ch-'+cid+'" title="查看 Agent 进度与 TODO">详情</a></div></div></div><div class="mini"><i style="width:'+c.prog+'%"></i></div>'+
+  const c=CH[cid];const opts=[["pool","待认领"]].concat(A.pkgs.map((p,i)=>[p.id,lab(i)+" "+p.name]));
+  return '<div class="card" draggable="true" data-id="'+cid+'"><div class="r1"><div class="b'+(/^\d+$/.test(c.no)?'':' x')+'">'+esc(c.no)+'</div><div style="flex:1"><div class="nm">'+esc(c.t)+'</div><div class="mt"><span>'+(c.pages?"目标 "+c.pages+" 页（现 "+c.now+"）":"附录，不限页数")+' · Agent '+c.prog+'%</span><a href="#ch-'+cid+'" title="查看 Agent 进度与 TODO">详情</a></div></div></div><div class="mini"><i style="width:'+c.prog+'%"></i></div>'+
     '<div style="display:flex;justify-content:flex-end;margin-top:6px"><select aria-label="移到" onchange="if(this.value)moveCard(\''+cid+'\',this.value)"><option value="">移到…</option>'+opts.map(o=>'<option value="'+o[0]+'">'+esc(o[1])+'</option>').join("")+'</select></div></div>';
 }
 function renderKan(){
-  const cols=A.pkgs.map((p,i)=>'<div class="col"><div class="hd"><div class="pid">'+(p.shared?"共担":"P"+(i+1))+'</div><input class="name" value="'+esc(p.name)+'" onchange="A.pkgs['+i+'].name=this.value;save();relabel()"><input class="who" placeholder="负责人（自由填写，可多人）" value="'+esc(p.who)+'" onchange="A.pkgs['+i+'].who=this.value;save()"><div class="fit">'+esc(p.fit)+'</div><div class="load"><span>'+p.ch.length+' 项</span><span>约 '+pagesOf(p.ch).toFixed(2).replace(/\.?0+$/,"")+' 页</span></div></div><div class="body" data-target="'+p.id+'">'+p.ch.map(cardHTML).join("")+'</div><div class="ft"><textarea placeholder="备注：分工细节、截止时间…" onchange="A.pkgs['+i+'].note=this.value;save()">'+esc(p.note)+'</textarea></div>'+(p.ch.length?'':'<div class="ft"><button class="btn" style="font-size:12px" onclick="delPkg('+i+')">删除此包</button></div>')+'</div>');
-  const pool='<div class="col pool"><div class="hd"><div class="pid">POOL</div><div style="font-weight:700;font-size:14.5px">待认领</div><div class="fit">拖到右侧任意分工包</div><div class="load"><span>'+A.pool.length+' 项</span><span>约 '+pagesOf(A.pool).toFixed(2).replace(/\.?0+$/,"")+' 页</span></div></div><div class="body" data-target="pool">'+A.pool.map(cardHTML).join("")+'</div></div>';
+  const cols=A.pkgs.map((p,i)=>'<div class="col"><div class="hd"><div class="pid">'+lab(i)+'</div><input class="name" value="'+esc(p.name)+'" onchange="A.pkgs['+i+'].name=this.value;save();relabel()"><input class="who" placeholder="负责人（自由填写，可多人）" value="'+esc(p.who)+'" onchange="A.pkgs['+i+'].who=this.value;save()"><div class="fit">'+esc(p.fit)+'</div><div class="load"><span>'+p.ch.length+' 项</span><span>'+(pagesOf(p.ch)?'目标约 '+num(pagesOf(p.ch))+' 页（现 '+num(nowOf(p.ch))+'）':'不计页数')+'</span></div></div><div class="body" data-target="'+p.id+'">'+p.ch.map(cardHTML).join("")+'</div><div class="ft"><textarea placeholder="备注：分工细节、截止时间…" onchange="A.pkgs['+i+'].note=this.value;save()">'+esc(p.note)+'</textarea></div>'+(p.ch.length?'':'<div class="ft"><button class="btn" style="font-size:12px" onclick="delPkg('+i+')">删除此包</button></div>')+'</div>');
+  const pool='<div class="col pool"><div class="hd"><div class="pid">POOL</div><div style="font-weight:700;font-size:14.5px">待认领</div><div class="fit">拖到右侧任意分工包</div><div class="load"><span>'+A.pool.length+' 项</span><span>目标约 '+num(pagesOf(A.pool))+' 页</span></div></div><div class="body" data-target="pool">'+A.pool.map(cardHTML).join("")+'</div></div>';
   $("#kan").innerHTML=pool+cols.join("");
   const assigned=A.pkgs.filter(p=>!p.shared&&p.ch.length).length;
   $("#kstat").textContent="分工包 "+A.pkgs.filter(p=>!p.shared).length+" 个 · 已有章节 "+assigned+" 个 · 待认领 "+A.pool.length+" 项";
@@ -624,7 +627,7 @@ function assignText(){
   const L=["GenRender Survey 分工（草案，"+new Date().toISOString().slice(0,10)+"）",""];
   A.pkgs.forEach((p,i)=>{
     const chs=p.ch.map(c=>(/^\d+$/.test(CH[c].no)?"第"+CH[c].no+"章 ":"")+CH[c].t).join("、")||"（暂无）";
-    L.push((p.shared?"共担":"P"+(i+1))+" "+p.name+"｜负责人："+(p.who||"待认领")+"｜"+chs+(pagesOf(p.ch)?"｜约"+pagesOf(p.ch).toFixed(2).replace(/\.?0+$/,"")+"页":"")+(p.note?"｜备注："+p.note:""));
+    L.push(lab(i)+" "+p.name+"｜负责人："+(p.who||"待认领")+"｜"+chs+(pagesOf(p.ch)?"｜目标约"+num(pagesOf(p.ch))+"页（现约"+num(nowOf(p.ch))+"页）":"")+(p.note?"｜备注："+p.note:""));
   });
   if(A.pool.length)L.push("待认领："+A.pool.map(c=>CH[c].t).join("、"));
   L.push("","每章 Agent 进度和 TODO 说明见面板第 06 节和 Overleaf 每章开头的 Agent progress 框。","Overleaf：https://www.overleaf.com/project/6ae8963a94de1429cdeeeb39");
@@ -634,7 +637,7 @@ function copyText(t,msg){(navigator.clipboard?navigator.clipboard.writeText(t):P
 function copyAssign(){copyText(assignText(),"已复制分工文本");}
 function copyDecisions(){copyText($("#decText").textContent,"已复制待拍板文字");}
 function renderChapters(){
-  $("#chgrid").innerHTML=ORDER.map(cid=>{const c=CH[cid];return '<div class="chc" id="ch-'+cid+'"><div class="top"><div class="no">'+esc(c.no)+'</div><div><div class="tt">'+esc(c.t)+'</div><div class="sub">'+esc(c.en)+(c.pages?" · "+c.pages+" 页":"")+'</div></div></div><div class="prog"><i style="width:'+c.prog+'%"></i></div><div class="st"><span>'+esc(c.state)+'</span><span>'+c.prog+'%</span></div>'+
+  $("#chgrid").innerHTML=ORDER.map(cid=>{const c=CH[cid];return '<div class="chc" id="ch-'+cid+'"><div class="top"><div class="no">'+esc(c.no)+'</div><div><div class="tt">'+esc(c.t)+'</div><div class="sub">'+esc(c.en)+(c.pages?" · 现约 "+c.now+" 页 / 目标 "+c.pages+" 页":"")+'</div></div></div><div class="prog"><i style="width:'+c.prog+'%"></i></div><div class="st"><span>'+esc(c.state)+'</span><span>'+c.prog+'%</span></div>'+
     '<details open><summary>Agent 已完成</summary><ul class="done">'+c.done.map(d=>"<li>"+esc(d)+"</li>").join("")+'</ul></details>'+
     '<details open><summary>TODO 解读（'+c.todo.length+'）</summary><ul class="todo">'+c.todo.map(t=>"<li><b>"+esc(t[0])+"：</b>"+esc(t[1])+"</li>").join("")+'</ul></details>'+
     '<div class="hint">'+esc(c.hint)+'</div></div>';}).join("");
@@ -665,8 +668,8 @@ subject-to-video 纳入；短剧管线只在第3章出现；纯文生视频、�
 5 分工方式
 先一起填总表（Overleaf 附录A：外部决定什么、模型收到什么、状态由谁持有、注入方式、数据来源、是否实时），再按章分头写。建议 6 到 7 个共一，按分工包认领，有的包含两章（见分工面板）。
 
-6 投稿节奏
-建议先挂 arXiv 占位，再投 TPAMI（Survey 类，20页双栏含参考文献），备选 IJCV 或 CGF STAR。需要定 arXiv 冻结时间。
+6 发表方式与篇幅
+以 arXiv 长文为主，不按期刊页数写：正文（不含参考文献和附录）至少 35 页，目标 40–50 页。之后如果投期刊，再从 arXiv 版压缩出期刊版。需要定 arXiv 冻结时间。
 
 7 需要确认的事
 "Fang 佬那篇"是不是 arXiv 2610.40191；群里说的 "videococo" 是哪篇；作者顺序和挂哪些老师。`;
