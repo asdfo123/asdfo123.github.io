@@ -1,6 +1,6 @@
 {
  "v": 1,
- "updated": "2026-11-03T13:52:49.099Z",
+ "updated": "2026-11-03T14:15:04.245Z",
  "by": "asdfo123",
  "state": {
   "pkgs": [
@@ -33,7 +33,7 @@
     "id": "p2_mw0odyob",
     "name": "渲染器接口",
     "fit": "最熟 R2V 论文与产品接口",
-    "who": "",
+    "who": "Zirui Lang",
     "note": "",
     "ch": [
      "c4"
@@ -55,7 +55,7 @@
     "id": "p4_mw0odyob",
     "name": "训练与数据",
     "fit": "后训练、RL、蒸馏",
-    "who": "",
+    "who": "Linshuai Ling",
     "note": "",
     "ch": [
      "c6"
