@@ -129,7 +129,7 @@ def main():
     if prev.get("updated") and payload.get("base") != prev.get("updated"):
         note = (f"\n\n注意：这次是在旧版本上改的，覆盖了 {prev.get('by') or '某人'} "
                 f"在 {prev.get('updated')} 的发布。如有需要，可以在 [分工面板]({BOARD}) 上重新调整。")
-    COMMENT.write_text(f"已发布，约 1 分钟后所有人刷新 [分工面板]({BOARD}) 就能看到。{note}\n\n"
+    COMMENT.write_text(f"已发布。大家刷新 [分工面板]({BOARD}) 就能看到（个别网络要等网站重新部署，最晚约 3 分钟）。{note}\n\n"
                        f"{summary(state)}\n", encoding="utf-8")
     output(True)
 
