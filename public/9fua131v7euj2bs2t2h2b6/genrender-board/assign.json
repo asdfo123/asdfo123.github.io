@@ -1,1 +1,100 @@
-{"v":1,"updated":null,"by":"","state":null}
+{
+ "v": 1,
+ "updated": "2026-11-03T12:56:32.289Z",
+ "by": "asdfo123",
+ "state": {
+  "pkgs": [
+   {
+    "id": "p0_mw0odyob",
+    "name": "主线与框架",
+    "fit": "主线提出者 / 统稿；拍板 A、B",
+    "who": "Xinye Li",
+    "note": "",
+    "ch": [
+     "c1",
+     "c2",
+     "c11"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p1_mw0odyob",
+    "name": "为什么走向渲染器（正反两面）",
+    "fit": "产业 + 世界模型视角；第 3 章与第 9 章互为正反",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c3",
+     "c9"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p2_mw0odyob",
+    "name": "渲染器接口",
+    "fit": "最熟 R2V 论文与产品接口",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c4"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p3_mw0odyob",
+    "name": "注入与理解",
+    "fit": "偏模型结构，熟悉 MLLM + DiT",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c5"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p4_mw0odyob",
+    "name": "训练与数据",
+    "fit": "后训练、RL、蒸馏",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c6"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p5_mw0odyob",
+    "name": "流式与评测",
+    "fit": "实时系统、基准评测",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c7",
+     "c8"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p6_mw0odyob",
+    "name": "全员共担",
+    "fit": "开放问题每包一段；总表各补自己的行",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c10",
+     "cA"
+    ],
+    "shared": true
+   },
+   {
+    "id": "pmw0of8c6",
+    "name": "画图",
+    "fit": "",
+    "who": "",
+    "note": "各个领域交付初版AIGC图，要有详细Specification，然后画图同学细化",
+    "ch": []
+   }
+  ],
+  "pool": []
+ }
+}
