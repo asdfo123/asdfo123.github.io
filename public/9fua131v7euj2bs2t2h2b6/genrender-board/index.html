@@ -309,7 +309,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 
 <section id="s7">
   <div class="sh"><span class="num">07</span><h2>分工面板</h2></div>
-  <p class="lede">不预设人员。下面是按 6–7 个共一给出的建议分包（有的包含两章），可以直接拖动章节卡片重新组合、改包名、填负责人（自由文本，可多人）。改完点「发布给所有人」，大家打开页面就能看到；没发布的改动只在你自己的浏览器里。</p>
+  <p class="lede">不预设人员。下面是按 6–7 个共一给出的建议分包（有的包含两章），可以直接拖动章节卡片重新组合、改包名、填负责人（自由文本，可多人）。改完点「发布给所有人」：会打开一个 GitHub 页面，登录后点绿色的提交按钮，约 1 分钟后所有人打开面板都能看到。没发布的改动只在你自己的浏览器里。</p>
   <div class="kbar">
     <button class="btn" onclick="applyPreset(7)">7 人建议方案</button>
     <button class="btn" onclick="applyPreset(6)">6 人方案</button>
@@ -451,15 +451,16 @@ const KEY="genrender-assign-v3",OLDKEY="genrender-assign-v2",TOKKEY="genrender-g
 const GH={owner:"asdfo123",repo:"asdfo123.github.io",branch:"main",path:"public/9fua131v7euj2bs2t2h2b6/genrender-board/assign.json"};
 const API="https://api.github.com/repos/"+GH.owner+"/"+GH.repo+"/contents/"+GH.path;
 const TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=GenRender+board&description=Publish+the+GenRender+assignment+board.+Under+Repository+access%2C+choose+Only+select+repositories+and+pick+asdfo123.github.io.&target_name=asdfo123&expires_in=90&contents=write";
-let A,SH={loaded:false,ok:false,sha:null,updated:null,by:"",state:null},DIRTY=false,STALE=null,BUSY=false,LASTFETCH=0;
+let A,SH={loaded:false,ok:false,sha:null,updated:null,by:"",state:null},DIRTY=false,STALE=null,BUSY=false,LASTFETCH=0,PENDING=0,ISSUE_URL="",POLL=null;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),1700);}
-function save(){DIRTY=true;localStorage.setItem(KEY,JSON.stringify({state:A,base:SH.updated,dirty:true}));renderSync();}
+function save(){if(PENDING){PENDING=0;clearInterval(POLL);}DIRTY=true;localStorage.setItem(KEY,JSON.stringify({state:A,base:SH.updated,dirty:true}));renderSync();}
 function preset(n){return{pkgs:PRESETS[n].map((p,i)=>({id:"p"+i+"_"+Date.now().toString(36),name:p.name,fit:p.fit,who:"",note:"",ch:p.ch.slice(),shared:!!p.shared})),pool:ORDER.filter(c=>!PRESETS[n].some(p=>p.ch.includes(c)))};}
 const clone=x=>JSON.parse(JSON.stringify(x));
 const validState=s=>!!(s&&Array.isArray(s.pkgs)&&Array.isArray(s.pool));
-function b64e(str){let bin="";new TextEncoder().encode(str).forEach(x=>bin+=String.fromCharCode(x));return btoa(bin);}
+function u8b64(u8){let bin="";for(let i=0;i<u8.length;i+=0x8000)bin+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000));return btoa(bin);}
+function b64e(str){return u8b64(new TextEncoder().encode(str));}
 function b64d(str){return new TextDecoder().decode(Uint8Array.from(atob(str.replace(/\s/g,"")),c=>c.charCodeAt(0)));}
 function tok(){return localStorage.getItem(TOKKEY)||"";}
 function ghHeaders(){const h={Accept:"application/vnd.github+json"};if(tok())h.Authorization="Bearer "+tok();return h;}
@@ -494,16 +495,49 @@ async function refreshShared(manual){
   if(manual||SH.updated!==before){adoptShared();renderKan();}renderSync();if(manual)toast("已是最新的共享版本");
 }
 async function askToken(){
-  const t=(prompt("粘贴你的 GitHub token（fine-grained，只选 asdfo123.github.io 仓库，Contents: Read and write）。\n只保存在这台浏览器里。\n\n还没有的话点取消，再点分工面板状态栏里的「创建 token」。","")||"").trim();
-  if(!t)return;
+  const t=(prompt("仓库管理员用：粘贴 asdfo123.github.io 的 GitHub token（Contents: Read and write），之后发布立即生效。\n只保存在这台浏览器里。\n\n其他人不需要 token，直接点「发布给所有人」即可。","")||"").trim();
+  if(!t){if(confirm("要打开 GitHub 创建 token 的页面吗？（只有仓库管理员需要）"))window.open(TOKEN_URL,"_blank","noopener");return;}
   try{const r=await fetch("https://api.github.com/user",{headers:{Accept:"application/vnd.github+json",Authorization:"Bearer "+t}});if(!r.ok)throw new Error();
     const u=await r.json();localStorage.setItem(TOKKEY,t);localStorage.setItem(TOKKEY+"-login",u.login||"");toast("已获得编辑权限"+(u.login?"："+u.login:""));}
   catch(e){alert("这个 token 无效，请检查后重试。");}
   renderSync();
 }
 function dropToken(){localStorage.removeItem(TOKKEY);localStorage.removeItem(TOKKEY+"-login");renderSync();toast("已退出编辑");}
+async function packState(base){
+  const bytes=new TextEncoder().encode(JSON.stringify({v:1,base:base||null,state:A}));
+  if(window.CompressionStream){try{const st=new Blob([bytes]).stream().pipeThrough(new CompressionStream("gzip"));return "gz:"+u8b64(new Uint8Array(await new Response(st).arrayBuffer()));}catch(e){}}
+  return "b64:"+u8b64(bytes);
+}
+async function issueURL(base){
+  const data=await packState(base);
+  const head="请直接点下方绿色的「Submit new issue」（或「Create」）提交，不用改任何内容。提交后约 1 分钟，分工面板上所有人都能看到。";
+  const sum=A.pkgs.map((p,i)=>"- "+(p.shared?"共担":"P"+(i+1))+" "+p.name+"："+(p.who||"待认领")).join("\n");
+  const mk=b=>"https://github.com/"+GH.owner+"/"+GH.repo+"/issues/new?title="+encodeURIComponent("[board] 更新分工")+"&body="+encodeURIComponent(b);
+  const full=mk(head+"\n\n"+sum+"\n\n（下面一行是分工数据，供自动程序读取）\nboard-data:"+data);
+  return full.length<7500?full:mk(head+"\n\n（下面一行是分工数据，供自动程序读取）\nboard-data:"+data);
+}
+function publishViaIssue(){
+  const d=readJSON(KEY),base=d?d.base:SH.updated;
+  if(SH.updated&&base!==SH.updated&&!confirm("共享版本在 "+fmt(SH.updated)+(SH.by?" 被 "+SH.by:" 被")+" 更新过，你是在更早的版本上改的。继续发布会覆盖那次更新，确定吗？"))return;
+  const w=window.open("about:blank","_blank");
+  issueURL(base).then(url=>{
+    ISSUE_URL=url;PENDING=Date.now();
+    if(w&&!w.closed){try{w.opener=null;}catch(e){}w.location.href=url;}
+    renderSync();startPoll();
+  });
+}
+function startPoll(){
+  clearInterval(POLL);const t0=Date.now();
+  POLL=setInterval(async()=>{
+    if(PENDING<=0||!DIRTY){clearInterval(POLL);return;}
+    await fetchShared();
+    if(SH.state&&JSON.stringify(SH.state)===JSON.stringify(A)){PENDING=0;DIRTY=false;localStorage.removeItem(KEY);clearInterval(POLL);toast("已生效，所有人都能看到了");}
+    else if(Date.now()-t0>6*60000){PENDING=-1;clearInterval(POLL);}
+    renderSync();
+  },20000);
+}
 async function publish(){
-  if(!tok())return askToken();
+  if(!tok())return publishViaIssue();
   if(BUSY)return;BUSY=true;renderSync("正在发布…");
   try{
     const r=await fetch(API+"?ref="+GH.branch,{headers:ghHeaders(),cache:"no-store"});
@@ -525,7 +559,7 @@ async function publish(){
   }catch(e){alert(e.message);}
   finally{BUSY=false;renderSync();}
 }
-function discard(){if(!confirm("放弃未发布的改动，恢复为共享版本？"))return;adoptShared();renderKan();renderSync();}
+function discard(){if(!confirm("放弃未发布的改动，恢复为共享版本？"))return;PENDING=0;clearInterval(POLL);adoptShared();renderKan();renderSync();}
 function restoreStale(){A=clone(STALE.state);STALE=null;localStorage.removeItem(KEY+"-stale");save();renderKan();}
 function dropStale(){STALE=null;localStorage.removeItem(KEY+"-stale");renderSync();}
 function renderSync(msg){
@@ -533,14 +567,17 @@ function renderSync(msg){
   const me=localStorage.getItem(TOKKEY+"-login")||"";let l,r="";
   if(msg)l='<span class="dot busy"></span>'+esc(msg);
   else if(!SH.loaded)l='<span class="dot busy"></span>正在读取共享分工…';
-  else if(DIRTY)l='<span class="dot warn"></span><b>有未发布的改动</b>，现在只有你能看到'+(tok()?'':'；没有编辑权限的话，可以「复制分工文本」发群');
+  else if(DIRTY&&PENDING>0)l='<span class="dot busy"></span><b>等待生效</b>：在打开的 GitHub 页面点绿色的提交按钮，约 1 分钟后所有人可见';
+  else if(DIRTY&&PENDING<0)l='<span class="dot warn"></span><b>还没看到生效</b>：确认已在 GitHub 页面点了提交？也可以再发一次';
+  else if(DIRTY)l='<span class="dot warn"></span><b>有未发布的改动</b>，现在只有你能看到'+(tok()?'':'。发布会打开 GitHub 页面（需要登录），点提交即可');
   else if(SH.state)l='<span class="dot ok"></span>这是所有人看到的共享版本 · '+fmt(SH.updated)+(SH.by?' 由 '+esc(SH.by):'')+' 发布';
   else if(SH.ok)l='<span class="dot ok"></span>共享版本：7 人建议方案（还没有人发布过修改）';
   else l='<span class="dot warn"></span>读取共享版本失败，显示的是本地内容';
   if(STALE&&!DIRTY)r+='<span class="small">这台浏览器里还有一份没发布的改动</span><button class="btn sm" onclick="restoreStale()">继续编辑它</button><button class="btn sm" onclick="dropStale()">不要了</button>';
-  if(DIRTY&&!msg)r+='<button class="btn pri sm" onclick="publish()">'+(tok()?'发布给所有人':'发布给所有人（需编辑权限）')+'</button><button class="btn sm" onclick="discard()">放弃改动</button>';
-  r+=tok()?'<span class="small">编辑者 '+esc(me)+' · <a href="#" onclick="dropToken();return false">退出</a></span>'
-          :'<span class="small"><a href="#" onclick="askToken();return false">编辑权限</a> · <a href="'+TOKEN_URL+'" target="_blank" rel="noopener noreferrer">创建 token</a></span>';
+  if(DIRTY&&PENDING>0&&!msg)r+='<a class="btn sm" href="'+esc(ISSUE_URL)+'" target="_blank" rel="noopener noreferrer">GitHub 页面没打开？点这里</a><button class="btn sm" onclick="discard()">放弃改动</button>';
+  else if(DIRTY&&!msg)r+='<button class="btn pri sm" onclick="publish()">'+(PENDING<0?'再发一次':'发布给所有人')+'</button><button class="btn sm" onclick="discard()">放弃改动</button>';
+  r+=tok()?'<span class="small">管理员 '+esc(me)+'（即时发布） · <a href="#" onclick="dropToken();return false">退出</a></span>'
+          :'<span class="small"><a href="#" onclick="askToken();return false" title="仓库管理员用；其他人不需要">管理员 token</a></span>';
   if(SH.loaded&&!DIRTY&&!msg)r+='<span class="small"><a href="#" onclick="refreshShared(true);return false">刷新</a></span>';
   const html='<div class="l">'+l+'</div><div class="r">'+r+'</div>';
   el.className="sync"+(DIRTY?" dirty":"");
