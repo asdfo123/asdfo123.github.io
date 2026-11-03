@@ -309,7 +309,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 
 <section id="s7">
   <div class="sh"><span class="num">07</span><h2>分工面板</h2></div>
-  <p class="lede">不预设人员。下面是按 6–7 个共一给出的建议分包（有的包含两章），可以直接拖动章节卡片重新组合、改包名、填负责人（自由文本，可多人）。改完点「发布给所有人」：会打开一个 GitHub 页面，登录后点绿色的提交按钮，约 1 分钟后所有人打开面板都能看到。没发布的改动只在你自己的浏览器里。</p>
+  <p class="lede">不预设人员。下面是按 6–7 个共一给出的建议分包（有的包含两章），可以直接拖动章节卡片重新组合、改包名、填负责人（自由文本，可多人）。改完点「发布给所有人」：会打开一个 GitHub 页面，登录后点绿色的提交按钮。通常十几秒生效，大家刷新面板就能看到（个别网络最晚约 3 分钟）。没发布的改动只在你自己的浏览器里。</p>
   <div class="kbar">
     <button class="btn" onclick="applyPreset(7)">7 人建议方案</button>
     <button class="btn" onclick="applyPreset(6)">6 人方案</button>
@@ -510,7 +510,7 @@ async function packState(base){
 }
 async function issueURL(base){
   const data=await packState(base);
-  const head="请直接点下方绿色的「Submit new issue」（或「Create」）提交，不用改任何内容。提交后约 1 分钟，分工面板上所有人都能看到。";
+  const head="请直接点下方绿色的「Submit new issue」（或「Create」）提交，不用改任何内容。提交后通常十几秒生效，大家刷新分工面板就能看到。";
   const sum=A.pkgs.map((p,i)=>"- "+(p.shared?"共担":"P"+(i+1))+" "+p.name+"："+(p.who||"待认领")).join("\n");
   const mk=b=>"https://github.com/"+GH.owner+"/"+GH.repo+"/issues/new?title="+encodeURIComponent("[board] 更新分工")+"&body="+encodeURIComponent(b);
   const full=mk(head+"\n\n"+sum+"\n\n（下面一行是分工数据，供自动程序读取）\nboard-data:"+data);
@@ -567,7 +567,7 @@ function renderSync(msg){
   const me=localStorage.getItem(TOKKEY+"-login")||"";let l,r="";
   if(msg)l='<span class="dot busy"></span>'+esc(msg);
   else if(!SH.loaded)l='<span class="dot busy"></span>正在读取共享分工…';
-  else if(DIRTY&&PENDING>0)l='<span class="dot busy"></span><b>等待生效</b>：在打开的 GitHub 页面点绿色的提交按钮，约 1 分钟后所有人可见';
+  else if(DIRTY&&PENDING>0)l='<span class="dot busy"></span><b>等待生效</b>：在打开的 GitHub 页面点绿色的提交按钮，通常十几秒生效';
   else if(DIRTY&&PENDING<0)l='<span class="dot warn"></span><b>还没看到生效</b>：确认已在 GitHub 页面点了提交？也可以再发一次';
   else if(DIRTY)l='<span class="dot warn"></span><b>有未发布的改动</b>，现在只有你能看到'+(tok()?'':'。发布会打开 GitHub 页面（需要登录），点提交即可');
   else if(SH.state)l='<span class="dot ok"></span>这是所有人看到的共享版本 · '+fmt(SH.updated)+(SH.by?' 由 '+esc(SH.by):'')+' 发布';
