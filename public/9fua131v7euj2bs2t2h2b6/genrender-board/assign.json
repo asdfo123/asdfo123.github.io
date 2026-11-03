@@ -1,1 +1,102 @@
-{"v":1,"updated":null,"by":"","state":null}
+{
+ "v": 1,
+ "updated": "2026-11-03T12:51:34.286Z",
+ "by": "asdfo123",
+ "state": {
+  "pkgs": [
+   {
+    "id": "p0_mw0osls6",
+    "name": "主线与框架",
+    "fit": "主线提出者 / 统稿；拍板 A、B",
+    "who": "连通性测试（请忽略）",
+    "note": "",
+    "ch": [
+     "c1",
+     "c2",
+     "c11"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p1_mw0osls6",
+    "name": "驱动领域与产业",
+    "fit": "懂短剧、商业内容、产品与产业数据",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c3"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p2_mw0osls6",
+    "name": "渲染器接口",
+    "fit": "最熟 R2V 论文与产品接口",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c4"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p3_mw0osls6",
+    "name": "注入与理解",
+    "fit": "偏模型结构，熟悉 MLLM + DiT",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c5"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p4_mw0osls6",
+    "name": "训练与数据",
+    "fit": "后训练、RL、蒸馏",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c6"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p5_mw0osls6",
+    "name": "流式与评测",
+    "fit": "实时系统、基准评测；结构侧已基本写完",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c7",
+     "c8"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p6_mw0osls6",
+    "name": "另一条路与开放问题",
+    "fit": "世界模型 / 生成式仿真视角",
+    "who": "",
+    "note": "",
+    "ch": [
+     "c9",
+     "c10"
+    ],
+    "shared": false
+   },
+   {
+    "id": "p7_mw0osls6",
+    "name": "全员共担",
+    "fit": "每人补自己负责论文的行",
+    "who": "",
+    "note": "",
+    "ch": [
+     "cA"
+    ],
+    "shared": true
+   }
+  ],
+  "pool": []
+ }
+}
