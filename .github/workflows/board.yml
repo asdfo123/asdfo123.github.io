@@ -1,0 +1,60 @@
+name: Board update from issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: board-update
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: startsWith(github.event.issue.title, '[board]')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ISSUE: ${{ github.event.issue.number }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # The issue body is untrusted; it only reaches the script through env.
+      - name: Validate and write assign.json
+        id: apply
+        env:
+          BODY: ${{ github.event.issue.body }}
+          AUTHOR: ${{ github.event.issue.user.login }}
+        run: python3 .github/scripts/board_apply.py
+
+      # Pushes made with GITHUB_TOKEN do not trigger deploy.yml, so dispatch it.
+      - name: Commit and redeploy
+        if: steps.apply.outputs.ok == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/9fua131v7euj2bs2t2h2b6/genrender-board/assign.json
+          git commit -q -m "board: update from #$ISSUE"
+          for i in 1 2 3; do
+            git pull -q --rebase origin main && git push -q origin HEAD:main && break
+            sleep 5
+          done
+          git log origin/main -1 --format=%s | grep -q "#$ISSUE"
+          gh workflow run deploy.yml --ref main
+
+      - name: Reply and close
+        if: success()
+        run: |
+          gh issue comment "$ISSUE" --body-file /tmp/board_comment.md
+          gh issue close "$ISSUE"
+
+      - name: Report failure
+        if: failure()
+        run: |
+          gh issue comment "$ISSUE" --body "处理失败，没有应用这次更新。请回到分工面板重新点「发布给所有人」。"
+          gh issue close "$ISSUE"
