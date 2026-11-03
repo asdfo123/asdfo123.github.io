@@ -106,6 +106,13 @@ tbody tr:hover td{background:color-mix(in srgb,var(--tealbg) 45%,transparent)}
 /* kanban */
 .kbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 14px}
 .kbar .sp{flex:1}
+.sync{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:8px 12px;margin:0 0 14px;font-size:13px;color:var(--ink2)}
+.sync.dirty{background:var(--saffbg);border-color:color-mix(in srgb,var(--saffron) 45%,transparent)}
+.sync .r{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sync .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:1px;background:var(--muted)}
+.sync .dot.ok{background:var(--ok)}.sync .dot.warn{background:var(--saffron)}.sync .dot.busy{background:var(--sea);animation:pulse 1s infinite alternate}
+@keyframes pulse{from{opacity:.3}to{opacity:1}}
+.btn.sm{font-size:12.5px;padding:4px 10px}
 .kan{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;align-items:start}
 .col{border:1px solid var(--line);border-radius:14px;background:var(--bg);display:flex;flex-direction:column;min-height:260px}
 .col.pool{background:repeating-linear-gradient(45deg,var(--bg),var(--bg) 8px,var(--paper) 8px,var(--paper) 16px)}
@@ -144,7 +151,7 @@ pre.txt{white-space:pre-wrap;word-break:break-word;font:14px/1.75 var(--sans);ba
 footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px}
 .toast{position:fixed;right:20px;bottom:20px;background:var(--ink);color:var(--paper);padding:9px 15px;border-radius:9px;font-size:13px;opacity:0;transform:translateY(6px);transition:.2s;pointer-events:none;z-index:9}
 .toast.on{opacity:.96;transform:none}
-@media print{.toc,.kbar,.btn,.card select{display:none!important}section{box-shadow:none;break-inside:avoid}body{background:#fff}.wrap{display:block}}
+@media print{.toc,.kbar,.sync,.btn,.card select{display:none!important}section{box-shadow:none;break-inside:avoid}body{background:#fff}.wrap{display:block}}
 </style>
 </head>
 <body>
@@ -302,7 +309,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 
 <section id="s7">
   <div class="sh"><span class="num">07</span><h2>分工面板</h2></div>
-  <p class="lede">不预设人员。下面是按 6–7 个共一给出的建议分包（有的包含两章），可以直接拖动章节卡片重新组合、改包名、填负责人（自由文本，可多人）。修改保存在本浏览器；定好后"复制分工文本"发群即可。</p>
+  <p class="lede">不预设人员。下面是按 6–7 个共一给出的建议分包（有的包含两章），可以直接拖动章节卡片重新组合、改包名、填负责人（自由文本，可多人）。改完点「发布给所有人」，大家打开页面就能看到；没发布的改动只在你自己的浏览器里。</p>
   <div class="kbar">
     <button class="btn" onclick="applyPreset(7)">7 人建议方案</button>
     <button class="btn" onclick="applyPreset(6)">6 人方案</button>
@@ -312,6 +319,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
     <span class="small" id="kstat"></span>
     <button class="btn pri" onclick="copyAssign()">复制分工文本</button>
   </div>
+  <div class="sync" id="sync"></div>
   <div class="kan" id="kan"></div>
   <p class="small" style="margin-top:10px">拖不动时（如手机上），用卡片右下角的"移到…"。页数按 TPAMI 20 页（含参考文献）倒推，正文约 14 页。附录 A 总表建议全员各自补自己负责论文的行。</p>
 </section>
@@ -439,18 +447,107 @@ const PRESETS={
      {name:"流式与评测",fit:"实时系统、基准评测",ch:["c7","c8"]},
      {name:"全员共担",fit:"开放问题每包一段；总表各补自己的行",ch:["c10","cA"],shared:true}]
 };
-const KEY="genrender-assign-v2";
-let A;
+const KEY="genrender-assign-v3",OLDKEY="genrender-assign-v2",TOKKEY="genrender-gh-token";
+const GH={owner:"asdfo123",repo:"asdfo123.github.io",branch:"main",path:"public/9fua131v7euj2bs2t2h2b6/genrender-board/assign.json"};
+const API="https://api.github.com/repos/"+GH.owner+"/"+GH.repo+"/contents/"+GH.path;
+const TOKEN_URL="https://github.com/settings/personal-access-tokens/new?name=GenRender+board&description=Publish+the+GenRender+assignment+board.+Under+Repository+access%2C+choose+Only+select+repositories+and+pick+asdfo123.github.io.&target_name=asdfo123&expires_in=90&contents=write";
+let A,SH={loaded:false,ok:false,sha:null,updated:null,by:"",state:null},DIRTY=false,STALE=null,BUSY=false,LASTFETCH=0;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),1700);}
-function save(){localStorage.setItem(KEY,JSON.stringify(A));}
+function save(){DIRTY=true;localStorage.setItem(KEY,JSON.stringify({state:A,base:SH.updated,dirty:true}));renderSync();}
 function preset(n){return{pkgs:PRESETS[n].map((p,i)=>({id:"p"+i+"_"+Date.now().toString(36),name:p.name,fit:p.fit,who:"",note:"",ch:p.ch.slice(),shared:!!p.shared})),pool:ORDER.filter(c=>!PRESETS[n].some(p=>p.ch.includes(c)))};}
-function load(){try{A=JSON.parse(localStorage.getItem(KEY));}catch(e){A=null;}if(!A||!A.pkgs)A=preset(7);}
+const clone=x=>JSON.parse(JSON.stringify(x));
+const validState=s=>!!(s&&Array.isArray(s.pkgs)&&Array.isArray(s.pool));
+function b64e(str){let bin="";new TextEncoder().encode(str).forEach(x=>bin+=String.fromCharCode(x));return btoa(bin);}
+function b64d(str){return new TextDecoder().decode(Uint8Array.from(atob(str.replace(/\s/g,"")),c=>c.charCodeAt(0)));}
+function tok(){return localStorage.getItem(TOKKEY)||"";}
+function ghHeaders(){const h={Accept:"application/vnd.github+json"};if(tok())h.Authorization="Bearer "+tok();return h;}
+function readJSON(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}}
+function fmt(iso){return iso?new Date(iso).toLocaleString("zh-CN",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"";}
+async function fetchShared(){
+  let data=null,sha=null,missing=false;
+  try{const r=await fetch(API+"?ref="+GH.branch,{headers:ghHeaders(),cache:"no-store"});
+    if(r.ok){const j=await r.json();sha=j.sha;data=JSON.parse(b64d(j.content));}else if(r.status===404)missing=true;}catch(e){}
+  if(!data&&!missing){try{const r=await fetch("assign.json?t="+Date.now(),{cache:"no-store"});if(r.ok)data=await r.json();}catch(e){}}
+  LASTFETCH=Date.now();
+  SH={loaded:true,ok:!!data||missing,sha,updated:data&&data.updated||null,by:data&&data.by||"",state:data&&validState(data.state)?data.state:null};
+}
+function adoptShared(){A=SH.state?clone(SH.state):preset(7);DIRTY=false;localStorage.removeItem(KEY);}
+async function initBoard(){
+  const d0=readJSON(KEY);A=d0&&validState(d0.state)?clone(d0.state):preset(7);renderKan();renderSync();
+  await fetchShared();
+  let d=readJSON(KEY);
+  if(!(d&&validState(d.state))){d=null;const old=readJSON(OLDKEY);if(validState(old))d={state:old,base:SH.updated,dirty:true};}
+  localStorage.removeItem(OLDKEY);
+  STALE=readJSON(KEY+"-stale");
+  if(d&&d.dirty&&(d.base===SH.updated||!SH.ok)){A=clone(d.state);DIRTY=true;localStorage.setItem(KEY,JSON.stringify(d));}
+  else{if(d&&d.dirty){STALE=d;localStorage.setItem(KEY+"-stale",JSON.stringify(d));}adoptShared();}
+  renderKan();renderSync();
+}
+async function refreshShared(manual){
+  if(DIRTY||BUSY)return;const before=SH.updated;await fetchShared();
+  if(manual||SH.updated!==before){adoptShared();renderKan();}renderSync();if(manual)toast("已是最新的共享版本");
+}
+async function askToken(){
+  const t=(prompt("粘贴你的 GitHub token（fine-grained，只选 asdfo123.github.io 仓库，Contents: Read and write）。\n只保存在这台浏览器里。\n\n还没有的话点取消，再点分工面板状态栏里的「创建 token」。","")||"").trim();
+  if(!t)return;
+  try{const r=await fetch("https://api.github.com/user",{headers:{Accept:"application/vnd.github+json",Authorization:"Bearer "+t}});if(!r.ok)throw new Error();
+    const u=await r.json();localStorage.setItem(TOKKEY,t);localStorage.setItem(TOKKEY+"-login",u.login||"");toast("已获得编辑权限"+(u.login?"："+u.login:""));}
+  catch(e){alert("这个 token 无效，请检查后重试。");}
+  renderSync();
+}
+function dropToken(){localStorage.removeItem(TOKKEY);localStorage.removeItem(TOKKEY+"-login");renderSync();toast("已退出编辑");}
+async function publish(){
+  if(!tok())return askToken();
+  if(BUSY)return;BUSY=true;renderSync("正在发布…");
+  try{
+    const r=await fetch(API+"?ref="+GH.branch,{headers:ghHeaders(),cache:"no-store"});
+    let sha=null,cur=null;
+    if(r.ok){const j=await r.json();sha=j.sha;try{cur=JSON.parse(b64d(j.content));}catch(e){}}
+    else if(r.status===401)throw new Error("token 无效或已过期，请点「退出」后重新设置编辑权限。");
+    else if(r.status!==404)throw new Error("读取共享版本失败（HTTP "+r.status+"），请稍后再试。");
+    const d=readJSON(KEY),base=d?d.base:SH.updated;
+    if(cur&&cur.updated&&cur.updated!==base&&!confirm("共享版本在 "+fmt(cur.updated)+(cur.by?" 被 "+cur.by:" 被")+" 更新过，你是在更早的版本上改的。继续发布会覆盖那次更新，确定吗？"))return;
+    const body={v:1,updated:new Date().toISOString(),by:localStorage.getItem(TOKKEY+"-login")||"",state:A};
+    const req={message:"board: update GenRender assignment",content:b64e(JSON.stringify(body,null,1)+"\n"),branch:GH.branch};if(sha)req.sha=sha;
+    const p=await fetch(API,{method:"PUT",headers:Object.assign(ghHeaders(),{"Content-Type":"application/json"}),body:JSON.stringify(req)});
+    if(!p.ok){const e=await p.json().catch(()=>({}));
+      throw new Error(p.status===401?"token 无效或已过期，请点「退出」后重新设置编辑权限。":(p.status===403||p.status===404)?"这个 token 没有写权限：需要选中 asdfo123.github.io 仓库，并给 Contents: Read and write。":(p.status===409||p.status===422)?"共享版本刚被更新，请先点「放弃改动」看最新版，再重新修改发布。":"发布失败（HTTP "+p.status+"）"+(e.message?"："+e.message:""));}
+    const j=await p.json();
+    SH={loaded:true,ok:true,sha:j.content&&j.content.sha,updated:body.updated,by:body.by,state:clone(A)};
+    DIRTY=false;STALE=null;localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-stale");
+    toast("已发布，所有人刷新页面就能看到");
+  }catch(e){alert(e.message);}
+  finally{BUSY=false;renderSync();}
+}
+function discard(){if(!confirm("放弃未发布的改动，恢复为共享版本？"))return;adoptShared();renderKan();renderSync();}
+function restoreStale(){A=clone(STALE.state);STALE=null;localStorage.removeItem(KEY+"-stale");save();renderKan();}
+function dropStale(){STALE=null;localStorage.removeItem(KEY+"-stale");renderSync();}
+function renderSync(msg){
+  const el=$("#sync");if(!el)return;
+  const me=localStorage.getItem(TOKKEY+"-login")||"";let l,r="";
+  if(msg)l='<span class="dot busy"></span>'+esc(msg);
+  else if(!SH.loaded)l='<span class="dot busy"></span>正在读取共享分工…';
+  else if(DIRTY)l='<span class="dot warn"></span><b>有未发布的改动</b>，现在只有你能看到'+(tok()?'':'；没有编辑权限的话，可以「复制分工文本」发群');
+  else if(SH.state)l='<span class="dot ok"></span>这是所有人看到的共享版本 · '+fmt(SH.updated)+(SH.by?' 由 '+esc(SH.by):'')+' 发布';
+  else if(SH.ok)l='<span class="dot ok"></span>共享版本：7 人建议方案（还没有人发布过修改）';
+  else l='<span class="dot warn"></span>读取共享版本失败，显示的是本地内容';
+  if(STALE&&!DIRTY)r+='<button class="btn sm" onclick="restoreStale()">恢复我未发布的旧改动</button><button class="btn sm" onclick="dropStale()">不要了</button>';
+  if(DIRTY&&!msg)r+='<button class="btn pri sm" onclick="publish()">'+(tok()?'发布给所有人':'发布给所有人（需编辑权限）')+'</button><button class="btn sm" onclick="discard()">放弃改动</button>';
+  r+=tok()?'<span class="small">编辑者 '+esc(me)+' · <a href="#" onclick="dropToken();return false">退出</a></span>'
+          :'<span class="small"><a href="#" onclick="askToken();return false">编辑权限</a> · <a href="'+TOKEN_URL+'" target="_blank" rel="noopener noreferrer">创建 token</a></span>';
+  if(SH.loaded&&!DIRTY&&!msg)r+='<span class="small"><a href="#" onclick="refreshShared(true);return false">刷新</a></span>';
+  const html='<div class="l">'+l+'</div><div class="r">'+r+'</div>';
+  el.className="sync"+(DIRTY?" dirty":"");
+  if(el.dataset.h!==html){el.dataset.h=html;el.innerHTML=html;}
+}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&Date.now()-LASTFETCH>30000)refreshShared(false);});
 function applyPreset(n){if(!confirm("切换到 "+n+" 人建议方案？当前拖动和填写的内容会被覆盖。"))return;A=preset(n);save();renderKan();toast("已切换到 "+n+" 人方案");}
 function clearAll(){if(!confirm("把所有章节放回\"待认领\"？"))return;A.pool=ORDER.slice();A.pkgs.forEach(p=>p.ch=[]);save();renderKan();}
 function addPkg(){A.pkgs.push({id:"p"+Date.now().toString(36),name:"新分工包",fit:"",who:"",note:"",ch:[]});save();renderKan();}
 function delPkg(i){const p=A.pkgs[i];A.pool.push(...p.ch);A.pkgs.splice(i,1);save();renderKan();}
+function relabel(){A.pkgs.forEach((p,i)=>document.querySelectorAll('.card select option[value="'+p.id+'"]').forEach(o=>o.textContent="P"+(i+1)+" "+p.name));}
 function pagesOf(list){return list.reduce((s,c)=>s+(CH[c]?.pages||0),0);}
 function moveCard(cid,target){
   A.pool=A.pool.filter(x=>x!==cid);A.pkgs.forEach(p=>p.ch=p.ch.filter(x=>x!==cid));
@@ -464,7 +561,7 @@ function cardHTML(cid){
     '<div style="display:flex;justify-content:flex-end;margin-top:6px"><select aria-label="移到" onchange="if(this.value)moveCard(\''+cid+'\',this.value)"><option value="">移到…</option>'+opts.map(o=>'<option value="'+o[0]+'">'+esc(o[1])+'</option>').join("")+'</select></div></div>';
 }
 function renderKan(){
-  const cols=A.pkgs.map((p,i)=>'<div class="col"><div class="hd"><div class="pid">'+(p.shared?"共担":"P"+(i+1))+'</div><input class="name" value="'+esc(p.name)+'" onchange="A.pkgs['+i+'].name=this.value;save();renderKan()"><input class="who" placeholder="负责人（自由填写，可多人）" value="'+esc(p.who)+'" onchange="A.pkgs['+i+'].who=this.value;save()"><div class="fit">'+esc(p.fit)+'</div><div class="load"><span>'+p.ch.length+' 项</span><span>约 '+pagesOf(p.ch).toFixed(2).replace(/\.?0+$/,"")+' 页</span></div></div><div class="body" data-target="'+p.id+'">'+p.ch.map(cardHTML).join("")+'</div><div class="ft"><textarea placeholder="备注：分工细节、截止时间…" onchange="A.pkgs['+i+'].note=this.value;save()">'+esc(p.note)+'</textarea></div>'+(p.ch.length?'':'<div class="ft"><button class="btn" style="font-size:12px" onclick="delPkg('+i+')">删除此包</button></div>')+'</div>');
+  const cols=A.pkgs.map((p,i)=>'<div class="col"><div class="hd"><div class="pid">'+(p.shared?"共担":"P"+(i+1))+'</div><input class="name" value="'+esc(p.name)+'" onchange="A.pkgs['+i+'].name=this.value;save();relabel()"><input class="who" placeholder="负责人（自由填写，可多人）" value="'+esc(p.who)+'" onchange="A.pkgs['+i+'].who=this.value;save()"><div class="fit">'+esc(p.fit)+'</div><div class="load"><span>'+p.ch.length+' 项</span><span>约 '+pagesOf(p.ch).toFixed(2).replace(/\.?0+$/,"")+' 页</span></div></div><div class="body" data-target="'+p.id+'">'+p.ch.map(cardHTML).join("")+'</div><div class="ft"><textarea placeholder="备注：分工细节、截止时间…" onchange="A.pkgs['+i+'].note=this.value;save()">'+esc(p.note)+'</textarea></div>'+(p.ch.length?'':'<div class="ft"><button class="btn" style="font-size:12px" onclick="delPkg('+i+')">删除此包</button></div>')+'</div>');
   const pool='<div class="col pool"><div class="hd"><div class="pid">POOL</div><div style="font-weight:700;font-size:14.5px">待认领</div><div class="fit">拖到右侧任意分工包</div><div class="load"><span>'+A.pool.length+' 项</span><span>约 '+pagesOf(A.pool).toFixed(2).replace(/\.?0+$/,"")+' 页</span></div></div><div class="body" data-target="pool">'+A.pool.map(cardHTML).join("")+'</div></div>';
   $("#kan").innerHTML=pool+cols.join("");
   const assigned=A.pkgs.filter(p=>!p.shared&&p.ch.length).length;
@@ -537,7 +634,7 @@ function toggleTheme(){const d=document.documentElement;const dark=d.dataset.the
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll(".toc a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));}});},{rootMargin:"-30% 0px -65% 0px"});
 document.querySelectorAll("main section").forEach(s=>io.observe(s));
 $("#decText").textContent=DECISIONS;
-renderChapters();load();renderKan();
+renderChapters();initBoard();
 </script>
 </body>
 </html>
