@@ -479,14 +479,14 @@ async function fetchShared(){
 }
 function adoptShared(){A=SH.state?clone(SH.state):preset(7);DIRTY=false;localStorage.removeItem(KEY);}
 async function initBoard(){
-  const d0=readJSON(KEY);A=d0&&validState(d0.state)?clone(d0.state):preset(7);renderKan();renderSync();
+  A=preset(7);renderKan();renderSync();
   await fetchShared();
-  let d=readJSON(KEY);
-  if(!(d&&validState(d.state))){d=null;const old=readJSON(OLDKEY);if(validState(old))d={state:old,base:SH.updated,dirty:true};}
-  localStorage.removeItem(OLDKEY);
-  STALE=readJSON(KEY+"-stale");
-  if(d&&d.dirty&&(d.base===SH.updated||!SH.ok)){A=clone(d.state);DIRTY=true;localStorage.setItem(KEY,JSON.stringify(d));}
-  else{if(d&&d.dirty){STALE=d;localStorage.setItem(KEY+"-stale",JSON.stringify(d));}adoptShared();}
+  const d=readJSON(KEY),old=readJSON(OLDKEY),st=readJSON(KEY+"-stale");
+  let draft=d&&d.dirty&&validState(d.state)?d:validState(old)?{state:old,base:null,dirty:true}:st&&validState(st.state)?st:null;
+  localStorage.removeItem(OLDKEY);localStorage.removeItem(KEY);localStorage.removeItem(KEY+"-stale");
+  if(draft&&JSON.stringify(draft.state)===JSON.stringify(SH.state||preset(7)))draft=null;
+  if(!SH.ok&&draft){A=clone(draft.state);DIRTY=true;localStorage.setItem(KEY,JSON.stringify(draft));}
+  else{adoptShared();STALE=draft;if(draft)localStorage.setItem(KEY+"-stale",JSON.stringify(draft));}
   renderKan();renderSync();
 }
 async function refreshShared(manual){
@@ -537,7 +537,7 @@ function renderSync(msg){
   else if(SH.state)l='<span class="dot ok"></span>这是所有人看到的共享版本 · '+fmt(SH.updated)+(SH.by?' 由 '+esc(SH.by):'')+' 发布';
   else if(SH.ok)l='<span class="dot ok"></span>共享版本：7 人建议方案（还没有人发布过修改）';
   else l='<span class="dot warn"></span>读取共享版本失败，显示的是本地内容';
-  if(STALE&&!DIRTY)r+='<button class="btn sm" onclick="restoreStale()">恢复我未发布的旧改动</button><button class="btn sm" onclick="dropStale()">不要了</button>';
+  if(STALE&&!DIRTY)r+='<span class="small">这台浏览器里还有一份没发布的改动</span><button class="btn sm" onclick="restoreStale()">继续编辑它</button><button class="btn sm" onclick="dropStale()">不要了</button>';
   if(DIRTY&&!msg)r+='<button class="btn pri sm" onclick="publish()">'+(tok()?'发布给所有人':'发布给所有人（需编辑权限）')+'</button><button class="btn sm" onclick="discard()">放弃改动</button>';
   r+=tok()?'<span class="small">编辑者 '+esc(me)+' · <a href="#" onclick="dropToken();return false">退出</a></span>'
           :'<span class="small"><a href="#" onclick="askToken();return false">编辑权限</a> · <a href="'+TOKEN_URL+'" target="_blank" rel="noopener noreferrer">创建 token</a></span>';
