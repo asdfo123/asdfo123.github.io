@@ -154,6 +154,14 @@ tbody tr:hover td{background:color-mix(in srgb,var(--tealbg) 45%,transparent)}
 .rrow .rt{display:flex;height:16px;background:var(--line2);border-radius:5px;overflow:hidden}
 .rrow .rt i{height:100%}.rrow .rt i.im{background:var(--sea)}.rrow .rt i.vi{background:var(--saffron)}.rrow .rt i.au{background:var(--coral)}
 .rrow .rnote{color:var(--ink2);font-size:12.5px}
+.tier .sub{font-size:12.5px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:6px}
+.tier .sub .works{margin-top:4px}
+.ex{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:8px 0}
+@media(max-width:1180px){.ex{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.ex{grid-template-columns:1fr}}
+.exs{border:1px solid var(--line);border-top:4px solid var(--ink2);border-radius:10px;padding:8px 10px;background:var(--bg)}
+.exs b{font-size:13px}.exs p{margin:4px 0 0;font-size:12.5px;color:var(--ink2);line-height:1.55}
+.exs.e1,.exs.e2{border-top-color:var(--sea)}.exs.e3{border-top-color:var(--teal2)}.exs.e4{border-top-color:var(--teal);background:var(--tealbg)}
 .kan{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;align-items:start}
 .col{border:1px solid var(--line);border-radius:14px;background:var(--bg);display:flex;flex-direction:column;min-height:260px}
 .col.pool{background:repeating-linear-gradient(45deg,var(--bg),var(--bg) 8px,var(--paper) 8px,var(--paper) 16px)}
@@ -197,13 +205,13 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 </head>
 <body>
 <div class="hero"><div class="in">
-  <div class="eyebrow">GenRender Survey · 协作框架 v0.4</div>
+  <div class="eyebrow">GenRender Survey · 协作框架 v0.4.1</div>
   <h1>视频模型作为渲染器</h1>
   <div class="en">Video Models as Generative Renderers</div>
   <p class="thesis">视频模型正在从"自己决定画什么"，变成"按外部给定的规格去画"。内容的决定权沿一架<b>规格阶梯</b>一步步移出模型：先是文本，再是参考图、多种参考的组合，最后是引擎、程序或仿真器算出的逐帧结构；视频模型负责忠实地画出来。</p>
   <div class="meta">
     <span class="chip">更新 <b>2026-11-05</b></span>
-    <span class="chip">方向 <b>v0.4 规格阶梯</b>，增补见 §09</span>
+    <span class="chip">方向 <b>v0.4.1 规格阶梯</b>，增补见 §09</span>
     <span class="chip">arXiv <b>11/19 提交</b> · 正文 35–45 页（不含参考文献）</span>
     <a class="chip" href="https://www.overleaf.com/project/6ae8963a94de1429cdeeeb39" target="_blank" rel="noopener noreferrer">Overleaf 项目 ↗</a>
     <button class="btn" id="themeBtn" onclick="toggleTheme()">切换深色</button>
@@ -246,12 +254,13 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
     <div class="add"><b>精度</b><p>确定得多准：文字描述 &lt; 参考示例（输出要像它，但不逐帧对齐）&lt; 逐帧对齐（白膜、骨架、框、轨迹）。</p></div>
     <div class="add"><b>主导权</b><p>谁持有规格、模型能不能推翻它。文本和参考是模型自行解释、也可能不听的输入；第 3 档由外部系统持有状态，渲染器只保留视觉记忆。</p></div>
   </div>
+  <p class="small"><b>阶梯不是好坏排名：</b>每个应用停在它需要的那一档。商业内容只要稳定的角色、不需要持久的世界，停在第 1–2 档是合理选择。</p>
   <p class="small">只看覆盖分不开第 2、3 档：多种参考的组合也能提到每个因素，但没有一个是逐帧对齐的，也没有外部状态撑着。对应 Overleaf 第 2 章 §2.1–2.3；"模型边界"的判定规则见 §08 拍板 B。</p>
 </section>
 
 <section id="s2">
   <div class="sh"><span class="num">02</span><h2>规格阶梯：两条谱系在第 3 档汇合</h2></div>
-  <p class="lede">全文主线：内容的决定权一档一档移出模型，每升一档都是因为下一档的具体失败。阶梯排的是规格，不是历史：结构渲染从图形学一路长出来，到第 3 档才和参考汇合，参考在这里退成"外观槽"。点图里的任一档，可以跳到下面对应的卡片。</p>
+  <p class="lede">全文主线：内容的决定权一档一档移出模型，每升一档都是因为下一档的具体失败。阶梯排的是规格，不是历史：结构渲染从图形学一路长出来，到第 3 档才和参考汇合，参考在这里退成"外观槽"。阶梯也不是好坏排名，每个应用停在它需要的那一档。点图里的任一档，可以跳到下面对应的卡片。</p>
   <svg class="diagram ladder" viewBox="0 0 1000 400" role="img" aria-label="规格阶梯：四档与两条谱系">
     <defs><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--coral)"/></marker>
       <marker id="ahs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--sea)"/></marker>
@@ -311,7 +320,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
       <text x="605.0" y="276" text-anchor="middle" font-size="12" fill="var(--coral)">单一参考被整体照搬，也没有动态</text>
       <a href="#tier-3" class="tierlink"><title>看第 3 档的详细卡片</title>
       <rect x="745" y="73" width="210" height="150" rx="14" fill="var(--tealbg)" stroke="var(--teal)" stroke-width="2.2"/>
-      <text x="850.0" y="99" text-anchor="middle" font-weight="700" fill="var(--teal)" font-size="14">第 3 档 · 可执行时空规格</text>
+      <text x="850.0" y="99" text-anchor="middle" font-weight="700" fill="var(--teal)" font-size="14">第 3 档 · 3a 对齐 / 3b 可执行</text>
       <text class="lbl" x="759" y="135">外观</text>
       <rect x="795" y="119" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"><title>身份：参考示例</title></rect>
       <rect x="833" y="119" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"><title>外观：参考示例</title></rect>
@@ -322,7 +331,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
       <rect x="833" y="151" width="32" height="22" rx="4" fill="var(--teal)" stroke="var(--teal)"><title>运动：逐帧对齐</title></rect>
       <rect x="871" y="151" width="32" height="22" rx="4" fill="var(--teal)" stroke="var(--teal)"><title>相机：逐帧对齐</title></rect>
       <rect x="909" y="151" width="32" height="22" rx="4" fill="var(--teal)" stroke="var(--teal)"><title>事件时序：逐帧对齐</title></rect>
-      <text class="lbl" x="850.0" y="197" text-anchor="middle">外部系统持有状态</text>
+      <text class="lbl" x="850.0" y="197" text-anchor="middle">3a 整段固定；3b 外部持有状态</text>
       <text class="lbl" x="850.0" y="214" text-anchor="middle">渲染器只保留视觉记忆</text>
       </a>
       <path d="M710,188 L741,118" stroke="var(--coral)" stroke-width="1.5" stroke-dasharray="5 4" fill="none" marker-end="url(#ahc)"/>
@@ -372,16 +381,27 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
       <div class="where">写在：第 4–8 章对照；第 5 章“理解”一节</div>
     </div>
     <div class="tier tier3" id="tier-3">
-      <div class="th"><span class="tb">3</span><div><b>可执行时空规格</b><span>Executable spatiotemporal</span></div></div>
-      <p class="tspec">引擎、程序或仿真器算出的逐帧代理；参考放进外观槽</p>
+      <div class="th"><span class="tb">3</span><div><b>时空结构规格</b><span>3a aligned · 3b executable</span></div></div>
+      <p class="tspec">逐帧对齐的结构固定时空因素；参考放进外观槽</p>
       <div class="fxg"><span>外观</span><i class="fx-e" title="身份：参考示例"></i><i class="fx-e" title="外观：参考示例"></i><i class="fx-e" title="声音：参考示例"></i><i class="fx-d" title="风格光照：文字描述"></i><span>时空</span><i class="fx-a" title="布局几何：逐帧对齐"></i><i class="fx-a" title="运动：逐帧对齐"></i><i class="fx-a" title="相机：逐帧对齐"></i><i class="fx-a" title="事件时序：逐帧对齐"></i></div>
       <div class="kv"><span>精度</span><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i></span><em>逐帧对齐</em></div>
-      <div class="kv"><span>主导权</span><b class="pill ext">外部系统（离线按段，交互时持续）</b></div>
-      <div class="works"><span>Code World Model</span><span>SolarRenderer</span><span>Matrix-Game 4.0</span><span>Wizard</span><span>PWM</span><span>Cosmos-Transfer1</span><span>EdenLive</span></div>
-      <div class="fail">代理外观泄漏；记忆复活旧结构；延迟</div>
-      <div class="where">写在：全文核心：第 2–8 章，目标 ≥ 60%</div>
+      <div class="kv"><span>主导权</span><b class="pill ext">外部（3a 按段 / 3b 持续）</b></div>
+      <div class="sub"><b>3a 逐帧对齐</b>：结构整段固定（一次性渲染的动画网格、录像里的深度或边缘、G-buffer）<div class="works"><span>Generative Rendering</span><span>DiffusionRenderer</span><span>Cosmos-Transfer1</span><span>Coarse-to-Real</span></div></div>
+      <div class="sub"><b>3b 可执行状态</b>：引擎、程序或仿真器持有状态，随状态变化重新给出结构<div class="works"><span>Code World Model</span><span>SolarRenderer</span><span>Matrix-Game 4.0</span><span>Wizard</span><span>PWM</span><span>EdenLive</span></div></div>
+      <div class="fail">3a：代理外观泄漏、欠定区域；3b 另有记忆复活旧结构、延迟、干预响应慢</div>
+      <div class="where">写在：全文核心，第 2–8 章；3b 是第 7 章的对象</div>
     </div>
   </div>
+  <h3>贯穿例子：两名剑士在庭院对决 <span class="tag t-both">v0.4.1</span></h3>
+  <p class="small">红衣剑士第 4 秒被击倒，必须一直倒着；镜头绕着两人转。第 1 章引入，第 4–8 章各用一次。</p>
+  <div class="ex">
+    <div class="exs e0"><b>第 0 档</b><p>一句提示词；脸、招式、时机都由模型定，可能让错的人倒下，或让倒下的人又站起来。</p></div>
+    <div class="exs e1"><b>第 1 档</b><p>每人一张参考图定长相；模型可能照搬参考图的姿势和背景，打法仍是它编的。</p></div>
+    <div class="exs e2"><b>第 2 档</b><p>参考图 + 一段参考打斗视频 + "0:04 红衣倒下" + 声音；两人的盔甲可能串，参考视频里的演员可能混进来。</p></div>
+    <div class="exs e3"><b>第 3a 档</b><p>编排好的动画一次性导出白膜和骨架，每帧姿势和镜头都定了；渲染器不能把白膜的灰色画出来。</p></div>
+    <div class="exs e4"><b>第 3b 档</b><p>游戏引擎实时跑：玩家决定谁倒下，引擎状态说红衣已倒；渲染器要让他一直倒着、盔甲前后一致、一瞬间出画面。</p></div>
+  </div>
+  <p class="small">各章怎么用：第 4 章选接口（骨架、框、白膜各定什么）；第 5 章把两人的参考绑到各自骨架；第 6 章看训练数据从哪来、蒸馏会不会抹平第 4 秒的倒地；第 7 章让玩家改变谁倒下；第 8 章按覆盖、精度、主导权打分。</p>
   <details class="tools"><summary>表格版（便于复制）</summary>
   <div class="tw"><table>
     <thead><tr><th>档位</th><th>外部规格</th><th>覆盖</th><th>精度</th><th>主导权</th><th>代表工作</th><th>典型失败</th></tr></thead>
@@ -389,7 +409,8 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
       <tr><td><b>0 文本规格</b></td><td>训练时的详细 caption；推理时 LLM 改写的提示词</td><td>任何因素，但只是描述</td><td>描述</td><td>模型</td><td>DALL·E 3、VPO、Prompt-A-Video、VC4VG <span class="tag t-ok">已核</span></td><td>字被忽略或混淆；几何和时序说不清</td></tr>
       <tr><td><b>1 外观锚定</b></td><td>1–3 张主体图 + 文本</td><td>身份、外观；动态靠描述或留空</td><td>示例</td><td>模型</td><td>CustomCrafter、PersonalVideo、DreamVideo-2</td><td>照搬参考图的姿态和背景</td></tr>
       <tr><td><b>2 多因素组合</b></td><td>多张参考、参考视频、音频、带时间的文本</td><td>逐主体的外观；粗粒度的动作、运镜、时序</td><td>示例；粗略对时</td><td>模型（要读懂并分配条件）</td><td>Movie Weaver、CINEMA、BindWeave、Kling-Omni、OmniHuman-1.5</td><td>多主体属性串扰；参考视频整段搬运</td></tr>
-      <tr><td><b>3 可执行时空规格</b></td><td>引擎、程序或仿真器算出的逐帧代理；参考放进外观槽</td><td>布局、几何、运动、相机、事件逐帧对齐；外观靠示例</td><td>逐帧对齐</td><td>外部系统（离线按段，交互时持续）</td><td>Code World Model、SolarRenderer、Matrix-Game 4.0、Wizard、PWM、Cosmos-Transfer1、EdenLive</td><td>代理外观泄漏；记忆复活旧结构；延迟</td></tr>
+      <tr><td><b>3a 逐帧对齐</b></td><td>整段固定的结构：一次性渲染的动画网格、录像里的深度或边缘、G-buffer；参考放进外观槽</td><td>布局、几何、运动、相机逐帧对齐；外观靠示例</td><td>逐帧对齐</td><td>外部（按段固定）</td><td>Generative Rendering、DiffusionRenderer、Cosmos-Transfer1、Coarse-to-Real</td><td>代理外观泄漏；欠定区域</td></tr>
+      <tr><td><b>3b 可执行状态</b></td><td>引擎、程序或仿真器按自己持有的状态重新算出的逐帧代理</td><td>同 3a，外加跟随外部动作的事件</td><td>逐帧对齐</td><td>外部系统（交互中持续）</td><td>Code World Model、SolarRenderer、Matrix-Game 4.0、Wizard、PWM、EdenLive</td><td>记忆复活旧结构；延迟；干预响应慢</td></tr>
     </tbody>
   </table></div>
   </details>
@@ -502,8 +523,12 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 
 <section id="s9">
   <div class="sh"><span class="num">09</span><h2>在 v3 基础上的增补</h2></div>
-  <p class="lede">Agent 在整理 Overleaf 时补进去的分析，均已写入对应章节；需要组里认可后再定稿。前五条是 v0.4（11/5）新增。</p>
+  <p class="lede">Agent 在整理 Overleaf 时补进去的分析，均已写入对应章节；需要组里认可后再定稿。前四条是 v0.4.1 新增，再往下五条是 v0.4（11/5）新增。</p>
   <div class="adds">
+    <div class="add"><b>第 3 档拆成 3a / 3b（v0.4.1）</b><p>3a 是整段固定的逐帧结构（离线），3b 是外部系统持有、随状态重新给出结构的可执行状态（交互）。名字和定义对上了，3b 正好是第 7 章的对象。</p></div>
+    <div class="add"><b>阶梯不是好坏排名</b><p>每个应用停在它需要的那一档；商业内容停在第 1–2 档是合理选择。这也把第 3 章"多领域走到同一种分工"的论证补了回来。</p></div>
+    <div class="add"><b>章节模板</b><p>第 4–8 章结尾统一为：第 3 档的问题 → 跨档对照框（五组解法各章一组，Agent 已按核实过的材料起草）→ takeaway。"同一个问题"这条发现因此在各章反复出现。</p></div>
+    <div class="add"><b>贯穿例子：两名剑士</b><p>第 1 章引入，从第 0 档一路走到第 3b 档；第 4–8 章各用一次，读者有一条线索可以跟。</p></div>
     <div class="add"><b>规格阶梯（v0.4）</b><p>用覆盖、精度、主导权三个维度定义四档。只看"完备度"分不开第 2、3 档，精度和主导权才分得开；这样阶梯可以量化，也和"世界状态 vs 视觉记忆"打通。</p></div>
     <div class="add"><b>第 0 档：文本规格</b><p>从 caption 与提示词改写讲起，补上"为什么外移"：DALL·E 3 重写 caption 并在推理时扩写提示词；VPO、Prompt-A-Video 训练改写器；VC4VG 显示 caption 质量与生成质量强相关。四篇已核实入库。</p></div>
     <div class="add"><b>阶梯不是历史</b><p>几何谱系来自图形学（vid2vid → Generative Rendering → Cosmos-Transfer → MG4），不经过第 1–2 档；到第 3 档参考退为外观槽，22 个结构渲染器里 7 个复用 H3 参考通道。</p></div>
@@ -559,36 +584,36 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 <script>
 const CH = {
   c1:{no:"1",t:"引言",en:"Introduction",pages:3.5,now:3.5,prog:60,state:"v0.4 已重写：文本规格开场、规格阶梯、两条谱系、定位、贡献",
-    done:["开场改为从文本规格讲起：DALL·E 3 重写 caption 与推理时扩写提示词、VPO、Prompt-A-Video、VC4VG（均已核对报告或摘要）","规格阶梯一节：四档 + 三个维度（覆盖、精度、主导权），配标题页的阶梯图；汇合说法保持收窄（22 个结构渲染器的通道统计）","两条谱系：几何谱系来自图形学（vid2vid → Generative Rendering → 2026），外观谱系从主体定制起步","定位：补上 Agentic Visual Generation 的 L0–L4，说明我们细分的是它的 L1","贡献改为围绕阶梯的 4 条"],
+    done:["开场改为从文本规格讲起：DALL·E 3 重写 caption 与推理时扩写提示词、VPO、Prompt-A-Video、VC4VG（均已核对报告或摘要）","规格阶梯一节：四档 + 三个维度（覆盖、精度、主导权），配标题页的阶梯图；汇合说法保持收窄（22 个结构渲染器的通道统计）","两条谱系：几何谱系来自图形学（vid2vid → Generative Rendering → 2026），外观谱系从主体定制起步","定位：补上 Agentic Visual Generation 的 L0–L4，说明我们细分的是它的 L1","贡献改为围绕阶梯的 4 条","v0.4.1：第 3 档拆成 3a / 3b；加\"阶梯不是好坏排名\"；贯穿例子（两名剑士）放在阶梯一节之后"],
     todo:[["§1.1 拍板 A","主张措辞：推荐\"视频模型的智能从决定内容转向忠实执行规格\"；拍板后同步改摘要。"],["§1.3 外观谱系的第一个工作","确定参考侧的\"第一个工作\"（拍板 4）；这一段保持简短。"],["§1.5 贡献表述","\"按去噪阶段错开条件\"可能有先例（SDEdit 式部分去噪、ControlNet guidance start/end），查新后再定措辞。"]],
     hint:"v0.4 初稿已就位，接下来主要是拍板 A 和打磨。"},
   c2:{no:"2",t:"定义与框架",en:"Definition and Framework",pages:4.5,now:4.2,prog:65,state:"v0.4：阶梯的正式定义已写；拍板 B 待定",
-    done:["8 个因素分成\"外观规格\"（身份、外观、声音、风格光照）和\"时空规格\"（布局几何、运动、相机、事件时序）","新增 §2.3 规格阶梯：用覆盖、精度、主导权定义四档（阶梯表），三条护栏：只看覆盖分不开第 2、3 档；阶梯不是历史；按条件分档、不按应用","条件决定矩阵加\"档位\"一列；\"同一个问题出现在每一档\"与五组解法表（列名改为第 1–2 档 / 第 3 档）","世界状态 vs 视觉记忆对应主导权维度；形式化、骨干、范围改成按档位表述","约定：后面各章的 reference route 指第 1–2 档，structure route 指第 3 档","五组解法表第 1–2 档的数字已对原文核对（11/5），Phantom-Data、Movie Weaver 两行改得更准"],
+    done:["8 个因素分成\"外观规格\"（身份、外观、声音、风格光照）和\"时空规格\"（布局几何、运动、相机、事件时序）","新增 §2.3 规格阶梯：用覆盖、精度、主导权定义四档（阶梯表），四条护栏：只看覆盖分不开第 2、3 档；阶梯不是历史；按条件分档、不按应用；阶梯不是好坏排名","条件决定矩阵加\"档位\"一列；\"同一个问题出现在每一档\"与五组解法表（列名改为第 1–2 档 / 第 3 档）","第 3 档拆成 3a（整段固定的对齐结构）和 3b（外部持有的可执行状态）","世界状态 vs 视觉记忆对应主导权维度；形式化、骨干、范围改成按档位表述","约定：后面各章的 reference route 指第 1–2 档，structure route 指第 3 档","五组解法表第 1–2 档的数字已对原文核对（11/5），Phantom-Data、Movie Weaver 两行改得更准"],
     todo:[["§2.2 拍板 B","模型边界规则：推荐\"在视频生成器采样前、以显式可检查形式确定某个因素的组件都算外部\"；备选\"单独训练\"或\"可单独替换\"。"],["§2.8 第 2 档骨干","一两句：哪些开源 / 闭源模型有多参考接口，参考怎么进模型。"],],
     hint:"全文口径在这一章，其他章按这里的术语写。"},
   c3:{no:"3",t:"驱动领域",en:"Driving Domains",pages:3,now:1.3,prog:25,state:"v0.4：按档位重组；世界模型与游戏已写",
     done:["领域证据表，每格标核实状态","游戏与工业、世界模型两节（第 3 档）按原文成稿（MG4 四个问题、Magpie、AlayaRenderer-Flash、AnyGameRenderer；PWM 8.00% → 94/98%、BoxWorld 97.3% vs ≤16.2%），并注明基准偏向外部状态"],
-    todo:[["§3.1 商业内容","压到半页左右，写成第 1–2 档。两格证据空缺仍需一手来源（财报、合作公告、平台数据）；确认 \"videococo\" 是哪篇。"],["§3.2 数字人","半页左右：音频驱动属第 2 档，外部 3D 参数驱动属第 3 档；数字已核（11/5）；按第 2 章边界规则说明 MLLM 规划器算外部。"],["§3.5 具身仿真","一段：数字已核（11/5）。PhysGen 要报基线范围 1.39–2.11，WonderPlay 报 71–85%。"],["§3.6 跨领域归纳","按阶梯写：各领域都从文本起步，文本不够用时往上走；可控性、状态可持久可验证、复用已有资产与引擎、成本；与第 9 章对照。"]],
+    todo:[["§3.1 商业内容","压到半页左右，写成\"理性地停在第 1–2 档\"，并补上第 0 → 1 档的证据（只用文本时角色一致性怎么失败）。两格证据空缺仍需一手来源（财报、合作公告、平台数据）；确认 \"videococo\" 是哪篇。"],["§3.2 数字人","半页左右：音频驱动属第 2 档，外部 3D 参数驱动属第 3 档；数字已核（11/5）；按第 2 章边界规则说明 MLLM 规划器算外部。"],["§3.5 具身仿真","一段：数字已核（11/5）。PhysGen 要报基线范围 1.39–2.11，WonderPlay 报 71–85%。"],["§3.6 跨领域归纳","按阶梯写：各领域都从文本起步，文本不够用时往上走；可控性、状态可持久可验证、复用已有资产与引擎、成本；与第 9 章对照。"]],
     hint:"篇幅从 5 页降到 3 页，重点是按档位讲清各领域为什么上来。"},
   c4:{no:"4",t:"渲染器接口",en:"Renderer Interfaces",pages:6,now:4.9,prog:60,state:"v0.4：第 3 档接口成稿；参考侧压成一小节",
     done:["第 3 档全文（来自 v0.1）：内容 / 编码 / 来源三属性；七类结构接口，配原创合成示意图与\"决定矩阵\"图；侧信道；信息充分性与可构造性；泄漏-遵循两难与五类对策；接口泛化（typed vs untyped）","\"接口在扩张并部分合并\"：22 个结构渲染器的通道统计","参考接口产品表：5 款产品已按官方文档核对并补上引用（11/5）"],
-    todo:[["§4.1 参考：从外观锚点到外观槽","约 1 页，按档位写：第 1 档单主体锚点 → 第 2 档组合与路由（含数据集与基准）→ 第 3 档复用参考通道当外观槽；挑 5 篇左右代表作，引用已入库。"],["产品表","按官方文档更新（可灵等版本）。"],["§4.7 汇合统计（可选）","扩展到闭源产品；v1 可以不做。"]],
+    todo:[["§4.1 参考：从外观锚点到外观槽","约 1 页，按档位写：第 1 档单主体锚点 → 第 2 档组合与路由（含数据集与基准）→ 第 3 档复用参考通道当外观槽；挑 5 篇左右代表作，引用已入库。"],["产品表","按官方文档更新（可灵等版本）。"],["§4.7 汇合统计（可选）","扩展到闭源产品；v1 可以不做。"],["跨档对照框","已起草（对齐到外观不敏感特征：RefAlign ↔ Coarse-to-Real / EdenLive），可以直接改；改完更新 takeaway。"],["贯穿例子","一段：打斗该用哪种接口；骨架、框、白膜各定什么；骨架够不够表达盔甲遮挡。"]],
     hint:"参考侧从\"半章\"降为一小节，工作量明显减少。"},
   c5:{no:"5",t:"从注入到理解",en:"From Injection to Understanding",pages:6,now:5.0,prog:60,state:"v0.4：第 3 档机制成稿；\"理解\"一节是第 2 → 3 档的桥",
     done:["第 3 档四类注入位置（输入融合、并行分支、in-context 参考 token、交叉注意力）+ mask 绑定 + 按噪声阶段条件，配示意图","\"论文内部对比证据\"表：结论是没有一致排序、受骨干混杂","\"从注入到理解\"：CINEMA、BindWeave、Kling-Omni、OmniHuman-1.5 的描述已按摘要核对"],
-    todo:[["§5.1 第 1–2 档注入","一段对照即可，不再每类一段：多编码器参考条件、参考解耦、MLLM 跨模态引导（RefAlign related work 的分法，需核对），各点一两个代表系统。"],["§5.5 参考绑定","两三句：DreamVideo-2 框 mask、Movie Weaver 锚 token，与五组解法表对应。"],["§5.7 理解支配生成","写成第 2 档的贡献被第 3 档复用（如 SolarRenderer 对每种结构的说明），并回应\"智能外移还是回流\"，支撑拍板 A。"]],
+    todo:[["§5.1 第 1–2 档注入","一段对照即可，不再每类一段：多编码器参考条件、参考解耦、MLLM 跨模态引导（RefAlign related work 的分法，需核对），各点一两个代表系统。"],["§5.5 参考绑定","两三句：DreamVideo-2 框 mask、Movie Weaver 锚 token，与五组解法表对应。"],["§5.7 理解支配生成","写成第 2 档的贡献被第 3 档复用（如 SolarRenderer 对每种结构的说明），并回应\"智能外移还是回流\"，支撑拍板 A。"],["跨档对照框","已起草（按去噪阶段错开：PersonalVideo / CustomCrafter ↔ Code Video Model / BoxWorld）；改完更新 takeaway。"],["贯穿例子","一段：把两人的参考各自绑到自己的骨架区域，结构早给、身份晚给。"]],
     hint:"\"理解\"一节是全文论证的关键一环。"},
   c6:{no:"6",t:"训练与数据",en:"Training and Data",pages:5.5,now:4.6,prog:60,state:"v0.4：第 3 档训练成稿；配对对照与后训练各约半页",
     done:["第 3 档全文：五类监督来源；对齐比规模重要；适配范围；双向 → 因果的四个要素；五类少步蒸馏与\"蒸馏侵蚀控制\"；训练流程图与架构训练表","\"同源配对 → 跨上下文配对\"开头段"],
-    todo:[["§6.1 配对对照","约半页：第 1–2 档\"同源 → 跨上下文 → 无需三元组\"对照第 3 档的几何与外观扰动，系统与数字对原文核对。"],["§6.6 后训练与 RL","约半页，先写第 3 档；若结构渲染器基本只用蒸馏，要明说。"]],
+    todo:[["§6.1 配对对照","约半页：第 1–2 档\"同源 → 跨上下文 → 无需三元组\"对照第 3 档的几何与外观扰动，系统与数字对原文核对。"],["§6.6 后训练与 RL","约半页，先写第 3 档；若结构渲染器基本只用蒸馏，要明说。"],["跨档对照框","已起草（打破同源配对：Phantom-Data ↔ AgentGarten / EdenLive）；改完更新 takeaway。"],["贯穿例子","一段：打斗的配对数据从哪来；少步蒸馏会不会把第 4 秒的倒地抹平。"]],
     hint:"核心是因果化与保控制的蒸馏，这部分已成稿。"},
-  c7:{no:"7",t:"流式与交互",en:"Streaming and Interaction",pages:4,now:3.6,prog:75,state:"v0.4：全章为第 3 档，已成稿",
+  c7:{no:"7",t:"流式与交互",en:"Streaming and Interaction",pages:4,now:3.6,prog:75,state:"v0.4.1：本章对象是第 3b 档，已成稿",
     done:["生成粒度、视觉记忆四种设计及\"记忆不能压过当前代理\"、流式编解码、延迟分解图、系统工程、条件切换；效率表（注明不可直接比较）"],
-    todo:[["§7.6 实时数字人","一段，按收到的条件分档：音频驱动、对话式数字人属第 2 档；外部面部 / 身体参数驱动属第 3 档。说明身份参考怎么缓存、对话里的按键到画面延迟意味着什么。"]],
+    todo:[["§7.6 实时数字人","一段，按收到的条件分档：音频驱动、对话式数字人属第 2 档；外部面部 / 身体参数驱动属第 3 档。说明身份参考怎么缓存、对话里的按键到画面延迟意味着什么。"],["跨档对照框","已起草（mask 绑定要跟着状态走：DreamVideo-2 ↔ Wizard / BoxWorld）；改完更新 takeaway。"],["贯穿例子","一段：玩家改变谁倒下；一个块内要切换，记忆不能把倒下的人复活，延迟要在预算内。"]],
     hint:"基本完成，可以多花时间互审第 6 章。"},
   c8:{no:"8",t:"评测",en:"Evaluation",pages:3.5,now:2.6,prog:55,state:"v0.4：按覆盖、精度、主导权重组评测",
     done:["现有度量盘点与局限；八维评测协议（标注已有 / 改造 / 新提）；四个诊断实验（明确未做）","\"参考保真与相似度奖励照搬\"：RefAlign 消融（已核：总分 55.73% → 49.93%，人脸相似度 53.15% → 68.45%）、OmniVBench 按因素评测、结构侧边缘指标偏爱描边"],
-    todo:[["评测协议","把八维协议对应到三个维度：覆盖（逐因素遵循）、精度（对代理的逐帧指标）、主导权（干预下长时程的状态一致）。"],["§8.2 参考保真","压到半页，作为第 1–2 档的对照；补几行参考侧基准。"],["泄漏指标","定义各档通用的泄漏指标：第 1–2 档的参考姿态照搬、第 3 档的代理风格可检测性。"]],
+    todo:[["评测协议","把八维协议对应到三个维度：覆盖（逐因素遵循）、精度（对代理的逐帧指标）、主导权（干预下长时程的状态一致）。"],["§8.2 参考保真","压到半页，作为第 1–2 档的对照；补几行参考侧基准。"],["泄漏指标","定义各档通用的泄漏指标：第 1–2 档的参考姿态照搬、第 3 档的代理风格可检测性。"],["跨档对照框","已起草（用语言说明每个条件管什么：Movie Weaver ↔ SolarRenderer，评测侧对应 OmniVBench 的逐因素清单）。"],["takeaway","本章还没有 takeaway 框，补 3–4 条。"],["贯穿例子","一段：按覆盖（两人身份与姿态）、精度（关键点对骨架的误差）、主导权（被击倒后是否一直倒着）打分。"]],
     hint:"同时负责全文的画图风格。"},
   c9:{no:"9",t:"另一条路",en:"The Other Path",pages:2,now:0.4,prog:15,state:"骨架；v0.4 写成\"阶梯回退\"",
     done:["通才立场（Veo 3 零样本推理论文、视觉世界模拟路线图）、按因素定义的分工光谱、渲染器路线代价三节骨架"],
