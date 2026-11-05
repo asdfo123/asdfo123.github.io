@@ -156,14 +156,14 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 </head>
 <body>
 <div class="hero"><div class="in">
-  <div class="eyebrow">GenRender Survey · 协作框架 v0.3+</div>
+  <div class="eyebrow">GenRender Survey · 协作框架 v0.4</div>
   <h1>视频模型作为渲染器</h1>
   <div class="en">Video Models as Generative Renderers</div>
-  <p class="thesis">视频模型正在从"自己决定画什么"，变成"按外部给定的内容去画"。谁、长什么样、说什么、在哪、怎么动、发生什么，越来越多地由 agent、参考素材、程序或仿真器在模型外部决定；视频模型负责忠实地画出来。</p>
+  <p class="thesis">视频模型正在从"自己决定画什么"，变成"按外部给定的规格去画"。内容的决定权沿一架<b>规格阶梯</b>一步步移出模型：先是文本，再是参考图、多种参考的组合，最后是引擎、程序或仿真器算出的逐帧结构；视频模型负责忠实地画出来。</p>
   <div class="meta">
-    <span class="chip">更新 <b>2026-11-03</b></span>
-    <span class="chip">方向 <b>以 v0.3 为准</b>，本页增补见 §09</span>
-    <span class="chip">目标 <b>arXiv 长文</b> · 正文 40–50 页（不含参考文献）</span>
+    <span class="chip">更新 <b>2026-11-05</b></span>
+    <span class="chip">方向 <b>v0.4 规格阶梯</b>，增补见 §09</span>
+    <span class="chip">arXiv <b>11/19 提交</b> · 正文 35–45 页（不含参考文献）</span>
     <a class="chip" href="https://www.overleaf.com/project/6ae8963a94de1429cdeeeb39" target="_blank" rel="noopener noreferrer">Overleaf 项目 ↗</a>
     <button class="btn" id="themeBtn" onclick="toggleTheme()">切换深色</button>
   </div>
@@ -172,9 +172,9 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 <div class="wrap">
 <nav class="toc" id="toc">
   <a href="#s1"><span class="n">01</span>主张与定义</a>
-  <a href="#s2"><span class="n">02</span>两条来路</a>
+  <a href="#s2"><span class="n">02</span>规格阶梯</a>
   <a href="#s3"><span class="n">03</span>条件决定矩阵</a>
-  <a href="#s4"><span class="n">04</span>五组同类解法</a>
+  <a href="#s4"><span class="n">04</span>每一档的同一个问题</a>
   <a href="#s5"><span class="n">05</span>领域证据</a>
   <a href="#s6"><span class="n">06</span>章节与 Agent 进度</a>
   <a href="#s7"><span class="n">07</span>分工面板</a>
@@ -187,46 +187,122 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 
 <section id="s1">
   <div class="sh"><span class="num">01</span><h2>主张与定义</h2></div>
-  <p class="lede">写进摘要和引言的那几句。</p>
-  <div class="callout c-key"><div class="t">主张（建议措辞，待拍板 A）</div>多个领域出于各自原因走到同一种分工：<b>决定内容的智能交给外部（LLM agent / 参考素材 / 程序 / 仿真器），视频模型的智能从"决定内容"转向"忠实执行条件"。</b>"理解支配生成"的含义是：生成效果的上限，越来越取决于模型能否读懂条件，而不是它自己想象什么。</div>
-  <h3>按因素的操作性定义 <span class="tag t-both">本页增补</span></h3>
-  <p>把视频要决定的内容拆成下面几个因素。某个因素在生成之前已在模型外部以显式形式确定，就说模型在这个因素上被当作<b>渲染器</b>；被外部确定的因素越多，越接近纯渲染器。这样"只给身份图算不算渲染器"就有了答案：它渲染身份和外观，其余因素自己生成。</p>
+  <p class="lede">写进摘要、引言和第 2 章的那几句。</p>
+  <div class="callout c-key"><div class="t">主张（建议措辞，待拍板 A）</div>内容的决定权沿规格阶梯移到模型外面（LLM、参考素材、程序、仿真器），<b>视频模型的智能从"决定内容"转向"忠实执行规格"。</b>"理解支配生成"的含义是：生成效果的上限，越来越取决于模型能否读懂规格，而不是它自己想象什么。</div>
+  <h3>按因素的操作性定义</h3>
+  <p>把视频要决定的内容拆成 8 个因素，分成两组。某个因素在生成之前已在模型外部以显式形式确定，就说模型在这个因素上被当作<b>渲染器</b>。这样"只给身份图算不算渲染器"就有了答案：它渲染身份和外观，其余因素自己生成。</p>
+  <p class="small" style="margin:4px 0 6px">外观规格：谁、长什么样、听起来怎样</p>
   <div class="def-grid">
-    <div class="fac"><b>身份</b><span>谁</span></div><div class="fac"><b>外观</b><span>长什么样</span></div><div class="fac"><b>声音</b><span>说什么、怎么说</span></div><div class="fac"><b>布局几何</b><span>在哪、什么形状</span></div><div class="fac"><b>运动</b><span>怎么动</span></div><div class="fac"><b>相机</b><span>怎么拍</span></div><div class="fac"><b>事件时序</b><span>何时发生什么</span></div><div class="fac"><b>风格光照</b><span>什么质感</span></div>
+    <div class="fac"><b>身份</b><span>谁</span></div><div class="fac"><b>外观</b><span>长什么样</span></div><div class="fac"><b>声音</b><span>说什么、怎么说</span></div><div class="fac"><b>风格光照</b><span>什么质感</span></div>
   </div>
-  <p class="small">对应 Overleaf 第 2 章 §2.1–2.2；"模型边界"的判定规则见 §08 拍板 B。</p>
+  <p class="small" style="margin:10px 0 6px">时空规格：在哪、怎么变</p>
+  <div class="def-grid">
+    <div class="fac"><b>布局几何</b><span>在哪、什么形状</span></div><div class="fac"><b>运动</b><span>怎么动</span></div><div class="fac"><b>相机</b><span>怎么拍</span></div><div class="fac"><b>事件时序</b><span>何时发生什么</span></div>
+  </div>
+  <h3>阶梯的三个维度 <span class="tag t-both">v0.4</span></h3>
+  <div class="adds">
+    <div class="add"><b>覆盖</b><p>外部规格确定了哪些因素，也就是上面 8 个里的哪几个。</p></div>
+    <div class="add"><b>精度</b><p>确定得多准：文字描述 &lt; 参考示例（输出要像它，但不逐帧对齐）&lt; 逐帧对齐（白膜、骨架、框、轨迹）。</p></div>
+    <div class="add"><b>主导权</b><p>谁持有规格、模型能不能推翻它。文本和参考是模型自行解释、也可能不听的输入；第 3 档由外部系统持有状态，渲染器只保留视觉记忆。</p></div>
+  </div>
+  <p class="small">只看覆盖分不开第 2、3 档：多种参考的组合也能提到每个因素，但没有一个是逐帧对齐的，也没有外部状态撑着。对应 Overleaf 第 2 章 §2.1–2.3；"模型边界"的判定规则见 §08 拍板 B。</p>
 </section>
 
 <section id="s2">
-  <div class="sh"><span class="num">02</span><h2>两条来路，汇到同一个接口</h2></div>
-  <p class="lede">全文的主线索：不同领域出于不同原因把内容决策外置，参考驱动与结构驱动在渲染器接口汇合。</p>
-  <svg class="diagram" viewBox="0 0 1000 316" role="img" aria-label="两条来路汇到同一个接口">
-    <defs>
-      <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink2)"/></marker>
-      <linearGradient id="gi" x1="0" x2="1"><stop offset="0" stop-color="var(--tealbg)"/><stop offset="1" stop-color="var(--paper)"/></linearGradient>
-    </defs>
-    <g font-size="13.5">
-      <g><rect x="4" y="14" width="206" height="46" rx="12" fill="var(--tealbg)" stroke="var(--sea)"/><text x="107" y="34" text-anchor="middle" font-weight="600">商业内容</text><text class="lbl" x="107" y="51" text-anchor="middle">角色和声音要一致</text></g>
-      <g><rect x="4" y="70" width="206" height="46" rx="12" fill="var(--tealbg)" stroke="var(--sea)"/><text x="107" y="90" text-anchor="middle" font-weight="600">数字人</text><text class="lbl" x="107" y="107" text-anchor="middle">台词和口型由 LLM / TTS 定</text></g>
-      <g><rect x="4" y="150" width="206" height="46" rx="12" fill="var(--saffbg)" stroke="var(--saffron)"/><text x="107" y="170" text-anchor="middle" font-weight="600">游戏与工业</text><text class="lbl" x="107" y="187" text-anchor="middle">场景已在代码或引擎里</text></g>
-      <g><rect x="4" y="206" width="206" height="46" rx="12" fill="var(--saffbg)" stroke="var(--saffron)"/><text x="107" y="226" text-anchor="middle" font-weight="600">世界模型</text><text class="lbl" x="107" y="243" text-anchor="middle">状态交给程序维护</text></g>
-      <g><rect x="4" y="262" width="206" height="46" rx="12" fill="var(--saffbg)" stroke="var(--saffron)"/><text x="107" y="282" text-anchor="middle" font-weight="600">具身仿真</text><text class="lbl" x="107" y="299" text-anchor="middle">仿真器给出轨迹</text></g>
-      <g fill="none" stroke="var(--ink2)" stroke-width="1.3" marker-end="url(#ah)">
-        <path d="M210,37 C250,37 250,70 286,72"/><path d="M210,93 C250,93 250,86 286,84"/>
-        <path d="M210,173 C250,173 250,216 286,220"/><path d="M210,229 C250,229 250,229 286,229"/><path d="M210,285 C250,285 250,242 286,238"/>
-        <path d="M492,78 C540,78 540,124 576,128"/><path d="M492,229 C540,229 540,186 576,182"/>
-        <path d="M800,155 L834,155"/><path d="M936,155 L962,155"/>
-      </g>
-      <rect x="288" y="50" width="204" height="56" rx="12" fill="var(--sea)"/><text x="390" y="74" text-anchor="middle" fill="#fff" font-weight="700">参考驱动 R2V</text><text x="390" y="94" text-anchor="middle" fill="#fff" font-size="11.5">图 · 视频 · 音频参考</text>
-      <rect x="288" y="201" width="204" height="56" rx="12" fill="var(--saffron)"/><text x="390" y="225" text-anchor="middle" fill="#fff" font-weight="700">结构驱动</text><text x="390" y="245" text-anchor="middle" fill="#fff" font-size="11.5">白膜 · 深度 · 语义 · 骨架 · 轨迹</text>
-      <rect x="578" y="72" width="222" height="166" rx="16" fill="url(#gi)" stroke="var(--teal)" stroke-width="1.6"/>
-      <text x="689" y="102" text-anchor="middle" font-weight="700" fill="var(--teal)" font-size="15">渲染器接口</text>
-      <text class="lbl" x="689" y="130" text-anchor="middle">身份 · 外观 · 声音 ← 参考</text><text class="lbl" x="689" y="154" text-anchor="middle">几何 · 布局 · 相机 ← 结构</text><text class="lbl" x="689" y="178" text-anchor="middle">（白膜常当参考视频喂入）</text><text class="lbl" x="689" y="202" text-anchor="middle">事件时刻 ← 带时间的文本</text>
-      <rect x="836" y="125" width="100" height="60" rx="12" fill="var(--teal)"/><text x="886" y="151" text-anchor="middle" fill="#fff" font-weight="700">视频基模</text><text x="886" y="170" text-anchor="middle" fill="#fff" font-size="11.5">执行条件</text>
-      <text x="996" y="159" text-anchor="end" font-size="12.5" fill="var(--ink2)">视频</text>
+  <div class="sh"><span class="num">02</span><h2>规格阶梯：两条谱系在第 3 档汇合</h2></div>
+  <p class="lede">全文主线：内容的决定权一档一档移出模型，每升一档都是因为下一档的具体失败。阶梯排的是规格，不是历史：结构渲染从图形学一路长出来，到第 3 档才和参考汇合，参考在这里退成"外观槽"。</p>
+  <svg class="diagram" viewBox="0 0 1000 400" role="img" aria-label="规格阶梯：四档与两条谱系">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink2)"/></marker>
+      <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--coral)"/></marker>
+      <marker id="ahs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--sea)"/></marker>
+      <marker id="ahy" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--saffron)"/></marker></defs>
+    <g font-size="13">
+      <rect x="10" y="178" width="210" height="150" rx="14" fill="var(--paper)" stroke="var(--ink2)" stroke-width="1.3"/>
+      <text x="115.0" y="204" text-anchor="middle" font-weight="700" fill="var(--ink2)" font-size="14">第 0 档 · 文本规格</text>
+      <text class="lbl" x="24" y="240">外观</text>
+      <rect x="60" y="224" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <rect x="98" y="224" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <rect x="136" y="224" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <rect x="174" y="224" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <text class="lbl" x="24" y="272">时空</text>
+      <rect x="60" y="256" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <rect x="98" y="256" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <rect x="136" y="256" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <rect x="174" y="256" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <text class="lbl" x="115.0" y="302" text-anchor="middle">文字描述内容</text>
+      <text class="lbl" x="115.0" y="319" text-anchor="middle">模型自己决定动态</text>
+      <rect x="255" y="143" width="210" height="150" rx="14" fill="var(--paper)" stroke="var(--sea)" stroke-width="1.3"/>
+      <text x="360.0" y="169" text-anchor="middle" font-weight="700" fill="var(--sea)" font-size="14">第 1 档 · 外观锚定</text>
+      <text class="lbl" x="269" y="205">外观</text>
+      <rect x="305" y="189" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="343" y="189" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="381" y="189" width="32" height="22" rx="4" fill="var(--paper)" stroke="var(--line)"/>
+      <rect x="419" y="189" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <text class="lbl" x="269" y="237">时空</text>
+      <rect x="305" y="221" width="32" height="22" rx="4" fill="var(--paper)" stroke="var(--line)"/>
+      <rect x="343" y="221" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <rect x="381" y="221" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <rect x="419" y="221" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <text class="lbl" x="360.0" y="267" text-anchor="middle">几张主体参考图</text>
+      <text class="lbl" x="360.0" y="284" text-anchor="middle">模型自己决定动态</text>
+      <path d="M220,258 L251,188" stroke="var(--coral)" stroke-width="1.5" stroke-dasharray="5 4" fill="none" marker-end="url(#ahc)"/>
+      <text x="360.0" y="311" text-anchor="middle" font-size="12" fill="var(--coral)">文本钉不住脸、几何和时刻</text>
+      <rect x="500" y="108" width="210" height="150" rx="14" fill="var(--paper)" stroke="var(--sea)" stroke-width="1.3"/>
+      <text x="605.0" y="134" text-anchor="middle" font-weight="700" fill="var(--sea)" font-size="14">第 2 档 · 多因素组合</text>
+      <text class="lbl" x="514" y="170">外观</text>
+      <rect x="550" y="154" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="588" y="154" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="626" y="154" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="664" y="154" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <text class="lbl" x="514" y="202">时空</text>
+      <rect x="550" y="186" width="32" height="22" rx="4" fill="var(--paper)" stroke="var(--line)"/>
+      <rect x="588" y="186" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="626" y="186" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="664" y="186" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <text class="lbl" x="605.0" y="232" text-anchor="middle">多种参考 + 带时间的文本</text>
+      <text class="lbl" x="605.0" y="249" text-anchor="middle">模型读懂并分配条件</text>
+      <path d="M465,223 L496,153" stroke="var(--coral)" stroke-width="1.5" stroke-dasharray="5 4" fill="none" marker-end="url(#ahc)"/>
+      <text x="605.0" y="276" text-anchor="middle" font-size="12" fill="var(--coral)">单一参考被整体照搬，也没有动态</text>
+      <rect x="745" y="73" width="210" height="150" rx="14" fill="var(--tealbg)" stroke="var(--teal)" stroke-width="2.2"/>
+      <text x="850.0" y="99" text-anchor="middle" font-weight="700" fill="var(--teal)" font-size="14">第 3 档 · 可执行时空规格</text>
+      <text class="lbl" x="759" y="135">外观</text>
+      <rect x="795" y="119" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="833" y="119" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="871" y="119" width="32" height="22" rx="4" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/>
+      <rect x="909" y="119" width="32" height="22" rx="4" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/>
+      <text class="lbl" x="759" y="167">时空</text>
+      <rect x="795" y="151" width="32" height="22" rx="4" fill="var(--teal)" stroke="var(--teal)"/>
+      <rect x="833" y="151" width="32" height="22" rx="4" fill="var(--teal)" stroke="var(--teal)"/>
+      <rect x="871" y="151" width="32" height="22" rx="4" fill="var(--teal)" stroke="var(--teal)"/>
+      <rect x="909" y="151" width="32" height="22" rx="4" fill="var(--teal)" stroke="var(--teal)"/>
+      <text class="lbl" x="850.0" y="197" text-anchor="middle">外部系统持有状态</text>
+      <text class="lbl" x="850.0" y="214" text-anchor="middle">渲染器只保留视觉记忆</text>
+      <path d="M710,188 L741,118" stroke="var(--coral)" stroke-width="1.5" stroke-dasharray="5 4" fill="none" marker-end="url(#ahc)"/>
+      <text x="838.0" y="241" text-anchor="middle" font-size="12" fill="var(--coral)">没有逐帧几何，也没有持久状态</text>
+      <path d="M300,128 L812,58 L812,70" stroke="var(--sea)" stroke-width="4" fill="none" stroke-linejoin="round" marker-end="url(#ahs)"/>
+      <text x="420" y="76" font-size="12.5" font-weight="700" fill="var(--sea)">外观谱系：主体定制 → 多参考组合 → 第 3 档的外观槽</text>
+      <path d="M10,352 L935,352 L935,226" stroke="var(--saffron)" stroke-width="4" fill="none" stroke-linejoin="round" marker-end="url(#ahy)"/>
+      <text x="10" y="372" font-size="12" font-weight="700" fill="color-mix(in srgb,var(--saffron) 70%,var(--ink))">几何谱系（来自图形学）：G-buffer 渲染、pix2pix、vid2vid（2018）→ Generative Rendering（2024）→ ControlNet、Cosmos-Transfer</text>
+      <text x="10" y="390" font-size="12" font-weight="700" fill="color-mix(in srgb,var(--saffron) 70%,var(--ink))">→ 引擎 / 代码 / 仿真驱动的渲染器（2026），不经过第 1–2 档</text>
+      <rect x="12" y="14" width="22" height="16" rx="3" fill="var(--paper)" stroke="var(--line)"/><text class="lbl" x="40" y="27">留空</text>
+      <rect x="112" y="14" width="22" height="16" rx="3" fill="var(--line2)" stroke="var(--muted)" stroke-dasharray="3 2"/><text class="lbl" x="140" y="27">文字描述</text>
+      <rect x="12" y="42" width="22" height="16" rx="3" fill="var(--sea)" fill-opacity=".55" stroke="var(--sea)"/><text class="lbl" x="40" y="55">参考示例</text>
+      <rect x="112" y="42" width="22" height="16" rx="3" fill="var(--teal)" stroke="var(--teal)"/><text class="lbl" x="140" y="55">逐帧对齐</text>
+      <text class="lbl" x="12" y="88">外观：身份、外观、声音、风格光照</text>
+      <text class="lbl" x="12" y="106">时空：布局几何、运动、相机、事件时序</text>
     </g>
   </svg>
-  <h3>汇合的证据（说得窄一点更安全）</h3>
+  <div class="tw"><table>
+    <thead><tr><th>档位</th><th>外部规格</th><th>覆盖</th><th>精度</th><th>主导权</th><th>代表工作</th><th>典型失败</th></tr></thead>
+    <tbody>
+      <tr><td><b>0 文本规格</b></td><td>训练时的详细 caption；推理时 LLM 改写的提示词</td><td>任何因素，但只是描述</td><td>描述</td><td>模型</td><td>DALL·E 3、VPO、Prompt-A-Video、VC4VG <span class="tag t-ok">已核</span></td><td>字被忽略或混淆；几何和时序说不清</td></tr>
+      <tr><td><b>1 外观锚定</b></td><td>1–3 张主体图 + 文本</td><td>身份、外观；动态靠描述或留空</td><td>示例</td><td>模型</td><td>CustomCrafter、PersonalVideo、DreamVideo-2</td><td>照搬参考图的姿态和背景</td></tr>
+      <tr><td><b>2 多因素组合</b></td><td>多张参考、参考视频、音频、带时间的文本</td><td>逐主体的外观；粗粒度的动作、运镜、时序</td><td>示例；粗略对时</td><td>模型（要读懂并分配条件）</td><td>Movie Weaver、CINEMA、BindWeave、Kling-Omni、OmniHuman-1.5</td><td>多主体属性串扰；参考视频整段搬运</td></tr>
+      <tr><td><b>3 可执行时空规格</b></td><td>引擎、程序或仿真器算出的逐帧代理；参考放进外观槽</td><td>布局、几何、运动、相机、事件逐帧对齐；外观靠示例</td><td>逐帧对齐</td><td>外部系统（离线按段，交互时持续）</td><td>Code World Model、SolarRenderer、Matrix-Game 4.0、Wizard、PWM、Cosmos-Transfer1、EdenLive</td><td>代理外观泄漏；记忆复活旧结构；延迟</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout c-info"><div class="t">本文重心（11/5 已定）</div>第 3 档是核心，至少占正文 60%；第 1–2 档在各技术章各写一小节对照，作为外观槽的来源，不再与第 3 档 1:1 并列。第 0 档放在第 1 章开头，解释"为什么外移"；agentic 本身由 2610.40191、2609.06758 覆盖，我们只引用、定位。</div>
+  <h3>第 3 档的汇合证据（说得窄一点更安全）</h3>
   <ul>
     <li><b>产品侧已合并：</b>Seedance 2.5 把白膜（clay render）列为参考类型 <span class="tag t-chk">待核</span></li>
     <li><b>基准侧在合并：</b>OmniVBench 按"保留、解耦、路由到目标"逐因素评测参考 <span class="tag t-ok">已核摘要</span>，并据组内阅读单设结构参考类 <span class="tag t-chk">待核</span></li>
@@ -237,7 +313,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
   </div>
   <div class="legend"><span><i style="background:var(--coral)"></i>交叉注意力 2</span><span><i style="background:#7a8a91"></i>其他 in-context 2</span><span><i style="background:#a9b5ba"></i>免训练 1</span></div>
   <div class="legend small">H3 参考通道：Code World Model、Streaming CWM、SolarRenderer、StreamRender-H3、AnyGameRenderer、Code Video Model、LynnReal-Omni ｜ 输入融合：DiffusionRenderer、Generative World Renderer、AlayaRenderer-Flash、Coarse-to-Real、EdenLive、Matrix-Game 4.0、Wizard ｜ 并行分支：Cosmos-Transfer1、FrameDiffuser、Programmable WM ｜ 交叉注意力：Magpie、BoxWorld ｜ 其他：AgentGarten、RGBX-Next、Proxy2World</div>
-  <h3>参考接口在扩张 <span class="tag t-rep">厂商文档，待按官方更新</span></h3>
+  <h3>参考接口在扩张：第 2 档走向第 3 档 <span class="tag t-rep">厂商文档，待按官方更新</span></h3>
   <div class="tw"><table>
     <thead><tr><th>产品</th><th>参考上限</th></tr></thead>
     <tbody>
@@ -252,29 +328,29 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 
 <section id="s3">
   <div class="sh"><span class="num">03</span><h2>统一视角：每种条件"决定什么、不许带进来什么"</h2></div>
-  <p class="lede">把两条来路的论文串起来的那张表（Overleaf 表：Condition determination matrix）。</p>
+  <p class="lede">条件决定矩阵（Overleaf 表 Condition determination matrix），v0.4 加了"档位"一列。</p>
   <div class="tw"><table>
-    <thead><tr><th>条件</th><th>它决定的</th><th>不该带进画面的</th><th>典型失败</th><th>来路</th></tr></thead>
+    <thead><tr><th>条件</th><th>它决定的</th><th>不该带进画面的</th><th>典型失败</th><th>档位</th></tr></thead>
     <tbody>
-      <tr><td>身份参考图</td><td>谁、长什么样</td><td>参考图的姿态、光照、背景</td><td>copy-paste</td><td><span class="tag t-ref">参考</span></td></tr>
-      <tr><td>参考视频</td><td>动作、运镜、风格</td><td>参考视频的人物和场景</td><td>整段搬运</td><td><span class="tag t-ref">参考</span></td></tr>
-      <tr><td>音频参考</td><td>音色、节奏、台词</td><td>—</td><td>口型对不上</td><td><span class="tag t-ref">参考</span></td></tr>
-      <tr><td>白膜 / 代码渲染</td><td>几何、布局、遮挡、相机</td><td>白膜自身的灰色外观</td><td>外观泄漏</td><td><span class="tag t-str">结构</span></td></tr>
-      <tr><td>G-buffer <span class="tag t-both">增补</span></td><td>几何、材质</td><td>—（光照留给模型）</td><td>光照扁平或不一致</td><td><span class="tag t-str">结构</span></td></tr>
-      <tr><td>语义图 / 框 <span class="tag t-both">增补</span></td><td>类别布局、实体存在与数量</td><td>平涂颜色、框边</td><td>同类实体身份互换、漏画</td><td><span class="tag t-str">结构</span></td></tr>
-      <tr><td>骨架 / 人体网格 <span class="tag t-both">增补</span></td><td>关节与姿态</td><td>骨线、灰模</td><td>肢体错配</td><td><span class="tag t-str">结构</span></td></tr>
-      <tr><td>仿真轨迹</td><td>物理过程</td><td>基元外观</td><td>不遵循轨迹</td><td><span class="tag t-str">结构</span></td></tr>
-      <tr><td>带时间的事件文本</td><td>事件发生时刻</td><td>—</td><td>时序错位</td><td><span class="tag t-both">两者</span></td></tr>
+      <tr><td>身份参考图</td><td>谁、长什么样</td><td>参考图的姿态、光照、背景</td><td>copy-paste</td><td><span class="tag t-ref">第 1–2 档</span></td></tr>
+      <tr><td>参考视频</td><td>动作、运镜、风格</td><td>参考视频的人物和场景</td><td>整段搬运</td><td><span class="tag t-ref">第 2 档</span></td></tr>
+      <tr><td>音频参考</td><td>音色、节奏、台词</td><td>—</td><td>口型对不上</td><td><span class="tag t-ref">第 2 档</span></td></tr>
+      <tr><td>白膜 / 代码渲染</td><td>几何、布局、遮挡、相机</td><td>白膜自身的灰色外观</td><td>外观泄漏</td><td><span class="tag t-str">第 3 档</span></td></tr>
+      <tr><td>G-buffer <span class="tag t-both">增补</span></td><td>几何、材质</td><td>—（光照留给模型）</td><td>光照扁平或不一致</td><td><span class="tag t-str">第 3 档</span></td></tr>
+      <tr><td>语义图 / 框 <span class="tag t-both">增补</span></td><td>类别布局、实体存在与数量</td><td>平涂颜色、框边</td><td>同类实体身份互换、漏画</td><td><span class="tag t-str">第 3 档</span></td></tr>
+      <tr><td>骨架 / 人体网格 <span class="tag t-both">增补</span></td><td>关节与姿态</td><td>骨线、灰模</td><td>肢体错配</td><td><span class="tag t-str">第 3 档</span></td></tr>
+      <tr><td>仿真轨迹</td><td>物理过程</td><td>基元外观</td><td>不遵循轨迹</td><td><span class="tag t-str">第 3 档</span></td></tr>
+      <tr><td>带时间的事件文本</td><td>事件发生时刻</td><td>—</td><td>时序错位</td><td><span class="tag t-both">第 2–3 档</span></td></tr>
     </tbody>
   </table></div>
-  <div class="callout c-info"><div class="t">核心观察（survey 的核心贡献）</div>R2V 讲"保真 vs 可编辑"，结构渲染讲"遵循 vs 泄漏"，其实是<b>同一个问题</b>：每个条件只该决定自己负责的因素，不能把别的东西带进画面。两条来路各自发明了几乎相同的解法，但没人在同一评测协议下比较过。</div>
+  <div class="callout c-info"><div class="t">核心观察（survey 的核心贡献）</div>第 1–2 档讲"保真 vs 可编辑"，第 3 档讲"遵循 vs 泄漏"，其实是<b>同一个问题</b>：每个条件只该决定自己负责的因素，不能把别的东西带进画面。照搬参考图和泄漏白膜质感是同一种失败；两侧各自发明了几乎相同的解法，但没人在同一评测协议下比较过。</div>
 </section>
 
 <section id="s4">
-  <div class="sh"><span class="num">04</span><h2>两条来路各自发明的同类解法</h2></div>
-  <p class="lede">五组。结构侧条目 Agent 已读原文；R2V 侧数字来自 v0.3，Overleaf 中标为 [to verify]，写正文前逐条核对。</p>
+  <div class="sh"><span class="num">04</span><h2>同一个问题出现在每一档：五组同类解法</h2></div>
+  <p class="lede">五组。第 3 档条目 Agent 已读原文；第 1–2 档数字来自 v0.3，Overleaf 中标为 [to verify]，写正文前逐条核对。</p>
   <div class="tw"><table>
-    <thead><tr><th>解法</th><th>R2V 侧</th><th>结构侧</th></tr></thead>
+    <thead><tr><th>解法</th><th>第 1–2 档（参考）</th><th>第 3 档（结构）</th></tr></thead>
     <tbody>
       <tr><td><b>按去噪阶段错开条件</b></td><td>CustomCrafter 前 5 步主体 LoRA 权重 0.4、之后 0.8；PersonalVideo 只在最后 1/4 步注入身份</td><td>Code Video Model 只在前 25% 步加白膜；BoxWorld 噪声 &gt; 0.8 才启用框条件；Proxy2World 早期固定代理深度；SolarRenderer 结构引导只在 σ ≥ 0.9 时就与全程引导持平 <span class="tag t-both">增补</span></td></tr>
       <tr><td><b>对齐到外观不敏感特征</b></td><td>RefAlign 对齐到 DINOv3；去掉对齐损失总分 55.73% → 49.93%，人脸相似度反升（照搬加重）</td><td>Coarse-to-Real 用 DINOv3 特征代替深度/边缘；EdenLive 微调编码器并把泄漏单列评测</td></tr>
@@ -283,20 +359,20 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
       <tr><td><b>用语言说明每个条件管什么</b></td><td>Movie Weaver 锚 token，身份可区分率 42.9% → 99.3%</td><td>SolarRenderer 每种结构两句固定说明（遵循什么、不许出现什么）；StreamRender-H3 发现必须给带时间戳的叙述</td></tr>
     </tbody>
   </table></div>
-  <div class="callout c-key"><div class="t">可以写进 insight 的镜像发现（假设，待查新）</div>结构条件放去噪早期，身份与外观细节放后期，两侧独立发现，依据都是"扩散先定布局、后补细节"。RefAlign 还测了"把 DINOv3 当输入"（52.15%）低于"对齐到 DINOv3"（55.73%），而结构侧目前都用前者：这是值得做的第一个跨来路对比实验。查新对象：SDEdit 式部分去噪、ControlNet 的 guidance start/end。</div>
+  <div class="callout c-key"><div class="t">可以写进 insight 的镜像发现（假设，待查新）</div>结构条件放去噪早期，身份与外观细节放后期，两侧独立发现，依据都是"扩散先定布局、后补细节"。RefAlign 还测了"把 DINOv3 当输入"（52.15%）低于"对齐到 DINOv3"（55.73%），而结构侧目前都用前者：这是值得做的第一个跨档位对比实验。查新对象：SDEdit 式部分去噪、ControlNet 的 guidance start/end。</div>
 </section>
 
 <section id="s5">
-  <div class="sh"><span class="num">05</span><h2>为什么各领域走向渲染器</h2></div>
-  <p class="lede">三类证据：端到端的问题 / 外置后的提升 / 采用信号。<span class="tag t-ok">已核</span> Agent 读过原文 · <span class="tag t-chk">待核</span> 来自 v0.3 尚未逐条核对。</p>
+  <div class="sh"><span class="num">05</span><h2>为什么各领域走向渲染器，各自到了第几档</h2></div>
+  <p class="lede">各领域都从文本起步，文本不够用时往上走。三类证据：端到端的问题 / 外置后的提升 / 采用信号。<span class="tag t-ok">已核</span> Agent 读过原文 · <span class="tag t-chk">待核</span> 来自 v0.3 尚未逐条核对。</p>
   <div class="tw"><table>
     <thead><tr><th>领域</th><th>端到端的问题</th><th>外置后的提升</th><th>采用信号</th></tr></thead>
     <tbody>
-      <tr><td><b>世界模型</b></td><td>Programmable WM：LingBot-World-V2 状态准确率 8.00%，角色无故消失、已死角色继续移动 <span class="tag t-ok">已核</span></td><td>引擎持状态后数量/状态准确率 94.00% / 98.00%；BoxWorld 成对条件成功率 97.3%，端到端 ≤ 16.2% <span class="tag t-ok">已核</span>（基准围绕外部状态设计，差距要谨慎解读）</td><td>Matrix-Game 4.0 改为引擎持状态，单张 RTX 5090 按键到显示 112 ms</td></tr>
-      <tr><td><b>游戏 / 工业</b></td><td>Matrix-Game 4.0 列四问题：无外部纠正、误差累积、帧记忆不压缩、玩法有限 <span class="tag t-ok">已核</span></td><td>AnyGameRenderer 在 H3 上微调后时间匹配率 50.9% → 62.9%</td><td>DLSS 5 给引擎画面加照片级光照材质；Seedance 2.5 支持白膜参考 <span class="tag t-chk">待核</span></td></tr>
-      <tr><td><b>具身 / 生成式仿真</b></td><td>Kang et al.：分布外照搬最近训练样例；Dream.exe：生成操作视频任务成功率 3.3% <span class="tag t-chk">待核</span></td><td>PhysGen 4.14 vs 1.39；WonderPlay 偏好率 80.2%；Cosmos-Transfer2.5 数据训练策略 24/30 vs 1/30 <span class="tag t-chk">待核</span></td><td>Isaac Sim CosmosWriter；Skild AI 用 Cosmos Transfer 做策略验证 <span class="tag t-chk">待核</span></td></tr>
-      <tr><td><b>数字人</b></td><td>音频驱动只跟节奏，不理解意图 <span class="tag t-chk">待核</span></td><td>OmniHuman-1.5 加 MLLM 规划后不自然率 0.58 → 0.37；Kling-Avatar 先出 MLLM 蓝图 <span class="tag t-chk">待核</span></td><td>Tavus：LLM → TTS → 人脸渲染；TalkingMachines 前接音频 LLM <span class="tag t-chk">待核</span></td></tr>
-      <tr><td><b>院线 / 短剧 / 抖音</b></td><td><b style="color:var(--coral)">需补</b>：参考生成之前角色一致性如何失败的系统证据</td><td><b style="color:var(--coral)">需补</b>：R2V 相对纯文生视频的生产增益</td><td>Netflix、《House of David》、可灵 × 快手星芒、DataEye 漫剧数据 <span class="tag t-chk">待核</span>；只能说明 AI 进入制作，还不能证明"外部决定、模型渲染"</td></tr>
+      <tr><td><b>世界模型</b><br><span class="tag t-both">第 3 档</span></td><td>Programmable WM：LingBot-World-V2 状态准确率 8.00%，角色无故消失、已死角色继续移动 <span class="tag t-ok">已核</span></td><td>引擎持状态后数量/状态准确率 94.00% / 98.00%；BoxWorld 成对条件成功率 97.3%，端到端 ≤ 16.2% <span class="tag t-ok">已核</span>（基准围绕外部状态设计，差距要谨慎解读）</td><td>Matrix-Game 4.0 改为引擎持状态，单张 RTX 5090 按键到显示 112 ms</td></tr>
+      <tr><td><b>游戏 / 工业</b><br><span class="tag t-both">第 3 档</span></td><td>Matrix-Game 4.0 列四问题：无外部纠正、误差累积、帧记忆不压缩、玩法有限 <span class="tag t-ok">已核</span></td><td>AnyGameRenderer 在 H3 上微调后时间匹配率 50.9% → 62.9%</td><td>DLSS 5 给引擎画面加照片级光照材质；Seedance 2.5 支持白膜参考 <span class="tag t-chk">待核</span></td></tr>
+      <tr><td><b>具身 / 生成式仿真</b><br><span class="tag t-both">第 3 档</span></td><td>Kang et al.：分布外照搬最近训练样例；Dream.exe：生成操作视频任务成功率 3.3% <span class="tag t-chk">待核</span></td><td>PhysGen 4.14 vs 1.39；WonderPlay 偏好率 80.2%；Cosmos-Transfer2.5 数据训练策略 24/30 vs 1/30 <span class="tag t-chk">待核</span></td><td>Isaac Sim CosmosWriter；Skild AI 用 Cosmos Transfer 做策略验证 <span class="tag t-chk">待核</span></td></tr>
+      <tr><td><b>数字人</b><br><span class="tag t-both">第 2 档；外部 3D 参数驱动时第 3 档</span></td><td>音频驱动只跟节奏，不理解意图 <span class="tag t-chk">待核</span></td><td>OmniHuman-1.5 加 MLLM 规划后不自然率 0.58 → 0.37；Kling-Avatar 先出 MLLM 蓝图 <span class="tag t-chk">待核</span></td><td>Tavus：LLM → TTS → 人脸渲染；TalkingMachines 前接音频 LLM <span class="tag t-chk">待核</span></td></tr>
+      <tr><td><b>院线 / 短剧 / 抖音</b><br><span class="tag t-both">第 1–2 档</span></td><td><b style="color:var(--coral)">需补</b>：参考生成之前角色一致性如何失败的系统证据</td><td><b style="color:var(--coral)">需补</b>：R2V 相对纯文生视频的生产增益</td><td>Netflix、《House of David》、可灵 × 快手星芒、DataEye 漫剧数据 <span class="tag t-chk">待核</span>；只能说明 AI 进入制作，还不能证明"外部决定、模型渲染"</td></tr>
     </tbody>
   </table></div>
 </section>
@@ -321,7 +397,7 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
   </div>
   <div class="sync" id="sync"></div>
   <div class="kan" id="kan"></div>
-  <p class="small" style="margin-top:10px">拖不动时（如手机上），用卡片右下角的"移到…"。篇幅：以 arXiv 为主，不按期刊限页；正文（不含参考文献和附录）至少 35 页，目标 40–50 页。按现在的 Overleaf 模板，正文约 30 页，各章目标合计约 47 页，新增篇幅主要给还没写的参考侧。附录 A 总表不限页数，建议全员各自补自己负责论文的行。</p>
+  <p class="small" style="margin-top:10px">拖不动时（如手机上），用卡片右下角的"移到…"。篇幅：11/19 提交 arXiv，正文（不含参考文献和附录）35–45 页，第 3 档至少占 60%。按现在的 Overleaf 模板，正文约 32 页，各章目标合计约 40 页。附录 A 总表不限页数，建议全员各自补自己负责论文的行。</p>
 </section>
 
 <section id="s8">
@@ -333,18 +409,23 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
 
 <section id="s9">
   <div class="sh"><span class="num">09</span><h2>在 v3 基础上的增补</h2></div>
-  <p class="lede">Agent 在整理 Overleaf 时补进去的分析，均已写入对应章节；需要组里认可后再定稿。</p>
+  <p class="lede">Agent 在整理 Overleaf 时补进去的分析，均已写入对应章节；需要组里认可后再定稿。前五条是 v0.4（11/5）新增。</p>
   <div class="adds">
-    <div class="add"><b>定义改为按因素判断</b><p>解决"只给身份图算不算渲染器"的二元困境；分工光谱（第 9 章）有了度量：外部确定了哪些因素。</p></div>
-    <div class="add"><b>主张措辞与模型边界</b><p>建议主张改为"智能从决定内容转向执行条件"，化解与第 5 章"渲染侧也在加理解"的张力；给出模型边界规则（拍板 A、B）。</p></div>
+    <div class="add"><b>规格阶梯（v0.4）</b><p>用覆盖、精度、主导权三个维度定义四档。只看"完备度"分不开第 2、3 档，精度和主导权才分得开；这样阶梯可以量化，也和"世界状态 vs 视觉记忆"打通。</p></div>
+    <div class="add"><b>第 0 档：文本规格</b><p>从 caption 与提示词改写讲起，补上"为什么外移"：DALL·E 3 重写 caption 并在推理时扩写提示词；VPO、Prompt-A-Video 训练改写器；VC4VG 显示 caption 质量与生成质量强相关。四篇已核实入库。</p></div>
+    <div class="add"><b>阶梯不是历史</b><p>几何谱系来自图形学（vid2vid → Generative Rendering → Cosmos-Transfer → MG4），不经过第 1–2 档；到第 3 档参考退为外观槽，22 个结构渲染器里 7 个复用 H3 参考通道。</p></div>
+    <div class="add"><b>按条件分档，不按应用</b><p>音频驱动的数字人属第 2 档（参考图 + 音频）；只有外部面部或身体参数驱动的才算第 3 档。第 7 章据此只写一段实时数字人。</p></div>
+    <div class="add"><b>结论改成论证</b><p>每次升档都由下一档的失败逼出；第 3 档分工为什么稳定；三个可观察的回退信号（端到端模型的长时程状态、无结构控制的精度、构造规格的成本）；开放问题按"卡在哪一档"重排。</p></div>
+    <div class="add"><b>定义改为按因素判断</b><p>解决"只给身份图算不算渲染器"的二元困境；阶梯的"覆盖"维度有了度量：外部确定了哪些因素。</p></div>
+    <div class="add"><b>主张措辞与模型边界</b><p>建议主张改为"智能从决定内容转向执行规格"，化解与第 5 章"渲染侧也在加理解"的张力；给出模型边界规则（拍板 A、B）。</p></div>
     <div class="add"><b>汇合说法收窄，并给数据</b><p>v3 写"5 个结构渲染器都建在 H3 参考通道"属实，但补上全貌：22 个里 7 个走 H3，其余走输入融合、分支、交叉注意力；可能有开源底座的路径依赖。</p></div>
     <div class="add"><b>世界状态 ≠ 视觉记忆</b><p>渲染器不持有权威状态，但要维护"长什么样"的记忆；三个架构证据：Matrix-Game 4.0 历史缓存不含控制信号、Wizard 换身份时屏蔽旧身份 token、PWM 身份槽位。</p></div>
     <div class="add"><b>蒸馏会侵蚀控制</b><p>SolarRenderer：通用四步加速 LoRA 会偏移控制，普通分布匹配把学生拉回模糊老师（Elo 1024 → 820）；沿结构条件外推老师后 1156。渲染器特有的训练坑。</p></div>
     <div class="add"><b>延迟 ≠ 吞吐</b><p>Magpie 32.2 FPS 但按键到画面约 1.55 s；Matrix-Game 4.0 4 帧一块，112 ms。块时长是延迟下界，帧率再高也压不掉；评测要分开报。</p></div>
-    <div class="add"><b>按因素评测有外部佐证</b><p>OmniVBench 按"保留、解耦、路由"逐因素评测参考，和条件决定矩阵同构；"相似度奖励照搬"在两条来路都成立（RefAlign 消融、结构侧边缘 F1 偏爱描边）。</p></div>
+    <div class="add"><b>按因素评测有外部佐证</b><p>OmniVBench 按"保留、解耦、路由"逐因素评测参考，和条件决定矩阵同构；"相似度奖励照搬"在各档都成立（RefAlign 消融、结构侧边缘 F1 偏爱描边）。</p></div>
     <div class="add"><b>竞品表补三篇</b><p>Agentic Visual Generation（2609.06758）、Simulating the Visual World（2511.08585，作反方）、From Pixels to States（2607.14076）。2610.40191 §4.3 已全文读过，重叠集中在结构侧系统层面。</p></div>
-    <div class="add"><b>建议加一个小实验</b><p>在同一底座上比较"去噪窗口"和"对齐 vs 输入 DINOv3"两组解法，给出两条来路第一次同协议比较。综述越来越多，有实验的分析性贡献更站得住。</p></div>
-    <div class="add"><b>引用与篇幅纪律</b><p>v0.3 中 23 篇新 arXiv 引用的标题和作者已核实入库；所有未核数字在 Overleaf 标 [to verify]；按 arXiv 长文给每章定了目标页数（正文 40–50 页），并标出每章现在的实际页数。</p></div>
+    <div class="add"><b>建议加一个小实验</b><p>在同一底座上比较"去噪窗口"和"对齐 vs 输入 DINOv3"两组解法，给出第 1–2 档与第 3 档第一次同协议比较。综述越来越多，有实验的分析性贡献更站得住。</p></div>
+    <div class="add"><b>引用与篇幅纪律</b><p>v0.3 中 23 篇新 arXiv 引用的标题和作者已核实入库；所有未核数字在 Overleaf 标 [to verify]；正文 35–45 页、第 3 档至少 60%，每章标了目标页数和现在的实际页数。</p></div>
   </div>
 </section>
 
@@ -354,15 +435,15 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
   <div class="tw"><table>
     <thead><tr><th>已有工作</th><th>它的角度</th><th>我们的角度</th><th>重叠</th></tr></thead>
     <tbody>
-      <tr><td>Video Generation Meets Agent Harness（2610.40191）</td><td>agent harness 为分析单位；§4.3 讲引擎/程序持状态、视频模型渲染</td><td>模型侧：接口、注入与理解、训练、忠实度；两条来路</td><td><span class="tag t-chk">高</span></td></tr>
-      <tr><td>Agentic Visual Generation（2609.06758）</td><td>LLM/VLM controller 把生成模型当 tool</td><td>内容定好之后生成模型要做什么</td><td><span class="tag t-chk">中高</span></td></tr>
+      <tr><td>Video Generation Meets Agent Harness（2610.40191）</td><td>agent harness 为分析单位；§4.3 讲引擎/程序持状态、视频模型渲染</td><td>模型侧：接口、注入与理解、训练、忠实度；以第 3 档为主</td><td><span class="tag t-chk">高</span></td></tr>
+      <tr><td>Agentic Visual Generation（2609.06758）</td><td>LLM/VLM controller 把生成模型当工具；按控制器能控制什么分 L0–L4 <span class="tag t-ok">已核摘要</span></td><td>从视频模型看，阶梯每一档都落在它的 L1（只准备输入）里；我们细分 L1：输入定了多少、多精确、主导权在谁</td><td><span class="tag t-chk">中高</span></td></tr>
       <tr><td>Simulating the Visual World（2511.08585）</td><td>视频基模 = 隐式世界模型 + 内部渲染器</td><td>决定内容的智能放在外面；写成光谱另一端</td><td><span class="tag t-both">概念</span></td></tr>
       <tr><td>From Pixels to States（2607.14076）</td><td>交互世界模型当游戏引擎，必须显式状态</td><td>状态外置之后怎么渲染</td><td><span class="tag t-both">中</span></td></tr>
-      <tr><td>可控视频生成综述（2507.16869）</td><td>按条件类型罗列</td><td>按"谁决定哪个内容因素"组织</td><td><span class="tag t-both">中</span></td></tr>
+      <tr><td>可控视频生成综述（2507.16869）</td><td>按条件类型罗列</td><td>按规格阶梯组织：谁确定哪个因素、多精确、主导权在谁</td><td><span class="tag t-both">中</span></td></tr>
       <tr><td>视频世界模型机制综述（2601.17067）</td><td>世界模型内部的状态与动力学</td><td>状态外置之后的渲染</td><td><span class="tag t-both">低–中</span></td></tr>
     </tbody>
   </table></div>
-  <div class="callout c-warn"><div class="t">反方</div>Veo 3 零样本推理论文认为视频模型无需专门训练就能做分割、编辑、迷宫等视觉推理，正成为通用视觉基模；Genie 3 把状态完全放在模型内部、实时生成，但一致性只能保持有限时长。建议写成分工光谱的另一端，正面讨论各自适用的场景（第 9 章）。2610.40191 §4.3 必须引用，文字和图都不复用。</div>
+  <div class="callout c-warn"><div class="t">反方</div>Veo 3 零样本推理论文认为视频模型无需专门训练就能做分割、编辑、迷宫等视觉推理，正成为通用视觉基模；Genie 3 把状态完全放在模型内部、实时生成，但一致性只能保持有限时长。建议写成"阶梯回退"的条件，正面讨论各自适用的场景（第 9 章与结论）。2610.40191 §4.3 必须引用，文字和图都不复用。</div>
 </section>
 
 <section id="s11">
@@ -377,57 +458,61 @@ footer{color:var(--muted);font-size:12.5px;text-align:center;padding:10px 0 40px
     <li><b>产品与产业（来自 v0.3，待复核）：</b><a href="https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5">Seedance 2.5</a> · <a href="https://docs.byteplus.com/en/docs/modelark/seedance-2-0">Seedance 2.0</a> · <a href="https://kling.ai/quickstart/klingai-video-3-omni-model-user-guide">Kling 3.0 Omni</a> · <a href="https://docs.cloud.google.com/vertex-ai/generative-ai/docs/video/use-reference-images-to-guide-video-generation">Veo 3.1</a> · <a href="https://docs.platform.vidu.cn/331842775e0">Vidu</a> · <a href="https://nvidianews.nvidia.com/news/nvidia-dlss-5-delivers-ai-powered-breakthrough-in-visual-fidelity-for-games">DLSS 5</a></li>
   </ul>
 </section>
-<footer>GenRender Survey 协作框架 · 方向以 v0.3 为准 · 页面未在主页链接，设置了 noindex · 分工面板发布后所有人可见</footer>
+<footer>GenRender Survey 协作框架 · 方向以 v0.4（规格阶梯）为准 · 页面未在主页链接，设置了 noindex · 分工面板发布后所有人可见</footer>
 </main>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
 const CH = {
-  c1:{no:"1",t:"引言",en:"Introduction",pages:3.5,now:2.5,prog:30,state:"主张、汇合、谱系、区分已写；叙事与参考侧谱系待补",
-    done:["按 v0.3 重写主张段与工作论点（对条件留白处可创造，对条件决定处必须忠实）","\"两条来路，一个接口\"已写，并把汇合说法收窄、配上 22 个结构渲染器的通道统计","结构侧谱系：vid2vid（2018）→ Generative Rendering（按其摘要准确描述）→ 2026 渲染器，配演化图","与 6 篇已有综述的区分表；明确承认\"世界状态与渲染分离\"不是我们的贡献","贡献列表初稿（4 条）"],
-    todo:[["§1.1 决策 A","主张措辞待拍板。推荐\"模型的智能从决定内容转向忠实执行条件\"；拍板后同步改主张段和摘要。"],["§1.2 两条来路叙事","按群里的\"路边 → 热门 → 工具\"主线，每条来路写一段，引用第 3 章领域证据，按时间正着写。"],["§1.3 参考侧谱系","主体定制（CustomCrafter、PersonalVideo、DreamVideo-2）→ 多概念（Movie Weaver）→ S2V 数据与基准（OpenS2V-Nexus、Phantom-Data）→ MLLM 引导（CINEMA、BindWeave、Kling-Omni）→ 商用角色生视频（Vidu，厂商自述待核）；并确定参考侧\"第一个工作\"。这些引用已核实入库。"],["§1.5 贡献表述","\"按去噪阶段错开条件\"可能有先例（SDEdit 式部分去噪、ControlNet guidance start/end），查新后再决定能不能写成发现。"]],
-    hint:"适合主线提出者 / 统稿人，和第 2 章同一人最顺。"},
-  c2:{no:"2",t:"定义与框架",en:"Definition and Framework",pages:5,now:3.0,prog:55,state:"框架已起草；决策 B 与参考侧骨干待补",
-    done:["按因素的操作性定义（身份、外观、声音、布局几何、运动、相机、事件时序、风格光照）","条件决定矩阵：v3 六行 + G-buffer、语义图/框、骨架三行与例子系统","\"同一个问题\"一节与五组同类解法表（结构侧读过原文；R2V 侧数字标 [to verify]）","镜像发现写成 insight 框（标为假设，注明查新对象）","世界状态 vs 视觉记忆：三个架构证据","形式化推广到参考 + 结构 + 文本 + 记忆；三种保真；骨干与范围"],
-    todo:[["§2.2 决策 B","模型边界规则待拍板。推荐：凡在视频生成器采样前、以显式可检查形式（文本、图、布局、轨迹、程序状态）确定某个内容因素的组件，都算外部；备选\"单独训练\"或\"可单独替换\"。"],["§2.7 参考侧骨干","总结哪些开源/闭源模型有多参考接口，参考怎么进模型（图像编码器、reference net、in-context token、MLLM 编码器）。"],["表：五组解法","R2V 侧数字（CustomCrafter 0.4/0.8、RefAlign 55.73→49.93、Phantom-Data、Movie Weaver 42.9→99.3 等）逐条对原文核对。"]],
-    hint:"框架章节，决定全文口径；建议与第 1 章打包。"},
-  c3:{no:"3",t:"驱动领域",en:"Driving Domains",pages:5,now:1.3,prog:20,state:"世界模型与游戏已写；商业内容最弱",
-    done:["领域证据表，每格标核实状态","游戏与工业、世界模型两节按原文成稿（MG4 四个问题、Magpie、AlayaRenderer-Flash、AnyGameRenderer；PWM 8.00% → 94/98%、BoxWorld 97.3% vs ≤16.2%），并注明基准偏向外部状态"],
-    todo:[["§3.1 商业内容（最弱一环）","两格空缺：参考生成之前角色一致性如何失败的系统证据；R2V 相对 T2V 的生产增益。采用信号要一手来源（财报、合作公告、平台数据）；可评估 World Narrative Model 作为早期\"外部决定、模型渲染\"例子；确认 \"videococo\" 是哪篇。"],["§3.2 数字人","基于 OmniHuman-1.5、Kling-Avatar、TalkingMachines 写一段，核对 0.58 → 0.37 等数字，并按第 2 章边界规则说明 MLLM 规划器算外部。"],["§3.5 具身仿真","基于 Kang et al.、Dream.exe、PhysGen、WonderPlay、RoboRender、Cosmos-Transfer2.5 写，核对 4.14 vs 1.39、80.2%、24/30 vs 1/30。"],["§3.6 跨领域归纳","可控性、状态可持久可验证、复用已有资产与引擎、成本；与第 9 章端到端立场对照。"]],
-    hint:"需要懂短剧/商业内容/产品的同学；具身一节可交给做生成式仿真的同学。"},
-  c4:{no:"4",t:"渲染器接口",en:"Renderer Interfaces",pages:7,now:4.9,prog:45,state:"结构侧成稿；参考侧空缺",
-    done:["结构侧全文（来自 v0.1）：内容/编码/来源三属性；七类结构接口，配原创合成示意图与\"决定矩阵\"图；侧信道；信息充分性与可构造性；泄漏-遵循两难与五类对策；接口泛化（typed vs untyped）","新增\"接口在扩张并部分合并\"：22 个结构渲染器通道统计","参考接口产品表（厂商自报，待核）"],
-    todo:[["§4.1 参考接口（核心空缺）","按它固定的因素组织：身份图（单/多主体）、参考视频（动作/运镜/风格）、音频参考（音色/口型）；覆盖研究系统和 S2V 数据集/基准（引用已入库）。"],["§4.7 汇合统计","把通道统计扩展到参考侧与闭源产品，决定引言里\"汇合\"说多强；产品表按官方文档更新（可灵版本）。"]],
-    hint:"适合最熟 R2V 论文与产品接口的同学（已有 R2V 梳理报告的同学很合适）。结构侧已基本成稿，新增的篇幅主要给参考侧。"},
-  c5:{no:"5",t:"从注入到理解",en:"From Injection to Understanding",pages:6.5,now:5.0,prog:45,state:"结构侧机制成稿；参考侧与\"理解\"待补",
-    done:["结构侧四类注入位置（输入融合、并行分支、in-context 参考 token、交叉注意力）+ mask 绑定 + 按噪声阶段条件，配示意图","\"论文内部对比证据\"表：结论是没有一致排序、受骨干混杂","新增\"从注入到理解\"：CINEMA、BindWeave、Kling-Omni、OmniHuman-1.5 的描述已按摘要核对"],
-    todo:[["§5.1 参考侧注入","R2V 常见三类：多编码器参考条件、参考解耦、MLLM 跨模态引导（RefAlign related work 的分法，需核对）；每类一段 + 代表系统。"],["§5.5 参考侧绑定","DreamVideo-2 框 mask 调制参考注意力、Movie Weaver 锚 token，与五组解法表对应。"],["§5.7 理解支配生成","补图像侧先例（多参考编辑/融合，需一手来源），正面回应\"智能外移还是回流\"（可直接用拍板 A 的建议说法）。"]],
-    hint:"适合偏模型结构、熟悉 MLLM + DiT 的同学。结构侧不用删，参考侧要和它并排补齐。"},
-  c6:{no:"6",t:"训练与数据",en:"Training and Data",pages:6,now:4.6,prog:50,state:"结构侧成稿；配对演进与 RL 待补",
-    done:["结构侧全文：五类监督来源；对齐比规模重要；适配范围；双向 → 因果的四个要素；五类少步蒸馏与\"蒸馏侵蚀控制\"；训练流程图与架构训练表","\"同源配对 → 跨上下文配对\"开头段"],
-    todo:[["§6.1 配对演进","补全\"同源 → 跨上下文 → 无需显式三元组\"，系统与数字对原文核对，对应五组解法表\"打破同源配对\"一行。"],["§6.6 后训练与 RL","两条来路的偏好优化 / RL：身份与参考保真奖励、结构遵循奖励、靠照搬刷奖励的风险；若结构侧基本只用蒸馏，要明说。"]],
-    hint:"适合做后训练 / RL / 蒸馏的同学。"},
-  c7:{no:"7",t:"流式与交互",en:"Streaming and Interaction",pages:4.5,now:3.6,prog:60,state:"结构侧成稿",
+  c1:{no:"1",t:"引言",en:"Introduction",pages:3.5,now:3.5,prog:60,state:"v0.4 已重写：文本规格开场、规格阶梯、两条谱系、定位、贡献",
+    done:["开场改为从文本规格讲起：DALL·E 3 重写 caption 与推理时扩写提示词、VPO、Prompt-A-Video、VC4VG（均已核对报告或摘要）","规格阶梯一节：四档 + 三个维度（覆盖、精度、主导权），配标题页的阶梯图；汇合说法保持收窄（22 个结构渲染器的通道统计）","两条谱系：几何谱系来自图形学（vid2vid → Generative Rendering → 2026），外观谱系从主体定制起步","定位：补上 Agentic Visual Generation 的 L0–L4，说明我们细分的是它的 L1","贡献改为围绕阶梯的 4 条"],
+    todo:[["§1.1 拍板 A","主张措辞：推荐\"视频模型的智能从决定内容转向忠实执行规格\"；拍板后同步改摘要。"],["§1.3 外观谱系的第一个工作","确定参考侧的\"第一个工作\"（拍板 4）；这一段保持简短。"],["§1.5 贡献表述","\"按去噪阶段错开条件\"可能有先例（SDEdit 式部分去噪、ControlNet guidance start/end），查新后再定措辞。"]],
+    hint:"v0.4 初稿已就位，接下来主要是拍板 A 和打磨。"},
+  c2:{no:"2",t:"定义与框架",en:"Definition and Framework",pages:4.5,now:4.2,prog:65,state:"v0.4：阶梯的正式定义已写；拍板 B 待定",
+    done:["8 个因素分成\"外观规格\"（身份、外观、声音、风格光照）和\"时空规格\"（布局几何、运动、相机、事件时序）","新增 §2.3 规格阶梯：用覆盖、精度、主导权定义四档（阶梯表），三条护栏：只看覆盖分不开第 2、3 档；阶梯不是历史；按条件分档、不按应用","条件决定矩阵加\"档位\"一列；\"同一个问题出现在每一档\"与五组解法表（列名改为第 1–2 档 / 第 3 档）","世界状态 vs 视觉记忆对应主导权维度；形式化、骨干、范围改成按档位表述","约定：后面各章的 reference route 指第 1–2 档，structure route 指第 3 档"],
+    todo:[["§2.2 拍板 B","模型边界规则：推荐\"在视频生成器采样前、以显式可检查形式确定某个因素的组件都算外部\"；备选\"单独训练\"或\"可单独替换\"。"],["§2.8 第 2 档骨干","一两句：哪些开源 / 闭源模型有多参考接口，参考怎么进模型。"],["表：五组解法","第 1–2 档的数字（CustomCrafter 0.4/0.8、RefAlign 55.73→49.93、Phantom-Data、Movie Weaver 42.9→99.3 等）逐条对原文核对。"]],
+    hint:"全文口径在这一章，其他章按这里的术语写。"},
+  c3:{no:"3",t:"驱动领域",en:"Driving Domains",pages:3,now:1.3,prog:25,state:"v0.4：按档位重组；世界模型与游戏已写",
+    done:["领域证据表，每格标核实状态","游戏与工业、世界模型两节（第 3 档）按原文成稿（MG4 四个问题、Magpie、AlayaRenderer-Flash、AnyGameRenderer；PWM 8.00% → 94/98%、BoxWorld 97.3% vs ≤16.2%），并注明基准偏向外部状态"],
+    todo:[["§3.1 商业内容","压到半页左右，写成第 1–2 档。两格证据空缺仍需一手来源（财报、合作公告、平台数据）；确认 \"videococo\" 是哪篇。"],["§3.2 数字人","半页左右：音频驱动属第 2 档，外部 3D 参数驱动属第 3 档；核对 0.58 → 0.37 等数字，并按第 2 章边界规则说明 MLLM 规划器算外部。"],["§3.5 具身仿真","一段：核对 PhysGen 4.14 vs 1.39、WonderPlay 80.2%、Cosmos-Transfer2.5 24/30 vs 1/30。"],["§3.6 跨领域归纳","按阶梯写：各领域都从文本起步，文本不够用时往上走；可控性、状态可持久可验证、复用已有资产与引擎、成本；与第 9 章对照。"]],
+    hint:"篇幅从 5 页降到 3 页，重点是按档位讲清各领域为什么上来。"},
+  c4:{no:"4",t:"渲染器接口",en:"Renderer Interfaces",pages:6,now:4.9,prog:60,state:"v0.4：第 3 档接口成稿；参考侧压成一小节",
+    done:["第 3 档全文（来自 v0.1）：内容 / 编码 / 来源三属性；七类结构接口，配原创合成示意图与\"决定矩阵\"图；侧信道；信息充分性与可构造性；泄漏-遵循两难与五类对策；接口泛化（typed vs untyped）","\"接口在扩张并部分合并\"：22 个结构渲染器的通道统计","参考接口产品表（厂商自报，待核）"],
+    todo:[["§4.1 参考：从外观锚点到外观槽","约 1 页，按档位写：第 1 档单主体锚点 → 第 2 档组合与路由（含数据集与基准）→ 第 3 档复用参考通道当外观槽；挑 5 篇左右代表作，引用已入库。"],["产品表","按官方文档更新（可灵等版本）。"],["§4.7 汇合统计（可选）","扩展到闭源产品；v1 可以不做。"]],
+    hint:"参考侧从\"半章\"降为一小节，工作量明显减少。"},
+  c5:{no:"5",t:"从注入到理解",en:"From Injection to Understanding",pages:6,now:5.0,prog:60,state:"v0.4：第 3 档机制成稿；\"理解\"一节是第 2 → 3 档的桥",
+    done:["第 3 档四类注入位置（输入融合、并行分支、in-context 参考 token、交叉注意力）+ mask 绑定 + 按噪声阶段条件，配示意图","\"论文内部对比证据\"表：结论是没有一致排序、受骨干混杂","\"从注入到理解\"：CINEMA、BindWeave、Kling-Omni、OmniHuman-1.5 的描述已按摘要核对"],
+    todo:[["§5.1 第 1–2 档注入","一段对照即可，不再每类一段：多编码器参考条件、参考解耦、MLLM 跨模态引导（RefAlign related work 的分法，需核对），各点一两个代表系统。"],["§5.5 参考绑定","两三句：DreamVideo-2 框 mask、Movie Weaver 锚 token，与五组解法表对应。"],["§5.7 理解支配生成","写成第 2 档的贡献被第 3 档复用（如 SolarRenderer 对每种结构的说明），并回应\"智能外移还是回流\"，支撑拍板 A。"]],
+    hint:"\"理解\"一节是全文论证的关键一环。"},
+  c6:{no:"6",t:"训练与数据",en:"Training and Data",pages:5.5,now:4.6,prog:60,state:"v0.4：第 3 档训练成稿；配对对照与后训练各约半页",
+    done:["第 3 档全文：五类监督来源；对齐比规模重要；适配范围；双向 → 因果的四个要素；五类少步蒸馏与\"蒸馏侵蚀控制\"；训练流程图与架构训练表","\"同源配对 → 跨上下文配对\"开头段"],
+    todo:[["§6.1 配对对照","约半页：第 1–2 档\"同源 → 跨上下文 → 无需三元组\"对照第 3 档的几何与外观扰动，系统与数字对原文核对。"],["§6.6 后训练与 RL","约半页，先写第 3 档；若结构渲染器基本只用蒸馏，要明说。"]],
+    hint:"核心是因果化与保控制的蒸馏，这部分已成稿。"},
+  c7:{no:"7",t:"流式与交互",en:"Streaming and Interaction",pages:4,now:3.6,prog:75,state:"v0.4：全章为第 3 档，已成稿",
     done:["生成粒度、视觉记忆四种设计及\"记忆不能压过当前代理\"、流式编解码、延迟分解图、系统工程、条件切换；效率表（注明不可直接比较）"],
-    todo:[["§7.6 参考侧流式","实时音频驱动 / 对话式数字人（台词与声音由 LLM、TTS 流式给出）；身份参考如何缓存；对话场景下按键到画面的延迟意味着什么。"],["篇幅","不用压缩：现约 3.6 页，目标 4.5 页，增量主要给参考侧流式。"]],
-    hint:"结构侧已基本写完，适合和第 8 章打包。"},
-  c8:{no:"8",t:"评测",en:"Evaluation",pages:4,now:2.6,prog:50,state:"结构侧协议成稿；参考侧一节已起草",
-    done:["现有度量盘点与局限；八维评测协议（标注已有/改造/新提）；四个诊断实验（明确未做）","新增\"参考保真与相似度奖励照搬\"：RefAlign 消融（待核）、OmniVBench 按因素评测、结构侧边缘指标偏爱描边"],
-    todo:[["§8.2 参考保真","盘点 S2V 与 omni-reference 基准；定义两条来路通用的泄漏指标（代理风格可检测性、参考姿态照搬）；评测表补参考侧行。"]],
-    hint:"适合熟悉基准评测的同学。"},
-  c9:{no:"9",t:"另一条路",en:"The Other Path",pages:2.5,now:0.4,prog:10,state:"骨架",
+    todo:[["§7.6 实时数字人","一段，按收到的条件分档：音频驱动、对话式数字人属第 2 档；外部面部 / 身体参数驱动属第 3 档。说明身份参考怎么缓存、对话里的按键到画面延迟意味着什么。"]],
+    hint:"基本完成，可以多花时间互审第 6 章。"},
+  c8:{no:"8",t:"评测",en:"Evaluation",pages:3.5,now:2.6,prog:55,state:"v0.4：按覆盖、精度、主导权重组评测",
+    done:["现有度量盘点与局限；八维评测协议（标注已有 / 改造 / 新提）；四个诊断实验（明确未做）","\"参考保真与相似度奖励照搬\"：RefAlign 消融（待核）、OmniVBench 按因素评测、结构侧边缘指标偏爱描边"],
+    todo:[["评测协议","把八维协议对应到三个维度：覆盖（逐因素遵循）、精度（对代理的逐帧指标）、主导权（干预下长时程的状态一致）。"],["§8.2 参考保真","压到半页，作为第 1–2 档的对照；补几行参考侧基准。"],["泄漏指标","定义各档通用的泄漏指标：第 1–2 档的参考姿态照搬、第 3 档的代理风格可检测性。"]],
+    hint:"同时负责全文的画图风格。"},
+  c9:{no:"9",t:"另一条路",en:"The Other Path",pages:2,now:0.4,prog:15,state:"骨架；v0.4 写成\"阶梯回退\"",
     done:["通才立场（Veo 3 零样本推理论文、视觉世界模拟路线图）、按因素定义的分工光谱、渲染器路线代价三节骨架"],
-    todo:[["§9.1 通才立场","补核实数字（分析的视频数量、最强端到端世界模型的实时分辨率/帧率、一致性保持时长），写入\"只有一种智能\"的观点。"],["§9.2 分工光谱图","按固定的因素摆放代表系统（复用条件矩阵与决定矩阵图）。"],["§9.3 何时端到端更好","无持久状态的开放内容、构造条件比生成更贵的任务等，并给证据。"]],
-    hint:"适合做世界模型 / 生成式仿真、对\"智能内化\"有看法的同学；和第 10 章或第 3 章打包都顺。"},
-  c10:{no:"10",t:"开放问题",en:"Open Problems",pages:2,now:1.3,prog:30,state:"结构侧部分（v0.1）",
-    done:["v0.1 结构侧开放问题：通用接口、最小充分表示、条件仲裁、实体索引记忆、跨引擎泛化、闭环验证、算力预算、超越像素"],
-    todo:[["补 v3 新问题","多参考冲突与路由、肖像授权与溯源、数据授权；建议每个分工包写一段自己领域的开放问题，由本章负责人汇总。"]],
+    todo:[["§9.1 通才立场","补核实数字（分析的视频数量、最强端到端世界模型的实时分辨率 / 帧率、一致性保持时长），写入\"只有一种智能\"的观点。"],["§9.2 放到阶梯上","不再单独画光谱图：把代表系统放进阶梯图和阶梯表。"],["§9.3 何时端到端更好","列条件并给证据，和结论里的三个回退信号保持一致。"]],
+    hint:"和结论互相呼应：阶梯在什么条件下会回退。"},
+  c10:{no:"10",t:"开放问题",en:"Open Problems",pages:1.5,now:1.3,prog:40,state:"v0.4：按\"卡在阶梯哪一步\"分四组",
+    done:["v0.1 的八个问题按阶梯重排：第 2 档的读懂与路由；第 3 档的通用接口与泛化；第 3 档运行时的记忆、验证、算力；超越像素与权利"],
+    todo:[["补新问题","多参考冲突与路由、肖像授权与溯源、数据授权；每位负责人 11/12 前交一段，统稿人汇总。"]],
     hint:"一人汇总，大家各写一段。"},
-  c11:{no:"·",t:"摘要与结论",en:"Abstract and Conclusion",pages:1,now:0.7,prog:30,state:"摘要已按 v0.3 起草；结论待重写",
-    done:["摘要按 v0.3 主张重写"],todo:[["结论","最后重写（现为 v0.1 结构侧结论），等前 10 章定稿。"]],hint:"统稿人负责。"},
-  cA:{no:"A",t:"附录 A 总表",en:"Master table",pages:0,now:0,prog:50,state:"结构侧 22 行已填；参考侧待补",
-    done:["列按 v0.3：外部决定什么、模型收到什么、状态由谁持有、注入方式、数据来源、是否实时；结构侧 22 行已填"],todo:[["参考侧行","参考侧 11 篇已列出待补；每人补自己负责论文的行。"]],hint:"全员共担，先填总表再写正文。"}
+  c11:{no:"·",t:"摘要与结论",en:"Abstract and Conclusion",pages:1,now:0.9,prog:60,state:"v0.4：摘要与结论已按阶梯重写",
+    done:["摘要按规格阶梯重写","结论改成论证：每次升档由下一档的失败逼出；第 3 档的分工为什么稳定；阶梯在什么条件下回退（三个可观察信号）；开放问题对应各档的卡点"],
+    todo:[["结论定稿","前 10 章定稿后，只保留各章支持的结论；回退信号与第 9 章一致。"]],
+    hint:"统稿人负责。"},
+  cA:{no:"A",t:"附录 A 总表",en:"Master table",pages:0,now:0,prog:50,state:"第 3 档 22 行已填；第 1–2 档补几行即可",
+    done:["列按 v0.3：外部决定什么、模型收到什么、状态由谁持有、注入方式、数据来源、是否实时；第 3 档 22 行已填"],
+    todo:[["补行","第 1–2 档代表作补几行即可；每人补自己负责论文的行。"]],
+    hint:"全员共担，先填总表再写正文。"}
 };
 const ORDER=["c1","c2","c3","c4","c5","c6","c7","c8","c9","c10","c11","cA"];
 const PRESETS={
@@ -642,37 +727,35 @@ function renderChapters(){
     '<details open><summary>TODO 解读（'+c.todo.length+'）</summary><ul class="todo">'+c.todo.map(t=>"<li><b>"+esc(t[0])+"：</b>"+esc(t[1])+"</li>").join("")+'</ul></details>'+
     '<div class="hint">'+esc(c.hint)+'</div></div>';}).join("");
 }
-const DECISIONS=`GenRender Survey 待拍板问题（框架 v0.3）
+const DECISIONS=`GenRender Survey 待拍板问题（框架 v0.4，11/5）
 
 A 主张怎么表述
-选项一：智能交给外部，视频模型当渲染器。
-选项二：视频模型的智能从决定内容转向忠实执行条件。
-建议选二。决定内容的智能外移，解析和执行条件的智能在模型内增长，正好接住第5章"理解支配生成"，也能回答审稿人"智能到底是外移还是回流"。
+建议：视频模型的智能从决定内容转向忠实执行规格。决定内容的智能沿规格阶梯外移，读懂和执行规格的智能在模型内增长，正好接住第5章"理解支配生成"，也能回答"智能到底是外移还是回流"。
 
 B "模型"的边界在哪
 同一产品里的 MLLM 规划器（OmniHuman-1.5、Kling-Avatar）算外部还是内部？
 建议规则：凡在视频生成器采样前，以显式、可检查的形式（文本、图、布局、轨迹、程序状态）确定某个内容因素的组件，都算外部，不管是否同一产品、是否联合训练。
 
 1 主线名字
-建议 Video Models as Generative Renderers。R2V 不当主线名。想造新词的话会上提候选。
+建议 Video Models as Generative Renderers；框架叫"规格阶梯"。
 
-2 R2V 单独成章还是拆进各章
-建议拆进各章，与结构侧并排写；R2V 的产业与时间线放第3章。拆进去不等于弱化，参考侧在每个技术章都占一半篇幅。需要和"R2V 才是核心"的意见对齐。
+2 R2V 怎么放（11/5 已定）
+第 1–2 档在各技术章各写一小节对照，作为第 3 档外观槽的来源；第 3 档至少占正文 60%。
 
 3 范围
-subject-to-video 纳入；短剧管线只在第3章出现；纯文生视频、纯 agent 编排、没有渲染接口的动作条件世界模型只作背景。
+第 3 档是核心；第 1–2 档选择性覆盖；第 0 档（caption、提示词改写）作为动机；纯文生视频、纯 agent 编排、没有渲染接口的动作条件世界模型只作背景。
 
 4 第一个工作
-结构侧：vid2vid（2018）。扩散时代：Generative Rendering（CVPR 2024）。参考侧：候选 Vidu 角色生视频（2024年7月，"业界首个"为厂商自述），还要找论文侧的起点。
+几何谱系：vid2vid（2018），扩散时代是 Generative Rendering（CVPR 2024）。外观谱系的起点待定（候选 Vidu 角色生视频，2024年7月，"业界首个"为厂商自述）。
 
-5 分工方式
-先一起填总表（Overleaf 附录A：外部决定什么、模型收到什么、状态由谁持有、注入方式、数据来源、是否实时），再按章分头写。建议 6 到 7 个共一，按分工包认领，有的包含两章（见分工面板）。
+5 分工方式（已定）
+见分工面板；先填总表（附录A），再按章写。
 
 6 发表方式与篇幅
-以 arXiv 长文为主，不按期刊页数写：正文（不含参考文献和附录）至少 35 页，目标 40–50 页。之后如果投期刊，再从 arXiv 版压缩出期刊版。需要定 arXiv 冻结时间。
+11/19 提交 arXiv，11/20 上午公开；正文（不含参考文献和附录）35–45 页。之后如果投期刊，再从 arXiv 版压缩。
 
 7 需要确认的事
-"Fang 佬那篇"是不是 arXiv 2610.40191；群里说的 "videococo" 是哪篇；作者顺序和挂哪些老师。`;
+"Fang 佬那篇"是不是 arXiv 2610.40191；群里说的 "videococo" 是哪篇（确认前不引用）；作者顺序和挂哪些老师。`;
 function toggleTheme(){const d=document.documentElement;const dark=d.dataset.theme!=="dark";d.dataset.theme=dark?"dark":"";localStorage.setItem("genrender-theme",dark?"dark":"");$("#themeBtn").textContent=dark?"切换浅色":"切换深色";}
 (function(){const t=localStorage.getItem("genrender-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.dataset.theme="dark";$("#themeBtn").textContent="切换浅色";}})();
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll(".toc a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+e.target.id));}});},{rootMargin:"-30% 0px -65% 0px"});
